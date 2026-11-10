@@ -1,5 +1,7 @@
 import { Prisma } from '@prisma/client';
 import { prisma } from '@/shared/lib/prisma';
+import { grantWorkoutCredit, syncDays,gameSummary } from './gamification';
+import { civilDay } from './streak';
 import { ApiError, planSchema, profileSchema, setSchema, toKg, workoutStreak, yangonDay, type PlanInput } from './validation';
 
 const planInclude = { days: { orderBy: { order: 'asc' as const }, include: { exercises: { orderBy: { order: 'asc' as const }, include: { exercise: { include: { translations: true } } } } } } };
@@ -17,6 +19,8 @@ export async function plansForUser(userId: string) {
 export async function saveProfile(userId: string, raw: unknown) {
   const data = profileSchema.parse(raw);
   return prisma.$transaction(async tx => {
+    const game = await tx.gameState.findUnique({where:{userId}});
+    if(game)data.timezone=game.timezone;
     const profile = await tx.fitnessProfile.upsert({ where: { userId }, create: { userId, ...data, onboarded: true }, update: { ...data, onboarded: true } });
     await tx.goal.updateMany({ where: { userId, active: true }, data: { active: false } });
     await tx.goal.create({ data: { userId, kind: data.goal, label: data.goal } });
@@ -59,7 +63,8 @@ export async function startSession(userId: string, dayId: string) {
     if (!day) throw new ApiError(404, 'NOT_FOUND');
     const active = await tx.workoutSession.findFirst({ where: { userId, status: 'active' }, include: sessionInclude });
     if (active) return active;
-    return tx.workoutSession.create({ data: { userId, planId: day.planId, dayId }, include: sessionInclude });
+    const state=await syncDays(tx,userId);
+    return tx.workoutSession.create({ data: { userId, planId: day.planId, dayId,creditTimezone:state.timezone }, include: sessionInclude });
   });
 }
 export async function getSession(userId: string, id: string) {
@@ -85,9 +90,12 @@ export async function finishSession(userId: string, id: string, note: string) {
   return prisma.$transaction(async tx => {
     const session = await tx.workoutSession.findFirst({ where: { id, userId } });
     if (!session) throw new ApiError(404, 'NOT_FOUND');
-    if (session.status === 'completed') return session;
+    if (session.status === 'completed') return {...session,reward:{awarded:false,xp:0,reason:'already_completed'}};
     if (await tx.workoutSet.count({ where: { sessionId: id, completed: true } }) === 0) throw new ApiError(400, 'LOG_A_SET_FIRST');
-    return tx.workoutSession.update({ where: { id }, data: { status: 'completed', endedAt: new Date(), note: note.normalize('NFC') } });
+    const now=new Date();
+    const completed=await tx.workoutSession.update({ where: { id }, data: { status: 'completed', endedAt: now, note: note.normalize('NFC') } });
+    const reward=await grantWorkoutCredit(tx,userId,id,now);
+    return {...completed,reward};
   });
 }
 export async function dashboard(userId: string) {
@@ -97,14 +105,16 @@ export async function dashboard(userId: string) {
     prisma.workoutSession.findFirst({ where: { userId, status: 'active' }, select: { id: true } }),
     prisma.bodyMeasurement.findMany({ where: { userId }, orderBy: { recordedAt: 'desc' }, take: 20 }),
   ]);
-  const date = new Date(yangonDay(new Date()) + 'T00:00:00Z');
+  const zone=profile?.timezone??'Asia/Yangon';
+  const game=profile?.onboarded?await gameSummary(userId):null;
+  const date = new Date(civilDay(new Date(),zone) + 'T00:00:00Z');
   const week = Array.from({ length: 7 }, (_, index) => {
     const d = new Date(date); d.setUTCDate(d.getUTCDate() - 6 + index);
     const key = d.toISOString().slice(0, 10);
-    return { date: key, count: sessions.filter(session => yangonDay(session.endedAt ?? session.startedAt) === key).length };
+    return { date: key, count: sessions.filter(session => civilDay(session.endedAt ?? session.startedAt,zone) === key).length };
   });
   return { profile, activeSession, measurements, stats: {
-    completed: sessions.length, planCount, exerciseCount, streak: workoutStreak(sessions.map(session => session.endedAt ?? session.startedAt)),
+    completed: sessions.length, planCount, exerciseCount, streak: game?.streak.current??0,
     sets: sessions.reduce((sum, session) => sum + session.sets.length, 0),
     volumeKg: sessions.reduce((sum, session) => sum + session.sets.reduce((n, set) => n + set.reps * set.weightKg, 0), 0), week,
   } };

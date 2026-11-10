@@ -5,6 +5,8 @@
 - All POC features free. No advertisements, Premium model, checkout, subscription, entitlement checks or upgrade UI.
 - Reference sources remain outside this product. No AGPL code/media imported. Retain third-party notices.
 - One Modal instance only; SQLite on durable Volume. Acknowledge writes only after persistence commit.
+- Scheduled notifications run in the same Modal app without a Volume mount and call the one web writer over authenticated HTTP. Keep opt-in, quiet hours, rate limits and durable per-device delivery claims.
+- Gamification rewards only verified server-recorded workout criteria; unique session/day credits prevent duplicate XP. Preserve historic calendar/timezone snapshots, protect planned rest/recovery, and never require intense daily exercise. All mascot artwork comes from one replaceable manifest.
 - Scope every user-owned lookup/mutation to the authenticated server-side identity; never trust a request userId.
 - LLM gateway is user-configured later. No existing key usage, provider calls, fake chat, or fake generated plans.
 - AI read tools access real user data; plan changes are proposals requiring explicit authenticated approval. No arbitrary SQL.

@@ -1,4 +1,5 @@
 const en = {
+  googleLogin: 'Continue with Google', googleUnavailable: 'Google sign-in is not connected yet.', googleError: 'Google sign-in did not complete. Please try again.', orEmail: 'or continue with email',
   brand: 'Mingalar Fit', subtitle: 'MYANMAR FITNESS COACH',
   home: 'Overview', exercises: 'Exercises', plans: 'My plans', progress: 'Progress', coach: 'AI Coach', profile: 'My profile',
   hello: 'Welcome back', heroTitle: 'A little stronger, every day.', heroBody: 'Build a routine that fits your life. Your next step starts here.',

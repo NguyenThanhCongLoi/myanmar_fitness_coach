@@ -27,6 +27,13 @@ model User {
   memories      AiMemory[]
   actions       AgentAction[]
   proposals     PlanProposal[]
+  game          GameState?
+  gameDays      GameDay[]
+  credits       WorkoutCredit[]
+  achievements Achievement[]
+  notices       NotificationJob[]
+  pushDevices   PushDevice[]
+  notificationPreference NotificationPreference?
   @@map("user")
 }
 
@@ -188,11 +195,116 @@ model WorkoutSession {
   startedAt DateTime @default(now())
   endedAt   DateTime?
   note      String @default("")
+  creditTimezone String @default("Asia/Yangon")
   user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
   plan      WorkoutPlan @relation(fields: [planId], references: [id])
   day       PlanDay @relation(fields: [dayId], references: [id])
   sets      WorkoutSet[]
   @@index([userId, startedAt])
+}
+
+model GameState {
+  userId String @id
+  timezone String @default("Asia/Yangon")
+  weekdays Json
+  weeklyGoal Int @default(3)
+  protectionEnabled Boolean @default(true)
+  shields Int @default(2)
+  recoveryUntil String?
+  pendingTimezone String?
+  timezoneEffectiveAt DateTime?
+  lastTimezoneChange DateTime?
+  cursor String
+  createdAt DateTime @default(now())
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+}
+
+model GameDay {
+  id String @id @default(cuid())
+  userId String
+  day String
+  week String
+  timezone String
+  planned Boolean
+  weeklyGoal Int
+  kind String @default("open")
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  @@unique([userId,day])
+  @@index([userId,week])
+}
+
+model WorkoutCredit {
+  id String @id @default(cuid())
+  userId String
+  sessionId String @unique
+  day String
+  timezone String
+  xp Int @default(50)
+  createdAt DateTime @default(now())
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  @@unique([userId,day])
+}
+
+model Achievement {
+  id String @id @default(cuid())
+  userId String
+  key String
+  createdAt DateTime @default(now())
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  @@unique([userId,key])
+}
+
+model NotificationPreference {
+  userId String @id
+  enabled Boolean @default(false)
+  reminders Boolean @default(true)
+  milestones Boolean @default(true)
+  summaries Boolean @default(true)
+  restMessages Boolean @default(true)
+  pushEnabled Boolean @default(false)
+  reminderMinute Int @default(1080)
+  quietStart Int @default(1260)
+  quietEnd Int @default(480)
+  checkedAt DateTime @default(now())
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+}
+
+model NotificationJob {
+  id String @id @default(cuid())
+  userId String
+  key String
+  type String
+  day String
+  status String @default("pending")
+  createdAt DateTime @default(now())
+  deliveredAt DateTime?
+  readAt DateTime?
+  pushState String @default("pending")
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  deliveries PushDelivery[]
+  @@unique([userId,key])
+  @@index([userId,status])
+}
+
+model PushDevice {
+  id String @id @default(cuid())
+  userId String
+  endpoint String @unique
+  subscription Json
+  createdAt DateTime @default(now())
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  deliveries PushDelivery[]
+}
+
+model PushDelivery {
+  id String @id @default(cuid())
+  jobId String
+  deviceId String
+  status String @default("claimed")
+  updatedAt DateTime @updatedAt
+  job NotificationJob @relation(fields:[jobId],references:[id],onDelete:Cascade)
+  device PushDevice @relation(fields:[deviceId],references:[id],onDelete:Cascade)
+  @@unique([jobId,deviceId])
 }
 
 model WorkoutSet {

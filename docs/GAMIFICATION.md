@@ -1,0 +1,28 @@
+# Rules and operational model
+
+The existing app, auth, workout engine and SQLite database are retained. User explicitly reconfirmed SQLite for this POC despite the new brief mentioning PostgreSQL. One web container owns all database access. The same Modal app's scheduled function runs every 15 minutes and calls a token-protected internal HTTP route; it has no Volume or database connection. At most 50 opted-in users are checked per run, oldest checked first. PostgreSQL is required before multi-writer scaling.
+
+## Credit and streaks
+
+- Completing a workout still saves it even if not eligible for gamification. Credit requires every prescribed set to have a positive server-recorded repetition count, at least 60 seconds since server start, and completion within 48 hours. This verifies recorded criteria, not physical exercise execution. No client timestamp overrides are accepted. No retrospective reward import of old workouts.
+- Exactly 50 XP for the first eligible workout per civil day. Unique session and user/day keys, transactions and serialized public requests prevent duplicate credit. Repeated app opens and repeated finish requests give no reward. Training during recovery is optional.
+- Habit streak counts credited training days. Planned rest, recovery, timezone transitions and shield-protected misses preserve the count without growing it. A closed unprotected missed planned day resets current, retaining longest. Returning creates a fresh streak without subtracting XP/badges.
+- Training-week streak grows when distinct credited days reach that week's goal. Open current weeks do not break it; recovery/transition weeks can pause it without awarding a successful week. Closed ordinary weeks below target reset current, preserving longest.
+- Default rhythm Monday/Wednesday/Friday; configure one to six training days and a weekly goal no greater than that count. Existing GameDay records retain timezone, planned/rest state and weekly goal. Changing future schedule cannot retroactively change a missed day. The goal used for a week is its earliest materialized day's snapshot.
+- Start with two optional shields. A missed planned day consumes one automatically when enabled; no XP is awarded. Weekly-goal achievement replenishes one up to two. Recovery can be declared for today/future up to 30 days; already closed missed dates cannot be rewritten.
+- IANA timezones use Intl civil calendar and DST rules. Zone changes are delayed 24 hours and limited to once per seven days. Existing day/credit dates never move. A session begun in an old zone cannot receive new-zone credit; first credit after a zone change requires at least 20 hours since any old-zone credit. Overlapping dates are deduplicated; backward date transitions wait for the immutable calendar cursor to catch up. This deliberately favors avoiding duplicate rewards over retroactive travel-day credit.
+- Flame tier configuration is in `src/server/streak.ts`: Ember 0–2, Orange 3–6, Red 7–13, Purple 14–29, Blue 30–59, Gold 60+. Thresholds are initial configuration values. No extra exercise is required for a cosmetic tier.
+
+## Notifications
+
+Opt-in defaults off. Preferences control reminders, rest encouragement, milestones, summaries, local reminder time and quiet hours (including midnight wrap). Weekly inbox summaries include the real previous week's credited-day count and goal from immutable calendar records; push messages remain generic. Maximum two inbox deliveries per rolling 24 hours. Day/type or achievement keys deduplicate jobs. Stale daily jobs are cancelled. Opt-out cancels pending jobs and deletes all push subscriptions; a device can separately unsubscribe. Inbox fetches may materialize due in-app messages, but external push attempts run only from the scheduled check. Each batch has a 120-second admission budget (an in-flight user's bounded sends may finish afterward).
+
+Web Push requests permission only on an explicit user click. VAPID keys and cron token live in `myanmar-fitness-coach-notifications`, provisioned once with `scripts/provision-notification-secret.py`. Only the public VAPID key is exposed. Endpoint allowlists restrict SSRF; no arbitrary network destination is accepted. Push payloads contain generic localized encouragement, no workout counts, health data or private notes.
+
+Per-job/device delivery claims are committed before external push sends. Unknown outcomes are not retried automatically (at-most-once attempt); this avoids duplicate reminders but can lose a push on process failure. Inbox state remains durable. Browser notification tags deduplicate display. External push receipt cannot be guaranteed while a device is offline or its platform blocks delivery. Quiet hours are checked before starting a batch; inbox and push depend on the next scheduled check, not exact-minute delivery.
+
+## Mascot assets
+
+Only `src/features/gamification/mascot-manifest.ts` maps states to assets. Replace local PNG/WebP/SVG paths there, use a horizontal sprite strip with frames/duration, or supply `.riv` metadata and a renderer adapter when adding Rive later. Each entry has a static fallback. Ten states are demonstrated on the achievements page. Reduced-motion switches off CSS animation/particles and uses static images for sprites/Rive. Real user-supplied PNG/sprite/Rive assets are not yet available for validation.
+
+UI text lives in `src/locales/game-{en,my}.ts`; Myanmar is provisional. Offline saves fail visibly, are not queued, and do not generate XP. Reconnect refetches server state. Avoid asking users to repeat physical exercise because a network request failed: retry saving the existing session instead.

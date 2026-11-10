@@ -4,3 +4,5 @@
 @media(max-width:760px){.heading-with-action{align-items:start;flex-wrap:wrap}.exercise-card-body{padding:12px}.card-meta{font-size:10px;gap:4px}.card-meta svg{width:14px}.count-label{display:none}.set-table-heading{grid-template-columns:22px 1fr 1fr;gap:8px}.set-table-heading span:last-child{display:none}.plan-card{padding:18px}.plan-icon{padding:10px}.plan-heading{gap:10px}.plan-heading h2{font-size:17px}.coach-layout{gap:18px}.form-grid.three{gap:8px}.form-grid.three label{font-size:11px}.form-grid.three input{padding:9px}.filter{padding:7px 12px;font-size:12px}.history-panel{padding:18px}.history-row strong{font-size:12px}}
 
 .profile-logout{margin-left:auto}
+
+.google-login{width:100%;background:white;border:1px solid var(--line);margin-top:22px}.google-letter{font-family:Arial,sans-serif;font-weight:700;font-size:20px;color:#4285f4}.google-hint{font-size:11px;color:var(--muted);text-align:center}.auth-divider{display:flex;align-items:center;gap:12px;margin:22px 0 0;font-size:11px;color:var(--muted)}.auth-divider:before,.auth-divider:after{content:"";height:1px;background:var(--line);flex:1}

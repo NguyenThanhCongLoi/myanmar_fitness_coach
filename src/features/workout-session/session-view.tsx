@@ -7,7 +7,7 @@ import { errorText, useLanguage } from '@/shared/language';
 import type { Prescription, Workout, WorkoutSet } from '@/shared/types';
 
 export function SessionView({ sessionId }: { sessionId: string }) {
-  const { notify, data, refresh, go } = useApp(); const { t, locale } = useLanguage();
+  const { notify, data, refresh, go,celebrate } = useApp(); const { t, locale } = useLanguage();
   const [session, setSession] = useState<Workout | null>(null); const [note, setNote] = useState(''); const [rest, setRest] = useState(0); const [finishing, setFinishing] = useState(false);
   const unit = data.profile?.weightUnit ?? 'kg';
   async function load() { try { setSession(await api<Workout>(`sessions/${sessionId}`)); } catch (error) { notify(errorText(error, t), true); } }
@@ -15,7 +15,7 @@ export function SessionView({ sessionId }: { sessionId: string }) {
   useEffect(() => { if (!rest) return; const timer = setInterval(() => setRest(value => Math.max(0, value - 1)), 1000); return () => clearInterval(timer); }, [rest > 0]);
   async function finish() {
     setFinishing(true);
-    try { await api(`sessions/${sessionId}/finish`, { note }); await refresh(); notify(t.finished); go('progress'); }
+    try { const result=await api<{reward:{awarded:boolean;xp:number;streak?:number}}>(`sessions/${sessionId}/finish`, { note }); await refresh(); celebrate(result.reward); go('home'); }
     catch (error) { notify(errorText(error, t), true); } finally { setFinishing(false); }
   }
   if (!session) return <p className="loading-inline">{t.loading}</p>;

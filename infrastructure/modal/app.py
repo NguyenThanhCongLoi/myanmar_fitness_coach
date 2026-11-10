@@ -6,6 +6,20 @@ ROOT = Path(__file__).resolve().parents[2] if modal.is_local() else Path('/app')
 app = modal.App('myanmar-fitness-coach')
 volume = modal.Volume.from_name('myanmar-fitness-coach-data', create_if_missing=True, version=2)
 config = modal.Secret.from_name('myanmar-fitness-coach-config', required_keys=['BETTER_AUTH_SECRET', 'BETTER_AUTH_URL'])
+# Upload only integration variables; never overwrite stable auth settings.
+gateway_values = {}
+if modal.is_local():
+    from dotenv import dotenv_values
+    local_values = dotenv_values(ROOT / '.env', interpolate=False, encoding='utf-8-sig')
+    gateway_values = {key: local_values.get(key) or '' for key in ('LLM_BASE_URL', 'LLM_API_KEY', 'LLM_MODEL', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET')}
+    llm_values = [gateway_values[key] for key in ('LLM_BASE_URL', 'LLM_API_KEY', 'LLM_MODEL')]
+    if any(llm_values) and not all(value.strip() for value in llm_values):
+        raise ValueError('Fill all three LLM_* variables in myanmar-fitness-coach/.env, or leave all three blank.')
+    google_values = [gateway_values[key] for key in ('GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET')]
+    if any(google_values) and not all(value.strip() for value in google_values):
+        raise ValueError('Fill both GOOGLE_* variables in myanmar-fitness-coach/.env, or leave both blank.')
+gateway = modal.Secret.from_dict(gateway_values)
+notification_config=modal.Secret.from_name('myanmar-fitness-coach-notifications',required_keys=['NOTIFICATION_CRON_TOKEN','VAPID_PUBLIC_KEY','VAPID_PRIVATE_KEY'])
 
 def ignored(path):
     relative = Path(path)
@@ -19,7 +33,7 @@ image = (modal.Image.from_registry('node:22-bookworm-slim', add_python='3.12')
     .run_commands('npm ci --no-audit --no-fund',
         'DATABASE_URL=file:/tmp/build.db BETTER_AUTH_URL=http://localhost:3000 BETTER_AUTH_SECRET=build-only-placeholder-secret-not-for-runtime npm run build'))
 
-@app.function(image=image, volumes={'/data': volume}, secrets=[config], cpu=2, memory=4096,
+@app.function(image=image, volumes={'/data': volume}, secrets=[config, gateway,notification_config], cpu=2, memory=4096,
               min_containers=0, max_containers=1, scaledown_window=180, timeout=600)
 @modal.concurrent(max_inputs=1)
 @modal.web_server(3000, startup_timeout=180, label='myanmar-fitness-coach')
@@ -37,6 +51,13 @@ def web():
     with sqlite3.connect('/data/fitness.db') as connection:
         connection.execute('PRAGMA journal_mode=DELETE')
         connection.execute('PRAGMA busy_timeout=30000')
+        if connection.execute("SELECT count(*) FROM sqlite_master WHERE name='WorkoutSession'").fetchone()[0] and not connection.execute("SELECT count(*) FROM sqlite_master WHERE name='GameState'").fetchone()[0]:
+            backup_path=Path('/data/backups/pre-gamification.db')
+            backup_path.parent.mkdir(exist_ok=True)
+            if not backup_path.exists():
+                with sqlite3.connect(backup_path) as backup:
+                    connection.backup(backup)
+                volume.commit()
     subprocess.run(['npm', 'run', 'db:migrate'], cwd='/app', check=True)
     subprocess.run(['npm', 'run', 'db:seed'], cwd='/app', check=True)
     volume.commit()
@@ -53,3 +74,14 @@ def web():
     bridge = HTTPServer(('127.0.0.1', 9988), CommitHandler)
     threading.Thread(target=bridge.serve_forever, daemon=True).start()
     subprocess.Popen(['npm', 'run', 'start'], cwd='/app', env=os.environ.copy())
+
+# No Volume here: all SQLite access stays inside the single web container.
+@app.function(image=modal.Image.debian_slim(python_version='3.12'),secrets=[notification_config],
+              schedule=modal.Period(minutes=15),cpu=0.25,memory=256,max_containers=1,timeout=600)
+def check_notifications():
+    import os
+    import urllib.request
+    request=urllib.request.Request('https://nguyenthanhcongloi332004--myanmar-fitness-coach.modal.run/api/internal/notifications',
+        method='POST',data=b'{}',headers={'Authorization':'Bearer '+os.environ['NOTIFICATION_CRON_TOKEN'],'Content-Type':'application/json'})
+    with urllib.request.urlopen(request,timeout=540) as response:
+        if response.status!=200: raise RuntimeError('Notification check failed')

@@ -9,7 +9,7 @@ export const profileSchema = z.object({
   daysPerWeek: z.number().int().min(1).max(6),
   limitations: z.string().trim().max(1000).default(''),
   weightUnit: z.enum(['kg', 'lb']), distanceUnit: z.enum(['km', 'mi']),
-  timezone: z.literal('Asia/Yangon').default('Asia/Yangon'),
+  timezone: z.string().max(100).refine(value=>{try{new Intl.DateTimeFormat('en',{timeZone:value});return true;}catch{return false;}}).default('Asia/Yangon'),
 }).strict();
 
 const prescription = z.object({

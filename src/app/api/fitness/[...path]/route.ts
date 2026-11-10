@@ -61,7 +61,7 @@ async function handler(request: Request, context: { params: Promise<{ path: stri
       const { content } = z.object({ content: z.string().trim().min(1).max(500) }).strict().parse(body);
       result = await prisma.aiMemory.upsert({ where: { userId_key: { userId: user.id, key: 'user_note' } }, create: { userId: user.id, key: 'user_note', content: content.normalize('NFC') }, update: { content: content.normalize('NFC') } });
     } else throw new ApiError(404, 'NOT_FOUND');
-    if (write) await persistDatabase();
+    if (write||route==='bootstrap') await persistDatabase();
     return Response.json(result, { headers: { 'Cache-Control': 'private, no-store' } });
   } catch (error) {
     // A gateway/tool error may follow a durable proposal write; commit before exposing the result.

@@ -1,5 +1,6 @@
 import type en from './en';
 const my: typeof en = {
+  googleLogin: 'Google ဖြင့် ဆက်လုပ်ရန်', googleUnavailable: 'Google အကောင့်ဝင်ခြင်းကို မချိတ်ဆက်ရသေးပါ။', googleError: 'Google ဖြင့် အကောင့်ဝင်ခြင်း မပြီးဆုံးပါ။ ထပ်မံကြိုးစားပါ။', orEmail: 'သို့မဟုတ် အီးမေးလ်ဖြင့် ဆက်လုပ်ရန်',
   brand: 'Mingalar Fit', subtitle: 'MYANMAR FITNESS COACH',
   home: 'ပင်မစာမျက်နှာ', exercises: 'လေ့ကျင့်ခန်းများ', plans: 'ကျွန်ုပ်၏အစီအစဉ်', progress: 'တိုးတက်မှု', coach: 'AI နည်းပြ', profile: 'ကိုယ်ရေးအချက်အလက်',
   hello: 'ပြန်လည်ကြိုဆိုပါတယ်', heroTitle: 'နေ့တိုင်း အနည်းငယ် ပိုသန်မာလာမယ်။', heroBody: 'သင့်ဘဝနှင့်ကိုက်ညီသော လေ့ကျင့်မှုအလေ့အကျင့်ကို တည်ဆောက်ပါ။ ဒီနေ့ပဲ စတင်လိုက်ပါ။',
