@@ -1,0 +1,9 @@
+export type Locale = 'my-MM' | 'en';
+export type Exercise = { id: string; name: string; instructions: string; muscles: string[]; equipment: string[]; difficulty: string; source: string; sourceUrl: string; attribution: string; dataLicense: string; mediaStatus: string; translations: { locale: string; name: string; instructions: string; reviewStatus: string }[] };
+export type Prescription = { id: string; exerciseId: string; order: number; sets: number; reps: number; restSeconds: number; targetKg: number; exercise: Exercise };
+export type PlanDay = { id: string; name: string; weekday: number; week: number; order: number; exercises: Prescription[] };
+export type Plan = { id: string; name: string; goal: string; weeks: number; source: string; createdAt: string; days: PlanDay[] };
+export type WorkoutSet = { id: string; exerciseId: string; setIndex: number; reps: number; weightKg: number; completed: boolean; exercise: { name: string } };
+export type Workout = { id: string; status: string; startedAt: string; endedAt: string | null; note: string; plan: { id: string; name: string }; day: PlanDay; sets: WorkoutSet[] };
+export type Profile = { id: string; locale: Locale; goal: 'general_fitness' | 'build_strength' | 'build_muscle' | 'improve_endurance'; experience: 'beginner' | 'intermediate' | 'advanced'; equipment: string[]; daysPerWeek: number; limitations: string; weightUnit: 'kg' | 'lb'; distanceUnit: 'km' | 'mi'; timezone: string; onboarded: boolean };
+export type Bootstrap = { user: { id: string; name: string; email: string }; profile: Profile | null; activeSession: { id: string } | null; measurements: { id: string; weightKg: number; recordedAt: string }[]; gatewayConfigured: boolean; stats: { completed: number; streak: number; sets: number; volumeKg: number; planCount: number; exerciseCount: number; week: { date: string; count: number }[] } };

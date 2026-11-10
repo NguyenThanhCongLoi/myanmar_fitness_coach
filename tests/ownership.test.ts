@@ -1,0 +1,36 @@
+import { afterAll, expect, test } from 'vitest';
+import { prisma } from '../src/shared/lib/prisma';
+import { createPlan, startSession, logSet, finishSession, getSession, plansForUser, approveProposal, dashboard } from '../src/server/services';
+import { planSchema, workoutStreak, yangonDay } from '../src/server/validation';
+const prefix=`integration-${Date.now()}`;
+afterAll(async()=>{await prisma.user.deleteMany({where:{id:{startsWith:prefix}}});await prisma.$disconnect();});
+test('real SQLite ownership, validated logging, idempotent approval and progress',async()=>{
+  const a=prefix+'a',b=prefix+'b';
+  await prisma.user.createMany({data:[a,b].map(id=>({id,name:id,email:id+'@example.test'}))});
+  const exercise=await prisma.exercise.findFirstOrThrow();
+  const input={name:'မြန်မာ test plan',goal:'Build a habit',weeks:1,days:[{name:'Day 1',week:1,weekday:0,exercises:[{exerciseId:exercise.id,sets:2,reps:10,restSeconds:60,targetKg:0}]}]};
+  const plan=await createPlan(a,input);
+  expect(await plansForUser(b)).toHaveLength(0);
+  await expect(startSession(b,plan.days[0].id)).rejects.toMatchObject({status:404});
+  const session=await startSession(a,plan.days[0].id);
+  await expect(getSession(b,session.id)).rejects.toMatchObject({status:404});
+  await expect(finishSession(a,session.id,'')).rejects.toMatchObject({code:'LOG_A_SET_FIRST'});
+  const set={exerciseId:exercise.id,setIndex:0,reps:12,weight:22.046226218,unit:'lb',restSeconds:60};
+  await expect(logSet(b,session.id,set)).rejects.toMatchObject({status:404});
+  await logSet(a,session.id,set);await logSet(a,session.id,set);
+  expect((await getSession(a,session.id)).sets).toHaveLength(1);
+  expect((await getSession(a,session.id)).sets[0].weightKg).toBeCloseTo(10);
+  await finishSession(a,session.id,'မြန်မာ Unicode');
+  expect((await dashboard(a)).stats.completed).toBe(1);
+  expect((await dashboard(b)).stats.completed).toBe(0);
+  const proposal=await prisma.planProposal.create({data:{userId:a,payload:input}});
+  await expect(approveProposal(b,proposal.id)).rejects.toMatchObject({status:404});
+  const approved=await approveProposal(a,proposal.id);
+  expect((await approveProposal(a,proposal.id)).id).toBe(approved.id);
+  expect(await prisma.workoutPlan.count({where:{proposalId:proposal.id}})).toBe(1);
+  expect(planSchema.safeParse({...input,userId:b}).success).toBe(false);
+});
+test('Yangon day boundaries determine streaks',()=>{
+  expect(yangonDay(new Date('2026-11-09T18:00:00Z'))).toBe('2026-11-10');
+  expect(workoutStreak([new Date('2026-11-09T18:00:00Z'),new Date('2026-11-08T18:00:00Z')],new Date('2026-11-10T03:00:00Z'))).toBe(2);
+});

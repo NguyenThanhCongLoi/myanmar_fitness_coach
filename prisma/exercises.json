@@ -1,0 +1,243 @@
+[
+  {
+    "id": "core-157",
+    "name": "Barbell Alternating Reverse Lunges",
+    "normalizedName": "barbell alternating reverse lunges",
+    "instructions": "Stand upright holding a barbell placed across the back of your shoulders.  Step back 2-3 feet with one foot and lower your body to the ground.  Your back knee should almost touch the ground and your front knee should be at a 90-degree angle.  Push up to return to the starting position.  Repeat with the other leg.  Repeat the movement for the recommended number of repetitions, then switch to the other leg.",
+    "muscles": [
+      "quadriceps",
+      "glutes",
+      "hamstrings"
+    ],
+    "equipment": [
+      "barbell",
+      "bar"
+    ],
+    "source": "workout-cool",
+    "sourceId": "157",
+    "sourceUrl": "https://github.com/Snouzy/workout-cool",
+    "dataLicense": "MIT",
+    "attribution": "Workout.cool contributors; MIT. Third-party media not imported.",
+    "mediaStatus": "not_imported"
+  },
+  {
+    "id": "core-163",
+    "name": "Facepulls",
+    "normalizedName": "facepulls",
+    "instructions": "Attach a rope to a low pulley cable machine.  Stand facing the machine and hold the rope with an overhand grip.  Step back to create tension in the cable, with feet shoulder-width apart.  Keep your back straight and lean slightly forward, bending your knees slightly.  Pull the rope towards your chest, squeezing your shoulder blades together.  Pause at the end of the movement, then slowly release and extend your arms back to the starting position.  Repeat for the desired number of repetitions.",
+    "muscles": [
+      "shoulders",
+      "forearms"
+    ],
+    "equipment": [
+      "cable",
+      "rope"
+    ],
+    "source": "workout-cool",
+    "sourceId": "163",
+    "sourceUrl": "https://github.com/Snouzy/workout-cool",
+    "dataLicense": "MIT",
+    "attribution": "Workout.cool contributors; MIT. Third-party media not imported.",
+    "mediaStatus": "not_imported"
+  },
+  {
+    "id": "core-164",
+    "name": "Bench Hops",
+    "normalizedName": "bench hops",
+    "instructions": "Start with a box or bench in front of you. Stand with feet shoulder-width apart. This will be your starting position.   Perform a short squat in preparation for the jump.   Jump over the bench, landing with your knees bent, absorbing the impact through your legs.",
+    "muscles": [
+      "full body"
+    ],
+    "equipment": [
+      "bench"
+    ],
+    "source": "workout-cool",
+    "sourceId": "164",
+    "sourceUrl": "https://github.com/Snouzy/workout-cool",
+    "dataLicense": "MIT",
+    "attribution": "Workout.cool contributors; MIT. Third-party media not imported.",
+    "mediaStatus": "not_imported"
+  },
+  {
+    "id": "dataset-1373",
+    "name": "Bodyweight standing calf raise",
+    "normalizedName": "bodyweight standing calf raise",
+    "instructions": "Stand with your feet shoulder-width apart, toes pointing forward. Place your hands on a wall or stable surface for balance. Slowly raise your heels off the ground, lifting your body weight onto the balls of your feet. Pause for a moment at the top, then slowly lower your heels back down to the starting position. Repeat for the desired number of repetitions.",
+    "muscles": [
+      "calves",
+      "ankles",
+      "feet"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "source": "exercises-dataset",
+    "sourceId": "1373",
+    "sourceUrl": "https://github.com/hasaneyldrm/exercises-dataset",
+    "dataLicense": "MIT",
+    "attribution": "Non-media data © 2026 Hasan Emir Yıldırım; MIT. Original media attribution: © Gym visual — https://gymvisual.com/ (media not imported).",
+    "mediaStatus": "not_imported"
+  },
+  {
+    "id": "dataset-0276",
+    "name": "Dead bug",
+    "normalizedName": "dead bug",
+    "instructions": "Lie flat on your back with your arms extended towards the ceiling. Bend your knees and lift your legs off the ground, creating a 90-degree angle at your hips and knees. Engage your core and lower back to press your lower back into the ground. Slowly lower your right arm and left leg towards the ground, keeping them straight and hovering just above the floor. Pause for a moment, then return to the starting position. Repeat the movement with your left arm and right leg. Continue alternating sides for the desired number of repetitions.",
+    "muscles": [
+      "abs",
+      "hip flexors",
+      "lower back"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "source": "exercises-dataset",
+    "sourceId": "0276",
+    "sourceUrl": "https://github.com/hasaneyldrm/exercises-dataset",
+    "dataLicense": "MIT",
+    "attribution": "Non-media data © 2026 Hasan Emir Yıldırım; MIT. Original media attribution: © Gym visual — https://gymvisual.com/ (media not imported).",
+    "mediaStatus": "not_imported"
+  },
+  {
+    "id": "dataset-0289",
+    "name": "Dumbbell bench press",
+    "normalizedName": "dumbbell bench press",
+    "instructions": "Lie flat on a bench with your feet flat on the ground and your back pressed against the bench. Hold a dumbbell in each hand, with your palms facing forward and your arms extended above your chest. Lower the dumbbells slowly to the sides of your chest, keeping your elbows at a 90-degree angle. Pause for a moment, then push the dumbbells back up to the starting position, fully extending your arms. Repeat for the desired number of repetitions.",
+    "muscles": [
+      "pectorals",
+      "triceps",
+      "shoulders"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "source": "exercises-dataset",
+    "sourceId": "0289",
+    "sourceUrl": "https://github.com/hasaneyldrm/exercises-dataset",
+    "dataLicense": "MIT",
+    "attribution": "Non-media data © 2026 Hasan Emir Yıldırım; MIT. Original media attribution: © Gym visual — https://gymvisual.com/ (media not imported).",
+    "mediaStatus": "not_imported"
+  },
+  {
+    "id": "dataset-0293",
+    "name": "Dumbbell bent over row",
+    "normalizedName": "dumbbell bent over row",
+    "instructions": "Stand with your feet shoulder-width apart, knees slightly bent, and hold a dumbbell in each hand with your palms facing your body. Bend forward at the hips, keeping your back straight and your core engaged. Let your arms hang straight down towards the floor, with your elbows slightly bent. Pull the dumbbells up towards your chest, squeezing your shoulder blades together. Pause for a moment at the top, then slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions.",
+    "muscles": [
+      "upper back",
+      "biceps",
+      "forearms"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "source": "exercises-dataset",
+    "sourceId": "0293",
+    "sourceUrl": "https://github.com/hasaneyldrm/exercises-dataset",
+    "dataLicense": "MIT",
+    "attribution": "Non-media data © 2026 Hasan Emir Yıldırım; MIT. Original media attribution: © Gym visual — https://gymvisual.com/ (media not imported).",
+    "mediaStatus": "not_imported"
+  },
+  {
+    "id": "dataset-0294",
+    "name": "Dumbbell biceps curl",
+    "normalizedName": "dumbbell biceps curl",
+    "instructions": "Stand up straight with a dumbbell in each hand, palms facing forward and arms fully extended. Keeping your upper arms stationary, exhale and curl the weights while contracting your biceps. Continue to raise the weights until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and slowly begin to lower the dumbbells back to the starting position. Repeat for the desired number of repetitions.",
+    "muscles": [
+      "biceps",
+      "forearms"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "source": "exercises-dataset",
+    "sourceId": "0294",
+    "sourceUrl": "https://github.com/hasaneyldrm/exercises-dataset",
+    "dataLicense": "MIT",
+    "attribution": "Non-media data © 2026 Hasan Emir Yıldırım; MIT. Original media attribution: © Gym visual — https://gymvisual.com/ (media not imported).",
+    "mediaStatus": "not_imported"
+  },
+  {
+    "id": "dataset-3470",
+    "name": "Forward lunge (male)",
+    "normalizedName": "forward lunge male",
+    "instructions": "Stand with your feet hip-width apart and hands on your hips. Take a big step forward with your right foot, lowering your body into a lunge position. Bend your right knee to about 90 degrees, keeping your knee aligned with your ankle. Push off with your right foot and return to the starting position. Repeat with your left leg, alternating sides for the desired number of repetitions.",
+    "muscles": [
+      "glutes",
+      "quadriceps",
+      "hamstrings",
+      "calves"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "source": "exercises-dataset",
+    "sourceId": "3470",
+    "sourceUrl": "https://github.com/hasaneyldrm/exercises-dataset",
+    "dataLicense": "MIT",
+    "attribution": "Non-media data © 2026 Hasan Emir Yıldırım; MIT. Original media attribution: © Gym visual — https://gymvisual.com/ (media not imported).",
+    "mediaStatus": "not_imported"
+  },
+  {
+    "id": "dataset-3013",
+    "name": "Low glute bridge on floor",
+    "normalizedName": "low glute bridge on floor",
+    "instructions": "Lie flat on your back with your knees bent and feet flat on the ground. Place your arms by your sides, palms facing down. Engage your glutes and core, then lift your hips off the ground until your body forms a straight line from your knees to your shoulders. Pause for a moment at the top, squeezing your glutes. Slowly lower your hips back down to the starting position. Repeat for the desired number of repetitions.",
+    "muscles": [
+      "glutes",
+      "hamstrings",
+      "core"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "source": "exercises-dataset",
+    "sourceId": "3013",
+    "sourceUrl": "https://github.com/hasaneyldrm/exercises-dataset",
+    "dataLicense": "MIT",
+    "attribution": "Non-media data © 2026 Hasan Emir Yıldırım; MIT. Original media attribution: © Gym visual — https://gymvisual.com/ (media not imported).",
+    "mediaStatus": "not_imported"
+  },
+  {
+    "id": "dataset-0662",
+    "name": "Push-up",
+    "normalizedName": "push up",
+    "instructions": "Start in a high plank position with your hands slightly wider than shoulder-width apart and your feet together. Engage your core and lower your body towards the ground by bending your elbows, keeping your body in a straight line. Pause for a moment when your chest is just above the ground, then push yourself back up to the starting position by straightening your arms. Repeat for the desired number of repetitions.",
+    "muscles": [
+      "pectorals",
+      "triceps",
+      "deltoids",
+      "core"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "source": "exercises-dataset",
+    "sourceId": "0662",
+    "sourceUrl": "https://github.com/hasaneyldrm/exercises-dataset",
+    "dataLicense": "MIT",
+    "attribution": "Non-media data © 2026 Hasan Emir Yıldırım; MIT. Original media attribution: © Gym visual — https://gymvisual.com/ (media not imported).",
+    "mediaStatus": "not_imported"
+  },
+  {
+    "id": "dataset-1460",
+    "name": "Walking lunge",
+    "normalizedName": "walking lunge",
+    "instructions": "Stand with your feet shoulder-width apart. Take a step forward with your right leg, lowering your body into a lunge position. Keep your torso upright and your front knee aligned with your ankle. Push off with your right foot and bring your left foot forward, stepping into a lunge position with your left leg. Continue alternating legs and walking forward, maintaining a controlled and steady pace. Repeat for the desired number of repetitions.",
+    "muscles": [
+      "glutes",
+      "quadriceps",
+      "hamstrings",
+      "calves"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "source": "exercises-dataset",
+    "sourceId": "1460",
+    "sourceUrl": "https://github.com/hasaneyldrm/exercises-dataset",
+    "dataLicense": "MIT",
+    "attribution": "Non-media data © 2026 Hasan Emir Yıldırım; MIT. Original media attribution: © Gym visual — https://gymvisual.com/ (media not imported).",
+    "mediaStatus": "not_imported"
+  }
+]

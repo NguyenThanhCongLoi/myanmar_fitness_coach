@@ -1,0 +1,273 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Identity and workout concepts adapted from Workout.cool; MIT notice in licenses/.
+model User {
+  id            String   @id
+  name          String
+  email         String   @unique
+  emailVerified Boolean  @default(false)
+  image         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  profile       FitnessProfile?
+  goals         Goal[]
+  plans         WorkoutPlan[]
+  workouts      WorkoutSession[]
+  measurements  BodyMeasurement[]
+  conversations AiConversation[]
+  memories      AiMemory[]
+  actions       AgentAction[]
+  proposals     PlanProposal[]
+  @@map("user")
+}
+
+model Session {
+  id        String @id
+  token     String @unique
+  userId    String
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String @id
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  user                  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@index([identifier])
+  @@map("verification")
+}
+
+model FitnessProfile {
+  id           String @id @default(cuid())
+  userId       String @unique
+  locale       String @default("my-MM")
+  goal         String @default("general_fitness")
+  experience   String @default("beginner")
+  equipment    Json
+  daysPerWeek  Int @default(3)
+  limitations  String @default("")
+  weightUnit   String @default("kg")
+  distanceUnit String @default("km")
+  timezone     String @default("Asia/Yangon")
+  onboarded    Boolean @default(false)
+  updatedAt    DateTime @updatedAt
+  user         User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Goal {
+  id        String @id @default(cuid())
+  userId    String
+  kind      String
+  label     String
+  active    Boolean @default(true)
+  createdAt DateTime @default(now())
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+}
+
+model Exercise {
+  id             String @id
+  name           String
+  normalizedName String @unique
+  instructions   String
+  muscles        Json
+  equipment      Json
+  difficulty     String @default("standard")
+  source         String
+  sourceId       String
+  sourceUrl      String
+  dataLicense    String
+  attribution    String
+  mediaStatus    String @default("not_imported")
+  createdAt      DateTime @default(now())
+  translations   ExerciseTranslation[]
+  planExercises  PlanExercise[]
+  sets           WorkoutSet[]
+  @@unique([source, sourceId])
+}
+
+model ExerciseTranslation {
+  id           String @id @default(cuid())
+  exerciseId   String
+  locale       String
+  name         String
+  instructions String
+  reviewStatus String @default("provisional")
+  exercise     Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  @@unique([exerciseId, locale])
+}
+
+model WorkoutPlan {
+  id          String @id @default(cuid())
+  userId      String
+  name        String
+  goal        String
+  weeks       Int @default(1)
+  source      String @default("manual")
+  status      String @default("active")
+  proposalId  String? @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  days        PlanDay[]
+  sessions    WorkoutSession[]
+  proposal    PlanProposal? @relation(fields: [proposalId], references: [id])
+  @@index([userId, createdAt])
+}
+
+model PlanDay {
+  id        String @id @default(cuid())
+  planId    String
+  name      String
+  week      Int @default(1)
+  weekday   Int
+  order     Int
+  plan      WorkoutPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  exercises PlanExercise[]
+  sessions  WorkoutSession[]
+  @@index([planId])
+}
+
+model PlanExercise {
+  id          String @id @default(cuid())
+  dayId       String
+  exerciseId  String
+  order       Int
+  sets        Int @default(3)
+  reps        Int @default(10)
+  restSeconds Int @default(60)
+  targetKg    Float @default(0)
+  day         PlanDay @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  exercise    Exercise @relation(fields: [exerciseId], references: [id])
+  @@index([dayId])
+}
+
+model WorkoutSession {
+  id        String @id @default(cuid())
+  userId    String
+  planId    String
+  dayId     String
+  status    String @default("active")
+  startedAt DateTime @default(now())
+  endedAt   DateTime?
+  note      String @default("")
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan      WorkoutPlan @relation(fields: [planId], references: [id])
+  day       PlanDay @relation(fields: [dayId], references: [id])
+  sets      WorkoutSet[]
+  @@index([userId, startedAt])
+}
+
+model WorkoutSet {
+  id         String @id @default(cuid())
+  sessionId  String
+  exerciseId String
+  setIndex   Int
+  reps       Int
+  weightKg   Float
+  restSeconds Int @default(60)
+  completed  Boolean @default(true)
+  loggedAt   DateTime @default(now())
+  session    WorkoutSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  @@unique([sessionId, exerciseId, setIndex])
+}
+
+model BodyMeasurement {
+  id        String @id @default(cuid())
+  userId    String
+  weightKg  Float
+  recordedAt DateTime @default(now())
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, recordedAt])
+}
+
+model AiConversation {
+  id        String @id @default(cuid())
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  AiMessage[]
+  @@index([userId])
+}
+
+model AiMessage {
+  id             String @id @default(cuid())
+  conversationId String
+  role           String
+  content        String
+  createdAt      DateTime @default(now())
+  conversation   AiConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  @@index([conversationId, createdAt])
+}
+
+model AiMemory {
+  id        String @id @default(cuid())
+  userId    String
+  key       String
+  content   String
+  createdAt DateTime @default(now())
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([userId, key])
+}
+
+model PlanProposal {
+  id        String @id @default(cuid())
+  userId    String
+  payload   Json
+  status    String @default("pending")
+  createdAt DateTime @default(now())
+  approvedAt DateTime?
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan      WorkoutPlan?
+  @@index([userId, status])
+}
+
+model AgentAction {
+  id        String @id @default(cuid())
+  userId    String
+  tool      String
+  status    String
+  arguments Json
+  createdAt DateTime @default(now())
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, createdAt])
+}

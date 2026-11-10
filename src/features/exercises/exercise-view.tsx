@@ -1,0 +1,16 @@
+'use client';
+import { useEffect, useState } from 'react';
+import { ArrowUpRight, Search } from 'lucide-react';
+import { api, localExercise } from '@/shared/client';
+import { useApp } from '@/shared/app-context';
+import { errorText, useLanguage } from '@/shared/language';
+import { Empty, ExerciseArt, Modal } from '@/shared/ui';
+import type { Exercise } from '@/shared/types';
+export function ExerciseView() {
+  const { notify } = useApp(); const { locale, t } = useLanguage();
+  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [loading, setLoading] = useState(true); const [search, setSearch] = useState(''); const [filter, setFilter] = useState('all'); const [selected, setSelected] = useState<Exercise | null>(null);
+  useEffect(() => { api<Exercise[]>('exercises').then(setExercises).catch(error => notify(errorText(error, t), true)).finally(() => setLoading(false)); }, []);
+  const results = exercises.filter(exercise => (filter === 'all' || exercise.equipment.includes(filter)) && `${exercise.name} ${localExercise(exercise, locale).name} ${exercise.muscles.join(' ')}`.toLowerCase().includes(search.toLowerCase()));
+  return <section><div className="page-heading"><span className="overline">{t.movement}</span><h1>{t.browse}</h1><p>{t.browseHint}</p></div><div className="library-toolbar"><div className="search-box"><Search size={19}/><input aria-label={t.search} placeholder={t.search} value={search} onChange={event => setSearch(event.target.value)}/></div><span className="count-label">{results.length} {t.exercises}</span></div><div className="filter-row">{['all', 'body weight', 'dumbbell', 'barbell', 'bench'].map(item => <button key={item} className={`filter ${filter === item ? 'selected' : ''}`} onClick={() => setFilter(item)}>{item === 'all' ? t.all : t.equipmentLabels[item as keyof typeof t.equipmentLabels]}</button>)}</div>{loading ? <p className="loading-inline">{t.loading}</p> : <div className="exercise-grid">{results.map(exercise => <button key={exercise.id} className="exercise-card" onClick={() => setSelected(exercise)}><ExerciseArt muscle={exercise.muscles[0]}/><div className="exercise-card-body"><span className="overline">{exercise.muscles[0]}</span><h3>{localExercise(exercise, locale).name}</h3><div className="card-meta"><span>{exercise.equipment.map(item => t.equipmentLabels[item as keyof typeof t.equipmentLabels] ?? item).join(' · ')}</span><ArrowUpRight size={18}/></div></div></button>)}</div>}{!loading && !results.length && <Empty title={t.noResults}/>}<p className="translation-note">{t.provisional}</p>{selected && <Modal title={localExercise(selected, locale).name} close={() => setSelected(null)}><ExerciseArt muscle={selected.muscles[0]}/><div className="detail-tags"><span>{selected.muscles.join(' · ')}</span><span>{selected.equipment.join(' · ')}</span></div><h3>{t.instructions}</h3><p className="instructions" lang={selected.translations.some(item => item.locale === locale) ? locale : 'en'}>{localExercise(selected, locale).instructions}</p>{locale === 'my-MM' && <p className="translation-note">{t.provisional}</p>}<details className="attribution"><summary>{t.dataSource}</summary><p>{selected.attribution}</p><a href={selected.sourceUrl} target="_blank" rel="noreferrer">{selected.source} · {selected.dataLicense}</a></details></Modal>}</section>;
+}
