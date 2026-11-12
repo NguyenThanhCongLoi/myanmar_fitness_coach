@@ -10,11 +10,13 @@ import { groupOf, placeOf, type BalanceIssue, type PlanDay, type PlanItem, type 
 import { Modal } from '@/shared/ui';
 import { Button } from '@/components/ui/button';
 import { trainingErrorText } from '../training/training-hub';
+import { AdaptiveControls } from './adaptive-controls';
+import type { assessTraining } from '@/shared/adaptation';
 import { RatingPrompt } from '../gamification/rating-prompt';
 import { BeeMessage, Mascot } from '../gamification/mascot';
 
 export type PlanDayView = PlanDay & { kcal: number; done: boolean; pct: number | null; doneOn: string | null; thumb: string | null };
-export type Plan = { program: ProgramKey; location: 'home' | 'gym'; bmi: number | null; band: string | null; week: number; step: number; stage: StepStage; deload: boolean;
+export type Plan = { adaptive?: { decision: ReturnType<typeof assessTraining> }; program: ProgramKey; location: 'home' | 'gym'; bmi: number | null; band: string | null; week: number; step: number; stage: StepStage; deload: boolean;
   lastChange: { week: number; avg: number; change: 'up' | 'same' | 'down' } | null; lastAdapt: { change: 'up' | 'same' | 'down'; reason: string; pct: number | null } | null; tired: boolean; pastWeeks: { week: number; done: number; avg: number }[]; sessionMinutes: number; nickname: string;
   current: number | null; completed: number; total: number; days: PlanDayView[]; balance?: { plan: BalanceIssue[]; done: BalanceIssue[] } };
 type Scores = { today: string; days: { day: string; score: number | null; workout: number | null; water: number | null; food: number | null; rest: boolean }[] };
@@ -25,7 +27,7 @@ export const pctColor = (p: number | null | undefined) => (p === null || p === u
 
 export async function startPlanDay(day: PlanDayView, program: ProgramKey, title: string) {
   return trainingApi<{ id: string }>('free', { name: title.slice(0, 100), program: { key: program, day: day.day },
-    exercises: day.items.map(i => ({ exerciseId: i.id, sets: i.sets, reps: i.target, restSeconds: Math.max(10, i.rest), targetKg: 0, timed: i.unit === 'seconds' })) });
+    exercises: day.items.map(i => ({ exerciseId: i.id, sets: i.sets, reps: i.target, restSeconds: Math.max(10, i.rest), targetKg: i.weightKg ?? 0, timed: i.unit === 'seconds' })) });
 }
 
 export function PlanView() {
@@ -40,6 +42,7 @@ export function PlanView() {
   const dayTitle = (d: PlanDayView) => u.splits[d.split as keyof typeof u.splits] ?? d.split;
   async function start(d: PlanDayView) {
     if (data.activeSession) { openWorkout(data.activeSession.id); return; }
+    if (!d.items.length) { notify(tt.adaptive.noMatch); return; }
     setBusy(true);
     try { const s = await startPlanDay(d, plan!.program, `${u.day} ${d.day} · ${dayTitle(d)}`); openWorkout(s.id); }
     catch (e) { notify(trainingErrorText(e, t, tt)); } finally { setBusy(false); }
@@ -59,6 +62,8 @@ export function PlanView() {
   if (!plan) return <section className="plan-view"><div className="sk sk-title"/><div className="sk sk-hero"/><div className="sk sk-card"/></section>;
   const today = plan.days.find(d => d.day === plan.current) ?? null;
   const todayScore = scores?.days.at(-1);
+  const recordedScores = scores?.days.filter(d => d.score !== null) ?? [];
+  const weeklyAverage = recordedScores.length ? Math.round(recordedScores.reduce((n, d) => n + d.score!, 0) / recordedScores.length) : null;
   const who = plan.nickname || data.user.name.split(' ')[0];
   const todayDone = plan.days.some(d => d.doneOn && new Date(d.doneOn).toDateString() === new Date().toDateString());
   const fill = (x: string, v: Record<string, string | number> = {}) => Object.entries(v).reduce((r, [k, val]) => r.replaceAll(`{${k}}`, String(val)), x);
@@ -70,38 +75,18 @@ export function PlanView() {
       <div className="plan-chips"><button type="button" className="chip-stat" onClick={() => go('achievements')} aria-label={u.streak}><Flame size={16}/>{data.stats.streak}</button></div>
     </header>
 
-    <CoachBubble state={warnings.length ? 'concerned' : todayDone ? 'celebrating' : 'waving'} lines={[
-      fill(u.coachHi, { name: who }),
-      todayDone ? u.coachDoneToday : today ? fill(u.coachToday, { title: dayTitle(today), min: today.minutes }) : u.coachWeekDone, ...warnings]}
-      warn={warnings.length > 0} action={!todayDone && today ? { label: data.activeSession ? u.resume : u.start, run: () => void start(today) } : null}
-      ask={{ label: u.coachAsk, run: () => go('coach') }} closeLabel={u.coachClose} busy={busy}/>
-
     <section className="score-card" aria-label={u.todayScore}>
-      <div className="score-main"><small>{u.todayScore}</small><strong><CountUp to={todayScore?.score ?? 0}/><em>%</em></strong>
-        <div className="score-bar"><i style={{ width: `${todayScore?.score ?? 0}%`, background: pctColor(todayScore?.score ?? null) }}/></div></div>
-      <div className="score-tiles">
-        {([['workout', Dumbbell, u.partWorkout, () => goPlan(location)], ['water', Droplets, u.partWater, () => go('water')], ['food', Utensils, u.partFood, () => go('water')]] as const).map(([k, Icon, label, act]) =>
-          <button key={k} type="button" className={`score-tile st-${k}`} onClick={act}><span className="st-head"><Icon size={14}/><small>{label}</small></span><strong>{todayScore?.[k] ?? 0}<em>%</em></strong></button>)}
-      </div>
-      {scores && <div className="score-bars" role="img" aria-label={`${u.last7}: ${scores.days.map(d => `${d.score ?? '—'}%`).join(', ')}`}>{scores.days.map(d => <span key={d.day} title={`${d.day}: ${d.score ?? '—'}%`} className={d.day === scores.today ? 'is-today' : ''}><b>{d.score ?? ''}</b><i style={{ height: `${Math.max(6, d.score ?? 0)}%`, background: d.score === null ? undefined : pctColor(d.score) }}/><small>{locale.startsWith('my') ? Number(d.day.slice(8)) : t.weekdaysShort[(new Date(d.day + 'T12:00:00Z').getUTCDay() + 6) % 7]}</small></span>)}</div>}
-    </section>
-
-    <section className="home-section" aria-labelledby="h-training">
-      <div className="section-head"><div><h2 id="h-training">{u.training}</h2><small>{u.trainingHint}</small></div><button type="button" className="see-all" onClick={() => go('discover')}>{u.seeAll}</button></div>
-      <div className="train-grid">
-        <button type="button" className="train-card tc-home" onClick={() => goPlan('home')}><span><small>{u.trainCards.home.sub}</small><strong>{u.trainCards.home.title}</strong></span><Home className="tc-art" size={72} aria-hidden="true"/></button>
-        <button type="button" className="train-card tc-gym" onClick={() => goPlan('gym')}><span><small>{u.trainCards.gym.sub}</small><strong>{u.trainCards.gym.title}</strong></span><Dumbbell className="tc-art" size={72} aria-hidden="true"/></button>
-        <button type="button" className="train-card tc-quick" onClick={() => setQuick(true)}><span><small>{u.trainCards.quick.sub}</small><strong>{u.trainCards.quick.title}</strong></span><Timer className="tc-art" size={72} aria-hidden="true"/></button>
-        <button type="button" className="train-card tc-build" onClick={() => openTrain({ mode: 'free', name: u.myWorkout, rows: [] })}><span><small>{u.trainCards.build.sub}</small><strong>{u.trainCards.build.title}</strong></span><ListPlus className="tc-art" size={72} aria-hidden="true"/></button>
-      </div>
+      <div className="score-summaries"><div className="score-main"><div className="solaris-ring" style={{ background: `conic-gradient(var(--forest) ${(todayScore?.score ?? 0) * 3.6}deg, var(--line) 0deg)` }}><strong><CountUp to={todayScore?.score ?? 0}/><em>%</em></strong></div><small>{u.todayScore}</small></div>
+      <div className="score-main"><div className="solaris-ring" style={{ background: `conic-gradient(var(--lime) ${(weeklyAverage ?? 0) * 3.6}deg, var(--line) 0deg)` }}><strong>{weeklyAverage ?? '—'}{weeklyAverage !== null && <em>%</em>}</strong></div><small>{tt.quiz.details.weeklyAverage}</small></div></div>
     </section>
 
     <section className="home-section" id="my-plan" aria-labelledby="h-plan">
       <div className="section-head"><div><h2 id="h-plan">{u.planSection}</h2><small>{u.planHint}</small></div><button type="button" className="see-all" onClick={() => setPrograms(true)}>{u.changePlan}</button></div>
       {today ? <article className="today-hero" onClick={() => setOpen(today)}>
-        <div className="today-hero-media" style={today.thumb ? { backgroundImage: `url(${today.thumb})` } : undefined}><span className="today-badge">{u.today}</span></div>
+        <div className="today-hero-media" style={today.thumb ? { backgroundImage: `url(${today.thumb})` } : undefined}>{!today.thumb && <Dumbbell className="hero-placeholder" size={52} aria-hidden="true"/>}<span className="today-badge">{u.today}</span></div>
         <div className="today-hero-body">
           <small>{u.day} {today.day}</small><h2>{dayTitle(today)}</h2>
+          {!today.items.length && <p>{tt.adaptive.noMatch}</p>}
           <p className="day-meta"><span className="meta-chip"><Clock size={14}/>{today.minutes} {u.min}</span><span className="meta-chip"><Flame size={14}/>{today.kcal} kcal</span><span className="meta-chip">{today.items.length} {u.exercises}</span><span className="meta-chip">{location === 'home' ? u.followTimer : u.gymReps}</span></p>
           <button type="button" className="button primary big-start" disabled={busy} onClick={e => { e.stopPropagation(); void start(today); }}><Play size={20}/>{data.activeSession ? u.resume : u.start}</button>
         </div></article>
@@ -119,9 +104,34 @@ export function PlanView() {
           <span className="wd-dot" style={d.done ? { background: pctColor(d.pct), borderColor: 'transparent', color: '#fff' } : undefined}>{d.done ? ((d.pct ?? 100) >= 100 ? <Check size={16}/> : `${d.pct}`) : d.day}</span><small>{dayTitle(d)}</small></button>)}</div>
       </section>
 
+      <AdaptiveControls key={plan.week} plan={plan} reload={() => load()}/>
       <div className="section-head sub"><h3>{u.recommended}</h3></div>
       <div className="program-rail">{(['personal', 'four_day', 'gym_beginner'] as const).map(p => <button key={p} type="button" className={`program-tile pt-${p} ${plan.program === p ? 'on' : ''}`} onClick={() => { if (plan.program !== p) void changeProgram(p); }}>
         {plan.program === p && <em>{u.currentPlan}</em>}<strong>{u.programs[p].title}</strong><small>{u.programs[p].desc}</small></button>)}</div>
+    </section>
+
+    <CoachBubble state={warnings.length ? 'concerned' : todayDone ? 'celebrating' : 'waving'} lines={[
+      fill(u.coachHi, { name: who }),
+      todayDone ? u.coachDoneToday : today ? fill(u.coachToday, { title: dayTitle(today), min: today.minutes }) : u.coachWeekDone, ...warnings]}
+      warn={warnings.length > 0} action={!todayDone && today ? { label: data.activeSession ? u.resume : u.start, run: () => void start(today) } : null}
+      ask={{ label: u.coachAsk, run: () => go('coach') }} closeLabel={u.coachClose} busy={busy}/>
+
+    <section className="home-section" aria-labelledby="h-training">
+      <div className="section-head"><div><h2 id="h-training">{u.training}</h2><small>{u.trainingHint}</small></div><button type="button" className="see-all" onClick={() => go('discover')}>{u.seeAll}</button></div>
+      <div className="train-grid">
+        <button type="button" className="train-card tc-home" onClick={() => goPlan('home')}><span><small>{u.trainCards.home.sub}</small><strong>{u.trainCards.home.title}</strong></span><Home className="tc-art" size={72} aria-hidden="true"/></button>
+        <button type="button" className="train-card tc-gym" onClick={() => goPlan('gym')}><span><small>{u.trainCards.gym.sub}</small><strong>{u.trainCards.gym.title}</strong></span><Dumbbell className="tc-art" size={72} aria-hidden="true"/></button>
+        <button type="button" className="train-card tc-quick" onClick={() => setQuick(true)}><span><small>{u.trainCards.quick.sub}</small><strong>{u.trainCards.quick.title}</strong></span><Timer className="tc-art" size={72} aria-hidden="true"/></button>
+        <button type="button" className="train-card tc-build" onClick={() => openTrain({ mode: 'free', name: u.myWorkout, rows: [] })}><span><small>{u.trainCards.build.sub}</small><strong>{u.trainCards.build.title}</strong></span><ListPlus className="tc-art" size={72} aria-hidden="true"/></button>
+      </div>
+    </section>
+
+    <section className="score-card" aria-label={u.todayScore}>
+      <div className="score-tiles">
+        {([['workout', Dumbbell, u.partWorkout, () => goPlan(location)], ['water', Droplets, u.partWater, () => go('water')], ['food', Utensils, u.partFood, () => go('water')]] as const).map(([k, Icon, label, act]) =>
+          <button key={k} type="button" className={`score-tile st-${k}`} onClick={act}><span className="st-head"><Icon size={23}/><small>{label}</small></span><div className="solaris-mini-ring" style={{ background: `conic-gradient(var(--series) ${(todayScore?.[k] ?? 0) * 3.6}deg, var(--series-soft) 0deg)` }}><strong>{todayScore?.[k] ?? 0}<em>%</em></strong></div></button>)}
+      </div>
+      {scores && <ScoreHistory scores={scores} label={u.last7} locale={locale} weekdays={t.weekdaysShort}/>}
     </section>
 
     <button type="button" className="meal-cta" onClick={() => { try { sessionStorage.setItem('mingalar-tab', 'food'); } catch { /* optional */ } go('water'); }}><Camera size={22}/><span><strong>{u.mealPhoto}</strong><small>{u.mealPhotoHint}</small></span></button>
@@ -155,6 +165,25 @@ export function PlanView() {
         <span><strong>{u.programs[p].title}</strong><small>{u.programs[p].desc}</small></span>{plan.program === p && <Check size={20}/>}</button>)}</div>
     </Modal>}
   </section>;
+}
+
+/** Gaps remain gaps: days without a score are never plotted as zero. */
+function ScoreHistory({ scores, label, locale, weekdays }: { scores: Scores; label: string; locale: string; weekdays: string[] }) {
+  const segments: { x: number; y: number }[][] = [];
+  scores.days.forEach((d, i) => {
+    if (d.score === null) return;
+    if (i === 0 || scores.days[i - 1].score === null) segments.push([]);
+    segments[segments.length - 1].push({ x: 20 + i * 50, y: 110 - Math.max(0, Math.min(100, d.score)) });
+  });
+  return <div className="solaris-history"><small>{label}</small>
+    <svg viewBox="0 0 340 120" role="img" aria-label={`${label}: ${scores.days.map(d => `${d.day}: ${d.score === null ? '—' : `${d.score}%`}`).join(', ')}`}>
+      {[10, 60, 110].map(y => <line key={y} className="chart-grid" x1="20" x2="320" y1={y} y2={y}/>)}
+      {segments.map((points, i) => <g key={i}>
+        {points.length > 1 && <><polygon className="chart-area" points={`${points[0].x},110 ${points.map(p => `${p.x},${p.y}`).join(' ')} ${points[points.length - 1].x},110`}/><polyline className="chart-line" points={points.map(p => `${p.x},${p.y}`).join(' ')}/></>}
+        {points.map(p => <circle key={p.x} cx={p.x} cy={p.y} r="4"/>)}</g>)}
+    </svg>
+    <div className="solaris-history-labels">{scores.days.map(d => <span key={d.day}>{locale.startsWith('my') ? new Intl.NumberFormat('my-MM').format(Number(d.day.slice(8))) : weekdays[(new Date(d.day + 'T12:00:00Z').getUTCDay() + 6) % 7]}</span>)}</div>
+  </div>;
 }
 
 // The bee coach greets the user at the top of Home like a chat: typing dots, then short lines (today's session, balance warnings).

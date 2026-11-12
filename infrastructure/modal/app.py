@@ -28,7 +28,7 @@ def ignored(path):
 
 image = (modal.Image.from_registry('node:22-bookworm-slim', add_python='3.12')
     .apt_install('openssl').workdir('/app')
-    .env({'NEXT_TELEMETRY_DISABLED': '1', 'VOICE_WARMUP': '1'})
+    .env({'NEXT_TELEMETRY_DISABLED': '1', 'VOICE_WARMUP': '0'})
     .add_local_dir(ROOT, '/app', copy=True, ignore=ignored)
     .run_commands('npm ci --no-audit --no-fund',
         'DATABASE_URL=file:/tmp/build.db BETTER_AUTH_URL=http://localhost:3000 BETTER_AUTH_SECRET=build-only-placeholder-secret-not-for-runtime npm run build'))
@@ -51,6 +51,13 @@ def web():
     with sqlite3.connect('/data/fitness.db') as connection:
         connection.execute('PRAGMA journal_mode=DELETE')
         connection.execute('PRAGMA busy_timeout=30000')
+        # Capture the existing database before this release's additive migrations.
+        adaptive_backup = Path('/data/backups/pre-adaptive-v2.db')
+        if connection.execute("SELECT count(*) FROM sqlite_master WHERE name='WorkoutSession'").fetchone()[0] and not adaptive_backup.exists():
+            adaptive_backup.parent.mkdir(exist_ok=True)
+            with sqlite3.connect(adaptive_backup) as backup:
+                connection.backup(backup)
+            volume.commit()
         if connection.execute("SELECT count(*) FROM sqlite_master WHERE name='WorkoutSession'").fetchone()[0] and not connection.execute("SELECT count(*) FROM sqlite_master WHERE name='GameState'").fetchone()[0]:
             backup_path=Path('/data/backups/pre-gamification.db')
             backup_path.parent.mkdir(exist_ok=True)

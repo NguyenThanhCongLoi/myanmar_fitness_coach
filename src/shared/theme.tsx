@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Monitor, Moon, Sun } from 'lucide-react';
 import { useTrainingLanguage } from '@/shared/training-language';
 import { track } from '@/shared/analytics';
-// Theme: system (default) / light / dark. Stored per device; applied as <html data-theme> before paint (see layout).
+// White is the default; saved system/dark preferences remain available.
 type Mode = 'system' | 'light' | 'dark';
 const KEY = 'mingalar-theme';
 export function applyTheme(mode: Mode) {
@@ -12,8 +12,8 @@ export function applyTheme(mode: Mode) {
 }
 export function ThemeToggle() {
   const tt = useTrainingLanguage();
-  const [mode, setMode] = useState<Mode>('system');
-  useEffect(() => { try { setMode((localStorage.getItem(KEY) as Mode) || 'system'); } catch { /* optional */ } }, []);
+  const [mode, setMode] = useState<Mode>('light');
+  useEffect(() => { try { setMode((localStorage.getItem(KEY) as Mode) || 'light'); } catch { /* optional */ } }, []);
   useEffect(() => {
     applyTheme(mode);
     if (mode !== 'system') return;

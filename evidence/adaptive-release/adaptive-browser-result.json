@@ -1,0 +1,102 @@
+{
+  "result": "PASS",
+  "pageErrors": [],
+  "weekAdvanced": true,
+  "readyPaused": true,
+  "restPaused": true,
+  "countdown": 10,
+  "audio": [
+    {
+      "src": "https://ta-01m787xpdxxc1z0rtdwsr81a9s-3000-lctk9yzyyjrvqcgjjmuvupn25.w.modal.host/audio/carefree.mp3",
+      "paused": false,
+      "time": 0.96592
+    }
+  ],
+  "sessionId": "cmwdr6rwq000qfq3vmf2zgk8u",
+  "completion": 100,
+  "decision": {
+    "step": 0,
+    "change": "same",
+    "reasons": [
+      "more_data"
+    ],
+    "avg": 100,
+    "completed": 1,
+    "planned": 3,
+    "reviewed": 1
+  },
+  "matrix": [
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 1440,
+      "overflow": 0
+    }
+  ]
+}

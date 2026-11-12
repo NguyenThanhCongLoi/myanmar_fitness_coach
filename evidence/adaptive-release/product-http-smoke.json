@@ -1,0 +1,16 @@
+{
+  "url": "https://avibigateway--myanmar-fitness-coach.modal.run",
+  "result": "PASS",
+  "exerciseCount": 62,
+  "checks": [
+    "real signup/session",
+    "profile Unicode",
+    "plan persistence",
+    "owner isolation",
+    "set idempotency",
+    "completed progress",
+    "coach memory isolation",
+    "LLM configured: chat NOT TESTED (no paid call)",
+    "anonymous 401"
+  ]
+}

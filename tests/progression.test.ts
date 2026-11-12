@@ -10,11 +10,13 @@ test('double progression: add reps, then load at top of range (gated by RIR), ho
   expect(e1rm(100, 5)).toBe(116.7); expect(e1rm(50, 20)).toBeNull(); expect(loadStep(['barbell'])).toBe(2.5); expect(loadStep(['dumbbell'])).toBe(2);
   expect(suggestNext([], ['barbell'], [8, 12]).note).toBe('START_LIGHT');
   expect(suggestNext([[set(9, 40), set(9, 40, 1)]], ['barbell'], [8, 12])).toMatchObject({ weightKg: 40, reps: 10, note: 'ADD_REP' });
-  expect(suggestNext([[set(12, 40), set(12, 40, 1)]], ['barbell'], [8, 12])).toMatchObject({ weightKg: 42.5, reps: 8, note: 'ADD_LOAD' });
-  expect(suggestNext([[set(12, 40, 0, 0)]], ['barbell'], [8, 12]).note).toBe('ADD_REP');
+  expect(suggestNext([[set(12, 40), set(12, 40, 1)]], ['barbell'], [8, 12])).toMatchObject({ weightKg: 40, reps: 12, note: 'HOLD' });
+  expect(suggestNext([[set(12, 40, 0, 0)]], ['barbell'], [8, 12]).note).toBe('HOLD');
   expect(suggestNext([[set(6, 40)]], ['barbell'], [8, 12])).toMatchObject({ weightKg: 40, note: 'HOLD' });
   expect(suggestNext([[set(6, 40)], [set(7, 40)]], ['barbell'], [8, 12])).toMatchObject({ weightKg: 35, note: 'REDUCE' });
-  expect(suggestNext([[set(15, 0)]], ['body weight'], [12, 15]).note).toBe('HARDER_VARIATION');
+  expect(suggestNext([[set(15, 0)]], ['body weight'], [12, 15]).note).toBe('HOLD');
+  expect(suggestNext([[set(12, 40, 0, 2)], [set(12, 40, 0, 3)]], ['barbell'], [8, 12])).toMatchObject({ weightKg: 42.5, reps: 8, note: 'ADD_LOAD' });
+  expect(suggestNext([[set(12, 8, 0, 2)], [set(12, 8, 0, 2)]], ['dumbbell'], [8,12]).note).toBe('HOLD');
 });
 test('logging a heavier set returns a personal record; progression uses previous completed sessions only', async () => {
   const id = prefix + 'a';
@@ -26,7 +28,7 @@ test('logging a heavier set returns a personal record; progression uses previous
   await logSet(id, s1.id, { exerciseId: ex, setIndex: 1, reps: 10, weight: 8, unit: 'kg', restSeconds: 60, rir: 1 });
   await finishSession(id, s1.id, '');
   const p = await progressionFor(id, [ex]);
-  expect(p[ex].suggestion).toMatchObject({ weightKg: 10, reps: 8, note: 'ADD_LOAD' });
+  expect(p[ex].suggestion).toMatchObject({ weightKg: 8, reps: 10, note: 'HOLD' });
   const s2 = await createTraining(id, 'free', { name: 'Session B', exercises: [{ exerciseId: ex, sets: 1, reps: 8, restSeconds: 60, targetKg: 10 }] });
   const pr = await logSet(id, s2.id, { exerciseId: ex, setIndex: 0, reps: 8, weight: 10, unit: 'kg', restSeconds: 60 });
   expect(pr.pr).toMatchObject({ type: 'e1rm' });
@@ -65,4 +67,14 @@ test('timed session completion % = seconds done / seconds planned', async () => 
   await finishSession(id, s.id, '');
   const done = await prisma.workoutSession.findUnique({ where: { id: s.id } });
   expect(done?.completionPct).toBe(75); expect(done?.programDay).toBe(1);
+});
+test('strength completion counts reps, excludes warm-up and never treats a missing timed duration as full', async () => {
+  const id = prefix + 'partial';
+  await prisma.user.create({ data: { id, name: 'T', email: id+'@example.test', profile: { create: { onboarded: true, equipment: ['body weight'] } } } });
+  const ex = 'dataset-0294';
+  const s = await createTraining(id,'free',{name:'Partial',exercises:[{exerciseId:ex,sets:2,reps:10,restSeconds:30,targetKg:0}]});
+  await logSet(id,s.id,{exerciseId:ex,setIndex:0,reps:10,weight:0,unit:'kg',restSeconds:30,kind:'warmup'});
+  await logSet(id,s.id,{exerciseId:ex,setIndex:0,reps:5,weight:0,unit:'kg',restSeconds:30});
+  await finishSession(id,s.id,'');
+  expect((await prisma.workoutSession.findUniqueOrThrow({where:{id:s.id}})).completionPct).toBe(25);
 });

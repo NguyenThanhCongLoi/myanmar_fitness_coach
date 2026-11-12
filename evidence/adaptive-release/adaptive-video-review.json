@@ -1,0 +1,139 @@
+{
+  "result": "PASS",
+  "exerciseId": "curated-squat",
+  "pageErrors": [],
+  "checks": [
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 320,
+      "overflow": 0,
+      "video": {
+        "width": 220,
+        "height": 276,
+        "ready": 4
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "overflow": 0,
+      "video": {
+        "width": 220,
+        "height": 276,
+        "ready": 4
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "overflow": 0,
+      "video": {
+        "width": 220,
+        "height": 276,
+        "ready": 4
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 320,
+      "overflow": 0,
+      "video": {
+        "width": 220,
+        "height": 276,
+        "ready": 4
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "overflow": 0,
+      "video": {
+        "width": 220,
+        "height": 276,
+        "ready": 4
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "overflow": 0,
+      "video": {
+        "width": 220,
+        "height": 276,
+        "ready": 4
+      }
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 320,
+      "overflow": 0,
+      "video": {
+        "width": 220,
+        "height": 276,
+        "ready": 4
+      }
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 390,
+      "overflow": 0,
+      "video": {
+        "width": 220,
+        "height": 276,
+        "ready": 4
+      }
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 1440,
+      "overflow": 0,
+      "video": {
+        "width": 220,
+        "height": 276,
+        "ready": 4
+      }
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 320,
+      "overflow": 0,
+      "video": {
+        "width": 220,
+        "height": 276,
+        "ready": 4
+      }
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 390,
+      "overflow": 0,
+      "video": {
+        "width": 220,
+        "height": 276,
+        "ready": 4
+      }
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 1440,
+      "overflow": 0,
+      "video": {
+        "width": 220,
+        "height": 276,
+        "ready": 4
+      }
+    }
+  ]
+}

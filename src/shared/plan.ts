@@ -6,7 +6,7 @@ import { pickSession, weeklySplits, availableAt, type ProgramExercise, type Spli
 export const PROGRAMS = ['personal', 'four_day', 'gym_beginner'] as const;
 export type ProgramKey = typeof PROGRAMS[number];
 export type DaySplit = Split | 'chest' | 'back' | 'cardio' | 'machine_full';
-export type PlanItem = { id: string; sets: number; target: number; unit: 'reps' | 'seconds'; rest: number; perSide: boolean; swappedFrom?: string };
+export type PlanItem = { id: string; sets: number; target: number; unit: 'reps' | 'seconds'; rest: number; perSide: boolean; swappedFrom?: string; weightKg?: number; loadNote?: string };
 // At home every exercise is followed by time (watch the video, move until the timer ends); in the gym it is reps x weight.
 const HOME_WORK: Record<Level, number> = { beginner: 30, intermediate: 40, advanced: 45 };
 export type PlanDay = { day: number; week: number; split: DaySplit; items: PlanItem[]; minutes: number };
@@ -41,7 +41,7 @@ export function cardioSettings(band: BmiBand | null) {
   return band === 'obese' ? { minutes: 20, work: 40, rest: 20 } : band === 'over' ? { minutes: 25, work: 45, rest: 20 } : band === 'under' ? { minutes: 15, work: 40, rest: 20 } : { minutes: 25, work: 45, rest: 15 };
 }
 const num = (v: string) => Number(String(v).split('–').pop()) || 10;
-function strengthItems(split: DaySplit, library: ProgramExercise[], location: 'home' | 'gym', level: Level): PlanItem[] {
+function strengthItems(split: DaySplit, library: ProgramExercise[], location: 'home' | 'gym', level: Level, priorityMuscles: readonly string[] = []): PlanItem[] {
   if (split === 'machine_full') {
     const ids = location === 'gym' ? MACHINE_FULL : [];
     const chosen = ids.map(id => library.find(e => e.id === id)).filter((e): e is ProgramExercise => !!e);
@@ -52,16 +52,16 @@ function strengthItems(split: DaySplit, library: ProgramExercise[], location: 'h
   // At home, follow-along needs a demo: use exercises with video first; fill with others only if too few.
   if (location === 'home') {
     const homeLib = library.filter(e => placeOf(e) === 'home');
-    const withVideo = pickSession(base, homeLib.filter(e => e.videoUrl), location, level);
+    const withVideo = pickSession(base, homeLib.filter(e => e.videoUrl), location, level, 5, priorityMuscles);
     if (withVideo.length >= 3) return withVideo.map(x => toItem(x.exercise, x.dose));
-    const more = pickSession(base, homeLib, location, level).filter(x => !withVideo.some(v => v.exercise.id === x.exercise.id));
+    const more = pickSession(base, homeLib, location, level, 5, priorityMuscles).filter(x => !withVideo.some(v => v.exercise.id === x.exercise.id));
     return [...withVideo, ...more].slice(0, 5).map(x => toItem(x.exercise, x.dose));
   }
   // Gym: use gym equipment (machines, cables, barbells, dumbbells on a bench); fill with others only if too few.
   const gymLib = library.filter(e => placeOf(e) === 'gym' || e.equipment.includes('dumbbell'));
-  const gymPick = pickSession(base, gymLib, location, level);
+  const gymPick = pickSession(base, gymLib, location, level, 5, priorityMuscles);
   if (gymPick.length >= 3) return gymPick.map(x => toItem(x.exercise, x.dose));
-  return pickSession(base, library, location, level).map(x => toItem(x.exercise, x.dose));
+  return pickSession(base, library, location, level, 5, priorityMuscles).map(x => toItem(x.exercise, x.dose));
 }
 function toItem(e: ProgramExercise, d: { sets: string; target: string; unit: string; restSeconds: string; perSide: boolean }): PlanItem {
   return { id: e.id, sets: Math.min(4, num(d.sets)), target: num(d.target), unit: d.unit === 'reps' ? 'reps' : 'seconds', rest: Math.max(15, num(d.restSeconds)), perSide: d.perSide };
@@ -78,13 +78,13 @@ export function minutesFor(items: PlanItem[]) {
   const sec = items.reduce((n, i) => n + i.sets * ((i.unit === 'reps' ? i.target * 3 * (i.perSide ? 2 : 1) : i.target) + i.rest), 0);
   return Math.max(5, Math.round(sec / 60) + 3);
 }
-export function buildPlan(o: { program: ProgramKey; daysPerWeek: number; library: ProgramExercise[]; location: 'home' | 'gym'; level: Level; bmi: number | null; weeks?: number; lowImpact?: boolean }): PlanDay[] {
+export function buildPlan(o: { program: ProgramKey; daysPerWeek: number; library: ProgramExercise[]; location: 'home' | 'gym'; level: Level; bmi: number | null; weeks?: number; lowImpact?: boolean; priorityMuscles?: readonly string[] }): PlanDay[] {
   const splits = programSplits(o.program, o.daysPerWeek, o.location), band = bmiBand(o.bmi);
   const lowImpact = !!o.lowImpact || band === 'obese';
   const lib = lowImpact ? o.library.filter(e => !(e.tags ?? []).includes('jumping')) : o.library;
   const perSplit = new Map<DaySplit, PlanItem[]>();
   for (const s of new Set(splits)) {
-    let items = s === 'cardio' ? cardioItems(lib, o.location, band, lowImpact) : strengthItems(s, lib, o.location, o.level);
+    let items = s === 'cardio' ? cardioItems(lib, o.location, band, lowImpact) : strengthItems(s, lib, o.location, o.level, o.priorityMuscles);
     if (o.location === 'home' && s !== 'cardio') items = items.map(i => ({ ...i, unit: 'seconds' as const, target: i.unit === 'seconds' ? i.target : HOME_WORK[o.level], sets: Math.min(3, i.sets), rest: 20 }));
     perSplit.set(s, items);
   }
@@ -129,10 +129,10 @@ export function nextStep(step: number, results: { pct: number | null; difficulty
 }
 
 // One week of days at a given step; sessionMinutes caps exercises/sets so the session fits the time the user chose.
-export function buildWeek(o: { program: ProgramKey; daysPerWeek: number; library: ProgramExercise[]; location: 'home' | 'gym'; step: number; bmi: number | null; week: number; sessionMinutes: number; lowImpact?: boolean }): PlanDay[] {
+export function buildWeek(o: { program: ProgramKey; daysPerWeek: number; library: ProgramExercise[]; location: 'home' | 'gym'; step: number; bmi: number | null; week: number; sessionMinutes: number; lowImpact?: boolean; priorityMuscles?: readonly string[] }): PlanDay[] {
   const deload = o.week % 4 === 0 && o.step > 0; // every 4th week is a lighter recovery week
   const s = STEPS[Math.max(0, Math.min(MAX_STEP, o.step - (deload ? 1 : 0)))];
-  const base = buildPlan({ program: o.program, daysPerWeek: o.daysPerWeek, library: o.library, location: o.location, level: s.maxLevel, bmi: o.bmi, weeks: 1, lowImpact: o.lowImpact });
+  const base = buildPlan({ program: o.program, daysPerWeek: o.daysPerWeek, library: o.library, location: o.location, level: s.maxLevel, bmi: o.bmi, weeks: 1, lowImpact: o.lowImpact, priorityMuscles: o.priorityMuscles });
   return base.map((d, i) => {
     const cardioScale = 0.5 + 0.1 * Math.min(5, Math.max(0, o.step - (deload ? 1 : 0)));
     let items = d.split === 'cardio' ? d.items.slice(0, Math.max(2, s.exercises)).map(it => ({ ...it, sets: Math.max(1, Math.round(it.sets * cardioScale)), target: Math.min(it.target, s.work + 10) })) : d.items.slice(0, s.exercises).map(it => o.location === 'home' || it.unit === 'seconds'

@@ -104,9 +104,9 @@ export async function finishSession(userId: string, id: string, note: string) {
     if (session.status === 'completed') return {...session,reward:{awarded:false,xp:0,reason:'already_completed'}};
     if (await tx.workoutSet.count({ where: { sessionId: id, completed: true } }) === 0) throw new ApiError(400, 'LOG_A_SET_FIRST');
     const now=new Date();
-    const rx=await tx.sessionExercise.findMany({where:{sessionId:id}}), done=await tx.workoutSet.findMany({where:{sessionId:id,completed:true}});
-    const planned=rx.reduce((n,p)=>n+(p.timed?p.sets*p.reps:p.sets),0);
-    const actual=rx.reduce((n,p)=>n+done.filter(x=>x.exerciseId===p.exerciseId).reduce((m,x)=>m+(p.timed?Math.min(p.reps,x.seconds||p.reps):1),0),0);
+    const rx=await tx.sessionExercise.findMany({where:{sessionId:id}}), done=await tx.workoutSet.findMany({where:{sessionId:id,completed:true,kind:{not:'warmup'}}});
+    const planned=rx.reduce((n,p)=>n+p.sets,0);
+    const actual=rx.reduce((n,p)=>n+done.filter(x=>x.exerciseId===p.exerciseId&&x.setIndex<p.sets).reduce((m,x)=>m+Math.min(1,(p.timed?x.seconds:x.reps)/Math.max(1,p.reps)),0),0);
     const completionPct=planned?Math.min(100,Math.round(actual/planned*100)):null;
     const completed=await tx.workoutSession.update({ where: { id }, data: { status: 'completed', endedAt: now, note: note.normalize('NFC'), completionPct } });
     const reward=await grantWorkoutCredit(tx,userId,id,now);

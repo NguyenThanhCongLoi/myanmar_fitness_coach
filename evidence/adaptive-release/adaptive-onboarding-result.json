@@ -1,0 +1,53 @@
+{
+  "result": "PASS",
+  "pageErrors": [],
+  "checks": [
+    {
+      "name": "welcome-en-390",
+      "overflow": 0
+    },
+    {
+      "name": "focus-en-390",
+      "overflow": 0
+    },
+    {
+      "name": "waist-en-390",
+      "overflow": 0
+    },
+    {
+      "name": "waist-my-320",
+      "overflow": 0
+    },
+    {
+      "name": "glutes-en-390",
+      "overflow": 0
+    },
+    {
+      "name": "equipment-en-390",
+      "overflow": 0
+    },
+    {
+      "name": "review-en-390",
+      "overflow": 0
+    },
+    {
+      "name": "completed-home-en-390",
+      "overflow": 0
+    }
+  ],
+  "savedBodyPreferences": {
+    "focusAreas": [
+      "waist",
+      "glutes"
+    ],
+    "waistGoal": "reduce",
+    "gluteGoal": "build",
+    "currentWaist": "fuller",
+    "currentGlutes": "small",
+    "protectedAreas": [],
+    "waistCm": 80,
+    "hipsCm": 95
+  },
+  "reviewEdit": true,
+  "reload": true
+}

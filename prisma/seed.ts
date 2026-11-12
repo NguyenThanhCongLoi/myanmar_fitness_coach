@@ -5,6 +5,7 @@ import stepsEn from './exercise-steps.json';
 import stepsMy from './exercise-steps-my.json';
 import media from './exercise-media.json';
 import wgerMedia from './exercise-media-wger.json';
+import originalMedia from './exercise-media-original.json';
 import guidanceEn from './exercise-guidance.json';
 import guidanceMy from './exercise-guidance-my.json';
 import mistakesMy from './exercise-mistakes-my.json';
@@ -27,7 +28,7 @@ async function main() {
   for(const entry of catalog){
     const {id,...base}=entry;
     // Real-person demo clips from wger (CC BY-SA 4.0) replace older clips; step illustrations are kept.
-    const base0=(media as Record<string,MediaEntry>)[id], w=(wgerMedia as Record<string,Partial<MediaEntry>>)[id];
+    const base0=(media as Record<string,MediaEntry>)[id], w=(originalMedia as Record<string,Partial<MediaEntry>>)[id] ?? (wgerMedia as Record<string,Partial<MediaEntry>>)[id];
     const m:MediaEntry|undefined=w?{...(base0??{steps:{}}),...w,variationNote:'',steps:base0?.steps??{}} as MediaEntry:base0, en=(stepsEn as Record<string,string[]>)[id]??[], my=(stepsMy as Record<string,{name:string;steps:string[]}>)[id];
     // Demo media: licence-checked Wikimedia Commons sources (attribution shown in UI); technique NOT coach-reviewed (mediaStatus).
     const mediaFields=m?.videoUrl?{videoUrl:m.videoUrl,thumbnailUrl:m.thumbnailUrl??null,mediaType:'video',mediaLicenseStatus:'verified',mediaStatus:'demo_unreviewed',mediaSource:`${m.mediaSource}${m.variationNote?` [${m.variationNote}]`:''} ${m.page}`}:{};

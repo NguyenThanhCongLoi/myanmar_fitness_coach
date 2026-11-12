@@ -9,9 +9,9 @@ import { MuscleMap } from '../exercises/muscle-map';
 import { WeeklyReport } from './weekly-report';
 import { ProgressPhotos } from './progress-photos';
 
-type Overview = { calendar: { day: string; count: number }[]; weeks: { week: string; workouts: number; sets: number; volumeKg: number }[]; setsPerMuscle: Record<string, number>; target: { min: number; max: number };
+type Overview = { calendar: { day: string; count: number; sessions: { id: string; completionPct: number | null; sets: number }[] }[]; weeks: { week: string; workouts: number; sets: number; volumeKg: number }[]; setsPerMuscle: Record<string, number>; target: { min: number; max: number };
   trends: { exerciseId: string; name: string; points: { day: string; e1rm: number }[] }[]; records: { exerciseId: string; name: string; e1rm: number | null; reps: number; weightKg: number }[]; totalWorkouts: number };
-const INK = 'var(--chart-ink, #2f6b52)';
+const INK = 'var(--chart-ink)';
 
 // Single-hue charts (magnitude), thin marks, recessive axes, native SVG tooltips on every mark, table-like labels for accessibility.
 function Bars({ data, label, unit }: { data: { key: string; label: string; value: number }[]; label: string; unit: string }) {
@@ -37,6 +37,7 @@ function Line({ points, label }: { points: { day: string; e1rm: number }[]; labe
 }
 export function ProgressCharts() {
   const { locale } = useLanguage(); const tt = useTrainingLanguage();
+  const [selected, setSelected] = useState<string | null>(null);
   const [o, setO] = useState<Overview | null>(null); const [library, setLibrary] = useState<Exercise[]>([]);
   const [load, setLoad] = useState<{ muscle: string; level: string }[]>([]);
   useEffect(() => { trainingApi<Overview>('progress').then(setO).catch(() => {}); trainingApi<Exercise[]>('exercises').then(setLibrary).catch(() => {}); trainingApi<{ muscles: { muscle: string; level: string }[] }>('recommendation?location=home').then(r => setLoad(r.muscles)).catch(() => {}); }, []);
@@ -47,7 +48,8 @@ export function ProgressCharts() {
   return <div className="progress-charts">
     <WeeklyReport/>
     <section className="panel"><h2>{tt.calendarTitle}</h2>
-      <div className="heat-calendar" role="img" aria-label={tt.calendarTitle}>{o.calendar.map(c => <span key={c.day} title={`${c.day}: ${c.count}`} className="heat-cell" style={{ background: c.count ? `color-mix(in srgb, #2f6b52 ${30 + 70 * c.count / maxCal}%, white)` : 'var(--line)' }}/>)}</div>
+      <div className="calendar-month" aria-label={tt.calendarTitle}>{o.calendar.map(c => <button type="button" key={c.day} title={`${c.day}: ${c.count}`} aria-label={`${c.day}: ${c.count}`} aria-pressed={selected === c.day} onClick={() => setSelected(c.day)} style={{ background: c.count ? `color-mix(in srgb, var(--c-train) ${15 + 30 * c.count / maxCal}%, var(--surface))` : 'var(--surface)' }}><span>{Number(c.day.slice(8))}</span>{c.count > 0 && <i/>}</button>)}</div>
+      {selected && <div className="calendar-detail"><strong>{new Intl.DateTimeFormat(locale === 'my-MM' ? 'my-MM' : 'en', { dateStyle: 'medium' }).format(new Date(selected + 'T12:00:00'))}</strong>{o.calendar.find(c => c.day === selected)?.sessions.map((s,i) => <p key={s.id}>{i + 1} · {s.completionPct ?? '—'}% · {s.sets} {tt.summarySets}</p>)}{!o.calendar.find(c => c.day === selected)?.count && <p className="muted">{tt.noSetsYet}</p>}</div>}
       <p className="muted small">{fill(tt.workoutsIn12Weeks, { n: o.totalWorkouts })}</p></section>
     <div className="chart-grid">
       <section className="panel"><Bars label={tt.weeklyVolume} unit="kg" data={o.weeks.map(w => ({ key: w.week, label: w.week.slice(5), value: w.volumeKg }))}/></section>

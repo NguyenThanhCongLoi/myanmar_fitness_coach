@@ -3,8 +3,8 @@
   "short_name": "Mingalar Fit",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f6f3ec",
-  "theme_color": "#0b5c46",
+  "background_color": "#ffffff",
+  "theme_color": "#fc7a1e",
   "lang": "my",
   "icons": [
     { "src": "/assets/mascot/bee/avatars/bee_avatar_happy-192.webp", "sizes": "192x192", "type": "image/webp" },

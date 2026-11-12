@@ -32,14 +32,15 @@ export function exercisesFor(muscles: readonly string[], library: ProgramExercis
     .sort((a, b) => (rank[a.difficulty] ?? 1) - (rank[b.difficulty] ?? 1) || (b.secondaryMuscles?.length ?? 0) - (a.secondaryMuscles?.length ?? 0) || a.id.localeCompare(b.id));
 }
 // Pick up to `max` exercises that cover as many different target muscles as possible (compound first), at or below the user level.
-export function pickSession(split: Split, library: ProgramExercise[], location: 'home' | 'gym', level: Level, max = 5) {
+export function pickSession(split: Split, library: ProgramExercise[], location: 'home' | 'gym', level: Level, max = 5, priorityMuscles: readonly string[] = []) {
   const targets = SPLIT_MUSCLES[split];
   const pool = exercisesFor(targets, library, location).filter(e => (rank[e.difficulty] ?? 1) <= rank[level])
     .sort((a, b) => (b.primaryMuscles?.length ?? 0) + (b.secondaryMuscles?.length ?? 0) * 0.5 - ((a.primaryMuscles?.length ?? 0) + (a.secondaryMuscles?.length ?? 0) * 0.5)
       || Number(location === 'gym') * (Number(b.equipment.some(q => q !== 'body weight')) - Number(a.equipment.some(q => q !== 'body weight'))) || a.id.localeCompare(b.id));
   const chosen: ProgramExercise[] = [], covered = new Set<string>();
   while (chosen.length < max) {
-    const next = pool.filter(e => !chosen.includes(e)).sort((a, b) => (b.primaryMuscles ?? []).filter(m => targets.includes(m) && !covered.has(m)).length - (a.primaryMuscles ?? []).filter(m => targets.includes(m) && !covered.has(m)).length)[0];
+    const next = pool.filter(e => !chosen.includes(e)).sort((a, b) => (b.primaryMuscles ?? []).filter(m => targets.includes(m) && !covered.has(m)).length - (a.primaryMuscles ?? []).filter(m => targets.includes(m) && !covered.has(m)).length
+      || (b.primaryMuscles ?? []).filter(m => priorityMuscles.includes(m)).length - (a.primaryMuscles ?? []).filter(m => priorityMuscles.includes(m)).length)[0];
     if (!next) break;
     chosen.push(next); (next.primaryMuscles ?? []).forEach(m => covered.add(m));
   }

@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "integrity": "ok",
+  "committedPlan": true,
+  "completedWorkout": true,
+  "coachMemory": true,
+  "reader": "separate read-only container"
+}

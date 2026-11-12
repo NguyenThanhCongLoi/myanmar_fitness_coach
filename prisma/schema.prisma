@@ -115,6 +115,7 @@ model FitnessProfile {
   activityLevel String @default("light")
   nickname     String @default("")
   trainTime    String @default("evening")
+  bodyPreferences Json @default("{}")
   updatedAt    DateTime @updatedAt
   user         User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -501,6 +502,7 @@ model WorkoutFeedback {
   pain Boolean @default(false)
   limitation String @default("")
   nextPreference String @default("keep")
+  technique String @default("unknown")
   createdAt DateTime @default(now())
   user User @relation(fields:[userId],references:[id],onDelete:Cascade)
   session WorkoutSession @relation(fields:[sessionId],references:[id],onDelete:Cascade)

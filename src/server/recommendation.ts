@@ -87,6 +87,7 @@ export async function recommendTrainingFocus(userId: string, raw: unknown = {}, 
 export const feedbackInput = z.object({
   difficulty: z.enum(['too_easy', 'right', 'too_hard']), soreMuscles: z.array(z.string().max(40)).max(12).default([]),
   pain: z.boolean().default(false), limitation: z.string().trim().max(300).default(''), nextPreference: z.enum(['keep', 'easier', 'harder']).default('keep'),
+  technique: z.enum(['good', 'needs_work', 'unknown']).default('unknown'),
 }).strict();
 export async function saveFeedback(userId: string, sessionId: string, raw: unknown) {
   const input = feedbackInput.parse(raw);

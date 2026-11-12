@@ -8,7 +8,7 @@ export function e1rm(weightKg: number, reps: number) { return weightKg > 0 && re
 export function loadStep(equipment: string[]) { return equipment.includes('barbell') ? 2.5 : equipment.includes('dumbbell') ? 2 : equipment.some(q => q === 'machine' || q === 'cable') ? 2.5 : 0; }
 type LoggedSet = { reps: number; weightKg: number; rir: number | null; setIndex: number };
 export type Suggestion = { weightKg: number; reps: number; note: 'START_LIGHT' | 'ADD_REP' | 'ADD_LOAD' | 'HOLD' | 'REDUCE' | 'HARDER_VARIATION'; previous: { reps: number; weightKg: number }[] };
-export function suggestNext(sessions: LoggedSet[][], equipment: string[], range: [number, number]): Suggestion {
+export function suggestNext(sessions: LoggedSet[][], equipment: string[], range: [number, number], canIncrease = true): Suggestion {
   const [lo, hi] = range;
   const last = sessions[0];
   if (!last?.length) return { weightKg: 0, reps: lo, note: 'START_LIGHT', previous: [] };
@@ -17,13 +17,17 @@ export function suggestNext(sessions: LoggedSet[][], equipment: string[], range:
   const top = last.filter(s => s.weightKg === weight);
   const minReps = Math.min(...top.map(s => s.reps));
   const rirs = top.map(s => s.rir).filter((x): x is number => x !== null);
-  const easyEnough = !rirs.length || Math.min(...rirs) >= 1;
+  const easyEnough = rirs.length === top.length && Math.min(...rirs) >= 2;
+  const prevTop = (sessions[1] ?? []).filter(s => s.weightKg === weight);
+  const confirmedTwice = prevTop.length > 0 && prevTop.every(s => s.reps >= hi && s.rir !== null && s.rir >= 2);
   const step = loadStep(equipment);
   if (weight === 0 || step === 0) {
-    if (minReps >= hi && easyEnough) return { weightKg: weight, reps: hi, note: 'HARDER_VARIATION', previous };
+    if (minReps >= hi) return { weightKg: weight, reps: hi, note: canIncrease && easyEnough && confirmedTwice ? 'HARDER_VARIATION' : 'HOLD', previous };
     return { weightKg: weight, reps: Math.min(hi, minReps + 1), note: 'ADD_REP', previous };
   }
-  if (minReps >= hi && easyEnough) return { weightKg: Math.round((weight + step) * 10) / 10, reps: lo, note: 'ADD_LOAD', previous };
+  if (minReps >= hi) return canIncrease && easyEnough && confirmedTwice && step / weight <= .1
+    ? { weightKg: Math.round((weight + step) * 10) / 10, reps: lo, note: 'ADD_LOAD', previous }
+    : { weightKg: weight, reps: hi, note: 'HOLD', previous };
   if (minReps < lo) {
     const prev = sessions[1];
     const missedTwice = prev?.length && Math.min(...prev.filter(s => s.weightKg === weight).map(s => s.reps).concat(hi)) < lo;
@@ -38,7 +42,7 @@ export async function progressionFor(userId: string, exerciseIds: string[], excl
   const [profile, exercises, sets] = await Promise.all([
     prisma.fitnessProfile.findUnique({ where: { userId } }),
     prisma.exercise.findMany({ where: { id: { in: exerciseIds } } }),
-    prisma.workoutSet.findMany({ where: { exerciseId: { in: exerciseIds }, completed: true, kind: { not: 'warmup' }, session: { userId, status: 'completed', ...(excludeSessionId ? { id: { not: excludeSessionId } } : {}) } }, include: { session: { select: { id: true, endedAt: true } } }, orderBy: { loggedAt: 'desc' }, take: 400 }),
+    prisma.workoutSet.findMany({ where: { exerciseId: { in: exerciseIds }, completed: true, kind: { not: 'warmup' }, session: { userId, status: 'completed', ...(excludeSessionId ? { id: { not: excludeSessionId } } : {}) } }, include: { session: { select: { id: true, endedAt: true, feedback: { select: { pain: true, difficulty: true, technique: true } } } } }, orderBy: { loggedAt: 'desc' }, take: 400 }),
   ]);
   const level = (profile?.experience ?? 'beginner') as Level;
   return Object.fromEntries(exercises.map(e => {
@@ -46,7 +50,14 @@ export async function progressionFor(userId: string, exerciseIds: string[], excl
     const bySession = [...new Set(own.map(s => s.sessionId))].map(id => own.filter(s => s.sessionId === id));
     const dose = doseFor({ tracking: e.tracking, equipment: e.equipment as string[], tags: e.tags as string[] }, level);
     const best = own.reduce((m, s) => Math.max(m, e1rm(s.weightKg, s.reps) ?? 0), 0);
-    return [e.id, { suggestion: dose.unit === 'reps' ? suggestNext(bySession, e.equipment as string[], range(dose.target)) : null, bestE1rm: best || null, bestReps: own.reduce((m, s) => Math.max(m, s.reps), 0) || null }];
+    const safe = bySession.slice(0, 2).length === 2 && bySession.slice(0, 2).every(ss => ss[0]?.session.feedback?.technique === 'good' && !ss[0].session.feedback?.pain && ss[0].session.feedback?.difficulty !== 'too_hard');
+    let suggestion = dose.unit === 'reps' ? suggestNext(bySession, e.equipment as string[], range(dose.target), safe) : null;
+    const last = own[0];
+    if (suggestion && last && (last.session.feedback?.pain || (last.session.endedAt && Date.now() - last.session.endedAt.getTime() > 14 * 86400000))) {
+      const step = loadStep(e.equipment as string[]);
+      suggestion = { ...suggestion, weightKg: step ? Math.max(0, Math.floor(last.weightKg * .9 / step) * step) : 0, note: 'REDUCE' };
+    }
+    return [e.id, { suggestion, bestE1rm: best || null, bestReps: own.reduce((m, s) => Math.max(m, s.reps), 0) || null }];
   }));
 }
 // Personal record check for a just-logged set against all of the user's other sets of that exercise.
@@ -68,7 +79,7 @@ export async function progressOverview(userId: string, now = new Date()) {
   const since = new Date(now.getTime() - 84 * 86400000);
   const sessions = await prisma.workoutSession.findMany({ where: { userId, status: 'completed', endedAt: { gte: since } }, include: { sets: { where: { completed: true, kind: { not: 'warmup' } }, include: { exercise: { select: { id: true, name: true, primaryMuscles: true } } } } }, orderBy: { endedAt: 'asc' } });
   const today = day(now), dayMs = 86400000;
-  const calendar = Array.from({ length: 84 }, (_, i) => { const d = day(new Date(now.getTime() - (83 - i) * dayMs)); return { day: d, count: sessions.filter(s => day(s.endedAt!) === d).length }; });
+  const calendar = Array.from({ length: 84 }, (_, i) => { const d = day(new Date(now.getTime() - (83 - i) * dayMs)); const ss = sessions.filter(s => day(s.endedAt!) === d); return { day: d, count: ss.length, sessions: ss.map(s => ({ id: s.id, completionPct: s.completionPct, sets: s.sets.length })) }; });
   const weeks = Array.from({ length: 8 }, (_, i) => {
     const end = new Date(now.getTime() - (7 - i) * 7 * dayMs), start = new Date(end.getTime() - 7 * dayMs);
     const inWeek = sessions.filter(s => s.endedAt! > start && s.endedAt! <= end);

@@ -1,0 +1,60 @@
+async page => {
+  if (!new URL(page.url()).hostname.endsWith('.w.modal.host')) throw new Error('Disposable preview only');
+  const errors = []; page.on('pageerror', e => errors.push(e.message));
+  const request = async (path, data) => { const r = data ? await page.request.post(new URL('/api/training/'+path,page.url()).href,{data}) : await page.request.get(new URL('/api/training/'+path,page.url()).href); if (!r.ok()) throw new Error(`${path}: ${r.status()} ${await r.text()}`); return r.json(); };
+  await page.setViewportSize({width:390,height:844});
+  await page.evaluate(()=>{localStorage.setItem('mingalar-locale','en');localStorage.setItem('mingalar-theme','light')});
+  await page.reload(); await page.locator('.adaptive-card').waitFor();
+  await page.getByRole('button',{name:'Adjust today',exact:true}).click();
+  await page.locator('.adaptive-form select').first().selectOption('10');
+  await page.getByLabel('Keep it lighter',{exact:true}).check();
+  await page.locator('.adaptive-form').getByRole('button',{name:'Save',exact:true}).click();
+  await page.waitForTimeout(700);
+  let plan=await request('plan?location=home'); if(plan.adaptive.todayChoice.minutes!==10||!plan.adaptive.todayChoice.lighter) throw new Error('Daily choice not persisted');
+  await page.getByRole('button',{name:'Weekly check-in',exact:true}).click();
+  await page.screenshot({path:'evidence/adaptive-week-en-390.png',fullPage:true});
+  const week=plan.week;
+  await page.getByRole('button',{name:'Finish week · build next',exact:true}).click();
+  await page.waitForTimeout(700); plan=await request('plan?location=home'); if(plan.week!==week+1)throw new Error('Week did not advance');
+  await page.evaluate(()=>{const Original=window.Audio;window.__workoutAudio=[];window.Audio=class extends Original{constructor(...args){super(...args);window.__workoutAudio.push(this)}}});
+  const session=await request('free',{name:'Adaptive browser validation',program:{key:plan.program,day:plan.current},exercises:[{exerciseId:'dataset-3013',sets:2,reps:3,restSeconds:10,targetKg:0,timed:true}]});
+  // Bootstrap on reload discovers the real active session; no fake player state.
+  await page.reload(); await page.locator('.plan-view').waitFor();
+  await page.evaluate(()=>{const Original=window.Audio;window.__workoutAudio=[];window.Audio=class extends Original{constructor(...args){super(...args);window.__workoutAudio.push(this)}}});
+  await page.locator('.today-hero').getByRole('button',{name:'Continue workout',exact:true}).click();
+  await page.locator('.player-ready .big-count').waitFor();
+  if(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)>0)throw new Error('Player overflow');
+  const initial=Number(await page.locator('.big-count').innerText()); if(initial<8||initial>10)throw new Error(`Initial countdown ${initial}`);
+  await page.getByRole('button',{name:'End workout',exact:true}).click();
+  const before=await page.locator('.big-count').innerText();await page.waitForTimeout(1300);if(await page.locator('.big-count').innerText()!==before)throw new Error('Ready timer changed behind quit sheet');
+  await page.getByRole('button',{name:'Keep going',exact:true}).click();
+  await page.getByRole('button',{name:/^Music: Off$/}).click();
+  await page.waitForTimeout(1000);
+  const audio=await page.evaluate(()=>window.__workoutAudio.map(a=>({src:a.src,paused:a.paused,time:a.currentTime,error:a.error?.code})));if(!audio.some(a=>a.src.endsWith('/audio/carefree.mp3')&&!a.paused&&a.time>0&&!a.error))throw new Error(`Audio not playing ${JSON.stringify(audio)}`);
+  await page.screenshot({path:'evidence/adaptive-player-en-390.png',fullPage:true});
+  await page.locator('.player-rest').waitFor({timeout:18000});
+  await page.getByRole('button',{name:'End workout',exact:true}).click();const rest=await page.locator('.rest-big strong').innerText();await page.waitForTimeout(1300);if(await page.locator('.rest-big strong').innerText()!==rest)throw new Error('Rest timer changed behind quit sheet');
+  await page.getByRole('button',{name:'Keep going',exact:true}).click();
+  await page.getByRole('button',{name:'Skip rest',exact:true}).click();
+  await page.locator('.session-summary').waitFor({timeout:15000});
+  await page.locator('.session-summary .button.primary').click();
+  await page.getByRole('button',{name:'Controlled',exact:true}).click();
+  await page.locator('.feedback-faces button').first().click();
+  await page.locator('.session-result').waitFor();
+  const saved=await request(`sessions/${session.id}`);if(saved.status!=='completed'||saved.sets.length!==2)throw new Error('Workout not saved');
+  await page.locator('.session-result .button').click();await page.locator('.plan-view').waitFor();
+  plan=await request('plan?location=home');const again=await request('plan?location=home');if(plan.step!==again.step)throw new Error('Read compounded adaptation');
+  if(!plan.adaptive.decision.reasons.includes('more_data'))throw new Error('One session incorrectly progressed');
+  await page.locator('.mobile-nav button').last().click();
+  await page.getByRole('button',{name:/Progress/}).first().click();
+  await page.locator('.calendar-month button').last().click();
+  if(!await page.locator('.calendar-detail').innerText().then(t=>t.includes('100%')))throw new Error('Calendar missing actual session');
+  await page.screenshot({path:'evidence/adaptive-progress-en-390.png',fullPage:true});
+  const matrix=[];
+  for(const locale of ['en','my-MM'])for(const theme of ['light','dark'])for(const width of [320,390,1440]){
+    await page.evaluate(({locale,theme})=>{localStorage.setItem('mingalar-locale',locale);localStorage.setItem('mingalar-theme',theme)}, {locale,theme});await page.reload();await page.locator('.adaptive-card').waitFor();await page.setViewportSize({width,height:900});
+    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);if(overflow>0)throw new Error(`${locale}/${theme}/${width}: ${overflow}`);matrix.push({locale,theme,width,overflow});
+    if(width===320)await page.screenshot({path:`evidence/adaptive-home-${locale}-${theme}-320.png`,fullPage:true});
+  }
+  return {result:errors.length?'FAIL':'PASS',pageErrors:errors,weekAdvanced:true,readyPaused:true,restPaused:true,countdown:initial,audio,sessionId:session.id,completion:plan.lastAdapt?.pct,decision:plan.adaptive.decision,matrix};
+}

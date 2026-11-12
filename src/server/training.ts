@@ -51,6 +51,7 @@ const actionSchema = z.object({
   kind: z.enum(['pause', 'resume', 'advance', 'skip', 'replace', 'add', 'update', 'end', 'abandon']),
   prescriptionId: z.string().max(100).optional(), exerciseId: z.string().max(100).optional(), prescription: prescription.optional(),
   reps: z.number().int().min(0).max(200).optional(), confirm: z.boolean().optional(),
+  reason: z.enum(['later','looking','too_hard','too_easy','unclear','pain','other']).optional(),
 }).strict();
 
 export async function trainingAction(userId: string, sessionId: string, raw: unknown, now = new Date()) {
@@ -74,7 +75,7 @@ export async function trainingAction(userId: string, sessionId: string, raw: unk
         phaseStartedAt: phase ? now : null, restUntil: session.restRemainingMs ? new Date(now.getTime() + session.restRemainingMs) : null, restRemainingMs: 0 } });
     } else if (input.kind === 'abandon') {
       if (!input.confirm) throw new ApiError(400, 'CONFIRMATION_REQUIRED');
-      await tx.workoutSession.update({ where: { id: sessionId }, data: { status: 'abandoned', endedAt: now, phaseStartedAt: null } });
+      await tx.workoutSession.update({ where: { id: sessionId }, data: { status: 'abandoned', endedAt: now, phaseStartedAt: null, ...(input.reason ? { note: `quit:${input.reason}` } : {}) } });
     } else if (routine) {
       if (input.kind === 'end') {
         // Exit early but keep the work actually done: remaining phases are logged as skipped, never as completed.

@@ -11,8 +11,9 @@ import {progressionFor,progressOverview} from '@/server/progression';
 import {getSession} from '@/server/services';
 import {persistDatabase} from '@/server/durability';
 import {recordClientEvents,setAnalyticsOptOut,trackRoute} from '@/server/analytics';
-import {addWater,dayScores,getPlan,savePrefs,setProgram,streakBoard,undoWater,waterSummary,swapExercise} from '@/server/plan';
+import {addWater,dayScores,getPlan,getPrefs,savePrefs,setProgram,streakBoard,undoWater,waterSummary,swapExercise} from '@/server/plan';
 import {ApiError} from '@/server/validation';
+import {saveTodayChoice,saveWeekReview} from '@/server/adaptation';
 export const runtime='nodejs';export const dynamic='force-dynamic';
 async function handler(request:Request,context:{params:Promise<{path:string[]}>}){
  try{
@@ -44,12 +45,15 @@ async function handler(request:Request,context:{params:Promise<{path:string[]}>}
   const place=(new URL(request.url).searchParams.get('location')==='gym'?'gym':'home') as 'home'|'gym';
   if(!write&&key==='progression'){const sp=new URL(request.url).searchParams;result=await progressionFor(user.id,(sp.get('ids')??'').split(',').filter(Boolean).slice(0,20).map(x=>x.slice(0,100)),sp.get('exclude')?.slice(0,40));}
   else if(!write&&key==='report')result=await weeklyReport(user.id);
-  else if(!write&&key==='plan')result=await getPlan(user.id,new URL(request.url).searchParams.get('location'));
+  else if(!write&&key==='plan'){result=await getPlan(user.id,new URL(request.url).searchParams.get('location'));await persistDatabase();}
+  else if(write&&key==='plan/today')result=await saveTodayChoice(user.id,body);
+  else if(write&&key==='plan/review')result=await saveWeekReview(user.id,body);
   else if(write&&key==='plan/swap')result=await swapExercise(user.id,body);
   else if(write&&key==='program')result=await setProgram(user.id,body);
   else if(!write&&key==='day-scores')result=await dayScores(user.id);
   else if(!write&&key==='streaks')result=await streakBoard(user.id);
   else if(write&&key==='prefs')result=await savePrefs(user.id,body);
+  else if(!write&&key==='prefs')result=await getPrefs(user.id);
   else if(write&&key==='energy/photo')result=await parseMealPhoto(body);
   else if(!write&&key==='water')result=await waterSummary(user.id);
   else if(write&&key==='water')result=await addWater(user.id,body);

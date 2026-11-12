@@ -1,8 +1,8 @@
 # Modal POC
 
-Canonical application URL: https://nguyenthanhcongloi332004--myanmar-fitness-coach.modal.run . Use this URL to match the configured authentication origin.
+Canonical application URL: https://avibigateway--myanmar-fitness-coach.modal.run . Use profile `lointc`, workspace `avibigateway`, environment `main`; verify them before deployment. Use this URL to match the configured authentication origin. Historical commands below using the former account URL must use this canonical origin instead.
 
-One Next.js application exposes frontend and APIs at one HTTPS endpoint. Better Auth supplies identity; Prisma accesses one SQLite database at `/data/fitness.db` on Volume `myanmar-fitness-coach-data` (v2). App: `myanmar-fitness-coach`, environment `main`, CPU 2, memory 4096 MiB, maximum one container, one concurrent request. Idle containers scale down after 180 seconds.
+One Next.js application exposes frontend and APIs at one HTTPS endpoint. Better Auth supplies identity; Prisma accesses one SQLite database at `/data/fitness.db` on Volume `myanmar-fitness-coach-data` (v2). App: `myanmar-fitness-coach`, environment `main`, CPU 2, memory 4096 MiB, maximum one container, one concurrent request. Idle containers scale down after 300 seconds.
 
 After each acknowledged write the server calls an authenticated loopback-only infrastructure bridge; it commits the Volume before returning success. Migrations and idempotent seed run before the web server starts. SQLite uses DELETE journaling. The Python adapter only launches Next.js and commits storage; it is not a second product backend.
 
@@ -17,7 +17,7 @@ From the workspace root, using the configured Python 3.12:
 
 The provisioning script creates `myanmar-fitness-coach-config` only if absent. It generates a stable auth secret and sets the endpoint origin without printing values. Existing unrelated secrets and LLM keys are not used. Retain this secret across deployments to preserve sessions. The app is a temporary free-feature POC; Modal infrastructure usage still follows the workspace's billing.
 
-Gamification deployment also requires `scripts/provision-notification-secret.py` once (already run for the current workspace). It creates the scheduler token and stable VAPID pair in `myanmar-fitness-coach-notifications`, printing no values. The same Modal app has a 15-minute scheduled HTTP check with no Volume mount; the web function remains the sole SQLite writer. Notification state remains in the existing SQLite database per the user's reconfirmed POC choice. Before the first gamification migration, startup saves a SQLite backup to `/data/backups/pre-gamification.db` and commits it. This backup is not an independent disaster-recovery copy.
+Gamification deployment also requires `scripts/provision-notification-secret.py` once (already run for the current workspace). It creates the scheduler token and stable VAPID pair in `myanmar-fitness-coach-notifications`, printing no values. The same Modal app has an hourly scheduled HTTP check with no Volume mount; the web function remains the sole SQLite writer. Notification state remains in the existing SQLite database per the user's reconfirmed POC choice. Before the first gamification migration, startup saves a SQLite backup to `/data/backups/pre-gamification.db` and commits it. This backup is not an independent disaster-recovery copy.
 
 ## Google sign-in
 
@@ -25,8 +25,8 @@ Fill `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` in the same local `.env`. The
 
 In [Google Cloud Console](https://console.cloud.google.com/), configure the OAuth consent screen and create an OAuth client of type **Web application**. Set:
 
-- Authorized JavaScript origin: `https://nguyenthanhcongloi332004--myanmar-fitness-coach.modal.run`
-- Authorized redirect URI: `https://nguyenthanhcongloi332004--myanmar-fitness-coach.modal.run/api/auth/callback/google`
+- Authorized JavaScript origin: `https://avibigateway--myanmar-fitness-coach.modal.run`
+- Authorized redirect URI: `https://avibigateway--myanmar-fitness-coach.modal.run/api/auth/callback/google`
 
 Choose audience **External** so other people can use their own Google accounts. For a public release, set publishing status **In production**. Google documents an exception to the testing allowlist for basic identity-only scopes (`openid`, `email`, `profile`), which are the only scopes this app requests; Workspace administrators may still restrict access. See [Google's audience rules](https://support.google.com/cloud/answer/15549945). Copy Client ID/Client Secret into `.env`, then use the stop/deploy commands below. Do not change the stable auth secret. Setup follows [Better Auth's Google provider documentation](https://better-auth.com/docs/authentication/google).
 

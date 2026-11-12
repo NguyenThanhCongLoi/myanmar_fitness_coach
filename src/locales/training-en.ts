@@ -1,4 +1,7 @@
+import adaptive from './adaptive-en';
+import onboarding from './onboarding-en';
 const en = {
+  adaptive,
   train: 'Train', trainTitle: 'Choose how you want to train', trainBody: 'Two independent ways to work out. Free Workout has no total time limit; Follow Along can fit an optional time budget.',
   freeWorkout: 'Free Workout', freeHint: 'Pick exercises, sets, reps, weight and rest yourself. No total duration limit.',
   followAlong: 'Follow Along', followHint: 'A guided routine with warm-up, timers, rest and cooldown.',
@@ -107,8 +110,9 @@ const en = {
   rateTitle: 'How much do you enjoy Mingalar Fit?', rateScale: ['Not at all', 'Not really', 'It is OK', 'I like it', 'Love it'], rateFavQ: 'What do you like most?',
   rateFavs: { workouts: 'Workouts', voice: 'Voice coach', ai_coach: 'AI coach', nutrition: 'Nutrition', progress: 'Progress', design: 'Look and feel' }, rateSkip: 'Skip', rateThanks: 'Thank you! This helps us improve.', rateLater: 'Ask me later',
   quiz: {
+    details: onboarding,
     titles: { trainTime: 'When do you usually train?', nickname: 'What should your coach call you?', activity: 'How active is a normal day?', minutes: 'How long can you train each time?', goal: 'What is your main goal?', sex: 'Your gender', age: 'Your age', height: 'How tall are you?', weight: 'Your current weight', target: 'Your target weight', place: 'Where will you train?', level: 'Your training experience', days: 'Which days can you train?', avoid: 'Any body part to protect?', health: 'One health question' },
-    hints: { trainTime: 'If you have not trained by then, we remind you.', nickname: 'Optional. Your coach and reminders will use it.', activity: 'Not counting workouts. Used for your daily calories.', minutes: 'We fit every session into this time.', goal: 'We build your plan around it.', sex: 'Used only to estimate calories.', age: 'Used only to estimate calories.', height: 'Used for your BMI.', weight: 'Used for your plan, calories and water.', target: 'You can change it any time.', place: 'You can switch later.', level: 'Be honest; the plan grows with you.', days: 'Pick 2 to 6 days. Other days are rest days.', avoid: 'We avoid exercises that load it.', health: 'Do you have a heart condition, chest pain, dizziness, or are you pregnant?' },
+    hints: { trainTime: 'If you have not trained by then, we remind you.', nickname: 'Optional. Your coach and reminders will use it.', activity: 'Not counting workouts. Used for your daily calories.', minutes: 'We fit every session into this time.', goal: 'We build your plan around it.', sex: 'Used only to estimate calories.', age: 'Used only to estimate calories.', height: 'Used for your BMI.', weight: 'Used for your plan, calories and water.', target: 'You can change it any time.', place: 'You can switch later.', level: 'Be honest; the plan grows with you.', days: 'Pick 2 to 6 days. Other days are rest days.', avoid: 'We keep your start gentle. Skip any movement that feels uncomfortable.', health: 'Do you have a heart condition, chest pain, dizziness, or are you pregnant?' },
     goals: { lose: 'Lose weight', muscle: 'Build muscle', strength: 'Get stronger', fit: 'Feel fitter and healthier' },
     sexes: { female: 'Female', male: 'Male', unspecified: 'Prefer not to say' },
     ages: ['Under 18', '18–24', '25–34', '35–44', '45–54', '55+'],
