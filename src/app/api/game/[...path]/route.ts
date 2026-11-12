@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { requiredUser } from '@/server/auth';
 import { prisma } from '@/shared/lib/prisma';
-import { gameSummary, updateGameSettings } from '@/server/gamification';
+import { gameSummary, updateGameSettings,updateSchedule } from '@/server/gamification';
 import { notificationState, saveNotificationPreferences, subscribePush, unsubscribePush, tickUser } from '@/server/notifications';
 import { persistDatabase } from '@/server/durability';
 import { ApiError } from '@/server/validation';
@@ -16,6 +16,7 @@ async function handler(request:Request,context:{params:Promise<{path:string[]}>}
     let result:unknown;
     if(!write&&route==='summary')result=await gameSummary(user.id);
     else if(write&&route==='settings')result=await updateGameSettings(user.id,body);
+    else if(write&&route==='schedule')result=await updateSchedule(user.id,body);
     else if(!write&&route==='notifications'){await tickUser(user.id);result=await notificationState(user.id);}
     else if(write&&route==='notifications/preferences')result=await saveNotificationPreferences(user.id,body);
     else if(write&&route==='notifications/read'){z.object({}).strict().parse(body);result=await prisma.notificationJob.updateMany({where:{userId:user.id,status:'delivered',readAt:null},data:{readAt:new Date()}});}

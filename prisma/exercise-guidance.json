@@ -1,0 +1,635 @@
+{
+  "core-157": {
+    "perSide": true,
+    "home": [],
+    "gym": [
+      "Set the bar on a rack at chest height and unrack it with both feet under the bar.",
+      "Grip the bar a little wider than your shoulders, wrists straight, elbows pointing down.",
+      "Leave enough space behind you to step back safely; use the rack safety pins.",
+      "Start with an empty bar until the movement feels steady."
+    ]
+  },
+  "core-163": {
+    "perSide": false,
+    "home": [
+      "At home, use a resistance band anchored at face height in a closed door instead of a cable."
+    ],
+    "gym": [
+      "Set the cable pulley at face height and use the rope attachment.",
+      "Hold the rope with thumbs pointing back towards you.",
+      "Pull the rope ends apart beside your ears; keep your ribs down.",
+      "Choose a light weight: you should control the return without being pulled forward."
+    ]
+  },
+  "core-164": {
+    "perSide": false,
+    "home": [
+      "Only use a very stable, low step or bench that cannot slide; clear the floor around you.",
+      "Wear shoes with grip; skip this exercise on a slippery floor."
+    ],
+    "gym": [
+      "Use a low plyo box or a fixed bench, never a stacked or wobbly surface.",
+      "Land with knees soft and in line with your toes."
+    ]
+  },
+  "dataset-1373": {
+    "perSide": false,
+    "home": [
+      "Hold a wall, chair back or door frame lightly for balance.",
+      "Stand on the edge of a stair for a bigger range once the floor version feels easy."
+    ],
+    "gym": [
+      "Use a step platform or the edge of a plate for more range, holding a rack for balance.",
+      "Hold a dumbbell in one hand to add load when bodyweight becomes easy."
+    ]
+  },
+  "dataset-0276": {
+    "perSide": true,
+    "home": [
+      "Use a mat or carpet so your back is comfortable.",
+      "Move slowly; if your lower back lifts off the floor, reduce how far you reach."
+    ],
+    "gym": [
+      "Use a gym mat in a quiet corner.",
+      "Hold a light plate or ball between hands for an extra challenge only when control is solid."
+    ]
+  },
+  "dataset-0289": {
+    "perSide": false,
+    "home": [
+      "You need a stable, flat bench and dumbbells; do not use a sofa or soft surface.",
+      "Without a bench, do a floor press: lie on a mat and press from the floor."
+    ],
+    "gym": [
+      "Sit on the end of a flat bench with the dumbbells on your thighs, then lie back and bring them to chest level.",
+      "Hold the dumbbells with palms facing your feet and wrists stacked over elbows.",
+      "Keep your feet flat and shoulder blades pulled gently back on the bench.",
+      "Lower to about chest level, elbows at roughly 45 degrees from your body."
+    ]
+  },
+  "dataset-0293": {
+    "perSide": false,
+    "home": [
+      "Use dumbbells or filled water bottles; keep a slight bend in your knees.",
+      "Rest one hand on a chair seat if you want extra back support (one-arm version)."
+    ],
+    "gym": [
+      "Use a flat bench for support: one knee and one hand on the bench for the one-arm version.",
+      "Keep your neck in line with your back and look at the floor slightly ahead.",
+      "Pull the elbow towards your hip, not straight up to the shoulder."
+    ]
+  },
+  "dataset-0294": {
+    "perSide": false,
+    "home": [
+      "Use dumbbells or filled water bottles; stand with your back against a wall to stop swinging."
+    ],
+    "gym": [
+      "Choose dumbbells you can lift for all reps without leaning back.",
+      "Grip the handle in the middle, wrists straight, palms facing forward.",
+      "Keep elbows pinned beside your ribs; only your forearms move."
+    ]
+  },
+  "dataset-3470": {
+    "perSide": true,
+    "home": [
+      "Clear a space about two steps long in front of you.",
+      "Hold a wall or chair for balance if needed."
+    ],
+    "gym": [
+      "Hold dumbbells at your sides to add load once bodyweight lunges feel easy.",
+      "Use a clear lane away from equipment."
+    ]
+  },
+  "dataset-3013": {
+    "perSide": false,
+    "home": [
+      "Use a mat on the floor; place your heels about a hand's length from your hips."
+    ],
+    "gym": [
+      "Use a mat; for more challenge, rest a light dumbbell or plate across your hips and hold it with both hands.",
+      "Keep your chin slightly tucked and push through your heels."
+    ]
+  },
+  "dataset-0662": {
+    "perSide": false,
+    "home": [
+      "Place hands flat on the floor, fingers spread, directly under or slightly wider than your shoulders.",
+      "Use a mat for comfort; start with knee or wall push-ups if needed."
+    ],
+    "gym": [
+      "Use a bench or Smith bar for an incline push-up if full push-ups are too hard.",
+      "Hands slightly wider than shoulders, elbows angled about 45 degrees back, not flared out."
+    ]
+  },
+  "dataset-1460": {
+    "perSide": true,
+    "home": [
+      "You need a clear hallway or room length; walk in a straight line."
+    ],
+    "gym": [
+      "Use an open turf or studio area away from machines.",
+      "Hold dumbbells at your sides for extra load once balance is steady."
+    ]
+  },
+  "curated-squat": {
+    "perSide": false,
+    "home": [
+      "Place a chair behind you as a target and safety: lightly touch it and stand up.",
+      "Keep your weight across your whole foot, not only the toes."
+    ],
+    "gym": [
+      "Hold a dumbbell at your chest (goblet squat) when bodyweight squats feel easy.",
+      "Use a box or bench behind you to control depth."
+    ]
+  },
+  "curated-barbell-squat": {
+    "perSide": false,
+    "home": [],
+    "gym": [
+      "Set the bar in the rack at mid-chest height and the safety pins just below your lowest squat depth.",
+      "Grip the bar evenly, hands just outside your shoulders, wrists straight; rest it on your upper back, not your neck.",
+      "Step back only two or three small steps and set your feet shoulder-width apart.",
+      "Ask for a spotter or use safety pins; start with the empty bar."
+    ]
+  },
+  "curated-plank": {
+    "perSide": false,
+    "home": [
+      "Use a mat or carpet under your forearms.",
+      "Look at the floor between your hands to keep your neck long."
+    ],
+    "gym": [
+      "Use a mat; for an easier version, rest your forearms on a bench.",
+      "Clasp your hands or keep forearms parallel, whichever is comfortable for your shoulders."
+    ]
+  },
+  "curated-side-plank": {
+    "perSide": true,
+    "home": [
+      "Use a mat; bend your knees for an easier version."
+    ],
+    "gym": [
+      "Use a mat; keep your elbow directly under your shoulder.",
+      "Stack your hips; do not let the top hip roll backwards."
+    ]
+  },
+  "curated-bird-dog": {
+    "perSide": true,
+    "home": [
+      "Use a mat; place a cushion under your knees if needed."
+    ],
+    "gym": [
+      "Use a mat; imagine balancing a cup on your lower back to keep hips level."
+    ]
+  },
+  "curated-wall-push": {
+    "perSide": false,
+    "home": [
+      "Place hands on the wall at shoulder height and shoulder-width apart, fingers pointing up.",
+      "The further your feet are from the wall, the harder it becomes."
+    ],
+    "gym": [
+      "Use a wall or a fixed rack upright; progress to an incline push-up on a bench."
+    ]
+  },
+  "curated-knee-push": {
+    "perSide": false,
+    "home": [
+      "Put a folded towel or mat under your knees.",
+      "Hands a little wider than shoulders, fingers forward."
+    ],
+    "gym": [
+      "Use a mat; progress to an incline push-up on a bench, then to full push-ups."
+    ]
+  },
+  "curated-shoulder-press": {
+    "perSide": false,
+    "home": [
+      "Use light dumbbells or water bottles; sit on a sturdy chair with back support if standing is hard."
+    ],
+    "gym": [
+      "Use a bench with the back upright for support.",
+      "Hold the dumbbells at shoulder height, palms forward, wrists stacked over elbows.",
+      "Press up and slightly in; do not lock your elbows hard at the top."
+    ]
+  },
+  "curated-lateral-raise": {
+    "perSide": false,
+    "home": [
+      "Use very light dumbbells or water bottles; lighter is better here."
+    ],
+    "gym": [
+      "Pick the lightest dumbbells first; heavy weights cause swinging.",
+      "Hold the dumbbells with palms facing your body and lead with your elbows.",
+      "A cable machine at hip height gives smoother resistance for one-arm raises."
+    ]
+  },
+  "curated-band-row": {
+    "perSide": false,
+    "home": [
+      "Anchor the band in a closed door with a door anchor or around a sturdy post.",
+      "Check the band for cracks before every session."
+    ],
+    "gym": [
+      "Use a cable row machine instead: sit tall, feet on the platform, knees slightly bent.",
+      "Hold the handle with palms facing each other and pull to your lower ribs."
+    ]
+  },
+  "curated-hip-hinge": {
+    "perSide": false,
+    "home": [
+      "Hold a broomstick along your back touching head, upper back and tailbone to learn a straight back."
+    ],
+    "gym": [
+      "Use a dowel or PVC pipe along your back; later progress to a light kettlebell or dumbbell deadlift."
+    ]
+  },
+  "curated-step-up": {
+    "perSide": true,
+    "home": [
+      "Use the bottom stair or a very stable, low step; hold the handrail."
+    ],
+    "gym": [
+      "Use a fixed step platform or a low plyo box; hold dumbbells only when balance is solid."
+    ]
+  },
+  "curated-march": {
+    "perSide": false,
+    "home": [
+      "Any clear space works; march on a carpet or mat to reduce impact."
+    ],
+    "gym": [
+      "March in an open area or on a treadmill at slow walking speed holding the rails."
+    ]
+  },
+  "curated-calf-stretch": {
+    "perSide": true,
+    "home": [
+      "Use a wall or door frame for support."
+    ],
+    "gym": [
+      "Use a wall or a rack upright for support."
+    ]
+  },
+  "curated-breathing": {
+    "perSide": false,
+    "home": [
+      "Sit or stand anywhere quiet."
+    ],
+    "gym": [
+      "Find a quiet corner or sit on a bench."
+    ]
+  },
+  "curated-seated-march": {
+    "perSide": false,
+    "home": [
+      "Use a sturdy chair without wheels."
+    ],
+    "gym": [
+      "Sit on a flat bench or the end of a machine seat that does not move."
+    ]
+  },
+  "curated-wall-sit": {
+    "perSide": false,
+    "home": [
+      "Use a smooth wall; place a mat under your feet so they do not slide."
+    ],
+    "gym": [
+      "Use a wall or the back of a fixed machine; keep knees above ankles."
+    ]
+  },
+  "curated-heel-walk": {
+    "perSide": false,
+    "home": [
+      "Stand next to a wall, counter or chair back."
+    ],
+    "gym": [
+      "Hold a rack or machine frame lightly for safety."
+    ]
+  },
+  "gym-lat-pulldown": {
+    "perSide": false,
+    "home": [
+      "At home, anchor a resistance band high on a closed door and pull down while kneeling."
+    ],
+    "gym": [
+      "Adjust the thigh pad so you cannot lift off the seat.",
+      "Use a grip just wider than shoulders; thumbs around the bar.",
+      "Pull to the top of your chest, never behind the neck.",
+      "Pick a weight you can pull without swinging your body."
+    ]
+  },
+  "gym-seated-cable-row": {
+    "perSide": false,
+    "home": [
+      "At home, loop a resistance band around a sturdy post or your feet and row while sitting tall."
+    ],
+    "gym": [
+      "Use the V-handle with palms facing each other.",
+      "Keep your chest up; do not lean back more than a little.",
+      "Pull elbows close to your sides toward your hips."
+    ]
+  },
+  "gym-triceps-pushdown": {
+    "perSide": false,
+    "home": [
+      "At home, anchor a resistance band high on a door and push down the same way."
+    ],
+    "gym": [
+      "Pin your elbows to your sides; only the forearms move.",
+      "With a rope, spread the ends apart at the bottom.",
+      "Choose a weight you can control without leaning over it."
+    ]
+  },
+  "gym-pec-deck": {
+    "perSide": false,
+    "home": [],
+    "gym": [
+      "Set the seat so your elbows are level with your shoulders.",
+      "Keep shoulders down and back against the pad.",
+      "Stop opening when you feel a gentle stretch, not pain in the shoulder."
+    ]
+  },
+  "gym-machine-chest-press": {
+    "perSide": false,
+    "home": [
+      "At home, do push-ups or knee push-ups for the same muscles."
+    ],
+    "gym": [
+      "Set the seat so handles are at mid-chest, not at the neck.",
+      "Grip with wrists straight and elbows slightly below shoulder height.",
+      "Breathe out as you press, in as you return."
+    ]
+  },
+  "gym-leg-press": {
+    "perSide": false,
+    "home": [
+      "At home, do bodyweight squats or wall sits instead."
+    ],
+    "gym": [
+      "Feet flat, hip-width, in the middle of the platform.",
+      "Lower only as far as your lower back stays on the pad.",
+      "Lock the safety handles before getting out."
+    ]
+  },
+  "gym-leg-extension": {
+    "perSide": false,
+    "home": [
+      "At home, do slow seated knee extensions on a chair or bodyweight squats."
+    ],
+    "gym": [
+      "Line up your knee with the red pivot dot on the machine.",
+      "Hold the side handles to keep your hips on the seat.",
+      "Use a light weight and move slowly; stop if the knee hurts."
+    ]
+  },
+  "gym-lying-leg-curl": {
+    "perSide": false,
+    "home": [
+      "At home, do glute bridges or a hip hinge to train the back of the legs."
+    ],
+    "gym": [
+      "Line up your knees with the pivot point of the machine.",
+      "Lower the thigh pad until it holds your legs firmly.",
+      "Hold the handles and move slowly in both directions."
+    ]
+  },
+  "gym-barbell-bench-press": {
+    "perSide": false,
+    "home": [],
+    "gym": [
+      "Set safety arms just below chest height or ask for a spotter.",
+      "Squeeze shoulder blades together and keep feet flat.",
+      "Wrists straight over elbows; start with the empty bar."
+    ]
+  },
+  "gym-barbell-deadlift": {
+    "perSide": false,
+    "home": [],
+    "gym": [
+      "Learn the hip hinge first; start with a light bar or plates on blocks.",
+      "Keep the bar touching your legs the whole time.",
+      "Never round your back to reach the bar."
+    ]
+  },
+  "gym-romanian-deadlift": {
+    "perSide": false,
+    "home": [
+      "At home, use dumbbells or practise the bodyweight hip hinge."
+    ],
+    "gym": [
+      "Start from standing (take the bar from a rack).",
+      "Keep the bar close to your legs.",
+      "Go down only as far as your back stays flat."
+    ]
+  },
+  "gym-barbell-row": {
+    "perSide": false,
+    "home": [
+      "At home, use dumbbells (dumbbell bent-over row)."
+    ],
+    "gym": [
+      "Grip just wider than shoulders, palms facing you.",
+      "Keep your torso still; only the arms move.",
+      "Use a light weight first to learn the position."
+    ]
+  },
+  "gym-cable-crossover": {
+    "perSide": false,
+    "home": [
+      "At home, use a resistance band anchored behind you for a standing fly."
+    ],
+    "gym": [
+      "Stand in the middle of the station with a split stance.",
+      "Keep the elbow bend the same throughout.",
+      "Use a light weight; the movement should feel smooth."
+    ]
+  },
+  "home-crunch": {
+    "perSide": false,
+    "home": [
+      "Use a mat; keep your chin slightly tucked and do not pull on your neck."
+    ],
+    "gym": [
+      "Use a mat; for more challenge hold a light plate on your chest."
+    ]
+  },
+  "home-superman": {
+    "perSide": false,
+    "home": [
+      "Use a mat; lift only a small height without pain."
+    ],
+    "gym": [
+      "Use a mat, or use the back extension bench with a small range."
+    ]
+  },
+  "home-hammer-curl": {
+    "perSide": false,
+    "home": [
+      "Use dumbbells or filled water bottles; stand against a wall to stop swinging."
+    ],
+    "gym": [
+      "Pick dumbbells you can lift without leaning back; a rope on a low cable also works."
+    ]
+  },
+  "home-bench-dips": {
+    "perSide": false,
+    "home": [
+      "Use a sturdy chair against a wall so it cannot slide; keep knees bent for an easier version."
+    ],
+    "gym": [
+      "Use a flat bench; straighten your legs only when the bent-knee version is easy."
+    ]
+  },
+  "gym-hip-adduction": {
+    "perSide": false,
+    "home": [
+      "At home, squeeze a pillow or ball between your knees while lying on your back."
+    ],
+    "gym": [
+      "Start with a small range; widen it only if your hips feel comfortable.",
+      "Keep your back against the pad the whole time."
+    ]
+  },
+  "gym-machine-shoulder-press": {
+    "perSide": false,
+    "home": [
+      "At home, use a dumbbell shoulder press with light weights."
+    ],
+    "gym": [
+      "Keep your feet flat and your ribs down so your back stays on the pad.",
+      "Stop just before your elbows lock."
+    ]
+  },
+  "gym-assisted-pullup": {
+    "perSide": false,
+    "home": [
+      "At home, do band rows instead."
+    ],
+    "gym": [
+      "Start with plenty of assistance and reduce it over the weeks.",
+      "Keep your shoulders away from your ears as you pull."
+    ]
+  },
+  "gym-lying-leg-curl-machine": {
+    "perSide": false,
+    "home": [
+      "At home, do glute bridges or slider leg curls on a smooth floor."
+    ],
+    "gym": [
+      "Keep your hips down on the bench.",
+      "Use a weight you can lower slowly."
+    ]
+  },
+  "gym-smith-squat": {
+    "perSide": false,
+    "home": [
+      "At home, do bodyweight squats."
+    ],
+    "gym": [
+      "Always set the safety stops first.",
+      "Go only as low as you can keep your back straight."
+    ]
+  },
+  "gym-hack-squat": {
+    "perSide": false,
+    "home": [
+      "At home, do wall sits or bodyweight squats."
+    ],
+    "gym": [
+      "Start light; this machine is harder than the leg press.",
+      "Keep your knees in line with your toes."
+    ]
+  },
+  "gym-seated-calf-raise": {
+    "perSide": false,
+    "home": [
+      "At home, do standing calf raises on a step."
+    ],
+    "gym": [
+      "Move slowly and pause at the top.",
+      "Push through the big toe side of your foot."
+    ]
+  },
+  "gym-cable-biceps-curl": {
+    "perSide": false,
+    "home": [
+      "At home, do dumbbell or band curls."
+    ],
+    "gym": [
+      "Stand tall and keep your elbows still.",
+      "Use a weight you can control on the way down."
+    ]
+  },
+  "gym-incline-dumbbell-press": {
+    "perSide": false,
+    "home": [
+      "At home, do incline push-ups with hands on a sturdy table."
+    ],
+    "gym": [
+      "A low incline (about 30 degrees) is enough.",
+      "Keep your elbows at about 45 degrees from your body."
+    ]
+  },
+  "gym-triceps-kickback": {
+    "perSide": true,
+    "home": [
+      "At home, use a water bottle or a band."
+    ],
+    "gym": [
+      "Keep your upper arm still and close to your body.",
+      "Choose a light weight; form matters more."
+    ]
+  },
+  "gym-overhead-triceps-extension": {
+    "perSide": false,
+    "home": [
+      "At home, use a water bottle or a light dumbbell."
+    ],
+    "gym": [
+      "Sitting on a bench with back support makes it easier to keep good form.",
+      "Keep your ribs down so your back does not arch."
+    ]
+  },
+  "gym-hip-thrust": {
+    "perSide": false,
+    "home": [
+      "At home, do glute bridges on the floor."
+    ],
+    "gym": [
+      "Use a bar pad for comfort.",
+      "Keep your chin tucked and ribs down at the top."
+    ]
+  },
+  "gym-pull-up": {
+    "perSide": false,
+    "home": [
+      "At home, do band rows or table rows if you have no bar."
+    ],
+    "gym": [
+      "Use the assisted machine first if you cannot do 5 good reps.",
+      "Keep your body still; no swinging."
+    ]
+  },
+  "gym-rear-delt-raise": {
+    "perSide": false,
+    "home": [
+      "At home, use water bottles or a band."
+    ],
+    "gym": [
+      "Very light weights are enough for this small muscle.",
+      "Lead with your elbows, not your hands."
+    ]
+  },
+  "gym-barbell-curl": {
+    "perSide": false,
+    "home": [
+      "At home, do dumbbell or band curls."
+    ],
+    "gym": [
+      "An EZ bar is easier on the wrists.",
+      "Keep your body still; no swinging."
+    ]
+  }
+}

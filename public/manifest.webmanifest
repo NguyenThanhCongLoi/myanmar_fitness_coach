@@ -1,0 +1,13 @@
+{
+  "name": "Mingalar Fit",
+  "short_name": "Mingalar Fit",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f3ec",
+  "theme_color": "#0b5c46",
+  "lang": "my",
+  "icons": [
+    { "src": "/assets/mascot/bee/avatars/bee_avatar_happy-192.webp", "sizes": "192x192", "type": "image/webp" },
+    { "src": "/assets/mascot/bee/master/bee_mascot_2048x2048_transparent-512.webp", "sizes": "512x512", "type": "image/webp", "purpose": "any" }
+  ]
+}

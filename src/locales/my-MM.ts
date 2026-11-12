@@ -1,6 +1,6 @@
 import type en from './en';
 const my: typeof en = {
-  googleLogin: 'Google ဖြင့် ဆက်လုပ်ရန်', googleUnavailable: 'Google အကောင့်ဝင်ခြင်းကို မချိတ်ဆက်ရသေးပါ။', googleError: 'Google ဖြင့် အကောင့်ဝင်ခြင်း မပြီးဆုံးပါ။ ထပ်မံကြိုးစားပါ။', orEmail: 'သို့မဟုတ် အီးမေးလ်ဖြင့် ဆက်လုပ်ရန်',
+  googleLogin: 'Google ဖြင့် ဆက်လုပ်ရန်', googleUnavailable: 'Google အကောင့်ဝင်ခြင်းကို မချိတ်ဆက်ရသေးပါ။', googleError: 'Google ဖြင့် အကောင့်ဝင်ခြင်း မပြီးဆုံးပါ။ ထပ်မံကြိုးစားပါ။', googleNotLinkedTitle: 'ဤအီးမေးလ်ဖြင့် အကောင့် ရှိပြီးသားပါ', googleStep1: 'အောက်တွင် စကားဝှက်ဖြင့် ဝင်ပါ', googleStep2: 'ထို့နောက် ကိုယ်ရေးအချက်အလက်ထဲရှိ “Google ချိတ်ဆက်ရန်” ကို နှိပ်ပါ — နောက်တစ်ကြိမ် Google တစ်ချက်နှိပ်ရုံဖြင့် ဝင်နိုင်ပါမည်', googleNotLinked: 'ဤအီးမေးလ်ဖြင့် စကားဝှက်သုံး အကောင့် ရှိပြီးသားပါ။ စကားဝှက်ဖြင့် ဝင်ပြီး ကိုယ်ရေးအချက်အလက်ထဲရှိ “Google ချိတ်ဆက်ရန်” ကို နှိပ်ပါ — နောက်တစ်ကြိမ်မှစ၍ Google ဖြင့် ဝင်နိုင်ပါမည်။', orEmail: 'သို့မဟုတ် အီးမေးလ်ဖြင့် ဆက်လုပ်ရန်',
   brand: 'Mingalar Fit', subtitle: 'MYANMAR FITNESS COACH',
   home: 'ပင်မစာမျက်နှာ', exercises: 'လေ့ကျင့်ခန်းများ', plans: 'ကျွန်ုပ်၏အစီအစဉ်', progress: 'တိုးတက်မှု', coach: 'AI နည်းပြ', profile: 'ကိုယ်ရေးအချက်အလက်',
   hello: 'ပြန်လည်ကြိုဆိုပါတယ်', heroTitle: 'နေ့တိုင်း အနည်းငယ် ပိုသန်မာလာမယ်။', heroBody: 'သင့်ဘဝနှင့်ကိုက်ညီသော လေ့ကျင့်မှုအလေ့အကျင့်ကို တည်ဆောက်ပါ။ ဒီနေ့ပဲ စတင်လိုက်ပါ။',
@@ -48,6 +48,6 @@ const my: typeof en = {
   planReviewHint: 'ရွေးထားသော လေ့ကျင့်ခန်းများကို ရွေးထားသောရက်တိုင်းတွင် အသုံးပြုမည်။ သင့်တင့်သော အစီအစဉ်မှ စတင်ပါ။',
   pickDay: 'လေ့ကျင့်မည့်ရက်နှင့် လေ့ကျင့်ခန်း အနည်းဆုံး တစ်ခုစီ ရွေးပါ။', goalPlaceholder: 'ဥပမာ - ပုံမှန်လေ့ကျင့်သော အလေ့အကျင့် တည်ဆောက်ရန်', planPlaceholder: 'ဥပမာ - ကျွန်ုပ်၏ တစ်ပတ်တာအစီအစဉ်',
   weekdaysShort: ['တနင်္လာ', 'အင်္ဂါ', 'ဗုဒ္ဓဟူး', 'ကြာသပတေး', 'သောကြာ', 'စနေ', 'တနင်္ဂနွေ'],
-  equipmentLabels: { 'body weight': 'ကိုယ်အလေးချိန်', dumbbell: 'Dumbbell', barbell: 'Barbell', bench: 'Bench', cable: 'Cable', band: 'Band' },
+  equipmentLabels: { 'body weight': 'ကိုယ်အလေးချိန်', dumbbell: 'Dumbbell', barbell: 'Barbell', bench: 'Bench', cable: 'Cable', band: 'Band', machine: 'စက် (Machine)' },
 };
 export default my;

@@ -1,0 +1,2023 @@
+[
+  {
+    "id": "core-157",
+    "canonicalId": "barbell-reverse-lunge",
+    "name": "Barbell Alternating Reverse Lunges",
+    "primaryMuscles": [
+      "quadriceps",
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "hamstring",
+      "abs"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "knee-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Keep your torso steady. Step back, lower within a comfortable range, then return and alternate legs.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "dataset-3470",
+      "dataset-1460"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "core-163",
+    "canonicalId": "cable-face-pull",
+    "name": "Facepulls",
+    "primaryMuscles": [
+      "back-deltoids",
+      "upper-back"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "trapezius"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "overhead"
+    ],
+    "tracking": "reps",
+    "instructions": "Set a rope near face height. Pull toward your face with elbows apart, then return slowly without leaning back.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "core-164",
+    "canonicalId": "bench-hop",
+    "name": "Bench Hops",
+    "primaryMuscles": [
+      "quadriceps",
+      "calves"
+    ],
+    "secondaryMuscles": [
+      "gluteal",
+      "abs"
+    ],
+    "equipment": [
+      "bench"
+    ],
+    "difficulty": "advanced",
+    "tags": [
+      "jumping",
+      "knee-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Use a low stable bench and a clear landing space. Land softly with bent knees; choose a non-jumping alternative if needed.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "dataset-1373",
+    "canonicalId": "standing-calf-raise",
+    "name": "Bodyweight standing calf raise",
+    "primaryMuscles": [
+      "calves"
+    ],
+    "secondaryMuscles": [
+      "left-soleus",
+      "right-soleus"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Stand near a stable support. Rise onto the balls of your feet, pause, then lower your heels slowly.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "curated-heel-walk"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "dataset-0276",
+    "canonicalId": "dead-bug",
+    "name": "Dead bug",
+    "primaryMuscles": [
+      "abs"
+    ],
+    "secondaryMuscles": [
+      "obliques"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "floor"
+    ],
+    "tracking": "reps",
+    "instructions": "Lie on your back with hips and knees bent. Extend opposite arm and leg while keeping your back comfortable, then switch sides.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "curated-plank",
+      "curated-bird-dog"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "dataset-0289",
+    "canonicalId": "dumbbell-bench-press",
+    "name": "Dumbbell bench press",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "front-deltoids"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "difficulty": "intermediate",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Lie on a stable bench. Press dumbbells above your chest without locking your elbows, then lower with control.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "dataset-0293",
+    "canonicalId": "dumbbell-bent-over-row",
+    "name": "Dumbbell bent over row",
+    "primaryMuscles": [
+      "upper-back"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "back-deltoids"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "back-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Hinge at your hips with a steady back. Pull the dumbbells toward your hips, then lower without swinging.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "curated-band-row"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "dataset-0294",
+    "canonicalId": "dumbbell-biceps-curl",
+    "name": "Dumbbell biceps curl",
+    "primaryMuscles": [
+      "biceps"
+    ],
+    "secondaryMuscles": [
+      "forearm"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Keep elbows near your sides. Curl the dumbbells without swinging your torso, then lower slowly.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "dataset-3470",
+    "canonicalId": "forward-lunge",
+    "name": "Forward lunge (male)",
+    "primaryMuscles": [
+      "quadriceps",
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "hamstring",
+      "abs"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "knee-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Step forward into a comfortable split stance. Bend both knees, keep your front heel down, then return and alternate legs.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "core-157",
+      "dataset-1460"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "dataset-3013",
+    "canonicalId": "glute-bridge",
+    "name": "Low glute bridge on floor",
+    "primaryMuscles": [
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "hamstring",
+      "abs"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "floor"
+    ],
+    "tracking": "reps",
+    "instructions": "Lie with knees bent and feet flat. Lift your hips without arching your lower back, then lower slowly.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "curated-hip-hinge"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "dataset-0662",
+    "canonicalId": "push-up",
+    "name": "Push-up",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "front-deltoids",
+      "abs"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "floor",
+      "wrist-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Start in a straight-body plank. Bend your elbows to lower your chest, then press up. Use a knee or wall variation when needed.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "curated-wall-push",
+      "curated-knee-push"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "dataset-1460",
+    "canonicalId": "walking-lunge",
+    "name": "Walking lunge",
+    "primaryMuscles": [
+      "quadriceps",
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "hamstring",
+      "abs"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "knee-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Take controlled forward lunges in a clear space. Keep your torso upright and alternate legs without rushing.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "core-157",
+      "dataset-3470"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-squat",
+    "canonicalId": "bodyweight-squat",
+    "name": "Bodyweight squat",
+    "primaryMuscles": [
+      "quadriceps",
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "hamstring",
+      "abs"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "knee-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Stand with feet comfortably apart. Sit your hips back and bend your knees within a comfortable range, then stand tall.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "curated-step-up",
+      "curated-seated-march"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-barbell-squat",
+    "canonicalId": "barbell-back-squat",
+    "name": "Barbell back squat",
+    "primaryMuscles": [
+      "quadriceps",
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "hamstring",
+      "lower-back",
+      "abs"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "difficulty": "advanced",
+    "tags": [
+      "knee-loaded",
+      "back-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Use a rack with safety supports and appropriate assistance. Brace your torso, squat to a controlled depth, then stand without rounding your back.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-plank",
+    "canonicalId": "forearm-plank",
+    "name": "Forearm plank",
+    "primaryMuscles": [
+      "abs"
+    ],
+    "secondaryMuscles": [
+      "obliques",
+      "gluteal"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "floor"
+    ],
+    "tracking": "timed",
+    "instructions": "Rest on your forearms and toes. Keep a comfortable straight line from shoulders to hips and breathe normally.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "dataset-0276",
+      "curated-bird-dog"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-side-plank",
+    "canonicalId": "side-plank",
+    "name": "Side plank",
+    "primaryMuscles": [
+      "obliques"
+    ],
+    "secondaryMuscles": [
+      "abs",
+      "gluteal"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "floor"
+    ],
+    "tracking": "timed",
+    "instructions": "Support yourself on one forearm with your elbow below your shoulder. Lift your hips, keep breathing, and change sides between sets.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-bird-dog",
+    "canonicalId": "bird-dog",
+    "name": "Bird dog",
+    "primaryMuscles": [
+      "lower-back",
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "abs",
+      "back-deltoids"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "floor",
+      "wrist-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Begin on hands and knees. Extend opposite arm and leg while keeping your hips level, return, then change sides.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "dataset-0276",
+      "curated-plank"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-wall-push",
+    "canonicalId": "wall-push-up",
+    "name": "Wall push up",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "front-deltoids"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "wrist-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Place your palms on a stable wall at chest height. Bend your elbows to lean toward the wall, then press back with control.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "dataset-0662",
+      "curated-knee-push"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-knee-push",
+    "canonicalId": "knee-push-up",
+    "name": "Knee push up",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "front-deltoids",
+      "abs"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "floor",
+      "wrist-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Keep a straight line from your knees to your shoulders. Lower your chest between your hands, then press up without sagging at the hips.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "dataset-0662",
+      "curated-wall-push"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-shoulder-press",
+    "canonicalId": "dumbbell-shoulder-press",
+    "name": "Dumbbell shoulder press",
+    "primaryMuscles": [
+      "front-deltoids"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "trapezius"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "overhead"
+    ],
+    "tracking": "reps",
+    "instructions": "Hold dumbbells beside your shoulders. Press overhead within a comfortable range without arching your back, then lower slowly.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-lateral-raise",
+    "canonicalId": "dumbbell-lateral-raise",
+    "name": "Dumbbell lateral raise",
+    "primaryMuscles": [
+      "front-deltoids",
+      "back-deltoids"
+    ],
+    "secondaryMuscles": [
+      "trapezius"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "With a soft bend in your elbows, raise light dumbbells out to your sides no higher than comfortable shoulder level. Lower without swinging.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-band-row",
+    "canonicalId": "band-row",
+    "name": "Band row",
+    "primaryMuscles": [
+      "upper-back"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "back-deltoids"
+    ],
+    "equipment": [
+      "band"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Secure the band to a suitable anchor. Pull your elbows back close to your sides, then return slowly. Check the band and anchor first.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "dataset-0293"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-hip-hinge",
+    "canonicalId": "bodyweight-hip-hinge",
+    "name": "Bodyweight hip hinge",
+    "primaryMuscles": [
+      "gluteal",
+      "hamstring"
+    ],
+    "secondaryMuscles": [
+      "lower-back"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "back-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Soften your knees and push your hips back while keeping your back steady. Stand by bringing your hips forward without leaning backward.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "dataset-3013"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-step-up",
+    "canonicalId": "low-step-up",
+    "name": "Low step up",
+    "primaryMuscles": [
+      "quadriceps",
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "hamstring",
+      "calves"
+    ],
+    "equipment": [
+      "bench"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "knee-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Use a low stable step. Place your whole foot on it, step up with control, then step down slowly and change sides.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "curated-squat",
+      "curated-seated-march"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-march",
+    "canonicalId": "march-in-place",
+    "name": "March in place",
+    "primaryMuscles": [
+      "quadriceps"
+    ],
+    "secondaryMuscles": [
+      "calves"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "warmup"
+    ],
+    "tracking": "timed",
+    "instructions": "Walk gently in place with relaxed arms. Keep the steps small and comfortable; this is preparation, not an intensity test.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-calf-stretch",
+    "canonicalId": "standing-calf-stretch",
+    "name": "Standing calf stretch",
+    "primaryMuscles": [
+      "calves"
+    ],
+    "secondaryMuscles": [
+      "left-soleus",
+      "right-soleus"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "cooldown"
+    ],
+    "tracking": "timed",
+    "instructions": "Use a wall for balance, place one foot behind you, and gently bring the back heel toward the floor. Do not bounce; switch sides comfortably.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-breathing",
+    "canonicalId": "standing-breathing",
+    "name": "Standing breathing",
+    "primaryMuscles": [
+      "abs"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "cooldown"
+    ],
+    "tracking": "timed",
+    "instructions": "Stand or sit comfortably, relax your shoulders, and let your breathing return to normal. Avoid holding your breath.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-seated-march",
+    "canonicalId": "seated-knee-lift",
+    "name": "Seated knee lift",
+    "primaryMuscles": [
+      "quadriceps"
+    ],
+    "secondaryMuscles": [
+      "abs"
+    ],
+    "equipment": [
+      "bench"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Sit tall on a stable chair. Lift one knee a little, lower it with control, then alternate without leaning backward.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "curated-squat",
+      "curated-step-up"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-wall-sit",
+    "canonicalId": "wall-sit",
+    "name": "Wall sit",
+    "primaryMuscles": [
+      "quadriceps"
+    ],
+    "secondaryMuscles": [
+      "gluteal"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "knee-loaded"
+    ],
+    "tracking": "timed",
+    "instructions": "Lean against a stable wall and lower only to a comfortable knee bend. Keep breathing and stand up if the position becomes uncomfortable.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "curated-heel-walk",
+    "canonicalId": "heel-raise-balance",
+    "name": "Heel raise balance",
+    "primaryMuscles": [
+      "calves"
+    ],
+    "secondaryMuscles": [
+      "left-soleus",
+      "right-soleus"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "timed",
+    "instructions": "Stand near a stable support. Lift your heels slightly and hold a comfortable balanced position without gripping your toes.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [
+      "dataset-1373"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-lat-pulldown",
+    "canonicalId": "lat-pulldown",
+    "name": "Lat pulldown",
+    "primaryMuscles": [
+      "upper-back"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "back-deltoids",
+      "forearm"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Sit with thighs under the pads. Pull the bar to your upper chest with elbows driving down, then let it rise slowly.",
+    "commonMistakes": [
+      "Leaning far back and swinging the body.",
+      "Pulling the bar behind the neck."
+    ],
+    "alternatives": [
+      "curated-band-row",
+      "gym-seated-cable-row"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-seated-cable-row",
+    "canonicalId": "seated-cable-row",
+    "name": "Seated cable row",
+    "primaryMuscles": [
+      "upper-back"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "back-deltoids",
+      "lower-back"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Sit tall with knees soft. Pull the handle to your lower ribs, squeeze your shoulder blades, then return slowly.",
+    "commonMistakes": [
+      "Rounding the back to reach forward.",
+      "Jerking the weight with the body."
+    ],
+    "alternatives": [
+      "curated-band-row",
+      "dataset-0293",
+      "gym-lat-pulldown"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-triceps-pushdown",
+    "canonicalId": "triceps-pushdown",
+    "name": "Triceps pushdown",
+    "primaryMuscles": [
+      "triceps"
+    ],
+    "secondaryMuscles": [
+      "forearm"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Keep elbows by your sides and push the bar or rope down until your arms are straight, then return slowly.",
+    "commonMistakes": [
+      "Letting elbows move forward and back.",
+      "Leaning over the weight."
+    ],
+    "alternatives": [
+      "gym-bench-dips",
+      "curated-knee-push"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-pec-deck",
+    "canonicalId": "pec-deck",
+    "name": "Pec deck (butterfly machine)",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "front-deltoids"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Sit tall with your back on the pad. Bring the handles together in front of your chest, then open slowly.",
+    "commonMistakes": [
+      "Letting the arms go too far back.",
+      "Shrugging the shoulders."
+    ],
+    "alternatives": [
+      "gym-machine-chest-press",
+      "dataset-0662"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-machine-chest-press",
+    "canonicalId": "machine-chest-press",
+    "name": "Machine chest press",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "front-deltoids"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Sit with handles at chest level. Press forward until arms are nearly straight, then return slowly.",
+    "commonMistakes": [
+      "Locking the elbows hard.",
+      "Lifting the back off the pad."
+    ],
+    "alternatives": [
+      "dataset-0662",
+      "gym-barbell-bench-press",
+      "gym-pec-deck"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-leg-press",
+    "canonicalId": "leg-press",
+    "name": "Leg press",
+    "primaryMuscles": [
+      "quadriceps",
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "hamstring",
+      "calves"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "knee-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Place feet hip-width on the platform. Lower with control, then press back without locking the knees.",
+    "commonMistakes": [
+      "Letting the lower back round off the seat at the bottom.",
+      "Locking the knees at the top."
+    ],
+    "alternatives": [
+      "curated-squat",
+      "curated-wall-sit",
+      "gym-leg-extension"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-leg-extension",
+    "canonicalId": "leg-extension",
+    "name": "Leg extension",
+    "primaryMuscles": [
+      "quadriceps"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "knee-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Sit with the pad on your lower shins. Straighten your knees, pause, then lower slowly.",
+    "commonMistakes": [
+      "Kicking the weight up fast.",
+      "Lifting the hips off the seat."
+    ],
+    "alternatives": [
+      "curated-squat",
+      "gym-leg-press"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-lying-leg-curl",
+    "canonicalId": "seated-leg-curl",
+    "name": "Seated leg curl",
+    "primaryMuscles": [
+      "hamstring"
+    ],
+    "secondaryMuscles": [
+      "calves"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Sit with the pad behind your lower legs and the thigh pad snug. Curl your heels under the seat, then return slowly.",
+    "commonMistakes": [
+      "Letting the weight pull your legs up quickly.",
+      "Lifting the hips or leaning back to move the weight."
+    ],
+    "alternatives": [
+      "dataset-3013",
+      "curated-hip-hinge"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-barbell-bench-press",
+    "canonicalId": "barbell-bench-press",
+    "name": "Barbell bench press",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "triceps",
+      "front-deltoids"
+    ],
+    "equipment": [
+      "barbell",
+      "bench"
+    ],
+    "difficulty": "intermediate",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Lie with eyes under the bar. Lower the bar to mid-chest with control, then press up. Use a spotter or safety arms.",
+    "commonMistakes": [
+      "Bouncing the bar off the chest.",
+      "Flaring elbows straight out to the sides."
+    ],
+    "alternatives": [
+      "dataset-0289",
+      "gym-machine-chest-press",
+      "dataset-0662"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-barbell-deadlift",
+    "canonicalId": "barbell-deadlift",
+    "name": "Barbell deadlift",
+    "primaryMuscles": [
+      "hamstring",
+      "gluteal",
+      "lower-back"
+    ],
+    "secondaryMuscles": [
+      "quadriceps",
+      "upper-back",
+      "forearm"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "back-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Bar over mid-foot. Hinge, grip, brace, then stand up by pushing the floor away, keeping the bar close.",
+    "commonMistakes": [
+      "Rounding the back.",
+      "Letting the bar drift away from the legs."
+    ],
+    "alternatives": [
+      "curated-hip-hinge",
+      "gym-romanian-deadlift"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-romanian-deadlift",
+    "canonicalId": "romanian-deadlift",
+    "name": "Romanian deadlift",
+    "primaryMuscles": [
+      "hamstring",
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "lower-back",
+      "forearm"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "back-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Hold the bar at your thighs. Push hips back with soft knees until you feel the hamstrings, then stand tall.",
+    "commonMistakes": [
+      "Bending the knees too much like a squat.",
+      "Rounding the back to go lower."
+    ],
+    "alternatives": [
+      "curated-hip-hinge",
+      "gym-lying-leg-curl"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-barbell-row",
+    "canonicalId": "barbell-bent-over-row",
+    "name": "Barbell bent-over row",
+    "primaryMuscles": [
+      "upper-back"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "back-deltoids",
+      "lower-back"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "back-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Hinge forward with a flat back. Pull the bar to your lower ribs, then lower with control.",
+    "commonMistakes": [
+      "Standing up during each rep.",
+      "Rounding the lower back."
+    ],
+    "alternatives": [
+      "dataset-0293",
+      "gym-seated-cable-row"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "gym-cable-crossover",
+    "canonicalId": "cable-crossover",
+    "name": "Cable crossover",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "front-deltoids"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "difficulty": "intermediate",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Step forward between high pulleys. Bring the handles together in front of your chest in an arc, then return slowly.",
+    "commonMistakes": [
+      "Bending the elbows into a press.",
+      "Using too much weight and losing balance."
+    ],
+    "alternatives": [
+      "gym-pec-deck",
+      "dataset-0662"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "home-crunch",
+    "canonicalId": "crunch",
+    "name": "Crunch",
+    "primaryMuscles": [
+      "abs"
+    ],
+    "secondaryMuscles": [
+      "obliques"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "floor"
+    ],
+    "tracking": "reps",
+    "instructions": "Lie with knees bent. Lift your shoulders a little off the floor using your stomach, then lower slowly.",
+    "commonMistakes": [
+      "Pulling on the neck with the hands.",
+      "Sitting all the way up quickly."
+    ],
+    "alternatives": [
+      "dataset-0276",
+      "curated-plank"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "home-superman",
+    "canonicalId": "superman",
+    "name": "Superman",
+    "primaryMuscles": [
+      "lower-back"
+    ],
+    "secondaryMuscles": [
+      "gluteal",
+      "upper-back"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "floor"
+    ],
+    "tracking": "reps",
+    "instructions": "Lie face down. Lift arms and legs a little off the floor, hold briefly, then lower slowly.",
+    "commonMistakes": [
+      "Lifting too high and straining the lower back.",
+      "Holding the breath."
+    ],
+    "alternatives": [
+      "curated-bird-dog",
+      "dataset-3013"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "home-hammer-curl",
+    "canonicalId": "dumbbell-hammer-curl",
+    "name": "Dumbbell hammer curl",
+    "primaryMuscles": [
+      "biceps",
+      "forearm"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Hold dumbbells with palms facing each other. Curl up without swinging, then lower slowly.",
+    "commonMistakes": [
+      "Swinging the body.",
+      "Letting elbows move forward."
+    ],
+    "alternatives": [
+      "dataset-0294"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "home-bench-dips",
+    "canonicalId": "bench-dip",
+    "name": "Bench dip",
+    "primaryMuscles": [
+      "triceps"
+    ],
+    "secondaryMuscles": [
+      "chest",
+      "front-deltoids"
+    ],
+    "equipment": [
+      "bench"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "wrist-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Hands on a stable bench behind you. Bend elbows to lower a little, then press up. Keep the range comfortable for the shoulders.",
+    "commonMistakes": [
+      "Going too low and straining the shoulders.",
+      "Elbows flaring out."
+    ],
+    "alternatives": [
+      "gym-triceps-pushdown",
+      "curated-knee-push"
+    ],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-hip-adduction",
+    "canonicalId": "hip-adduction-machine",
+    "name": "Hip adduction machine",
+    "primaryMuscles": [
+      "quadriceps"
+    ],
+    "secondaryMuscles": [
+      "gluteal"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Sit tall with pads on the inside of your knees. Squeeze your legs together, then open slowly.",
+    "commonMistakes": [
+      "Letting the weight slam the legs open.",
+      "Leaning forward and rocking the body."
+    ],
+    "alternatives": [
+      "curated-wall-sit",
+      "gym-leg-press"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-machine-shoulder-press",
+    "canonicalId": "machine-shoulder-press",
+    "name": "Machine shoulder press",
+    "primaryMuscles": [
+      "front-deltoids"
+    ],
+    "secondaryMuscles": [
+      "triceps"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "overhead"
+    ],
+    "tracking": "reps",
+    "instructions": "Seat height so handles start at shoulder level. Press up without locking elbows, lower with control.",
+    "commonMistakes": [
+      "Arching the lower back away from the pad.",
+      "Shrugging the shoulders up to the ears."
+    ],
+    "alternatives": [
+      "curated-shoulder-press",
+      "curated-lateral-raise"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-assisted-pullup",
+    "canonicalId": "assisted-pull-up-machine",
+    "name": "Assisted pull-up machine",
+    "primaryMuscles": [
+      "upper-back"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "back-deltoids"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Kneel on the pad, grip the bar and pull your chest toward it. More assistance weight makes it easier.",
+    "commonMistakes": [
+      "Swinging or kicking to get up.",
+      "Dropping down too fast."
+    ],
+    "alternatives": [
+      "gym-lat-pulldown",
+      "curated-band-row"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-lying-leg-curl-machine",
+    "canonicalId": "lying-leg-curl",
+    "name": "Lying leg curl",
+    "primaryMuscles": [
+      "hamstring"
+    ],
+    "secondaryMuscles": [
+      "calves"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "knee-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Lie face down with the pad above your heels. Curl your heels toward your hips, then lower slowly.",
+    "commonMistakes": [
+      "Lifting the hips off the bench.",
+      "Letting the weight drop on the way down."
+    ],
+    "alternatives": [
+      "gym-lying-leg-curl",
+      "dataset-3013"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-smith-squat",
+    "canonicalId": "smith-machine-squat",
+    "name": "Smith machine squat",
+    "primaryMuscles": [
+      "quadriceps",
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "hamstring"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "knee-loaded",
+      "back-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Bar on upper back, feet slightly forward. Unhook, sit down and back, then stand up.",
+    "commonMistakes": [
+      "Feet too far back so the knees hurt.",
+      "Forgetting to set the safety stops."
+    ],
+    "alternatives": [
+      "curated-squat",
+      "gym-leg-press"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-hack-squat",
+    "canonicalId": "hack-squat-machine",
+    "name": "Hack squat machine",
+    "primaryMuscles": [
+      "quadriceps"
+    ],
+    "secondaryMuscles": [
+      "gluteal"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "knee-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Back and shoulders against the pads. Release the safety, lower with control and press back up.",
+    "commonMistakes": [
+      "Heels lifting off the platform.",
+      "Bouncing at the bottom."
+    ],
+    "alternatives": [
+      "gym-leg-press",
+      "gym-smith-squat"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-seated-calf-raise",
+    "canonicalId": "seated-calf-raise-machine",
+    "name": "Seated calf raise machine",
+    "primaryMuscles": [
+      "calves"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Pads on lower thighs, balls of feet on the platform. Lift heels high, then lower slowly.",
+    "commonMistakes": [
+      "Bouncing quickly through short reps.",
+      "Rolling onto the outside of the feet."
+    ],
+    "alternatives": [
+      "dataset-1373",
+      "curated-heel-walk"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-cable-biceps-curl",
+    "canonicalId": "cable-biceps-curl",
+    "name": "Cable biceps curl",
+    "primaryMuscles": [
+      "biceps"
+    ],
+    "secondaryMuscles": [
+      "forearm"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Stand facing a low pulley. Curl the handle up with elbows at your sides, lower slowly.",
+    "commonMistakes": [
+      "Swinging the body to lift the weight.",
+      "Elbows drifting forward."
+    ],
+    "alternatives": [
+      "dataset-0294",
+      "home-hammer-curl"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-incline-dumbbell-press",
+    "canonicalId": "incline-dumbbell-press",
+    "name": "Incline dumbbell press",
+    "primaryMuscles": [
+      "chest"
+    ],
+    "secondaryMuscles": [
+      "front-deltoids",
+      "triceps"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "wrist-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Bench at a low incline. Press dumbbells up over your chest, lower to the sides of your chest.",
+    "commonMistakes": [
+      "Bench set too steep, turning it into a shoulder press.",
+      "Flaring elbows straight out to the sides."
+    ],
+    "alternatives": [
+      "dataset-0289",
+      "gym-machine-chest-press"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-triceps-kickback",
+    "canonicalId": "dumbbell-triceps-kickback",
+    "name": "Dumbbell triceps kickback",
+    "primaryMuscles": [
+      "triceps"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Hinge forward, upper arm by your side. Straighten the elbow back, then bend slowly.",
+    "commonMistakes": [
+      "Swinging the upper arm.",
+      "Rounding the back."
+    ],
+    "alternatives": [
+      "gym-triceps-pushdown",
+      "home-bench-dips"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-overhead-triceps-extension",
+    "canonicalId": "overhead-dumbbell-triceps-extension",
+    "name": "Overhead dumbbell triceps extension",
+    "primaryMuscles": [
+      "triceps"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "overhead"
+    ],
+    "tracking": "reps",
+    "instructions": "Hold one dumbbell overhead with both hands, lower behind your head, then straighten.",
+    "commonMistakes": [
+      "Elbows flaring wide.",
+      "Arching the lower back."
+    ],
+    "alternatives": [
+      "gym-triceps-pushdown",
+      "gym-triceps-kickback"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-hip-thrust",
+    "canonicalId": "barbell-hip-thrust",
+    "name": "Hip thrust",
+    "primaryMuscles": [
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "hamstring",
+      "quadriceps"
+    ],
+    "equipment": [
+      "barbell",
+      "bench"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "back-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Upper back on a bench, bar over hips. Drive hips up until body is straight, lower slowly.",
+    "commonMistakes": [
+      "Overarching the lower back at the top.",
+      "Feet too close or too far."
+    ],
+    "alternatives": [
+      "dataset-3013",
+      "curated-hip-hinge"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-pull-up",
+    "canonicalId": "pull-up",
+    "name": "Pull-up",
+    "primaryMuscles": [
+      "upper-back"
+    ],
+    "secondaryMuscles": [
+      "biceps",
+      "back-deltoids"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "difficulty": "advanced",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Hang from the bar, pull your chest toward it, then lower all the way down with control.",
+    "commonMistakes": [
+      "Kicking or swinging.",
+      "Doing half reps without lowering fully."
+    ],
+    "alternatives": [
+      "gym-assisted-pullup",
+      "gym-lat-pulldown"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-rear-delt-raise",
+    "canonicalId": "bent-over-rear-delt-raise",
+    "name": "Bent-over rear delt raise",
+    "primaryMuscles": [
+      "back-deltoids"
+    ],
+    "secondaryMuscles": [
+      "upper-back",
+      "trapezius"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "difficulty": "beginner",
+    "tags": [],
+    "tracking": "reps",
+    "instructions": "Hinge forward with light dumbbells. Raise arms out to the sides, lower slowly.",
+    "commonMistakes": [
+      "Using heavy weights and swinging.",
+      "Rounding the back."
+    ],
+    "alternatives": [
+      "core-163",
+      "curated-band-row"
+    ]
+  },
+  {
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable",
+    "id": "gym-barbell-curl",
+    "canonicalId": "barbell-biceps-curl",
+    "name": "Barbell biceps curl",
+    "primaryMuscles": [
+      "biceps"
+    ],
+    "secondaryMuscles": [
+      "forearm"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "wrist-loaded"
+    ],
+    "tracking": "reps",
+    "instructions": "Stand tall, palms up, elbows at sides. Curl the bar up and lower slowly.",
+    "commonMistakes": [
+      "Leaning back to swing the bar.",
+      "Letting the bar drop quickly."
+    ],
+    "alternatives": [
+      "dataset-0294",
+      "gym-cable-biceps-curl"
+    ]
+  }
+]

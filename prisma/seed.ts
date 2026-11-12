@@ -1,5 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 import exercises from './exercises.json';
+import catalog from './exercise-catalog.json';
+import stepsEn from './exercise-steps.json';
+import stepsMy from './exercise-steps-my.json';
+import media from './exercise-media.json';
+import wgerMedia from './exercise-media-wger.json';
+import guidanceEn from './exercise-guidance.json';
+import guidanceMy from './exercise-guidance-my.json';
+import mistakesMy from './exercise-mistakes-my.json';
+type MediaEntry = { videoUrl?: string; thumbnailUrl?: string; mediaSource?: string; license?: string; page?: string; variationNote?: string; steps: Record<string, { image: string; credit: string }> };
 const prisma = new PrismaClient();
 // Provisional language samples, never certified native-quality exercise instruction.
 const translations: Record<string, { name: string; instructions: string }> = {
@@ -15,6 +24,22 @@ async function main() {
     if (translation) await prisma.exerciseTranslation.upsert({ where: { exerciseId_locale: { exerciseId: exercise.id, locale: 'my-MM' } },
       create: { exerciseId: exercise.id, locale: 'my-MM', ...translation, reviewStatus: 'provisional' }, update: {} });
   }
-  console.log(JSON.stringify({ seeded: exercises.length, mediaImported: 0, provisionalMyanmar: Object.keys(translations).length }));
+  for(const entry of catalog){
+    const {id,...base}=entry;
+    // Real-person demo clips from wger (CC BY-SA 4.0) replace older clips; step illustrations are kept.
+    const base0=(media as Record<string,MediaEntry>)[id], w=(wgerMedia as Record<string,Partial<MediaEntry>>)[id];
+    const m:MediaEntry|undefined=w?{...(base0??{steps:{}}),...w,variationNote:'',steps:base0?.steps??{}} as MediaEntry:base0, en=(stepsEn as Record<string,string[]>)[id]??[], my=(stepsMy as Record<string,{name:string;steps:string[]}>)[id];
+    // Demo media: licence-checked Wikimedia Commons sources (attribution shown in UI); technique NOT coach-reviewed (mediaStatus).
+    const mediaFields=m?.videoUrl?{videoUrl:m.videoUrl,thumbnailUrl:m.thumbnailUrl??null,mediaType:'video',mediaLicenseStatus:'verified',mediaStatus:'demo_unreviewed',mediaSource:`${m.mediaSource}${m.variationNote?` [${m.variationNote}]`:''} ${m.page}`}:{};
+    const steps=en.map((text,i)=>({en:text,my:my?.steps[i]??null,image:m?.steps[String(i+1)]?.image??null,credit:m?.steps[String(i+1)]?.credit??null}));
+    const g=(guidanceEn as Record<string,{perSide:boolean;home:string[];gym:string[]}>)[id], gm=(guidanceMy as Record<string,{home:string[];gym:string[]}>)[id];
+    const pair=(en:string[],my?:string[])=>en.map((text,i)=>({en:text,my:my?.[i]??null}));
+    const mistakes=pair(base.commonMistakes,(mistakesMy as Record<string,{mistakes:string[]}>)[id]?.mistakes);
+    const guidance=g?{perSide:g.perSide,home:pair(g.home,gm?.home),gym:pair(g.gym,gm?.gym),mistakes}:{mistakes};
+    const data={...base,...mediaFields,steps,guidance};
+    await prisma.exercise.upsert({where:{id},create:{id,...data,normalizedName:data.name.toLowerCase(),muscles:data.primaryMuscles,source:'mingalar-curation',sourceId:data.canonicalId,sourceUrl:'',dataLicense:'Original curated text',attribution:'Mingalar Fit curated movement metadata'},update:{...data,muscles:data.primaryMuscles}});
+    if(my)await prisma.exerciseTranslation.upsert({where:{exerciseId_locale:{exerciseId:id,locale:'my-MM'}},create:{exerciseId:id,locale:'my-MM',name:my.name,instructions:my.steps.join(' '),reviewStatus:'provisional'},update:{name:my.name,instructions:my.steps.join(' '),reviewStatus:'provisional'}});
+  }
+  console.log(JSON.stringify({seeded:catalog.length,demoVideos:new Set([...Object.keys(media as Record<string,MediaEntry>).filter(k=>(media as Record<string,MediaEntry>)[k].videoUrl),...Object.keys(wgerMedia)]).size,steps:Object.keys(stepsEn).length,provisionalMyanmar:Object.keys(translations).length}));
 }
 main().finally(() => prisma.$disconnect());

@@ -1,0 +1,57 @@
+/* Tailwind v4 + shadcn/ui, mapped onto the Mingalar Fit tokens in polish.css (see DESIGN.md).
+   No global preflight: the existing screens use plain CSS and rely on browser defaults for lists/headings.
+   A scoped reset applies only inside shadcn components (they carry data-slot attributes). */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+/* unlayered, before utilities: legacy `button{border:0}` resets border-color to currentColor; utilities (same specificity, later) still win */
+[data-slot] { border-color: var(--line); }
+/* utilities stay unlayered on purpose: legacy element rules (button{background:none}) are unlayered and would beat layered utilities */
+@import "tailwindcss/utilities.css";
+@import "tw-animate-css";
+/* legacy class names that are also Tailwind utilities: never generate them (would add text-decoration / box-shadow / filter to old markup) */
+@source not inline("overline ring filter transition");
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme inline {
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--lime);
+  --color-primary-foreground: var(--on-lime);
+  --color-secondary: var(--mint);
+  --color-secondary-foreground: var(--mint-ink);
+  --color-muted: var(--surface-2);
+  --color-muted-foreground: var(--muted);
+  --color-accent: var(--surface-2);
+  --color-accent-foreground: var(--ink);
+  --color-destructive: var(--st-low);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--c-water);
+  --color-brand: var(--forest);
+  --color-lime: var(--lime);
+  --color-sky: var(--sky);
+  --color-coral: var(--coral-soft);
+  --color-lavender: var(--lavender);
+  --color-mint: var(--mint);
+  --color-water: var(--c-water);
+  --color-meal: var(--c-meal);
+  --color-train: var(--c-train);
+  --color-photo: var(--c-photo);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-head);
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+}
+
+@layer base {
+  [data-slot], [data-slot] *, [data-slot]::before, [data-slot]::after, [data-slot] *::before, [data-slot] *::after { box-sizing: border-box; border: 0 solid var(--line); }
+  [data-slot] :where(h1, h2, h3, h4, p) { margin: 0; }
+}

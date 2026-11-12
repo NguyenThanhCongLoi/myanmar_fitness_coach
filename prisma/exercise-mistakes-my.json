@@ -1,0 +1,498 @@
+{
+ "core-157": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အတိုင်းအတာကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "core-163": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အတိုင်းအတာကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "core-164": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အတိုင်းအတာကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "dataset-1373": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အတိုင်းအတာကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "dataset-0276": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အတိုင်းအတာကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "dataset-0289": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အနေအထားကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "dataset-0293": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အနေအထားကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "dataset-0294": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အနေအထားကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "dataset-3470": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အနေအထားကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "dataset-3013": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အနေအထားကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "dataset-0662": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အနေအထား သို့မဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "dataset-1460": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အနေအထား သို့မဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-squat": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အနေအထား သို့မဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-barbell-squat": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အနေအထား သို့မဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-plank": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အနေအထား သို့မဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-side-plank": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမယ့် အနေအထား ဒါမှမဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-bird-dog": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမယ့် အနေအထား ဒါမှမဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-wall-push": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမယ့် အနေအထား ဒါမှမဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-knee-push": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမယ့် အနေအထား ဒါမှမဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-shoulder-press": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမယ့် အနေအထား ဒါမှမဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-lateral-raise": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အကွာအဝေးကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-band-row": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အကွာအဝေးကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-hip-hinge": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အကွာအဝေးကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-step-up": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အကွာအဝေးကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-march": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်မအောင့်ထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမည့် အလေးချိန် သို့မဟုတ် အကွာအဝေးကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-calf-stretch": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်ကိုလည်း အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမယ့် အနေအထား ဒါမှမဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-breathing": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်ကိုလည်း အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမယ့် အနေအထား ဒါမှမဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-seated-march": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်ကိုလည်း အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမယ့် အနေအထား ဒါမှမဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-wall-sit": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်ကိုလည်း အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမယ့် အနေအထား ဒါမှမဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "curated-heel-walk": {
+  "mistakes": [
+   "လေ့ကျင့်ခန်းကို အလောတကြီးမလုပ်ပါနဲ့။ အသက်ကိုလည်း အောင့်မထားပါနဲ့။",
+   "နာကျင်မှုဖြစ်စေမယ့် အနေအထား ဒါမှမဟုတ် အလေးချိန်ကို အသုံးမပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-lat-pulldown": {
+  "mistakes": [
+   "ကိုယ်ခန္ဓာကို အနောက်ဘက်သို့ အလွန်အကျွံမှီပြီး လွှဲယမ်းခြင်း မပြုပါနှင့်။",
+   "Bar ကို လည်ပင်းနောက်ဘက်သို့ ဆွဲချခြင်း မပြုပါနှင့်။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-seated-cable-row": {
+  "mistakes": [
+   "ရှေ့သို့လှမ်းမီစေရန် ကျောကုန်းကို ကွေးခြင်း မပြုပါနှင့်။",
+   "ကိုယ်ခန္ဓာကို အသုံးပြုပြီး အလေးချိန်ကို ဆောင့်ဆွဲခြင်း မပြုပါနှင့်။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-triceps-pushdown": {
+  "mistakes": [
+   "တောင်ဝှေးများကို ရှေ့တိုးနောက်ငင် ဖြစ်စေခြင်း မပြုပါနှင့်။",
+   "အလေးချိန်ပေါ်သို့ ကိုယ်ကို အရှေ့သို့ အလွန်အကျွံ အမှီမပြုပါနှင့်။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-pec-deck": {
+  "mistakes": [
+   "လက်မောင်းများကို အနောက်ဘက်သို့ အလွန်အကျွံ ရောက်သွားသည်အထိ မလွှတ်ပါနှင့်။",
+   "ပခုံးများကို ပင့်တင်ခြင်း မပြုပါနှင့်။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-machine-chest-press": {
+  "mistakes": [
+   "တောင်ဝှေးများကို အတင်းဆောင့်ပြီး Lock ချခြင်း မပြုပါနှင့်။",
+   "ကျောပြင်ကို အနားပေးထားသော Pad မှ ခွာပြီး မကြွပါစေနှင့်။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-leg-press": {
+  "mistakes": [
+   "အောက်ဆုံးအမှတ်ရောက်တဲ့အခါ ခါးအောက်ပိုင်းကို ထိုင်ခုံကနေ ကွာထွက်မသွားပါစေနဲ့။",
+   "အပေါ်ဆုံးအမှတ်မှာ ဒူးကို အတင်းဆန့်ပြီး lock မချပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-leg-extension": {
+  "mistakes": [
+   "အလေးချိန်ကို အပေါ်သို့ အရှိန်ပြင်းပြင်းနဲ့ ကန်တင်ခြင်း မပြုပါနဲ့။",
+   "တင်ပါးကို ထိုင်ခုံကနေ ကြွတက်မလာပါစေနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-barbell-bench-press": {
+  "mistakes": [
+   "bar ကို ရင်ဘတ်ပေါ်တင်ပြီး ပြန်ကန်တင်ခြင်း မပြုပါနဲ့။",
+   "တံတောင်ဆစ်တွေကို ဘေးဘက်သို့ အတင်းဖြန့်ထုတ်ခြင်း မပြုပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-barbell-deadlift": {
+  "mistakes": [
+   "ကျောကုန်းကို ကွေးမထားပါနဲ့။",
+   "bar ကို ခြေထောက်နဲ့ ဝေးရာသို့ ရောက်မသွားပါစေနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "home-hammer-curl": {
+  "mistakes": [
+   "ခန္ဓာကိုယ်ကို ဟန်ချက်ပျက်ပြီး ယိမ်းခါခြင်းမပြုပါနဲ့။",
+   "တောင်ဝှေးများကို ရှေ့သို့ အလွန်အကျွံ မတွန်းထုတ်ပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "home-bench-dips": {
+  "mistakes": [
+   "ပခုံးကို ဒဏ်ဖြစ်စေနိုင်တဲ့အထိ အလွန်အကျွံ အောက်သို့ မဆင်းပါနဲ့။",
+   "တောင်ဝှေးများကို ဘေးသို့ အလွန်အကျွံ ဖြန့်မထားပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "home-superman": {
+  "mistakes": [
+   "ခါးအောက်ပိုင်းကို အလွန်အကျွံမြှောက်ပြီး အားစိုက်တာမျိုး မလုပ်ပါနဲ့။",
+   "အသက်အောင့်မထားပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-romanian-deadlift": {
+  "mistakes": [
+   "Squat ပုံစံမျိုး ဒူးကို အလွန်အကျွံမကွေးပါနဲ့။",
+   "အောက်ကို ပိုဆင်းနိုင်ဖို့ ကျောကိုကွေးတာမျိုး မလုပ်ပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-barbell-row": {
+  "mistakes": [
+   "Rep တစ်ကြိမ်ချင်းစီ လုပ်နေစဉ်အတွင်း မတ်တပ်မရပ်ပါနဲ့။",
+   "ခါးအောက်ပိုင်းကို ကွေးတာမျိုး မလုပ်ပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-cable-crossover": {
+  "mistakes": [
+   "တံတောင်ဆစ်တွေကို တွန်းထုတ်သလိုမျိုး ကွေးလိုက်တာမျိုး မလုပ်ပါနဲ့။",
+   "အလေးချိန် (Weight) များလွန်းပြီး ဟန်ချက်ပျက်တာမျိုး မဖြစ်ပါစေနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "home-crunch": {
+  "mistakes": [
+   "လက်တွေနဲ့ လည်ပင်းကို ဆွဲမတာမျိုး မလုပ်ပါနဲ့။",
+   "အပေါ်ကို အတင်းအကြပ် အမြန်ထိုင်လိုက်တာမျိုး မလုပ်ပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-lying-leg-curl": {
+  "mistakes": [
+   "အလေးချိန်ရဲ့ အရှိန်နဲ့ ခြေထောက်တွေကို အပေါ်သို့ မြန်မြန်ဆန်ဆန် ပြန်လွှတ်ပေးပါ။",
+   "အလေးချိန်ကို ရွှေ့နိုင်ဖို့ တင်ပါးကို အနည်းငယ်ကြွပေးပါ ဒါမှမဟုတ် နောက်သို့ အနည်းငယ် မှီထားပါ။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-hip-adduction": {
+  "mistakes": [
+   "အလေးချိန်ကြောင့် ခြေထောက်များ အတင်းပွင့်မသွားပါစေနှင့်။",
+   "ရှေ့သို့ ကိုင်းပြီး ကိုယ်ခန္ဓာကို ဟိုဘက်ဒီဘက် မယိမ်းပါနှင့်။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-machine-shoulder-press": {
+  "mistakes": [
+   "ခါးအောက်ပိုင်းကို အမှီခုံမှ ခွာပြီး ကွေးမထားပါနှင့်။",
+   "ပခုံးများကို နားအထိ ပင့်တင်ပြီး မလုပ်ပါနှင့်။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-assisted-pullup": {
+  "mistakes": [
+   "အပေါ်တက်ဖို့အတွက် ကိုယ်ကို လွှဲတာ ဒါမှမဟုတ် ခြေထောက်နဲ့ ကန်တာမျိုး မလုပ်ပါနဲ့။",
+   "အောက်ကို ပြန်ဆင်းတဲ့အခါ အရမ်းမြန်မြန် မဆင်းပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-lying-leg-curl-machine": {
+  "mistakes": [
+   "တင်ပါးကို bench ပေါ်ကနေ မကြွပါနဲ့။",
+   "အလေးချိန်ကို အောက်ပြန်ချတဲ့အခါ ချက်ချင်း ပလပ်ခနဲ မချပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-smith-squat": {
+  "mistakes": [
+   "ခြေထောက်တွေကို နောက်ဘက် အလွန်အကျွံထားမိရင် ဒူးနာနိုင်ပါတယ်။",
+   "Safety stops တွေကို သတ်မှတ်ဖို့ မမေ့ပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-hack-squat": {
+  "mistakes": [
+   "ခြေဖနောင့်တွေ platform ပေါ်ကနေ ကြွမလာပါစေနဲ့။",
+   "အောက်ဆုံးအမှတ်ရောက်တဲ့အခါ အရှိန်နဲ့ ပြန်တက်တာမျိုး (Bouncing) မလုပ်ပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-seated-calf-raise": {
+  "mistakes": [
+   "အကြိမ်ရေ (Reps) တိုတိုလေးတွေနဲ့ အမြန်ခုန်ပြီး မလုပ်ပါနဲ့။",
+   "ခြေဖဝါးအပြင်ဘက်ကို အားပြုပြီး မတင်တာမျိုး မလုပ်ပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-cable-biceps-curl": {
+  "mistakes": [
+   "အလေးချိန်ကို မတင်ဖို့အတွက် ကိုယ်ခန္ဓာကို ယိမ်းပြီး အားမယူပါနဲ့။",
+   "တံတောင်ဆုံကို ရှေ့သို့ အလွန်အကျွံ မတွန်းထုတ်ပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-incline-dumbbell-press": {
+  "mistakes": [
+   "Bench ကို အလွန်အမင်း စောင်းထားမိပါက shoulder press ဖြစ်သွားနိုင်ပါတယ်။",
+   "တံတောင်ဆစ်တွေကို ဘေးဘက်သို့ အလွန်အမင်း ဖြန့်မထားပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-triceps-kickback": {
+  "mistakes": [
+   "လက်မောင်းအပေါ်ပိုင်းကို ယိမ်းခါခြင်း မပြုပါနဲ့။",
+   "ကျောကုန်းကို ကွေးမထားပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-overhead-triceps-extension": {
+  "mistakes": [
+   "တောင်ဝကို ဘေးသို့ အလွန်အကျွံ ဖြဲမထားပါနဲ့။",
+   "ခါးအောက်ပိုင်းကို အကွေးအဝိုက် မလုပ်ပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-hip-thrust": {
+  "mistakes": [
+   "အပေါ်ဆုံးအမှတ်တွင် ခါးအောက်ပိုင်းကို အလွန်အကျွံ ကွေးမတင်ပါနဲ့။",
+   "ခြေထောက်များကို ကိုယ်နှင့် အလွန်နီးကပ်စေခြင်း သို့မဟုတ် အလွန်ဝေးကွာစေခြင်းမျိုး မဖြစ်ပါစေနှင့်။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-pull-up": {
+  "mistakes": [
+   "ခြေထောက်ကို လွှဲတာ ဒါမှမဟုတ် ကိုယ်ကို ယိမ်းတာမျိုး မလုပ်ပါနဲ့။",
+   "အောက်ထိ အပြည့်အဝ မဆင်းဘဲ တစ်ဝက်တည်းနဲ့ Reps တွေ မလုပ်ပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-rear-delt-raise": {
+  "mistakes": [
+   "အလေးချိန် အလွန်အကျွံသုံးပြီး ကိုယ်ကို ယိမ်းပြီး မတင်ပါနဲ့။",
+   "ကျောကုန်းကို ခုံးထားတာမျိုး မလုပ်ပါနဲ့။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ },
+ "gym-barbell-curl": {
+  "mistakes": [
+   "Bar ကို လွှဲပြီး မတင်ဖို့အတွက် နောက်ကို အနည်းငယ် မှီထားပါ။",
+   "Bar ကို အောက်သို့ အမြန်ပြန်ချပေးပါ။"
+  ],
+  "reviewStatus": "provisional-llm",
+  "model": "google/gemma-4-31b-it"
+ }
+}

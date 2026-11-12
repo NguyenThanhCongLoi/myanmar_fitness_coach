@@ -1,10 +1,11 @@
 // Pure civil-calendar rules. Existing days keep their original timezone/schedule snapshot.
 export type StreakDay = { day: string; week: string; planned: boolean; weeklyGoal: number; kind: string };
 export const FLAME_TIERS = [
-  {min:0,key:'ember',color:'#ca8056'}, {min:3,key:'orange',color:'#fa963b'},
+  {min:0,key:'ember',color:'#a7ada4'}, {min:3,key:'orange',color:'#fa963b'},
   {min:7,key:'red',color:'#ec6053'}, {min:14,key:'purple',color:'#a37bea'},
   {min:30,key:'blue',color:'#60b6eb'}, {min:60,key:'gold',color:'#eac259'},
 ] as const;
+export const FLAME_LIT_AT = 3;
 export function flameTier(count:number) { return [...FLAME_TIERS].reverse().find(t=>count>=t.min)??FLAME_TIERS[0]; }
 export function civilDay(date:Date,timezone:string) {
   const parts=new Intl.DateTimeFormat('en-CA',{timeZone:timezone,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date);

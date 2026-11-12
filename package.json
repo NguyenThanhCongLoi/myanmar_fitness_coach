@@ -12,24 +12,34 @@
     "check:locales": "tsx scripts/check-locales.ts"
   },
   "dependencies": {
+    "@fontsource/inter": "5.3.0",
     "@fontsource/noto-sans-myanmar": "5.3.0",
+    "@fontsource/plus-jakarta-sans": "5.3.0",
     "@prisma/client": "6.10.1",
     "better-auth": "1.7.19",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "cn": "^0.5.2",
     "lucide-react": "0.487.0",
     "next": "16.2.1",
+    "radix-ui": "1.8.1",
     "react": "19.2.1",
     "react-dom": "19.2.1",
-    "zod": "4.6.7",
-    "web-push": "4.0.0"
+    "tailwind-merge": "3.7.0",
+    "tw-animate-css": "1.4.0",
+    "web-push": "4.0.0",
+    "zod": "4.6.7"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "4.3.5",
     "@types/node": "22.12.0",
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0",
+    "@types/web-push": "3.6.4",
     "prisma": "6.10.1",
+    "tailwindcss": "4.3.5",
     "tsx": "4.19.4",
     "typescript": "5.8.3",
-    "vitest": "4.1.10",
-    "@types/web-push": "3.6.4"
+    "vitest": "4.1.10"
   }
 }

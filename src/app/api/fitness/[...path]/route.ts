@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { prisma } from '@/shared/lib/prisma';
 import { requiredUser } from '@/server/auth';
+import { trackAppOpen, trackRoute } from '@/server/analytics';
 import { persistDatabase } from '@/server/durability';
 import { ApiError, toKg } from '@/server/validation';
 import { approveProposal, createPlan, dashboard, exerciseList, finishSession, getSession, logSet, plansForUser, saveProfile, sessionInclude, startSession } from '@/server/services';
@@ -44,23 +45,28 @@ async function handler(request: Request, context: { params: Promise<{ path: stri
     else if (request.method === 'POST' && path[0] === 'sessions' && path[2] === 'sets' && path.length === 3) result = await logSet(user.id, path[1], body);
     else if (request.method === 'POST' && path[0] === 'sessions' && path[2] === 'finish' && path.length === 3) result = await finishSession(user.id, path[1], z.object({ note: z.string().max(1000).default('') }).strict().parse(body).note);
     else if (request.method === 'POST' && route === 'measurements') {
-      const input = z.object({ weight: z.number().positive().max(700), unit: z.enum(['kg', 'lb']) }).strict().parse(body);
+      const input = z.object({ weight: z.number().positive().max(700), unit: z.enum(['kg', 'lb']), waistCm: z.number().min(40).max(200).nullable().optional() }).strict().parse(body);
       const weightKg = toKg(input.weight, input.unit);
       if (weightKg < 20 || weightKg > 350) throw new ApiError(400, 'INVALID_INPUT');
-      result = await prisma.bodyMeasurement.create({ data: { userId: user.id, weightKg } });
+      result = await prisma.bodyMeasurement.create({ data: { userId: user.id, weightKg, waistCm: input.waistCm ?? null } });
     } else if (!write && route === 'coach') {
-      const conversation = await prisma.aiConversation.findFirst({ where: { userId: user.id }, orderBy: { updatedAt: 'desc' }, include: { messages: { orderBy: { createdAt: 'asc' }, take: 50 } } });
-      result = { configured: gatewayConfigured(), messages: conversation?.messages ?? [], proposals: await prisma.planProposal.findMany({ where: { userId: user.id, status: 'pending' }, orderBy: { createdAt: 'desc' }, take: 10 }), memories: await prisma.aiMemory.findMany({ where: { userId: user.id }, take: 10 }) };
+      const exerciseId = url.searchParams.get('exerciseId')?.slice(0, 100) || undefined;
+      const conversation = await prisma.aiConversation.findFirst({ where: { userId: user.id }, orderBy: { updatedAt: 'desc' }, include: { messages: { where: exerciseId ? { exerciseId } : {}, orderBy: { createdAt: 'desc' }, take: exerciseId ? 20 : 50 } } });
+      if (conversation) conversation.messages.reverse();
+      result = { configured: gatewayConfigured(), messages: conversation?.messages ?? [], proposals: await prisma.planProposal.findMany({ where: { userId: user.id, status: 'pending' }, orderBy: { createdAt: 'desc' }, take: 10 }), memories: await prisma.aiMemory.findMany({ where: { userId: user.id, key: { in: ['user_note', 'injuries', 'preferences', 'schedule'] } }, take: 10 }) };
     } else if (request.method === 'POST' && route === 'coach/chat') {
-      const input = z.object({ message: z.string().trim().min(1).max(2000), locale: z.enum(['my-MM', 'en']) }).strict().parse(body);
-      result = await chat(user.id, input.message, input.locale);
+      const input = z.object({ message: z.string().trim().min(1).max(2000), locale: z.enum(['my-MM', 'en']), exerciseId: z.string().max(100).optional() }).strict().parse(body);
+      result = await chat(user.id, input.message.normalize('NFC'), input.locale, input.exerciseId);
     } else if (request.method === 'POST' && path[0] === 'proposals' && path[2] === 'approve' && path.length === 3) {
       z.object({ confirm: z.literal(true) }).strict().parse(body);
       result = await approveProposal(user.id, path[1]);
     } else if (request.method === 'POST' && route === 'coach/memory') {
-      const { content } = z.object({ content: z.string().trim().min(1).max(500) }).strict().parse(body);
-      result = await prisma.aiMemory.upsert({ where: { userId_key: { userId: user.id, key: 'user_note' } }, create: { userId: user.id, key: 'user_note', content: content.normalize('NFC') }, update: { content: content.normalize('NFC') } });
+      // Long-term coach memory the user writes and can edit at any time; the AI reads it via get_user_profile.
+      const { content, key } = z.object({ content: z.string().trim().max(500), key: z.enum(['user_note', 'injuries', 'preferences', 'schedule']).default('user_note') }).strict().parse(body);
+      result = content ? await prisma.aiMemory.upsert({ where: { userId_key: { userId: user.id, key } }, create: { userId: user.id, key, content: content.normalize('NFC') }, update: { content: content.normalize('NFC') } }) : await prisma.aiMemory.deleteMany({ where: { userId: user.id, key } });
     } else throw new ApiError(404, 'NOT_FOUND');
+    if (write) await trackRoute(user.id, 'fitness', path, request);
+    else if (route === 'bootstrap') await trackAppOpen(user.id, request);
     if (write||route==='bootstrap') await persistDatabase();
     return Response.json(result, { headers: { 'Cache-Control': 'private, no-store' } });
   } catch (error) {

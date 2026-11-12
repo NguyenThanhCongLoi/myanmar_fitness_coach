@@ -1,5 +1,5 @@
 const en = {
-  googleLogin: 'Continue with Google', googleUnavailable: 'Google sign-in is not connected yet.', googleError: 'Google sign-in did not complete. Please try again.', orEmail: 'or continue with email',
+  googleLogin: 'Continue with Google', googleUnavailable: 'Google sign-in is not connected yet.', googleError: 'Google sign-in did not complete. Please try again.', googleNotLinkedTitle: 'This email already has an account', googleStep1: 'Sign in below with your password', googleStep2: 'Then tap “Connect Google” in your profile — next time Google works in one tap', googleNotLinked: 'This email already has an account with a password. Sign in with your password, then use “Connect Google” in Profile to sign in with Google next time.', orEmail: 'or continue with email',
   brand: 'Mingalar Fit', subtitle: 'MYANMAR FITNESS COACH',
   home: 'Overview', exercises: 'Exercises', plans: 'My plans', progress: 'Progress', coach: 'AI Coach', profile: 'My profile',
   hello: 'Welcome back', heroTitle: 'A little stronger, every day.', heroBody: 'Build a routine that fits your life. Your next step starts here.',
@@ -47,6 +47,6 @@ const en = {
   planReviewHint: 'The selected exercises repeat on each selected day. Start with a manageable routine.',
   pickDay: 'Choose at least one day and exercise.', goalPlaceholder: 'e.g. Build a steady training habit', planPlaceholder: 'e.g. My weekly routine',
   weekdaysShort: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-  equipmentLabels: { 'body weight': 'Bodyweight', dumbbell: 'Dumbbell', barbell: 'Barbell', bench: 'Bench', cable: 'Cable', band: 'Band' },
+  equipmentLabels: { 'body weight': 'Bodyweight', dumbbell: 'Dumbbell', barbell: 'Barbell', bench: 'Bench', cable: 'Cable', band: 'Band', machine: 'Machine' },
 };
 export default en;

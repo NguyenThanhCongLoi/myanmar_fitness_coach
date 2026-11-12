@@ -53,9 +53,11 @@ test('notification opt-in, quiet hours, deduplication, rate limit and unsubscrib
  await saveNotificationPreferences(id,{enabled:true,reminders:true,milestones:true,summaries:true,restMessages:true,reminderMinute:0,quietStart:0,quietEnd:1439});
  await tickUser(id,now);expect((await notificationState(id)).items).toHaveLength(0);
  await saveNotificationPreferences(id,{enabled:true,reminders:true,milestones:true,summaries:true,restMessages:true,reminderMinute:0,quietStart:0,quietEnd:0});
- await tickUser(id,now);await tickUser(id,now);expect((await notificationState(id)).items).toHaveLength(1);
+ await tickUser(id,now);await tickUser(id,now);
+ // 18:30 Yangon on a planned rest day: one rest message + one water nudge (no water logged), each deduplicated per day
+ const first=(await notificationState(id)).items as {type:string}[];expect(first.filter(x=>x.type!=='water')).toHaveLength(1);expect(first.filter(x=>x.type==='water')).toHaveLength(1);expect(first).toHaveLength(2);
  await prisma.notificationJob.createMany({data:[1,2,3].map(n=>({userId:id,key:'milestone-test-'+n,type:'milestone',day:'2026-11-10'}))});
- await tickUser(id,now);expect((await notificationState(id)).items).toHaveLength(2);
+ await tickUser(id,now);expect((await notificationState(id)).items).toHaveLength(3); // at most 3 per day
  await saveNotificationPreferences(id,{enabled:false,reminders:true,milestones:true,summaries:true,restMessages:true,reminderMinute:0,quietStart:0,quietEnd:0});
  expect(await prisma.notificationJob.count({where:{userId:id,status:'pending'}})).toBe(0);
  expect(pushSubscriptionSchema.safeParse({endpoint:'https://127.0.0.1/push',keys:{auth:'a'.repeat(22),p256dh:'a'.repeat(87)}}).success).toBe(false);

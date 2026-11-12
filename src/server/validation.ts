@@ -5,10 +5,11 @@ export const profileSchema = z.object({
   locale: localeSchema,
   goal: z.enum(['general_fitness', 'build_strength', 'build_muscle', 'improve_endurance']),
   experience: z.enum(['beginner', 'intermediate', 'advanced']),
-  equipment: z.array(z.enum(['body weight', 'dumbbell', 'barbell', 'bench', 'cable', 'band'])).min(1).max(6),
+  equipment: z.array(z.enum(['body weight', 'dumbbell', 'barbell', 'bench', 'cable', 'band', 'machine'])).min(1).max(7).refine(x => new Set(x).size === x.length),
   daysPerWeek: z.number().int().min(1).max(6),
   limitations: z.string().trim().max(1000).default(''),
   weightUnit: z.enum(['kg', 'lb']), distanceUnit: z.enum(['km', 'mi']),
+  screening: z.object({ heart: z.boolean(), chestPain: z.boolean(), dizziness: z.boolean(), joint: z.boolean(), medication: z.boolean(), pregnancy: z.boolean(), other: z.boolean() }).strict().optional(),
   timezone: z.string().max(100).refine(value=>{try{new Intl.DateTimeFormat('en',{timeZone:value});return true;}catch{return false;}}).default('Asia/Yangon'),
 }).strict();
 
@@ -33,14 +34,17 @@ export type PlanInput = z.infer<typeof planSchema>;
 
 export const setSchema = z.object({
   exerciseId: z.string().min(1).max(100), setIndex: z.number().int().min(0).max(7),
-  reps: z.number().int().min(1).max(100), weight: z.number().min(0).max(900),
-  unit: z.enum(['kg', 'lb']), restSeconds: z.number().int().min(15).max(600).default(60),
+  reps: z.number().int().min(1).max(600), weight: z.number().min(0).max(900),
+  unit: z.enum(['kg', 'lb']), restSeconds: z.number().int().min(10).max(600).default(60),
+  rir: z.number().int().min(0).max(5).nullable().optional(),
+  kind: z.enum(['normal', 'warmup', 'drop', 'failure']).default('normal'),
+  seconds: z.number().int().min(0).max(3600).optional(),
 }).strict().refine(value => toKg(value.weight, value.unit) <= 400, 'Weight exceeds POC input range');
 export function toKg(value: number, unit: string) { return unit === 'lb' ? value * 0.45359237 : value; }
 export function fromKg(value: number, unit: string) { return unit === 'lb' ? value / 0.45359237 : value; }
 
 export class ApiError extends Error {
-  constructor(public status: number, public code: string) { super(code); }
+  constructor(public status: number, public code: string, public details?: Record<string, unknown>) { super(code); }
 }
 
 export function yangonDay(date: Date) {

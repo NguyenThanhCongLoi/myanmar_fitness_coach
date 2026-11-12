@@ -58,15 +58,29 @@ export async function updateGameSettings(userId:string,raw:unknown,now=new Date(
     if(input.timezone!==state.timezone&&state.lastTimezoneChange&&now.getTime()-state.lastTimezoneChange.getTime()<7*86400000)throw new ApiError(409,'TIMEZONE_COOLDOWN');
     if(input.recoveryDays)await tx.gameDay.updateMany({where:{userId,day:civilDay(now,state.timezone),kind:'open'},data:{kind:'recovery'}});
     // Existing calendar snapshots never change; schedule changes affect unmaterialized days only.
-    return tx.gameState.update({where:{userId},data:{weekdays:input.weekdays,weeklyGoal:input.weeklyGoal,protectionEnabled:input.protectionEnabled,recoveryUntil:input.recoveryDays?addDay(civilDay(now,state.timezone),input.recoveryDays-1):null,...(input.timezone!==state.timezone?{pendingTimezone:input.timezone,timezoneEffectiveAt:new Date(now.getTime()+86400000)}:{pendingTimezone:null,timezoneEffectiveAt:null})}});
+    return tx.gameState.update({where:{userId},data:{weekdays:input.weekdays,scheduleChosen:true,weeklyGoal:input.weeklyGoal,protectionEnabled:input.protectionEnabled,recoveryUntil:input.recoveryDays?addDay(civilDay(now,state.timezone),input.recoveryDays-1):null,...(input.timezone!==state.timezone?{pendingTimezone:input.timezone,timezoneEffectiveAt:new Date(now.getTime()+86400000)}:{pendingTimezone:null,timezoneEffectiveAt:null})}});
   });
+}
+type CreditSession={mode:string;creditTargetSets:number;playerPlan:unknown;playerIndex:number;sets:{exerciseId:string;setIndex:number;completed:boolean;reps:number}[];prescriptions:{exerciseId:string;sets:number;skipped:boolean}[];phaseLogs:{kind:string;status:string}[];day:{exercises:{exerciseId:string;sets:number}[]}};
+// Follow Along: routine finished and >=80% of exercise phases actually completed (timed or with logged reps).
+// Free/plan workouts: >=80% of the prescribed sets actually logged with reps; skipped exercises still count in the target.
+export function workCompleted(session:CreditSession){
+  if(session.mode==='follow'){
+    const routine=session.playerPlan as {phases:{kind:string}[];criteria?:{minimumFraction?:number}}|null;
+    if(!routine)return false;
+    const planned=routine.phases.filter(p=>p.kind==='exercise').length,done=session.phaseLogs.filter(p=>p.kind==='exercise'&&p.status==='completed').length;
+    return planned>0&&session.playerIndex>=routine.phases.length&&done>=Math.ceil(planned*(routine.criteria?.minimumFraction??0.8));
+  }
+  const items=session.prescriptions.length?session.prescriptions:session.day.exercises.map(p=>({...p,skipped:false}));
+  const target=session.creditTargetSets||items.reduce((n,p)=>n+p.sets,0);
+  const logged=items.filter(p=>!p.skipped).reduce((n,p)=>n+Array.from({length:p.sets},(_,i)=>session.sets.some(s=>s.exerciseId===p.exerciseId&&s.setIndex===i&&s.completed&&s.reps>0)).filter(Boolean).length,0);
+  return target>0&&logged>=Math.ceil(target*0.8);
 }
 export async function grantWorkoutCredit(tx:Tx,userId:string,sessionId:string,now=new Date()) {
   const state=await syncDays(tx,userId,now),today=civilDay(now,state.timezone);
-  const session=await tx.workoutSession.findFirstOrThrow({where:{id:sessionId,userId},include:{sets:true,day:{include:{exercises:true}}}});
-  // Server-observed start/completion and all prescribed sets, never caller dates or app opens.
-  const required=session.day.exercises.reduce((n,p)=>n+p.sets,0);
-  const complete=required>0&&session.day.exercises.every(p=>Array.from({length:p.sets},(_,i)=>session.sets.some(s=>s.exerciseId===p.exerciseId&&s.setIndex===i&&s.completed&&s.reps>0)).every(Boolean));
+  const session=await tx.workoutSession.findFirstOrThrow({where:{id:sessionId,userId},include:{sets:true,prescriptions:true,phaseLogs:true,day:{include:{exercises:true}}}});
+  // Server-observed start/completion and actually completed work, never caller dates, planned work or app opens.
+  const complete=workCompleted(session);
   const elapsed=now.getTime()-session.startedAt.getTime();
   if(session.status!=='completed'||!complete||elapsed<60000||elapsed>48*3600000)return {awarded:false,xp:0,reason:'criteria'};
   if(await tx.workoutCredit.findUnique({where:{sessionId}})||await tx.workoutCredit.findUnique({where:{userId_day:{userId,day:today}}}))return {awarded:false,xp:0,reason:'already_credited'};
@@ -88,4 +102,15 @@ export async function grantWorkoutCredit(tx:Tx,userId:string,sessionId:string,no
     await tx.notificationJob.upsert({where:{userId_key:{userId,key:'achievement:'+key}},create:{userId,key:'achievement:'+key,type:'milestone',day:today},update:{}});
   }
   return {awarded:true,xp:50,unlocked,streak:streak.current};
+}
+
+// User picks training days directly (Today card). Weekly goal is clamped to the chosen days; profile days/week follows.
+export const scheduleSchema=z.object({weekdays:z.array(z.number().int().min(0).max(6)).min(1).max(6).refine(x=>new Set(x).size===x.length)}).strict();
+export async function updateSchedule(userId:string,raw:unknown,now=new Date()){
+  const input=scheduleSchema.parse(raw);const weekdays=[...input.weekdays].sort((a,b)=>a-b);
+  return prisma.$transaction(async tx=>{
+    const state=await syncDays(tx,userId,now);
+    await tx.fitnessProfile.updateMany({where:{userId},data:{daysPerWeek:weekdays.length}});
+    return tx.gameState.update({where:{userId},data:{weekdays,scheduleChosen:true,weeklyGoal:Math.min(state.weeklyGoal,weekdays.length)}});
+  });
 }

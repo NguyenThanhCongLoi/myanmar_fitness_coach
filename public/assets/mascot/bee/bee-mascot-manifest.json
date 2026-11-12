@@ -1,0 +1,407 @@
+{
+ "source": "image/ (user-supplied originals, unmodified)",
+ "generatedBy": "scripts/process-bee-mascot.py",
+ "animationFrames": 0,
+ "missing": [],
+ "assets": [
+  {
+   "assetId": "bee_avatar_happy",
+   "filename": "bee_avatar_happy.png",
+   "category": "avatars",
+   "expression": "happy",
+   "pose": "face crop",
+   "format": "png",
+   "width": 1024,
+   "height": 1024,
+   "alpha": true,
+   "sha256": "3c33dba3a2fa5bbad8fb7eb3af2a14452ffe15441ef050f2c4af22f14b00ad0e",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "chat/notification avatar",
+   "variants": {
+    "192": "/assets/mascot/bee/avatars/bee_avatar_happy-192.webp",
+    "96": "/assets/mascot/bee/avatars/bee_avatar_happy-96.webp"
+   }
+  },
+  {
+   "assetId": "bee_avatar_idle",
+   "filename": "bee_avatar_idle.png",
+   "category": "avatars",
+   "expression": "idle",
+   "pose": "face crop",
+   "format": "png",
+   "width": 1024,
+   "height": 1024,
+   "alpha": true,
+   "sha256": "dbed35bf7d1cf73291ff83c5c480fe3f5032435d0ff11267dcfbf018ec331a0b",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "chat/notification avatar",
+   "variants": {
+    "192": "/assets/mascot/bee/avatars/bee_avatar_idle-192.webp",
+    "96": "/assets/mascot/bee/avatars/bee_avatar_idle-96.webp"
+   }
+  },
+  {
+   "assetId": "bee_celebrating",
+   "filename": "bee_celebrating.png",
+   "category": "expressions",
+   "expression": "celebrating",
+   "pose": "jumping, arms up",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "f452fac7f5d5db728e2ffebdaeebd69b4595f43a16418e7087b7520087d91d60",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "workout completed",
+   "variants": {
+    "320": "/assets/mascot/bee/expressions/bee_celebrating-320.webp",
+    "160": "/assets/mascot/bee/expressions/bee_celebrating-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_concerned",
+   "filename": "bee_concerned.png",
+   "category": "expressions",
+   "expression": "concerned",
+   "pose": "arms crossed, worried",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "c9f49a90375340dbe7f06fe941a7ae37ed0adfe2922be52a252ae26d9a0e5acf",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "errors",
+   "variants": {
+    "320": "/assets/mascot/bee/expressions/bee_concerned-320.webp",
+    "160": "/assets/mascot/bee/expressions/bee_concerned-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_determined",
+   "filename": "bee_determined.png",
+   "category": "expressions",
+   "expression": "determined",
+   "pose": "fist pump",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "a16d831ccba09958567aa6dd994f6ce50655839cfcace76548b5f82c7d7b296d",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "during workout",
+   "variants": {
+    "320": "/assets/mascot/bee/expressions/bee_determined-320.webp",
+    "160": "/assets/mascot/bee/expressions/bee_determined-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_encouraging",
+   "filename": "bee_encouraging.png",
+   "category": "expressions",
+   "expression": "encouraging",
+   "pose": "thumbs up",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "b53329fe3e48572ead9ccdc891a1be2d74fd3bb0334c0d5a2d5f5586ff6c5030",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "workout start / missed workout",
+   "variants": {
+    "320": "/assets/mascot/bee/expressions/bee_encouraging-320.webp",
+    "160": "/assets/mascot/bee/expressions/bee_encouraging-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_excited",
+   "filename": "bee_excited.png",
+   "category": "expressions",
+   "expression": "excited",
+   "pose": "arms up, flying",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "a9315bdfe0a11e263e25014981e8a75288970b8ffef3a5e2de889638552e9667",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "milestones",
+   "variants": {
+    "320": "/assets/mascot/bee/expressions/bee_excited-320.webp",
+    "160": "/assets/mascot/bee/expressions/bee_excited-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_happy",
+   "filename": "bee_happy.png",
+   "category": "expressions",
+   "expression": "happy",
+   "pose": "standing, waving hand",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "75f9836ada1beee349ecf2199a7e3a641b21539ad813a1991ed1c7c0a854e582",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "dashboard / reactions",
+   "variants": {
+    "320": "/assets/mascot/bee/expressions/bee_happy-320.webp",
+    "160": "/assets/mascot/bee/expressions/bee_happy-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_idle",
+   "filename": "bee_idle.png",
+   "category": "expressions",
+   "expression": "idle",
+   "pose": "standing, arms at sides",
+   "format": "png",
+   "width": 498,
+   "height": 498,
+   "alpha": true,
+   "sha256": "f01bcd48aa358469a9e7ce534516a17b4af0984819f16ea5f7188027a92d4167",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "small idle (low-res 498 px source)",
+   "variants": {
+    "320": "/assets/mascot/bee/expressions/bee_idle-320.webp",
+    "160": "/assets/mascot/bee/expressions/bee_idle-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_mascot_2048x2048_transparent",
+   "filename": "bee_mascot_2048x2048_transparent.png",
+   "category": "master",
+   "expression": "neutral",
+   "pose": "standing",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "39d0d5901de2ed5b7e0a0841da72249f705ab60726003178369fd31ef8182474",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "brand master / onboarding",
+   "variants": {
+    "512": "/assets/mascot/bee/master/bee_mascot_2048x2048_transparent-512.webp",
+    "320": "/assets/mascot/bee/master/bee_mascot_2048x2048_transparent-320.webp"
+   }
+  },
+  {
+   "assetId": "bee_pose_cheering",
+   "filename": "bee_pose_cheering.png",
+   "category": "poses",
+   "expression": "cheering",
+   "pose": "both arms up",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "368b85af1700c5f659a0f24c596d425e1a7f99bc59530d1940dcc7f28b5f54f5",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "celebration",
+   "variants": {
+    "320": "/assets/mascot/bee/poses/bee_pose_cheering-320.webp",
+    "160": "/assets/mascot/bee/poses/bee_pose_cheering-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_pose_jumping",
+   "filename": "bee_pose_jumping.png",
+   "category": "poses",
+   "expression": "happy",
+   "pose": "jumping",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "f0d9831957ff4c4181251f1a6678481673e1f416edfebfcea754e47f8c636dd4",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "celebration",
+   "variants": {
+    "320": "/assets/mascot/bee/poses/bee_pose_jumping-320.webp",
+    "160": "/assets/mascot/bee/poses/bee_pose_jumping-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_pose_neutral",
+   "filename": "bee_pose_neutral.png",
+   "category": "poses",
+   "expression": "neutral",
+   "pose": "standing",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "b358f882e9d886297c41d0f24606643115a01dc8054c6ac61232790e618a8ee5",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "neutral helper",
+   "variants": {
+    "320": "/assets/mascot/bee/poses/bee_pose_neutral-320.webp",
+    "160": "/assets/mascot/bee/poses/bee_pose_neutral-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_pose_pointing",
+   "filename": "bee_pose_pointing.png",
+   "category": "poses",
+   "expression": "happy",
+   "pose": "pointing to side",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "1941f09ec6e032a8a077501cc4d979aff3e64851d53f2eb9fdeff196776304d9",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "contextual helper next to actions",
+   "variants": {
+    "320": "/assets/mascot/bee/poses/bee_pose_pointing-320.webp",
+    "160": "/assets/mascot/bee/poses/bee_pose_pointing-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_pose_sitting",
+   "filename": "bee_pose_sitting.png",
+   "category": "poses",
+   "expression": "calm",
+   "pose": "sitting",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "853f54426cc5b1f7423913f38840c4ab4f704fa8f22c57dad75a0a985bdefe8e",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "rest / recovery",
+   "variants": {
+    "320": "/assets/mascot/bee/poses/bee_pose_sitting-320.webp",
+    "160": "/assets/mascot/bee/poses/bee_pose_sitting-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_pose_waving",
+   "filename": "bee_pose_waving.png",
+   "category": "poses",
+   "expression": "happy",
+   "pose": "waving",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "bcacb135edca2ea2eb81b3486f55668df067ed723e85808042072908ade7bf4c",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "greeting",
+   "variants": {
+    "320": "/assets/mascot/bee/poses/bee_pose_waving-320.webp",
+    "160": "/assets/mascot/bee/poses/bee_pose_waving-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_proud",
+   "filename": "bee_proud.png",
+   "category": "expressions",
+   "expression": "proud",
+   "pose": "hands on hips",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "d49bcbdd0a34aea9b169ffb107ab1c431376827608a056730180742acae63815",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "personal record / progress",
+   "variants": {
+    "320": "/assets/mascot/bee/expressions/bee_proud-320.webp",
+    "160": "/assets/mascot/bee/expressions/bee_proud-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_sleepy",
+   "filename": "bee_sleepy.png",
+   "category": "expressions",
+   "expression": "sleepy",
+   "pose": "eyes closed",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "a8cdfe43ea3984362c7f2b46db0b70b4068f019aaaf47921b4d23eb595fd0d6b",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "rest day",
+   "variants": {
+    "320": "/assets/mascot/bee/expressions/bee_sleepy-320.webp",
+    "160": "/assets/mascot/bee/expressions/bee_sleepy-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_surprised",
+   "filename": "bee_surprised.png",
+   "category": "expressions",
+   "expression": "surprised",
+   "pose": "open mouth, arms out",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "4a9c4d18bd150afe81a7861145f4a629baab761841d95a1122a03f9fb190ef14",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "unexpected / new record",
+   "variants": {
+    "320": "/assets/mascot/bee/expressions/bee_surprised-320.webp",
+    "160": "/assets/mascot/bee/expressions/bee_surprised-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_thinking",
+   "filename": "bee_thinking.png",
+   "category": "expressions",
+   "expression": "thinking",
+   "pose": "hand on chin",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "7edfeaf305d184f6980ebfa0ca272cb567030ea28718d96b8b8c396a1797bf09",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "AI Coach processing",
+   "variants": {
+    "320": "/assets/mascot/bee/expressions/bee_thinking-320.webp",
+    "160": "/assets/mascot/bee/expressions/bee_thinking-160.webp"
+   }
+  },
+  {
+   "assetId": "bee_waving",
+   "filename": "bee_waving.png",
+   "category": "expressions",
+   "expression": "waving",
+   "pose": "waving",
+   "format": "png",
+   "width": 2048,
+   "height": 2048,
+   "alpha": true,
+   "sha256": "cc6510b3cbfdf67441a1cf1c550c5cc0ed5c4c73fcac5cdb4536506a00142f2e",
+   "duplicateOf": null,
+   "available": true,
+   "intendedUsage": "app opened / reminder",
+   "variants": {
+    "320": "/assets/mascot/bee/expressions/bee_waving-320.webp",
+    "160": "/assets/mascot/bee/expressions/bee_waving-160.webp"
+   }
+  }
+ ]
+}

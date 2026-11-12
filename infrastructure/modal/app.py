@@ -11,7 +11,7 @@ gateway_values = {}
 if modal.is_local():
     from dotenv import dotenv_values
     local_values = dotenv_values(ROOT / '.env', interpolate=False, encoding='utf-8-sig')
-    gateway_values = {key: local_values.get(key) or '' for key in ('LLM_BASE_URL', 'LLM_API_KEY', 'LLM_MODEL', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET')}
+    gateway_values = {key: local_values.get(key) or '' for key in ('LLM_BASE_URL', 'LLM_API_KEY', 'LLM_MODEL', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'TTS_BASE_URL', 'TTS_API_KEY', 'TTS_MODEL', 'TTS_VOICE', 'TTS_EN_BASE_URL', 'TTS_EN_API_KEY', 'TTS_EN_MODEL', 'TTS_EN_VOICE', 'ADMIN_EMAILS')}
     llm_values = [gateway_values[key] for key in ('LLM_BASE_URL', 'LLM_API_KEY', 'LLM_MODEL')]
     if any(llm_values) and not all(value.strip() for value in llm_values):
         raise ValueError('Fill all three LLM_* variables in myanmar-fitness-coach/.env, or leave all three blank.')
@@ -28,13 +28,13 @@ def ignored(path):
 
 image = (modal.Image.from_registry('node:22-bookworm-slim', add_python='3.12')
     .apt_install('openssl').workdir('/app')
-    .env({'NEXT_TELEMETRY_DISABLED': '1'})
+    .env({'NEXT_TELEMETRY_DISABLED': '1', 'VOICE_WARMUP': '1'})
     .add_local_dir(ROOT, '/app', copy=True, ignore=ignored)
     .run_commands('npm ci --no-audit --no-fund',
         'DATABASE_URL=file:/tmp/build.db BETTER_AUTH_URL=http://localhost:3000 BETTER_AUTH_SECRET=build-only-placeholder-secret-not-for-runtime npm run build'))
 
 @app.function(image=image, volumes={'/data': volume}, secrets=[config, gateway,notification_config], cpu=2, memory=4096,
-              min_containers=0, max_containers=1, scaledown_window=180, timeout=600)
+              min_containers=0, max_containers=1, scaledown_window=300, timeout=600)
 @modal.concurrent(max_inputs=1)
 @modal.web_server(3000, startup_timeout=180, label='myanmar-fitness-coach')
 def web():
@@ -76,12 +76,12 @@ def web():
     subprocess.Popen(['npm', 'run', 'start'], cwd='/app', env=os.environ.copy())
 
 # No Volume here: all SQLite access stays inside the single web container.
-@app.function(image=modal.Image.debian_slim(python_version='3.12'),secrets=[notification_config],
-              schedule=modal.Period(minutes=15),cpu=0.25,memory=256,max_containers=1,timeout=600)
+@app.function(image=modal.Image.debian_slim(python_version='3.12'),secrets=[notification_config,config],
+              schedule=modal.Period(minutes=60),cpu=0.25,memory=256,max_containers=1,timeout=600)
 def check_notifications():
     import os
     import urllib.request
-    request=urllib.request.Request('https://nguyenthanhcongloi332004--myanmar-fitness-coach.modal.run/api/internal/notifications',
+    request=urllib.request.Request(os.environ['BETTER_AUTH_URL'].rstrip('/')+'/api/internal/notifications',
         method='POST',data=b'{}',headers={'Authorization':'Bearer '+os.environ['NOTIFICATION_CRON_TOKEN'],'Content-Type':'application/json'})
     with urllib.request.urlopen(request,timeout=540) as response:
         if response.status!=200: raise RuntimeError('Notification check failed')

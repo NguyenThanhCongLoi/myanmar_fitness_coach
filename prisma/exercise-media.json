@@ -1,0 +1,419 @@
+{
+ "dataset-0662": {
+  "videoUrl": "/media/video/dataset-0662.mp4",
+  "thumbnailUrl": "/media/poster/dataset-0662.webp",
+  "mediaSource": "Push-up animation by Frank C. Müller, Baden-Baden, CC BY-SA 4.0, via Wikimedia Commons. Modified: converted to silent MP4 loop.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Liegestuetz02_ani_fcm.gif",
+  "variationNote": "",
+  "steps": {
+   "1": {
+    "image": "/media/steps/dataset-0662-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Push-ups-1.png). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/dataset-0662-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Push-ups-2.png). Background flattened, resized."
+   }
+  }
+ },
+ "curated-squat": {
+  "videoUrl": "/media/video/curated-squat.mp4",
+  "thumbnailUrl": "/media/poster/curated-squat.webp",
+  "mediaSource": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied.",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Squat-CDC_strength_training_for_older_adults.gif",
+  "variationNote": "chair-assisted variation",
+  "steps": {
+   "1": {
+    "image": "/media/steps/curated-squat-1.webp",
+    "credit": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied. Still frame."
+   },
+   "2": {
+    "image": "/media/steps/curated-squat-2.webp",
+    "credit": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied. Still frame."
+   }
+  }
+ },
+ "curated-wall-push": {
+  "videoUrl": "/media/video/curated-wall-push.mp4",
+  "thumbnailUrl": "/media/poster/curated-wall-push.webp",
+  "mediaSource": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied.",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Wallpushup-CDC_strength_training_for_older_adults.gif",
+  "variationNote": "",
+  "steps": {
+   "1": {
+    "image": "/media/steps/curated-wall-push-1.webp",
+    "credit": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied. Still frame."
+   },
+   "3": {
+    "image": "/media/steps/curated-wall-push-3.webp",
+    "credit": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied. Still frame."
+   }
+  }
+ },
+ "dataset-0294": {
+  "videoUrl": "/media/video/dataset-0294.mp4",
+  "thumbnailUrl": "/media/poster/dataset-0294.webp",
+  "mediaSource": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied.",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Biceps_curl-CDC_strength_training_for_older_adults.gif",
+  "variationNote": "seated variation",
+  "steps": {
+   "1": {
+    "image": "/media/steps/dataset-0294-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Biceps_curl_with_dumbbell_1.svg). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/dataset-0294-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Biceps_curl_with_dumbbell_2.svg). Background flattened, resized."
+   }
+  }
+ },
+ "curated-shoulder-press": {
+  "videoUrl": "/media/video/curated-shoulder-press.mp4",
+  "thumbnailUrl": "/media/poster/curated-shoulder-press.webp",
+  "mediaSource": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied.",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Overhead_press-CDC_strength_training_for_older_adults.gif",
+  "variationNote": "seated variation",
+  "steps": {
+   "1": {
+    "image": "/media/steps/curated-shoulder-press-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Dumbbell_shoulder_press_1.svg). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/curated-shoulder-press-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Dumbbell_shoulder_press_2.svg). Background flattened, resized."
+   }
+  }
+ },
+ "curated-step-up": {
+  "videoUrl": "/media/video/curated-step-up.mp4",
+  "thumbnailUrl": "/media/poster/curated-step-up.webp",
+  "mediaSource": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied.",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Step_up-CDC_strength_training_for_older_adults.gif",
+  "variationNote": "",
+  "steps": {
+   "1": {
+    "image": "/media/steps/curated-step-up-1.webp",
+    "credit": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied. Still frame."
+   },
+   "3": {
+    "image": "/media/steps/curated-step-up-3.webp",
+    "credit": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied. Still frame."
+   }
+  }
+ },
+ "dataset-3470": {
+  "videoUrl": "/media/video/dataset-3470.mp4",
+  "thumbnailUrl": "/media/poster/dataset-3470.webp",
+  "mediaSource": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied.",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Lunge-CDC_strength_training_for_older_adults.gif",
+  "variationNote": "",
+  "steps": {
+   "1": {
+    "image": "/media/steps/dataset-3470-1.webp",
+    "credit": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied. Still frame."
+   },
+   "3": {
+    "image": "/media/steps/dataset-3470-3.webp",
+    "credit": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied. Still frame."
+   }
+  }
+ },
+ "curated-barbell-squat": {
+  "videoUrl": "/media/video/curated-barbell-squat.mp4",
+  "thumbnailUrl": "/media/poster/curated-barbell-squat.webp",
+  "mediaSource": "\"Squat - exercise demonstration video\" by FitnessScape, CC BY 3.0, via Wikimedia Commons. Modified: audio removed, transcoded.",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Squat_-_exercise_demonstration_video.webm",
+  "variationNote": "Commons licence review of the YouTube source pending",
+  "steps": {}
+ },
+ "gym-leg-press": {
+  "videoUrl": "/media/video/gym-leg-press.mp4",
+  "thumbnailUrl": "/media/poster/gym-leg-press.webp",
+  "mediaSource": "Video: U.S. Centers for Disease Control and Prevention, 'Muscle Strengthening at the Gym' (public domain), via Wikimedia Commons. Trimmed, audio removed. No endorsement implied.",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Muscle_Strengthening_at_the_Gym_-_Seated_Leg_Press.webm",
+  "variationNote": "",
+  "steps": {
+   "1": {
+    "image": "/media/steps/gym-leg-press-1.webp",
+    "credit": "Video: U.S. Centers for Disease Control and Prevention, 'Muscle Strengthening at the Gym' (public domain), via Wikimedia Commons. Trimmed, audio removed. No endorsement implied. Still frame."
+   },
+   "3": {
+    "image": "/media/steps/gym-leg-press-3.webp",
+    "credit": "Video: U.S. Centers for Disease Control and Prevention, 'Muscle Strengthening at the Gym' (public domain), via Wikimedia Commons. Trimmed, audio removed. No endorsement implied. Still frame."
+   }
+  }
+ },
+ "gym-leg-extension": {
+  "videoUrl": "/media/video/gym-leg-extension.mp4",
+  "thumbnailUrl": "/media/poster/gym-leg-extension.webp",
+  "mediaSource": "Video: U.S. Centers for Disease Control and Prevention, 'Muscle Strengthening at the Gym' (public domain), via Wikimedia Commons. Trimmed, audio removed. No endorsement implied.",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Muscle_Strengthening_at_the_Gym_-_Leg_Extension.webm",
+  "variationNote": "",
+  "steps": {
+   "1": {
+    "image": "/media/steps/gym-leg-extension-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Leg_extensions_1.svg). Background flattened, resized."
+   },
+   "2": {
+    "image": "/media/steps/gym-leg-extension-2.webp",
+    "credit": "Video: U.S. Centers for Disease Control and Prevention, 'Muscle Strengthening at the Gym' (public domain), via Wikimedia Commons. Trimmed, audio removed. No endorsement implied. Still frame."
+   },
+   "3": {
+    "image": "/media/steps/gym-leg-extension-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Leg_extensions_2.svg). Background flattened, resized."
+   }
+  }
+ },
+ "gym-lying-leg-curl": {
+  "videoUrl": "/media/video/gym-lying-leg-curl.mp4",
+  "thumbnailUrl": "/media/poster/gym-lying-leg-curl.webp",
+  "mediaSource": "Video: U.S. Centers for Disease Control and Prevention, 'Muscle Strengthening at the Gym' (public domain), via Wikimedia Commons. Trimmed, audio removed. No endorsement implied.",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Muscle_Strengthening_at_the_Gym_-_Leg_Curl.webm",
+  "variationNote": "",
+  "steps": {
+   "1": {
+    "image": "/media/steps/gym-lying-leg-curl-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Seated_leg_curl_1.svg). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/gym-lying-leg-curl-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Seated_leg_curl_2.svg). Background flattened, resized."
+   }
+  }
+ },
+ "gym-machine-chest-press": {
+  "videoUrl": "/media/video/gym-machine-chest-press.mp4",
+  "thumbnailUrl": "/media/poster/gym-machine-chest-press.webp",
+  "mediaSource": "Video: U.S. Centers for Disease Control and Prevention, 'Muscle Strengthening at the Gym' (public domain), via Wikimedia Commons. Trimmed, audio removed. No endorsement implied.",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Muscle_Strengthening_at_the_Gym_-_Chest_Press.webm",
+  "variationNote": "",
+  "steps": {
+   "1": {
+    "image": "/media/steps/gym-machine-chest-press-1.webp",
+    "credit": "Video: U.S. Centers for Disease Control and Prevention, 'Muscle Strengthening at the Gym' (public domain), via Wikimedia Commons. Trimmed, audio removed. No endorsement implied. Still frame."
+   },
+   "3": {
+    "image": "/media/steps/gym-machine-chest-press-3.webp",
+    "credit": "Video: U.S. Centers for Disease Control and Prevention, 'Muscle Strengthening at the Gym' (public domain), via Wikimedia Commons. Trimmed, audio removed. No endorsement implied. Still frame."
+   }
+  }
+ },
+ "gym-barbell-bench-press": {
+  "videoUrl": "/media/video/gym-barbell-bench-press.mp4",
+  "thumbnailUrl": "/media/poster/gym-barbell-bench-press.webp",
+  "mediaSource": "\"Bench press - exercise demonstration video\" by FitnessScape, CC BY 3.0, via Wikimedia Commons. Modified: audio removed, transcoded.",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Bench_press_-_exercise_demonstration_video.webm",
+  "variationNote": "",
+  "steps": {
+   "2": {
+    "image": "/media/steps/gym-barbell-bench-press-2.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Bench_press_2.svg). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/gym-barbell-bench-press-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Bench_press_1.svg). Background flattened, resized."
+   }
+  }
+ },
+ "gym-barbell-deadlift": {
+  "videoUrl": "/media/video/gym-barbell-deadlift.mp4",
+  "thumbnailUrl": "/media/poster/gym-barbell-deadlift.webp",
+  "mediaSource": "\"Deadlift - exercise demonstration video\" by FitnessScape, CC BY 3.0, via Wikimedia Commons. Modified: audio removed, transcoded.",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Deadlift_-_exercise_demonstration_video.webm",
+  "variationNote": "",
+  "steps": {
+   "2": {
+    "image": "/media/steps/gym-barbell-deadlift-2.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Barbell_dead_lifts_2.svg). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/gym-barbell-deadlift-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Barbell_dead_lifts_1.svg). Background flattened, resized."
+   }
+  }
+ },
+ "gym-barbell-row": {
+  "videoUrl": "/media/video/gym-barbell-row.mp4",
+  "thumbnailUrl": "/media/poster/gym-barbell-row.webp",
+  "mediaSource": "\"Bent-over row - exercise demonstration video\" by FitnessScape, CC BY 3.0, via Wikimedia Commons. Modified: audio removed, transcoded.",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Bent-over_row_-_exercise_demonstration_video.webm",
+  "variationNote": "",
+  "steps": {
+   "2": {
+    "image": "/media/steps/gym-barbell-row-2.webp",
+    "credit": "\"Bent-over row - exercise demonstration video\" by FitnessScape, CC BY 3.0, via Wikimedia Commons. Modified: audio removed, transcoded. Still frame."
+   }
+  }
+ },
+ "core-157": {
+  "steps": {
+   "1": {
+    "image": "/media/steps/core-157-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Rear-lunges-2-1024x1015.png). Background flattened, resized."
+   },
+   "2": {
+    "image": "/media/steps/core-157-2.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Rear-lunges-1-1024x1015.png). Background flattened, resized."
+   }
+  }
+ },
+ "curated-lateral-raise": {
+  "steps": {
+   "1": {
+    "image": "/media/steps/curated-lateral-raise-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Dumbbell-lateral-raises-2.png). Background flattened, resized."
+   },
+   "2": {
+    "image": "/media/steps/curated-lateral-raise-2.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Dumbbell-lateral-raises-1.png). Background flattened, resized."
+   }
+  }
+ },
+ "curated-side-plank": {
+  "steps": {
+   "1": {
+    "image": "/media/steps/curated-side-plank-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Side-plank-1.png). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/curated-side-plank-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Side-plank-2.png). Background flattened, resized."
+   }
+  }
+ },
+ "dataset-3013": {
+  "steps": {
+   "1": {
+    "image": "/media/steps/dataset-3013-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Bridging_1.svg). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/dataset-3013-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Bridging_2.svg). Background flattened, resized."
+   }
+  }
+ },
+ "gym-lat-pulldown": {
+  "steps": {
+   "2": {
+    "image": "/media/steps/gym-lat-pulldown-2.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Close-grip-front-lat-pull-down-2.png). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/gym-lat-pulldown-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Close-grip-front-lat-pull-down-1.png). Background flattened, resized."
+   }
+  }
+ },
+ "gym-seated-cable-row": {
+  "steps": {
+   "2": {
+    "image": "/media/steps/gym-seated-cable-row-2.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Cable-seated-rows-2.png). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/gym-seated-cable-row-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Cable-seated-rows-1.png). Background flattened, resized."
+   }
+  }
+ },
+ "gym-triceps-pushdown": {
+  "steps": {
+   "1": {
+    "image": "/media/steps/gym-triceps-pushdown-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Triceps_pushdown_with_cable_2.svg). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/gym-triceps-pushdown-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Triceps_pushdown_with_cable_1.svg). Background flattened, resized."
+   }
+  }
+ },
+ "gym-pec-deck": {
+  "steps": {
+   "2": {
+    "image": "/media/steps/gym-pec-deck-2.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Butterfly-machine-2.png). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/gym-pec-deck-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Butterfly-machine-1.png). Background flattened, resized."
+   }
+  }
+ },
+ "gym-romanian-deadlift": {
+  "steps": {
+   "1": {
+    "image": "/media/steps/gym-romanian-deadlift-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Romanian_dead_lift_1.svg). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/gym-romanian-deadlift-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Romanian_dead_lift_2.svg). Background flattened, resized."
+   }
+  }
+ },
+ "gym-cable-crossover": {
+  "steps": {
+   "2": {
+    "image": "/media/steps/gym-cable-crossover-2.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Cable-crossover-2.png). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/gym-cable-crossover-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Cable-crossover-1.png). Background flattened, resized."
+   }
+  }
+ },
+ "home-superman": {
+  "steps": {
+   "1": {
+    "image": "/media/steps/home-superman-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Supermans-1.png). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/home-superman-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Supermans-2.png). Background flattened, resized."
+   }
+  }
+ },
+ "home-hammer-curl": {
+  "steps": {
+   "1": {
+    "image": "/media/steps/home-hammer-curl-1.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Bicep_hammer_curl_with_dumbbell_1.svg). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/home-hammer-curl-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Bicep_hammer_curl_with_dumbbell_2.svg). Background flattened, resized."
+   }
+  }
+ },
+ "home-bench-dips": {
+  "steps": {
+   "2": {
+    "image": "/media/steps/home-bench-dips-2.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Bench_dips_1.svg). Background flattened, resized."
+   },
+   "3": {
+    "image": "/media/steps/home-bench-dips-3.webp",
+    "credit": "Illustration by Everkinetic, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Bench_dips_2.svg). Background flattened, resized."
+   }
+  }
+ }
+}

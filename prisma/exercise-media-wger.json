@@ -1,0 +1,236 @@
+{
+ "core-163": {
+  "videoUrl": "/media/video/core-163.mp4",
+  "thumbnailUrl": "/media/poster/core-163.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/222/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 222
+ },
+ "dataset-0289": {
+  "videoUrl": "/media/video/dataset-0289.mp4",
+  "thumbnailUrl": "/media/poster/dataset-0289.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/75/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 75
+ },
+ "dataset-0294": {
+  "videoUrl": "/media/video/dataset-0294.mp4",
+  "thumbnailUrl": "/media/poster/dataset-0294.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/92/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 92
+ },
+ "home-hammer-curl": {
+  "videoUrl": "/media/video/home-hammer-curl.mp4",
+  "thumbnailUrl": "/media/poster/home-hammer-curl.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/272/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 272
+ },
+ "curated-shoulder-press": {
+  "videoUrl": "/media/video/curated-shoulder-press.mp4",
+  "thumbnailUrl": "/media/poster/curated-shoulder-press.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/567/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 567
+ },
+ "curated-lateral-raise": {
+  "videoUrl": "/media/video/curated-lateral-raise.mp4",
+  "thumbnailUrl": "/media/poster/curated-lateral-raise.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/348/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 348
+ },
+ "gym-barbell-bench-press": {
+  "videoUrl": "/media/video/gym-barbell-bench-press.mp4",
+  "thumbnailUrl": "/media/poster/gym-barbell-bench-press.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/73/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 73
+ },
+ "gym-leg-press": {
+  "videoUrl": "/media/video/gym-leg-press.mp4",
+  "thumbnailUrl": "/media/poster/gym-leg-press.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/371/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 371
+ },
+ "gym-lying-leg-curl": {
+  "videoUrl": "/media/video/gym-lying-leg-curl.mp4",
+  "thumbnailUrl": "/media/poster/gym-lying-leg-curl.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/366/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 366
+ },
+ "gym-romanian-deadlift": {
+  "videoUrl": "/media/video/gym-romanian-deadlift.mp4",
+  "thumbnailUrl": "/media/poster/gym-romanian-deadlift.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/507/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 507
+ },
+ "gym-seated-cable-row": {
+  "videoUrl": "/media/video/gym-seated-cable-row.mp4",
+  "thumbnailUrl": "/media/poster/gym-seated-cable-row.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/512/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 512
+ },
+ "gym-triceps-pushdown": {
+  "videoUrl": "/media/video/gym-triceps-pushdown.mp4",
+  "thumbnailUrl": "/media/poster/gym-triceps-pushdown.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/659/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 659
+ },
+ "gym-hip-adduction": {
+  "videoUrl": "/media/video/gym-hip-adduction.mp4",
+  "thumbnailUrl": "/media/poster/gym-hip-adduction.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/12/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 12
+ },
+ "gym-machine-shoulder-press": {
+  "videoUrl": "/media/video/gym-machine-shoulder-press.mp4",
+  "thumbnailUrl": "/media/poster/gym-machine-shoulder-press.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/543/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 543
+ },
+ "gym-lying-leg-curl-machine": {
+  "videoUrl": "/media/video/gym-lying-leg-curl-machine.mp4",
+  "thumbnailUrl": "/media/poster/gym-lying-leg-curl-machine.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/365/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 365
+ },
+ "gym-smith-squat": {
+  "videoUrl": "/media/video/gym-smith-squat.mp4",
+  "thumbnailUrl": "/media/poster/gym-smith-squat.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/341/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 341
+ },
+ "gym-hack-squat": {
+  "videoUrl": "/media/video/gym-hack-squat.mp4",
+  "thumbnailUrl": "/media/poster/gym-hack-squat.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/375/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 375
+ },
+ "gym-seated-calf-raise": {
+  "videoUrl": "/media/video/gym-seated-calf-raise.mp4",
+  "thumbnailUrl": "/media/poster/gym-seated-calf-raise.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/590/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 590
+ },
+ "gym-cable-biceps-curl": {
+  "videoUrl": "/media/video/gym-cable-biceps-curl.mp4",
+  "thumbnailUrl": "/media/poster/gym-cable-biceps-curl.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/95/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 95
+ },
+ "gym-incline-dumbbell-press": {
+  "videoUrl": "/media/video/gym-incline-dumbbell-press.mp4",
+  "thumbnailUrl": "/media/poster/gym-incline-dumbbell-press.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/537/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 537
+ },
+ "gym-triceps-kickback": {
+  "videoUrl": "/media/video/gym-triceps-kickback.mp4",
+  "thumbnailUrl": "/media/poster/gym-triceps-kickback.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/655/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 655
+ },
+ "gym-overhead-triceps-extension": {
+  "videoUrl": "/media/video/gym-overhead-triceps-extension.mp4",
+  "thumbnailUrl": "/media/poster/gym-overhead-triceps-extension.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/211/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 211
+ },
+ "gym-hip-thrust": {
+  "videoUrl": "/media/video/gym-hip-thrust.mp4",
+  "thumbnailUrl": "/media/poster/gym-hip-thrust.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/294/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 294
+ },
+ "gym-pull-up": {
+  "videoUrl": "/media/video/gym-pull-up.mp4",
+  "thumbnailUrl": "/media/poster/gym-pull-up.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/475/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 475
+ },
+ "gym-rear-delt-raise": {
+  "videoUrl": "/media/video/gym-rear-delt-raise.mp4",
+  "thumbnailUrl": "/media/poster/gym-rear-delt-raise.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/82/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 82
+ },
+ "gym-barbell-curl": {
+  "videoUrl": "/media/video/gym-barbell-curl.mp4",
+  "thumbnailUrl": "/media/poster/gym-barbell-curl.webp",
+  "mediaSource": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+  "license": "CC BY-SA 4.0",
+  "page": "https://wger.de/en/exercise/91/view-base",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+  "wgerExercise": 91
+ }
+}

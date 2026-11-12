@@ -1,0 +1,32 @@
+import { afterAll, expect, test } from 'vitest';
+import { prisma } from '../src/shared/lib/prisma';
+import { activityKcal, bmr, intakeTarget, projection, workoutKcal } from '../src/shared/energy';
+import { coachInsights, deleteLog, energySummary, logActivity, logFood, saveBody } from '../src/server/energy';
+const prefix = `energy-${Date.now()}`;
+afterAll(async () => { await prisma.user.deleteMany({ where: { id: { startsWith: prefix } } }); await prisma.$disconnect(); });
+test('formulas: Mifflin-St Jeor, MET calories, safe intake floor and projection', () => {
+  expect(bmr({ weightKg: 70, heightCm: 175, birthYear: 1996, sex: 'male' }, 2026)).toBe(1649);
+  expect(bmr({ weightKg: 60, heightCm: 160, birthYear: 1996, sex: 'female' }, 2026)).toBe(1289);
+  expect(bmr({ weightKg: 60, heightCm: null, birthYear: 1996, sex: null })).toBeNull();
+  expect(activityKcal('running', 30, 70)).toBe(315); expect(workoutKcal(45, 60)).toBe(225);
+  expect(intakeTarget({ weightKg: 45, heightCm: 150, birthYear: 1970, sex: 'female' }, 'lose')).toBe(1200);
+  expect(projection(-500, 70, 65)).toEqual({ weeklyKg: -0.45, weeksToGoal: 12 });
+  expect(projection(300, 70, 65).weeksToGoal).toBeNull();
+});
+test('energy logs are owner-scoped and feed the summary and insights', async () => {
+  const a = prefix + 'a', b = prefix + 'b';
+  for (const id of [a, b]) await prisma.user.create({ data: { id, name: 'T', email: id + '@example.test', profile: { create: { equipment: ['body weight'], onboarded: true, goal: 'general_fitness' } } } });
+  await prisma.bodyMeasurement.create({ data: { userId: a, weightKg: 70 } });
+  await saveBody(a, { heightCm: 175, birthYear: 1996, sex: 'male', goalWeightKg: 65, weightGoal: 'lose' });
+  const food = await logFood(a, { meal: 'lunch', description: 'မုန့်ဟင်းခါး', kcal: 400, proteinG: 18 });
+  await logActivity(a, { kind: 'walking', minutes: 30 });
+  const s = await energySummary(a);
+  expect(s.daily[6]).toMatchObject({ intake: 400, protein: 18, activity: 123 });
+  expect(s.targetIntake).toBeGreaterThanOrEqual(1500); expect(s.missing).toEqual([]);
+  expect((await energySummary(b)).daily[6].intake).toBe(0);
+  await expect(deleteLog(b, { kind: 'food', id: food.id })).rejects.toMatchObject({ status: 404 });
+  const codes = (await coachInsights(a)).map(i => i.code);
+  expect(codes).toContain('WORKOUTS_WEEK'); expect(codes).toContain('PROTEIN_LOW');
+  expect((await coachInsights(b)).map(i => i.code)).toContain('ADD_BODY_DATA');
+  expect(await deleteLog(a, { kind: 'food', id: food.id })).toEqual({ deleted: true });
+});

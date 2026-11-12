@@ -2,10 +2,11 @@ import { Prisma } from '@prisma/client';
 import { prisma } from '@/shared/lib/prisma';
 import { grantWorkoutCredit, syncDays,gameSummary } from './gamification';
 import { civilDay } from './streak';
+import { detectPr } from './progression';
 import { ApiError, planSchema, profileSchema, setSchema, toKg, workoutStreak, yangonDay, type PlanInput } from './validation';
 
 const planInclude = { days: { orderBy: { order: 'asc' as const }, include: { exercises: { orderBy: { order: 'asc' as const }, include: { exercise: { include: { translations: true } } } } } } };
-export const sessionInclude = { plan: { select: { id: true, name: true } }, day: { include: { exercises: { orderBy: { order: 'asc' as const }, include: { exercise: { include: { translations: true } } } } } }, sets: { orderBy: { setIndex: 'asc' as const }, include: { exercise: { select: { id: true, name: true } } } } };
+export const sessionInclude = { prescriptions:{orderBy:{order:'asc' as const},include:{exercise:{include:{translations:true}}}},phaseLogs:true, plan: { select: { id: true, name: true } }, day: { include: { exercises: { orderBy: { order: 'asc' as const }, include: { exercise: { include: { translations: true } } } } } }, sets: { orderBy: { setIndex: 'asc' as const }, include: { exercise: { select: { id: true, name: true } } } } };
 
 export async function exerciseList(search = '') {
   return prisma.exercise.findMany({
@@ -14,7 +15,7 @@ export async function exerciseList(search = '') {
   });
 }
 export async function plansForUser(userId: string) {
-  return prisma.workoutPlan.findMany({ where: { userId }, include: planInclude, orderBy: { createdAt: 'desc' } });
+  return prisma.workoutPlan.findMany({ where: { userId,status:'active' }, include: planInclude, orderBy: { createdAt: 'desc' } });
 }
 export async function saveProfile(userId: string, raw: unknown) {
   const data = profileSchema.parse(raw);
@@ -61,10 +62,10 @@ export async function startSession(userId: string, dayId: string) {
   return prisma.$transaction(async tx => {
     const day = await tx.planDay.findFirst({ where: { id: dayId, plan: { userId } } });
     if (!day) throw new ApiError(404, 'NOT_FOUND');
-    const active = await tx.workoutSession.findFirst({ where: { userId, status: 'active' }, include: sessionInclude });
+    const active = await tx.workoutSession.findFirst({ where: { userId, status: {in:['active','paused']} }, include: sessionInclude });
     if (active) return active;
     const state=await syncDays(tx,userId);
-    return tx.workoutSession.create({ data: { userId, planId: day.planId, dayId,creditTimezone:state.timezone }, include: sessionInclude });
+    return tx.workoutSession.create({ data: { userId, planId: day.planId, dayId,creditTimezone:state.timezone,creditTargetSets:0,prescriptions:{create:(await tx.planExercise.findMany({where:{dayId}})).map(({exerciseId,order,sets,reps,restSeconds,targetKg})=>({exerciseId,originalExerciseId:exerciseId,order,sets,reps,restSeconds,targetKg}))} }, include: sessionInclude });
   });
 }
 export async function getSession(userId: string, id: string) {
@@ -75,25 +76,39 @@ export async function getSession(userId: string, id: string) {
 export async function logSet(userId: string, sessionId: string, raw: unknown) {
   const data = setSchema.parse(raw);
   return prisma.$transaction(async tx => {
-    const session = await tx.workoutSession.findFirst({ where: { id: sessionId, userId, status: 'active' }, include: { day: { include: { exercises: true } } } });
+    const session = await tx.workoutSession.findFirst({ where: { id: sessionId, userId }, include: { prescriptions:true, day: { include: { exercises: true } } } });
     if (!session) throw new ApiError(404, 'NOT_FOUND');
-    const prescription = session.day.exercises.find(item => item.exerciseId === data.exerciseId);
+    if (session.status === 'paused') throw new ApiError(409, 'WORKOUT_PAUSED');
+    if (session.status !== 'active') throw new ApiError(409, 'WORKOUT_ENDED');
+    const prescription = (session.prescriptions.length?session.prescriptions.filter(p=>!p.skipped):session.day.exercises).find(item => item.exerciseId === data.exerciseId);
     if (!prescription || data.setIndex >= prescription.sets) throw new ApiError(400, 'INVALID_SET');
-    const fields = { reps: data.reps, weightKg: toKg(data.weight, data.unit), restSeconds: data.restSeconds, completed: true };
+    const fields = { reps: data.reps, weightKg: toKg(data.weight, data.unit), restSeconds: data.restSeconds, rir: data.rir ?? null, kind: data.kind, seconds: data.seconds ?? 0, completed: true };
+    if(session.mode==='follow')throw new ApiError(400,'INVALID_INPUT');
+    // Superset: go straight to the next exercise of the group; rest only after the last one.
+    const group=(prescription as {supersetGroup?:string|null}).supersetGroup;
+    const groupOrder=group?session.prescriptions.filter(p=>!p.skipped&&(p as {supersetGroup?:string|null}).supersetGroup===group).sort((a,b)=>a.order-b.order):[];
+    const restMs=group&&groupOrder.at(-1)?.exerciseId!==data.exerciseId?0:data.restSeconds*1000;
+    await tx.workoutSession.update({where:{id:sessionId},data:{restUntil:restMs?new Date(Date.now()+restMs):null}});
     return tx.workoutSet.upsert({
       where: { sessionId_exerciseId_setIndex: { sessionId, exerciseId: data.exerciseId, setIndex: data.setIndex } },
       create: { sessionId, exerciseId: data.exerciseId, setIndex: data.setIndex, ...fields }, update: fields,
     });
-  });
+  }).then(async set => ({ ...set, pr: set.kind === 'warmup' ? null : await detectPr(userId, set.exerciseId, set.id, set.weightKg, set.reps) }));
 }
 export async function finishSession(userId: string, id: string, note: string) {
   return prisma.$transaction(async tx => {
     const session = await tx.workoutSession.findFirst({ where: { id, userId } });
     if (!session) throw new ApiError(404, 'NOT_FOUND');
+    if(session.status==='abandoned')throw new ApiError(409,'WORKOUT_ENDED');
+    if(session.mode==='follow'&&session.playerPlan&&session.playerIndex<(session.playerPlan as {phases:unknown[]}).phases.length)throw new ApiError(409,'PHASE_NOT_READY');
     if (session.status === 'completed') return {...session,reward:{awarded:false,xp:0,reason:'already_completed'}};
     if (await tx.workoutSet.count({ where: { sessionId: id, completed: true } }) === 0) throw new ApiError(400, 'LOG_A_SET_FIRST');
     const now=new Date();
-    const completed=await tx.workoutSession.update({ where: { id }, data: { status: 'completed', endedAt: now, note: note.normalize('NFC') } });
+    const rx=await tx.sessionExercise.findMany({where:{sessionId:id}}), done=await tx.workoutSet.findMany({where:{sessionId:id,completed:true}});
+    const planned=rx.reduce((n,p)=>n+(p.timed?p.sets*p.reps:p.sets),0);
+    const actual=rx.reduce((n,p)=>n+done.filter(x=>x.exerciseId===p.exerciseId).reduce((m,x)=>m+(p.timed?Math.min(p.reps,x.seconds||p.reps):1),0),0);
+    const completionPct=planned?Math.min(100,Math.round(actual/planned*100)):null;
+    const completed=await tx.workoutSession.update({ where: { id }, data: { status: 'completed', endedAt: now, note: note.normalize('NFC'), completionPct } });
     const reward=await grantWorkoutCredit(tx,userId,id,now);
     return {...completed,reward};
   });
@@ -102,7 +117,7 @@ export async function dashboard(userId: string) {
   const [sessions, profile, planCount, exerciseCount, activeSession, measurements] = await Promise.all([
     prisma.workoutSession.findMany({ where: { userId, status: 'completed' }, include: { sets: true }, orderBy: { startedAt: 'desc' }, take: 1000 }),
     prisma.fitnessProfile.findUnique({ where: { userId } }), prisma.workoutPlan.count({ where: { userId } }), prisma.exercise.count(),
-    prisma.workoutSession.findFirst({ where: { userId, status: 'active' }, select: { id: true } }),
+    prisma.workoutSession.findFirst({ where: { userId, status: {in:['active','paused']} }, select: { id: true } }),
     prisma.bodyMeasurement.findMany({ where: { userId }, orderBy: { recordedAt: 'desc' }, take: 20 }),
   ]);
   const zone=profile?.timezone??'Asia/Yangon';

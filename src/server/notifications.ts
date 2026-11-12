@@ -13,7 +13,7 @@ export const pushSubscriptionSchema=z.object({endpoint:z.string().url().max(2048
 }),expirationTime:z.number().nullable().optional(),keys:z.object({p256dh:z.string().regex(/^[A-Za-z0-9_-]{87}$/),auth:z.string().regex(/^[A-Za-z0-9_-]{22}$/)}).strict()}).strict();
 export function noticeText(type:string,locale:string){
   const t=locale==='my-MM'?my:en;
-  return type==='training'?{title:t.notificationTraining,body:t.notificationTrainingBody}:type==='rest'?{title:t.notificationRest,body:t.notificationRestBody}:type==='weekly'?{title:t.notificationWeekly,body:t.notificationWeeklyBody}:{title:t.notificationMilestone,body:t.notificationMilestoneBody};
+  return type==='water'?{title:t.notificationWater,body:t.notificationWaterBody}:type==='meal'?{title:t.notificationMeal,body:t.notificationMealBody}:type==='training'?{title:t.notificationTraining,body:t.notificationTrainingBody}:type==='rest'?{title:t.notificationRest,body:t.notificationRestBody}:type==='weekly'?{title:t.notificationWeekly,body:t.notificationWeeklyBody}:{title:t.notificationMilestone,body:t.notificationMilestoneBody};
 }
 export async function notificationState(userId:string){
   const preferences=await prisma.notificationPreference.upsert({where:{userId},create:{userId},update:{}});
@@ -62,14 +62,17 @@ export async function tickUser(userId:string,now=new Date(),sendPush=false) {
     const kind=summary.mission.kind;
     const type=kind==='open'&&pref.reminders?'training':['rest','recovery','transition'].includes(kind)&&pref.restMessages?'rest':null;
     if(type)await prisma.notificationJob.upsert({where:{userId_key:{userId,key:type+':'+today}},create:{userId,key:type+':'+today,type,day:today},update:{}});
+    // gentle habit nudges, once per day each
+    if(pref.reminders&&minute>=15*60){const ml=(await prisma.waterLog.aggregate({where:{userId,day:today},_sum:{ml:true}}))._sum.ml??0;if(ml<800)await prisma.notificationJob.upsert({where:{userId_key:{userId,key:'water:'+today}},create:{userId,key:'water:'+today,type:'water',day:today},update:{}});}
+    if(pref.reminders&&minute>=20*60&&!(await prisma.foodLog.count({where:{userId,day:today}})))await prisma.notificationJob.upsert({where:{userId_key:{userId,key:'meal:'+today}},create:{userId,key:'meal:'+today,type:'meal',day:today},update:{}});
     if(weekday(today)===0&&pref.summaries)await prisma.notificationJob.upsert({where:{userId_key:{userId,key:'weekly:'+today}},create:{userId,key:'weekly:'+today,type:'weekly',day:today},update:{}});
   }
   const jobs=await prisma.notificationJob.findMany({where:{userId,status:'pending'},orderBy:{createdAt:'asc'},take:10});
   for(const job of jobs){
-    const allowed=job.type==='milestone'?pref.milestones:job.type==='training'?pref.reminders:job.type==='weekly'?pref.summaries:pref.restMessages;
+    const allowed=job.type==='milestone'?pref.milestones:['training','water','meal'].includes(job.type)?pref.reminders:job.type==='weekly'?pref.summaries:pref.restMessages;
     if(!allowed||(job.type!=='milestone'&&job.day!==today)) {await prisma.notificationJob.update({where:{id:job.id},data:{status:'cancelled',pushState:'cancelled'}});continue;}
     const recent=await prisma.notificationJob.count({where:{userId,status:'delivered',deliveredAt:{gte:new Date(now.getTime()-86400000)}}});
-    if(recent>=2)break;
+    if(recent>=3)break;
     await prisma.notificationJob.updateMany({where:{id:job.id,status:'pending'},data:{status:'delivered',deliveredAt:now}});
   }
   // Commit inbox + per-device delivery claims BEFORE external sends. Unknown outcomes are not retried.
@@ -77,7 +80,7 @@ export async function tickUser(userId:string,now=new Date(),sendPush=false) {
   const pending=await prisma.notificationJob.findMany({where:{userId,status:'delivered',pushState:'pending'},take:2,orderBy:{deliveredAt:'asc'}});
   const devices=await prisma.pushDevice.findMany({where:{userId}}),profile=await prisma.fitnessProfile.findUnique({where:{userId}});
   for(const job of pending){
-    const allowed=job.type==='milestone'?pref.milestones:job.type==='training'?pref.reminders:job.type==='weekly'?pref.summaries:pref.restMessages;
+    const allowed=job.type==='milestone'?pref.milestones:['training','water','meal'].includes(job.type)?pref.reminders:job.type==='weekly'?pref.summaries:pref.restMessages;
     if(!allowed){await prisma.notificationJob.update({where:{id:job.id},data:{pushState:'cancelled'}});continue;}
     if(job.deliveredAt&&now.getTime()-job.deliveredAt.getTime()>86400000){await prisma.notificationJob.update({where:{id:job.id},data:{pushState:'expired'}});continue;}
     for(const device of devices){
