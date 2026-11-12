@@ -39,6 +39,7 @@ image = (modal.Image.from_registry('node:22-bookworm-slim', add_python='3.12')
 @modal.web_server(3000, startup_timeout=180, label='myanmar-fitness-coach')
 def web():
     import os
+    import hashlib
     import secrets
     import sqlite3
     import subprocess
@@ -66,7 +67,18 @@ def web():
                     connection.backup(backup)
                 volume.commit()
     subprocess.run(['npm', 'run', 'db:migrate'], cwd='/app', check=True)
-    subprocess.run(['npm', 'run', 'db:seed'], cwd='/app', check=True)
+    # Seed only when curated source changes. Customer records are never part of this hash.
+    digest = hashlib.sha256()
+    for source in [Path('/app/prisma/seed.ts'), *sorted(Path('/app/prisma').glob('*.json'))]:
+        digest.update(source.name.encode())
+        digest.update(source.read_bytes())
+    seed_version = digest.hexdigest()
+    seed_stamp = Path('/data/catalog-seed.sha256')
+    if not seed_stamp.exists() or seed_stamp.read_text().strip() != seed_version:
+        subprocess.run(['npm', 'run', 'db:seed'], cwd='/app', check=True)
+        seed_stamp.write_text(seed_version)
+    else:
+        print('Curated catalog unchanged; skipping seed.', flush=True)
     volume.commit()
     class CommitHandler(BaseHTTPRequestHandler):
         def do_POST(self):

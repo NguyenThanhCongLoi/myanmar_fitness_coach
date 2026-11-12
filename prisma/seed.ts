@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, type Prisma } from '@prisma/client';
 import exercises from './exercises.json';
 import catalog from './exercise-catalog.json';
 import stepsEn from './exercise-steps.json';
@@ -18,11 +18,11 @@ const translations: Record<string, { name: string; instructions: string }> = {
   'dataset-3013': { name: 'Glute bridge — တင်ပါးမြှောက်ခြင်း', instructions: 'ဒူးကွေးပြီး ခြေထောက်ကို မြေပြင်တွင် ထားပါ။ တင်ပါးကို ဖြည်းဖြည်းမြှောက်ပြီး ပြန်ချပါ။ ခါးကို လွန်ကဲစွာ မကော့ပါနှင့်။' },
   'core-157': { name: 'Barbell reverse lunges — နောက်ဆုတ်ခြေလှမ်း', instructions: 'ဘားကို ပခုံးနောက်တွင် ထိန်းထားပြီး ခြေတစ်ဖက် နောက်သို့ ဆုတ်ပါ။ ဒူးကို ဖြည်းဖြည်းကွေးပြီး မူလအနေအထားသို့ ပြန်ထပါ။ ဘားမပါဘဲ လှုပ်ရှားမှုကို အရင်လေ့လာပါ။' },
 };
-async function main() {
+async function main(db: Prisma.TransactionClient) {
   for (const exercise of exercises) {
-    await prisma.exercise.upsert({ where: { id: exercise.id }, create: exercise, update: {} });
+    await db.exercise.upsert({ where: { id: exercise.id }, create: exercise, update: {} });
     const translation = translations[exercise.id];
-    if (translation) await prisma.exerciseTranslation.upsert({ where: { exerciseId_locale: { exerciseId: exercise.id, locale: 'my-MM' } },
+    if (translation) await db.exerciseTranslation.upsert({ where: { exerciseId_locale: { exerciseId: exercise.id, locale: 'my-MM' } },
       create: { exerciseId: exercise.id, locale: 'my-MM', ...translation, reviewStatus: 'provisional' }, update: {} });
   }
   for(const entry of catalog){
@@ -38,9 +38,13 @@ async function main() {
     const mistakes=pair(base.commonMistakes,(mistakesMy as Record<string,{mistakes:string[]}>)[id]?.mistakes);
     const guidance=g?{perSide:g.perSide,home:pair(g.home,gm?.home),gym:pair(g.gym,gm?.gym),mistakes}:{mistakes};
     const data={...base,...mediaFields,steps,guidance};
-    await prisma.exercise.upsert({where:{id},create:{id,...data,normalizedName:data.name.toLowerCase(),muscles:data.primaryMuscles,source:'mingalar-curation',sourceId:data.canonicalId,sourceUrl:'',dataLicense:'Original curated text',attribution:'Mingalar Fit curated movement metadata'},update:{...data,muscles:data.primaryMuscles}});
-    if(my)await prisma.exerciseTranslation.upsert({where:{exerciseId_locale:{exerciseId:id,locale:'my-MM'}},create:{exerciseId:id,locale:'my-MM',name:my.name,instructions:my.steps.join(' '),reviewStatus:'provisional'},update:{name:my.name,instructions:my.steps.join(' '),reviewStatus:'provisional'}});
+    await db.exercise.upsert({where:{id},create:{id,...data,normalizedName:data.name.toLowerCase(),muscles:data.primaryMuscles,source:'mingalar-curation',sourceId:data.canonicalId,sourceUrl:'',dataLicense:'Original curated text',attribution:'Mingalar Fit curated movement metadata'},update:{...data,muscles:data.primaryMuscles}});
+    if(my)await db.exerciseTranslation.upsert({where:{exerciseId_locale:{exerciseId:id,locale:'my-MM'}},create:{exerciseId:id,locale:'my-MM',name:my.name,instructions:my.steps.join(' '),reviewStatus:'provisional'},update:{name:my.name,instructions:my.steps.join(' '),reviewStatus:'provisional'}});
   }
-  console.log(JSON.stringify({seeded:catalog.length,demoVideos:new Set([...Object.keys(media as Record<string,MediaEntry>).filter(k=>(media as Record<string,MediaEntry>)[k].videoUrl),...Object.keys(wgerMedia)]).size,steps:Object.keys(stepsEn).length,provisionalMyanmar:Object.keys(translations).length}));
+  return {seeded:catalog.length,demoVideos:new Set([...Object.keys(media as Record<string,MediaEntry>).filter(k=>(media as Record<string,MediaEntry>)[k].videoUrl),...Object.keys(wgerMedia)]).size,steps:Object.keys(stepsEn).length,provisionalMyanmar:Object.keys(translations).length};
 }
-main().finally(() => prisma.$disconnect());
+// One commit instead of hundreds of fsyncs on the remote SQLite Volume.
+const startedAt = Date.now();
+prisma.$transaction(db => main(db), { timeout: 120000 })
+  .then(result => console.log(JSON.stringify({ ...result, durationMs: Date.now() - startedAt })))
+  .finally(() => prisma.$disconnect());

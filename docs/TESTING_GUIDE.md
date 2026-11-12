@@ -19,6 +19,8 @@ ffprobe -v error -show_entries format=duration,size -of json public/audio/carefr
 
 PASS: 76 tests / 20 files. New checks cover adaptation, repeated plan reads, idempotent weekly close, owner isolation/injected identity, actual rep completion, warm-up exclusion, missing RIR, two-session load confirmation and protection/equipment filters. The expected invalid-OAuth-state test logs a rejected state; this is not a failed authentication test.
 
+After a post-deploy cold-navigation timeout, startup seeding was batched into one transaction and gated by a persisted source hash. Fresh and repeated disposable seeds both retained 62 exercises / 36 demos (211ms / 207ms); the full 76 tests, locale contracts and production build passed again. Actual customer-Volume seed took 2594ms. Separate read-only verification confirms the persisted seed stamp matches source, both new schema columns exist, and the pre-release backup has integrity `ok`. These are seed timings, not promises about complete cold HTTP startup. Browser follow-up navigates a clean canonical URL to discard stale provider retry queries.
+
 Browser uses the existing Playwright CLI with Microsoft Edge (no new test runner). From the workspace root:
 
 ```powershell

@@ -6,6 +6,10 @@ One Next.js application exposes frontend and APIs at one HTTPS endpoint. Better 
 
 After each acknowledged write the server calls an authenticated loopback-only infrastructure bridge; it commits the Volume before returning success. Migrations and idempotent seed run before the web server starts. SQLite uses DELETE journaling. The Python adapter only launches Next.js and commits storage; it is not a second product backend.
 
+Catalog seeding runs in one Prisma transaction. Startup hashes `prisma/seed.ts` plus the curated JSON inputs and persists `/data/catalog-seed.sha256` only after successful seeding; unchanged source skips future seeds. The stamp and database are committed before serving. This avoids hundreds of separate Volume fsyncs on every cold start; it never includes or resets customer records. A changed catalog still reseeds atomically.
+
+Use the clean canonical URL after a redeploy. Modal can leave an internal retry query in the address bar after a cold navigation; reloading a query tied to a replaced function can yield an invalid-function-call page. Never save/share that internal query in handover evidence.
+
 **Stop this app before redeploying it.** Never perform rolling deployments with overlapping SQLite writers. Do not increase container count. Use PostgreSQL before horizontal scaling. Volume persistence is not an independent backup; scheduled backups and restore drills remain future work.
 
 From the workspace root, using the configured Python 3.12:

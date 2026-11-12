@@ -4,5 +4,8 @@
   "committedPlan": true,
   "completedWorkout": true,
   "coachMemory": true,
+  "adaptiveColumns": true,
+  "seedStampMatchesSource": true,
+  "preReleaseBackupIntegrity": "ok",
   "reader": "separate read-only container"
 }

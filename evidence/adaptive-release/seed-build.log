@@ -1,0 +1,167 @@
+
+added 229 packages in 14s
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": SQLite database "product-tests.db" at "file:/tmp/product-tests.db"
+
+SQLite database product-tests.db created at file:/tmp/product-tests.db
+
+14 migrations found in prisma/migrations
+
+Applying migration `20261110000000_initial`
+Applying migration `20261110010000_gamification`
+Applying migration `20261110020000_training`
+Applying migration `20261111000000_coach_feedback`
+Applying migration `20261111010000_exercise_steps`
+Applying migration `20261111020000_energy`
+Applying migration `20261111030000_coaching`
+Applying migration `20261111040000_schedule_chosen`
+Applying migration `20261111050000_set_kinds_supersets`
+Applying migration `20261112000000_usage_analytics`
+Applying migration `20261113000000_plans_water`
+Applying migration `20261114000000_progressive_plan`
+Applying migration `20261115000000_body_preferences`
+Applying migration `20261116000000_adaptive_feedback`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 20261110000000_initial/
+    └─ migration.sql
+  └─ 20261110010000_gamification/
+    └─ migration.sql
+  └─ 20261110020000_training/
+    └─ migration.sql
+  └─ 20261111000000_coach_feedback/
+    └─ migration.sql
+  └─ 20261111010000_exercise_steps/
+    └─ migration.sql
+  └─ 20261111020000_energy/
+    └─ migration.sql
+  └─ 20261111030000_coaching/
+    └─ migration.sql
+  └─ 20261111040000_schedule_chosen/
+    └─ migration.sql
+  └─ 20261111050000_set_kinds_supersets/
+    └─ migration.sql
+  └─ 20261112000000_usage_analytics/
+    └─ migration.sql
+  └─ 20261113000000_plans_water/
+    └─ migration.sql
+  └─ 20261114000000_progressive_plan/
+    └─ migration.sql
+  └─ 20261115000000_body_preferences/
+    └─ migration.sql
+  └─ 20261116000000_adaptive_feedback/
+    └─ migration.sql
+
+All migrations have been successfully applied.
+
+> myanmar-fitness-coach@0.1.0 db:seed
+> tsx prisma/seed.ts
+
+{"seeded":62,"demoVideos":36,"steps":62,"provisionalMyanmar":4,"durationMs":211}
+
+> myanmar-fitness-coach@0.1.0 db:seed
+> tsx prisma/seed.ts
+
+{"seeded":62,"demoVideos":36,"steps":62,"provisionalMyanmar":4,"durationMs":207}
+
+> myanmar-fitness-coach@0.1.0 test
+> vitest run
+
+
+ RUN  v4.1.10 /app
+
+ ✓ tests/recommendation.test.ts (8 tests) 204ms
+ ✓ tests/training.test.ts (3 tests) 313ms
+ ✓ tests/progression.test.ts (6 tests) 141ms
+ ✓ tests/gamification.test.ts (4 tests) 248ms
+ ✓ tests/plan.test.ts (8 tests) 12ms
+ ✓ tests/analytics.test.ts (4 tests) 67ms
+ ✓ tests/adaptation.test.ts (2 tests) 195ms
+ ✓ tests/program.test.ts (6 tests) 18ms
+ ✓ tests/body-preferences.test.ts (3 tests) 87ms
+ ✓ tests/sequencer.test.ts (8 tests) 16ms
+ ✓ tests/streak.test.ts (8 tests) 13ms
+ ✓ tests/ownership.test.ts (2 tests) 93ms
+ ✓ tests/energy.test.ts (2 tests) 49ms
+ ✓ tests/tts.test.ts (3 tests) 33ms
+ ✓ tests/google-auth.test.ts (2 tests) 258ms
+ ✓ tests/motivation.test.ts (1 test) 2ms
+ ✓ tests/balance.test.ts (3 tests) 3ms
+ ✓ tests/tts-numbers.test.ts (1 test) 2ms
+ ✓ tests/web-push.test.ts (1 test) 5ms
+ ✓ tests/batch4.test.ts (1 test) 2ms
+
+ Test Files  20 passed (20)
+      Tests  76 passed (76)
+   Start at  16:42:10
+   Duration  5.22s (transform 401ms, setup 0ms, import 1.64s, tests 1.76s, environment 1ms)
+
+
+> myanmar-fitness-coach@0.1.0 check:locales
+> tsx scripts/check-locales.ts
+
+PASS: Myanmar and English locale contracts
+
+> myanmar-fitness-coach@0.1.0 build
+> prisma generate && next build
+
+Prisma schema loaded from prisma/schema.prisma
+
+✔ Generated Prisma Client (v6.10.1) to ./node_modules/@prisma/client in 154ms
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
+
+▲ Next.js 16.2.1 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 2.7s
+  Running TypeScript ...
+  Finished TypeScript in 6.4s ...
+  Collecting page data using 13 workers ...
+  Generating static pages using 13 workers (0/5) ...
+  Generating static pages using 13 workers (1/5)
+
+  Generating static pages using 13 workers (2/5)
+
+  Generating static pages using 13 workers (3/5)
+
+✓ Generating static pages using 13 workers (5/5) in 352ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /admin
+├ ƒ /api/admin/[...path]
+├ ƒ /api/auth-options
+├ ƒ /api/auth/[...all]
+├ ƒ /api/fitness/[...path]
+├ ƒ /api/game/[...path]
+├ ƒ /api/internal/notifications
+├ ƒ /api/training/[...path]
+└ ○ /icon.svg
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+npm notice
+npm notice New major version of npm available! 10.9.9 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+stderr | tests/google-auth.test.ts > Google authorization uses state, PKCE and the application callback without exchanging tokens
+2026-11-12T16:42:15.392Z ERROR [Better Auth]: Failed to parse state [StateError [BetterAuthError]: State mismatch: verification not found] {
+  code: 'state_mismatch',
+  details: { state: 'invalid' },
+  errorURL: undefined
+}
