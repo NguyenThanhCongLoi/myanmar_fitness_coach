@@ -35,7 +35,8 @@ export function TargetView() {
           <small>{s.current >= s.next ? g.reached : g.toNext.replace('{n}', String(s.next - s.current)).replace('{m}', String(s.next))} · {g.best} {s.best}</small></div>
         <div className="streak-grid" role="img" aria-label={`${g.names[k]}: 5 ${g.weeks}`}>
           {Array.from({ length: offset }, (_, i) => <span key={`x${i}`} className="sg-empty"/>)}
-          {b.grid.map(d => <span key={d.day} title={`${d.day}`} className={d.day === b.today ? 'today' : ''} style={{ background: cell(k, d) }}>{k === 'water' && d.waterPct >= 100 ? '✓' : ''}</span>)}
+          {b.grid.map(d => { const bg = cell(k, d), rest = k === 'training' && d.workoutPct === null && !d.planned, on = bg !== 'var(--line)' && bg !== 'transparent';
+            return <span key={d.day} title={`${d.day}`} className={[d.day === b.today ? 'today' : '', rest ? 'rest' : '', on ? 'on' : 'off'].join(' ')} style={on ? { background: bg } : undefined}>{k === 'water' && d.waterPct >= 100 ? '✓' : ''}</span>; })}
         </div>
         <div className="sg-legend">{t.weekdaysShort.map(w => <small key={w}>{w.slice(0, 2)}</small>)}</div>
       </article>; })}
