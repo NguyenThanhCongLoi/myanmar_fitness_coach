@@ -1,0 +1,154 @@
+/* Final polish layer (loaded last): readable type floor, vertical workout banners, quiet player controls, desktop scale. */
+
+/* ---- Type floor: no secondary text under 14px in the app body (badges excepted) ---- */
+main small:not(.sr-only){font-size:max(14px,1em);line-height:1.55}
+.mobile-nav span{font-size:13px;font-weight:600}
+.hv-metric small{font-size:14px;line-height:1.45}
+.hv-metric strong{font-size:24px}
+.hv-plan-body>small,.hv-meta{font-size:15px}
+.ps-day summary small,.ps-list small{font-size:15px}
+.detail-tags span,.chip,.chip-label{font-size:14px}
+.summary-stats small,.session-summary small,.muscle-legend span{font-size:14px}
+.muscle-map-label,.map-label{font-size:13px}
+.music-chip small{font-size:13px}
+.music-list small{font-size:14px}
+
+/* ---- Workouts for you: vertical list of wide cards (was a horizontal rail) ---- */
+.hv-banners{grid-auto-flow:row!important;grid-template-columns:1fr!important;grid-auto-columns:auto!important;overflow:visible!important;scroll-snap-type:none!important;gap:14px!important;padding-bottom:0!important}
+.hv-banner{aspect-ratio:16/9!important;min-height:0!important;width:100%;padding:20px!important;border-radius:24px!important;box-shadow:0 10px 26px rgb(20 12 60/.14)}
+.hv-banner::before{background:linear-gradient(90deg,rgb(10 6 30/.72) 0%,rgb(10 6 30/.35) 55%,transparent 80%)!important}
+.hv-banner span{gap:4px!important;max-width:70%}
+.hv-banner strong{font-size:24px!important;line-height:1.3;letter-spacing:-.2px}
+.hv-banner small{font-size:15px!important;opacity:.95!important;display:inline-flex;align-items:center;gap:6px}
+.hv-banner{align-items:flex-end}
+@media(min-width:760px){.hv-banners{grid-template-columns:repeat(2,1fr)!important}}
+
+/* ---- Discover: the gym banner said its title twice ---- */
+.feature-banner small{display:none}
+
+/* ---- Me: stat tiles read as one number + one label ---- */
+.me-stats .stat-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:16px 8px;text-align:center}
+.me-stats .stat-tile small{line-height:1.4}
+
+/* ---- Player: voice / fullscreen are quiet secondary controls, aligned with the top bar ---- */
+.minimal-player .player-bar{position:relative}
+.minimal-player .workout-audio{top:12px!important}
+.minimal-player .audio-btn{width:44px!important;height:44px!important;min-height:44px!important;padding:0!important;display:grid!important;place-items:center;border-radius:50%!important;background:var(--paper)!important;color:var(--ink)!important;border:1px solid var(--line)!important;box-shadow:none!important;background-image:none!important}
+.minimal-player .audio-btn[aria-pressed=true]{background:var(--v-soft,#efeaff)!important;color:var(--v3,#4f2ee0)!important;border-color:transparent!important}
+.minimal-player .audio-btn svg{width:20px;height:20px}
+.minimal-player .player-progress{height:8px;border-radius:99px}
+.minimal-player .player-state{font-size:17px}
+.minimal-caption h2{font-size:24px}
+
+/* ---- Desktop: scale type up so it reads at arm's length ---- */
+@media(min-width:1024px){
+  .hv-coach strong{font-size:20px}.hv-coach small{font-size:16px}
+  .hv-metric strong{font-size:28px}.hv-metric small{font-size:15px}
+  .home-v2 .hv-head h2,.home-v2>h2{font-size:24px}
+  .hv-plan-body strong{font-size:34px}.hv-plan-body>small,.hv-meta{font-size:16px}
+  .hv-banner strong{font-size:26px!important}
+  .minimal-caption h2{font-size:30px}
+  .minimal-player .player-state{font-size:19px}
+  .minimal-count{font-size:96px!important}
+  .minimal-player .player-next{min-height:68px!important;font-size:22px!important}
+}
+@media(prefers-reduced-motion:reduce){.hv-banner{transition:none}}
+
+/* ---- Myanmar script needs room, not a smaller size: lift the old 10–11px Burmese overrides ---- */
+:lang(my) .hv-metric small{font-size:13px!important;line-height:1.55!important}
+:lang(my) .hv-metric{align-items:flex-start}
+.day-state,.activity-week .activity-day .day-state{font-size:12px!important;line-height:1.4!important}
+.week-day small,.water-week small,.score-strip small,.score-bars small,:lang(my) .score-bars small{font-size:12.5px!important;line-height:1.45}
+@media(max-width:760px){:lang(my) .mobile-nav button{font-size:12px}}
+.summary-map figcaption,.muscle-map figcaption,.body-map figcaption{font-size:13px}
+
+/* ---- Button system: one height scale, one radius, one press/disabled/focus behaviour ---- */
+:root{--btn-h:52px;--btn-h-lg:62px;--btn-r:18px;--start:#dc2626;--start-press:#b91c1c;--press:scale(.97);--ease-out:cubic-bezier(.2,.8,.2,1)}
+main .button{min-height:var(--btn-h);border-radius:var(--btn-r);font-weight:700;letter-spacing:.1px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .14s var(--ease-out),box-shadow .2s var(--ease-out),background-color .2s var(--ease-out),opacity .2s}
+main .button:active:not(:disabled),.start-bar-go:active:not(:disabled),.music-chip:active,.ex-set-list button:active,.wi-row:active,.quick-card:active,.media-card:active{transform:var(--press)}
+main .button:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+main .button:focus-visible,main .quick-card:focus-visible,main .media-card:focus-visible,main .hv-banner:focus-visible{outline:3px solid var(--v2,#6842ff);outline-offset:3px}
+.start-bar-go{min-height:var(--btn-h-lg);border-radius:var(--btn-r);background:linear-gradient(180deg,#ef3b3b,var(--start));box-shadow:0 1px 0 rgb(255 255 255/.25) inset,0 10px 24px rgb(220 38 38/.32)}
+.start-bar-go:hover:not(:disabled){background:linear-gradient(180deg,#e43333,var(--start-press))}
+.music-chip{border-radius:var(--btn-r);min-height:var(--btn-h-lg)}
+.start-bar{border-top:1px solid color-mix(in srgb,var(--line) 60%,transparent);padding-bottom:max(12px,env(safe-area-inset-bottom))}
+
+/* ---- Quick workouts: big duration selectors ---- */
+.quick-card strong{font-size:28px!important;letter-spacing:-.4px}
+.quick-card small{font-size:14px!important}
+
+/* ---- Rest: the next move's video is the hero, countdown in red ---- */
+.minimal-player.phase-rest .player-media{box-shadow:0 0 0 3px var(--v2,#6842ff)}
+.minimal-player.phase-rest .player-state{color:var(--v3,#4f2ee0);font-weight:700}
+.minimal-player.phase-rest .minimal-count{color:var(--start)}
+.minimal-count{transition:color .3s}
+[data-theme=dark] .minimal-player.phase-rest .player-state{color:#b9a8ff}
+[data-theme=dark] .minimal-player .audio-btn[aria-pressed=true]{background:#2b2350!important;color:#cfc2ff!important}
+[data-theme=dark] .hv-banner{box-shadow:0 10px 26px rgb(0 0 0/.4)}
+
+/* ---- Onboarding tiles: one alignment for every choice ---- */
+.intake-v2 .quiz-option.tile{justify-content:center;text-align:center}
+.intake-v2 .quiz-option{transition:transform .14s var(--ease-out),border-color .2s,background-color .2s,box-shadow .2s}
+.intake-v2 .quiz-option:active{transform:var(--press)}
+.minimal-player .workout-audio,.minimal-player .workout-audio .adaptive-actions,.minimal-player .audio-btn{margin:0!important}
+.minimal-player .workout-audio{top:12px!important;height:44px;display:flex;align-items:center}
+/* ---- One accent family in dark mode too (old orange theme leftovers) ---- */
+[data-theme=dark] .topbar .avatar,[data-theme=dark] .me-avatar{background:#2b2350!important;color:#cfc2ff!important}
+:lang(my) .me-stats .stat-tile small{font-size:13px;line-height:1.5}
+
+/* ---- Home: bigger AI coach card, then plan, then a light "today" strip ---- */
+.hv-coach{min-height:96px;padding:16px 18px!important;gap:14px!important;border-radius:24px!important}
+.hv-coach strong{font-size:19px!important;line-height:1.4}
+.hv-coach small{font-size:15.5px!important;line-height:1.55;color:var(--muted)}
+.hv-today{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hv-water{grid-column:1/-1;display:flex;align-items:stretch;gap:10px;padding:8px;border-radius:24px;background:linear-gradient(135deg,#eef6ff,#e7f0ff);border:1px solid #d9e7ff}
+.hv-water.low{background:linear-gradient(135deg,#fff4ec,#ffeede);border-color:#ffd9bf}
+.hv-water-main{flex:1;min-width:0;display:flex;align-items:center;gap:14px;padding:10px;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer;border-radius:18px}
+.hv-water-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.hv-water-text small{font-size:14px;color:var(--muted)}
+.hv-water-text strong{font-size:24px;line-height:1.25;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+.hv-water-bar{display:block;height:8px;border-radius:99px;background:rgb(37 99 235/.14);overflow:hidden;margin-top:4px}
+.hv-water-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#60a5fa,#2563eb);transition:width .6s var(--ease-out,ease)}
+.hv-water-add{flex:none;align-self:center;display:inline-flex;align-items:center;gap:4px;min-height:52px;padding:0 16px;border:0;border-radius:16px;background:#2563eb;color:#fff;font-size:16px;font-weight:700;box-shadow:0 6px 16px rgb(37 99 235/.28);cursor:pointer;transition:transform .14s}
+.hv-water-add:active:not(:disabled){transform:scale(.95)}.hv-water-add:disabled{opacity:.5}
+.hv-ico{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:15px;background:#fff;color:#2563eb;box-shadow:0 2px 8px rgb(20 40 90/.08)}
+.hv-ico.flame{color:#ea580c}
+.hv-stat{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:16px;min-height:132px;border:1px solid var(--line);border-radius:24px;background:var(--surface,#fff);color:var(--ink);text-align:left;cursor:pointer;transition:transform .14s}
+.hv-stat .hv-ico{background:var(--v-soft,#efeaff);color:var(--v3,#4f2ee0);box-shadow:none}
+.hv-stat .hv-ico.flame{background:#fff1e6;color:#ea580c}
+.hv-stat strong{font-size:30px;line-height:1.1;letter-spacing:-.5px;font-variant-numeric:tabular-nums;margin-top:4px}
+.hv-stat small{font-size:14.5px;color:var(--muted);line-height:1.45}
+.hv-stat:active{transform:var(--press)}
+:lang(my) .hv-stat small{font-size:14px;line-height:1.6}
+@media(min-width:760px){.hv-today{grid-template-columns:2fr 1fr 1fr}.hv-water{grid-column:auto}.hv-stat{min-height:0}}
+[data-theme=dark] .hv-water{background:linear-gradient(135deg,#14213a,#101a30);border-color:#22335a}
+[data-theme=dark] .hv-water.low{background:linear-gradient(135deg,#2c1d12,#24170e);border-color:#4a2f1a}
+[data-theme=dark] .hv-ico{background:#1b2742;color:#8ab4ff;box-shadow:none}
+[data-theme=dark] .hv-stat .hv-ico{background:#2b2350;color:#cfc2ff}
+[data-theme=dark] .hv-stat .hv-ico.flame{background:#3a2414;color:#fdba74}
+[data-theme=dark] .hv-water-bar{background:rgb(138 180 255/.16)}
+.hv-stat{display:grid!important;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:12px;row-gap:0;align-items:center;min-height:0!important;padding:14px!important}
+.hv-stat .hv-ico{grid-row:1/3;width:44px;height:44px}
+.hv-stat strong{margin:0!important;font-size:26px!important}
+.hv-stat small{grid-column:2}
+
+/* ---- Today strip, premium pass: glossy gradient surfaces, white type, soft sheen ---- */
+.hv-water,.hv-stat{position:relative;overflow:hidden;isolation:isolate;border:0!important;color:#fff!important;
+  box-shadow:inset 0 1px 0 rgb(255 255 255/.28),0 14px 30px -10px var(--glow),0 2px 6px rgb(15 10 40/.12)!important;transition:transform .18s var(--ease-out),box-shadow .25s var(--ease-out)}
+.hv-water::after,.hv-stat::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(120% 80% at 10% -10%,rgb(255 255 255/.32),transparent 55%),radial-gradient(90% 70% at 110% 120%,rgb(0 0 0/.18),transparent 60%)}
+.hv-water{--glow:rgb(37 99 235/.55);background:linear-gradient(135deg,#3b82f6 0%,#2563eb 45%,#1e3a8a 100%)!important;padding:10px!important}
+.hv-water.low{--glow:rgb(37 99 235/.55);background:linear-gradient(135deg,#3b82f6 0%,#2563eb 45%,#1e3a8a 100%)!important}
+.hv-stat.streak{--glow:rgb(234 88 12/.5);background:linear-gradient(135deg,#fb923c 0%,#f97316 40%,#e11d48 100%)!important}
+.hv-stat.week{--glow:rgb(104 66 255/.5);background:linear-gradient(135deg,#8a6dff 0%,#6842ff 50%,#4f2ee0 100%)!important}
+.hv-water-main,.hv-stat{color:#fff}
+.hv-water-text small,.hv-stat small{color:rgb(255 255 255/.85)!important;font-weight:600}
+.hv-water-text strong,.hv-stat strong{color:#fff;text-shadow:0 1px 2px rgb(0 0 0/.15)}
+.hv-water .hv-ico,.hv-stat .hv-ico,.hv-stat .hv-ico.flame{background:rgb(255 255 255/.2)!important;color:#fff!important;box-shadow:inset 0 1px 0 rgb(255 255 255/.35)!important;backdrop-filter:blur(6px);border-radius:16px}
+.hv-water-bar{background:rgb(255 255 255/.25)!important;height:8px}
+.hv-water-bar i{background:linear-gradient(90deg,#e0f2fe,#fff)!important;box-shadow:0 0 10px rgb(255 255 255/.6)}
+.hv-water-add{background:#fff!important;color:#1d4ed8!important;box-shadow:0 6px 16px rgb(10 30 90/.3),inset 0 -2px 0 rgb(29 78 216/.12)!important;border-radius:999px!important;padding:0 18px!important}
+.hv-water:active,.hv-stat:active{transform:scale(.98)}
+@media(hover:hover){.hv-water:hover,.hv-stat:hover{transform:translateY(-2px)}}
+[data-theme=dark] .hv-water,[data-theme=dark] .hv-stat{box-shadow:inset 0 1px 0 rgb(255 255 255/.18),0 14px 30px -12px var(--glow)!important}
+@media(prefers-reduced-motion:reduce){.hv-water,.hv-stat,.hv-water-bar i{transition:none}}

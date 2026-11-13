@@ -24,7 +24,7 @@ test('plan reads never compound; weekly close advances once, is owner isolated a
   const a = prefix + 'a', b = prefix + 'b';
   for (const id of [a,b]) await prisma.user.create({ data: { id, email: `${id}@example.test`, name: 'Synthetic', profile: { create: { onboarded: true, intakeVersion: 1, equipment: ['body weight'], daysPerWeek: 3, planStep: 3 } } } });
   await getPlan(a, 'home');
-  const session = await createTraining(a, 'free', { name: 'Test', program: { key: 'personal', day: 1 }, exercises: [{ exerciseId: 'dataset-0294', sets: 1, reps: 10, restSeconds: 30, targetKg: 0 }] });
+  const session = await createTraining(a, 'free', { name: 'Test', program: { key: 'personal', day: 1 }, exercises: [{ exerciseId: 'curated-squat', sets: 1, reps: 10, restSeconds: 30, targetKg: 0 }] });
   await prisma.workoutSession.update({ where: { id: session.id }, data: { status: 'completed', endedAt: new Date(), completionPct: 30, note: 'quit:too_hard' } });
   expect((await getPlan(a,'home')).step).toBe(2);
   expect((await getPlan(a,'home')).step).toBe(2);
@@ -37,7 +37,7 @@ test('plan reads never compound; weekly close advances once, is owner isolated a
   await saveWeekReview(a, check); await saveWeekReview(a, check);
   expect((await prisma.fitnessProfile.findUniqueOrThrow({ where: { userId: a } })).planWeek).toBe(2);
   expect((await prisma.fitnessProfile.findUniqueOrThrow({ where: { userId: b } })).planWeek).toBe(1);
-  const stopped = await createTraining(b, 'free', { name: 'Pain before first set', exercises: [{ exerciseId: 'dataset-0294', sets: 1, reps: 10, restSeconds: 30, targetKg: 0 }] });
+  const stopped = await createTraining(b, 'free', { name: 'Pain before first set', exercises: [{ exerciseId: 'curated-squat', sets: 1, reps: 10, restSeconds: 30, targetKg: 0 }] });
   await trainingAction(b, stopped.id, { actionId: 'pain-stop-test', revision: 0, kind: 'abandon', confirm: true, reason: 'pain' });
   const pain = await getPlan(b, 'home');
   expect(pain.adaptive.decision.reasons).toContain('pain');

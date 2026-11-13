@@ -1,0 +1,58 @@
+{
+  "result": "PASS",
+  "steps": [
+    "age",
+    "height",
+    "weight",
+    "sex",
+    "goal",
+    "level",
+    "activity",
+    "place",
+    "preferences",
+    "days",
+    "minutes",
+    "health",
+    "focus",
+    "waistNow",
+    "waistGoal",
+    "glutesNow",
+    "glutesGoal",
+    "review"
+  ],
+  "baseline": {
+    "height": 170,
+    "weight": 70,
+    "limitations": "no jumping"
+  },
+  "homeDays": [
+    {
+      "split": "full",
+      "minutes": 10,
+      "ids": [
+        "vid-sumo-squat",
+        "vid-bicycle-crunch",
+        "curated-knee-push"
+      ]
+    },
+    {
+      "split": "cardio",
+      "minutes": 10,
+      "ids": [
+        "dataset-1373",
+        "vid-sumo-squat",
+        "vid-reverse-lunge"
+      ]
+    },
+    {
+      "split": "full",
+      "minutes": 12,
+      "ids": [
+        "curated-knee-push",
+        "dataset-1373",
+        "curated-bird-dog"
+      ]
+    }
+  ],
+  "errors": []
+}

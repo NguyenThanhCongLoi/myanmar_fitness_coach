@@ -23,7 +23,7 @@ export function SessionSummary({ session, library, onContinue }: { session: Work
   const end = session.endedAt ? new Date(session.endedAt).getTime() : Date.now();
   const minutes = Math.max(1, Math.round((end - new Date(session.startedAt).getTime() - (session.totalPausedMs ?? 0)) / 60000));
   const ids = [...new Set(session.sets.map(s => s.exerciseId))];
-  const reps = session.sets.reduce((n, s) => n + s.reps, 0), volume = Math.round(session.sets.reduce((n, s) => n + s.reps * s.weightKg, 0));
+  const reps = session.sets.reduce((n, s) => n + (s.seconds ? 0 : s.reps), 0), volume = Math.round(session.sets.reduce((n, s) => n + s.reps * s.weightKg, 0));
   const kcal = workoutKcal(minutes, data.measurements[0]?.weightKg ?? 70);
   const muscles = [...new Set(ids.flatMap(id => library.find(e => e.id === id)?.primaryMuscles ?? []))];
   const secondary = [...new Set(ids.flatMap(id => library.find(e => e.id === id)?.secondaryMuscles ?? []))].filter(m => !muscles.includes(m));

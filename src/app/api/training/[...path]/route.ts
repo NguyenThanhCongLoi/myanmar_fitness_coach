@@ -1,3 +1,4 @@
+import {readPlayback,savePlayback} from '@/server/playback';
 import {z} from 'zod';
 import {allowedAppOrigin} from '@/server/origins';
 import {saveIntake} from '@/server/intake';
@@ -82,6 +83,7 @@ async function handler(request:Request,context:{params:Promise<{path:string[]}>}
   else if(!write&&path[0]==='sessions'&&path.length===2)result={...await getSession(user.id,path[1]),serverNow:new Date().toISOString()};
   else if(!write&&key==='recommendation')result=await recommendTrainingFocus(user.id,{location:new URL(request.url).searchParams.get('location')??'home'});
   else if(write&&path[0]==='sessions'&&path[2]==='feedback'&&path.length===3)result=await saveFeedback(user.id,path[1],body);
+  else if(path[0]==='sessions'&&path[2]==='playback'&&path.length===3)result=write?await savePlayback(user.id,path[1],body):await readPlayback(user.id,path[1]);
   else if(write&&key==='intake')result=await saveIntake(user.id,body);
   else if(write&&key==='quick-plan')result=await previewQuickWorkout(user.id,body);
   else if(write&&key==='free')result=await createTraining(user.id,'free',body);

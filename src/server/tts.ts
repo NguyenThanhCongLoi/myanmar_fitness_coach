@@ -7,6 +7,7 @@ import { prisma } from '@/shared/lib/prisma';
 import { z } from 'zod';
 import { ApiError } from './validation';
 import { doseFor, type Level } from '@/shared/dose';
+import { voiceLine, type VoiceKey } from '@/locales/workout-voice';
 
 // Server-only TTS through owner-configured OpenAI-compatible gateways: TTS_* = Myanmar voice, TTS_EN_* = English voice (env / Modal Secret).
 // Audio is cached by content hash so each script is synthesized once; keys never reach the browser.
@@ -65,14 +66,17 @@ export async function exerciseSpeech(userId: string, exerciseId: string, step?: 
 // ---------- PT session + coach message voice ----------
 const SPLIT_MY: Record<string, string> = { push: 'ရင်ဘတ်၊ ပခုံးနှင့် Triceps', pull: 'ကျောနှင့် Biceps', legs: 'ခြေထောက်နှင့် တင်ပါး', core: 'Core နှင့် ဝမ်းဗိုက်', full: 'တစ်ကိုယ်လုံး', upper: 'ခန္ဓာကိုယ် အပေါ်ပိုင်း', lower: 'ခြေထောက်နှင့် Core' };
 const myRange = (v: string) => v.split('–').map(x => burmeseNumberWords(Number(x))).join(' မှ ');
-async function synthesize(userId: string, text: string, lang: VoiceLang = 'my') {
+async function synthesize(userId: string, text: string, lang: VoiceLang = 'my', cachedOnly=false) {
   if (!ttsConfigured(lang)) throw new ApiError(503, 'VOICE_NOT_CONFIGURED');
-  const c = cfg(lang); const [voice, modelId] = [c.voice!, await model(lang)];
+  const c = cfg(lang);
+  if(cachedOnly&&!c.model&&!discoveredModel[lang])throw new ApiError(404,'VOICE_NOT_CACHED');
+  const [voice, modelId] = [c.voice!, cachedOnly?(c.model||discoveredModel[lang])!:await model(lang)];
   const input = lang === 'my' ? speakableBurmese(text) : text;
   // Myanmar keys keep the original v2 format so existing cached audio stays valid.
   const key = createHash('sha256').update(`${lang === 'my' ? 'v2' : 'en1'}\n${modelId}\n${voice}\n${input}`).digest('hex');
   const file = path.join(cacheDir(), `${key}.mp3`);
   try { return { audio: await readFile(file), cached: true }; } catch { /* not cached */ }
+  if(cachedOnly)throw new ApiError(404,'VOICE_NOT_CACHED');
   // Only uncached synthesis counts against a small per-user rate limit.
   const now = Date.now(), times = (recent.get(userId) ?? []).filter(t => now - t < 60000);
   if (userId !== WARM_USER && times.length >= 10) throw new ApiError(429, 'PLEASE_WAIT');
@@ -146,11 +150,29 @@ export function speakableBurmese(text: string) {
   return text.replace(/[0-9၀-၉]+/g, m => burmeseNumberWords(Number(MY_TO_ASCII(m)))).replace(/[–-](?=\s*[က-႟])/g, ' မှ ');
 }
 
+// ---------- Guided-player script (locales/workout-voice.ts): countdown, go, switch sides, rest, get ready, complete ----------
+export const WORKOUT_CUES = ['starts', 'go', 'side', 'relax', 'ready', 'count', 'complete', 'encourage'] as const;
+export type WorkoutCue = typeof WORKOUT_CUES[number];
+const CUE_KEY: Record<Exclude<WorkoutCue, 'count'>, VoiceKey> = { starts: 'startsIn', go: 'go', side: 'switchSide', relax: 'rest', ready: 'getReady', complete: 'done', encourage:'encourage' };
+async function workoutCueText(kind: WorkoutCue, lang: VoiceLang, exerciseId?: string, n?: number) {
+  if (kind === 'count') { if (!n || n < 1) throw new ApiError(400, 'INVALID_INPUT'); return String(n); }
+  let name = '';
+  if (kind === 'starts' || kind === 'ready') {
+    if (!exerciseId) throw new ApiError(400, 'INVALID_INPUT');
+    const e = await prisma.exercise.findUnique({ where: { id: exerciseId }, include: { translations: { where: { locale: 'my-MM' } } } });
+    if (!e) throw new ApiError(404, 'NOT_FOUND');
+    name = lang === 'en' ? e.name.split('—')[0].trim() : (e.translations[0]?.name ?? e.name).split('—').pop()!.trim();
+  }
+  return voiceLine(lang, CUE_KEY[kind], { name });
+}
+
 // ---------- In-workout PT cues (fixed templates + stored exercise data only) ----------
 export const MOTIVATION_MY = ['ကောင်းတယ်၊ ဆက်လုပ်ပါ။', 'အသက်ကို ပုံမှန်ရှူပါ။', 'ပုံစံမှန်ကို ထိန်းထားပါ။', 'တစ်ဝက် ရောက်ပါပြီ၊ အားကောင်းတယ်။', 'နောက်ဆုံး အနည်းငယ်ပဲ ကျန်တော့တယ်။', 'သင် လုပ်နိုင်ပါတယ်။', 'ဖြည်းဖြည်းနဲ့ ထိန်းချုပ်ပါ။', 'အရမ်းတော်ပါတယ်၊ ဒီအတိုင်းပဲ။'];
 const MUSCLE_MY: Record<string, string> = { chest: 'ရင်ဘတ်', 'upper-back': 'ကျောအပေါ်ပိုင်း', 'lower-back': 'ခါး', trapezius: 'ပခုံးကြော', 'front-deltoids': 'ပခုံးရှေ့', 'back-deltoids': 'ပခုံးနောက်', biceps: 'လက်မောင်းရှေ့', triceps: 'လက်မောင်းနောက်', forearm: 'လက်ဖျံ', quadriceps: 'ပေါင်ရှေ့', hamstring: 'ပေါင်နောက်', gluteal: 'တင်ပါး', calves: 'ခြေသလုံး', abs: 'ဝမ်းဗိုက်', obliques: 'ဝမ်းဗိုက်ဘေး', adductor: 'ပေါင်အတွင်း', abductors: 'ပေါင်အပြင်' };
 export async function cueSpeech(userId: string, raw: unknown) {
-  const q = z.object({ kind: z.enum(['next', 'motivate', 'done', 'rest', 'finish', 'pr']), exerciseId: z.string().max(100).optional(), n: z.coerce.number().int().min(0).max(7).optional(), lang: z.enum(['my', 'en']).optional() }).strict().parse(raw);
+  const q = z.object({ kind: z.enum(['next', 'motivate', 'done', 'rest', 'finish', 'pr', ...WORKOUT_CUES]), exerciseId: z.string().max(100).optional(), n: z.coerce.number().int().min(0).max(9).optional(), lang: z.enum(['my', 'en']).optional(), cachedOnly:z.enum(['1']).optional() }).strict().parse(raw);
+  if (q.kind === 'motivate' && (q.n ?? 0) > 7) throw new ApiError(400, 'INVALID_INPUT');
+  if ((WORKOUT_CUES as readonly string[]).includes(q.kind)) { const lang = q.lang === 'en' ? 'en' : 'my'; return synthesize(userId, (await workoutCueText(q.kind as WorkoutCue, lang, q.exerciseId, q.n)).normalize('NFC'), lang, q.cachedOnly==='1'); }
   if (q.lang === 'en') return synthesize(userId, await cueTextEn(userId, q), 'en');
   let text = '';
   if (q.kind === 'motivate') text = MOTIVATION_MY[q.n ?? 0];
@@ -213,6 +235,9 @@ export async function warmVoices(log: (m: string) => void = () => {}) {
     if (!ttsConfigured(lang)) continue;
     for (const kind of ['done', 'rest', 'pr', 'finish'] as const) await run(() => cueSpeech(WARM_USER, { kind, lang }));
     for (let n = 0; n < 8; n++) await run(() => cueSpeech(WARM_USER, { kind: 'motivate', n, lang }));
+    for (const kind of ['go', 'side', 'relax', 'complete'] as const) await run(() => cueSpeech(WARM_USER, { kind, lang }));
+    for (let n = 1; n <= 9; n++) await run(() => cueSpeech(WARM_USER, { kind: 'count', n, lang }));
+    for (const e of exercises) for (const kind of ['starts', 'ready'] as const) await run(() => cueSpeech(WARM_USER, { kind, exerciseId: e.id, lang }));
     for (const e of exercises) await run(() => exerciseSpeech(WARM_USER, e.id, undefined, lang));
   }
   if (made) await persistDatabase();

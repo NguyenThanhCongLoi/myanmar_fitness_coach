@@ -1,5 +1,6 @@
 export default {
   confirm: 'Confirm',
+  estimatedSet: 'Estimated time', finishSet: 'Finish when ready',
   body: 'Your starting point', age: 'Age', height: 'Height (cm)', weight: 'Weight (kg)', sex: 'Sex',
   sexes: { male: 'Male', female: 'Female', unspecified: 'Prefer not to say' },
   bodyHint: 'Your baseline for training and energy estimates.',

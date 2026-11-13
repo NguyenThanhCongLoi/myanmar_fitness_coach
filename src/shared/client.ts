@@ -27,11 +27,18 @@ export function localExercise(exercise: import('./types').Exercise, locale: stri
 }
 export function weightValue(kg: number, unit: string) { return unit === 'lb' ? kg / 0.45359237 : kg; }
 // The exercise library is static per deployment: fetch it once per page session and share it.
+const pendingStarts=new Map<string,string>();
 const memo = new Map<string, Promise<unknown>>();
 export async function trainingApi<T>(path: string, data?: unknown): Promise<T> {
   if (data === undefined && path === 'exercises') {
     if (!memo.has(path)) memo.set(path, trainingRequest<T>(path).catch(e => { memo.delete(path); throw e; }));
     return memo.get(path) as Promise<T>;
+  }
+  if(path==='free'&&data&&typeof data==='object'){
+    const key=JSON.stringify(data);const requestId=pendingStarts.get(key)??actionId();
+    if(pendingStarts.size>=12)pendingStarts.delete(pendingStarts.keys().next().value!);
+    pendingStarts.set(key,requestId);
+    try{const result=await trainingRequest<T>(path,{...data,requestId});pendingStarts.delete(key);return result;}catch(error){if(error instanceof RequestError&&error.status>=400&&error.status<500)pendingStarts.delete(key);throw error;}
   }
   return trainingRequest<T>(path, data);
 }

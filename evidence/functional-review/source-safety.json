@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "filesScanned": 722,
+  "configuredSecretValuesScanned": 3,
+  "matches": 0,
+  "privateEnvInSource": false,
+  "diffWhitespace": "PASS"
+}

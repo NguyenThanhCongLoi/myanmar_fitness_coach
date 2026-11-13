@@ -1,0 +1,37 @@
+async page => {
+  const origin=new URL(page.url()).origin;
+  if(!new URL(origin).hostname.endsWith('.w.modal.host'))throw new Error('Disposable preview only');
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  const post=async(path,data)=>{const r=await page.request.post(origin+path,{data,headers:{Origin:origin}});if(!r.ok())throw new Error(path+': '+r.status()+' '+await r.text());return r.json();};
+  await post('/api/auth/sign-up/email',{name:'Gym Preview',email:`gym-${Date.now()}@example.test`,password:'Disposable-gym-review-2026'});
+  await post('/api/training/intake',{locale:'en',goal:'general_fitness',experience:'beginner',equipment:['body weight','machine'],daysPerWeek:3,limitations:'',weightUnit:'kg',distanceUnit:'km',timezone:'Asia/Yangon',heightCm:170,weightKg:70,age:30,sex:'unspecified',activityLevel:'active',trainingLocation:'gym',sessionMinutes:20,weightGoal:'maintain',bodyPreferences:{focusAreas:['full'],waistGoal:'maintain',gluteGoal:'maintain',currentWaist:'unsure',currentGlutes:'unsure',protectedAreas:[]},screening:{heart:false,chestPain:false,dizziness:false,joint:false,medication:false,pregnancy:false,other:false},healthClearance:false});
+  const session=await post('/api/training/free',{name:'Gym countdown preview',location:'gym',exercises:[{exerciseId:'gym-leg-press',sets:2,reps:2,restSeconds:10,targetKg:0,timed:false}]});
+  await page.evaluate(()=>{localStorage.setItem('mingalar-locale','en');localStorage.setItem('mingalar-theme','light');localStorage.setItem('mingalar-music','pump');localStorage.setItem('mingalar-voice','off');});
+  await page.setViewportSize({width:390,height:900});await page.reload();await page.locator('button.hv-plan').click();await page.locator('.start-bar-go').click();
+  await page.locator('.phase-work').waitFor({timeout:20000});
+  const count=()=>page.locator('.minimal-count').evaluate(e=>Number(e.firstChild.textContent));
+  const initial=await count();await page.waitForTimeout(1150);const after=await count();if(after>=initial)throw new Error('Gym still counts up');
+  await page.getByRole('button',{name:'Pause',exact:true}).click();const frozen=await count();await page.waitForTimeout(1200);if(await count()!==frozen)throw new Error('Pause did not freeze countdown');
+  await page.getByRole('button',{name:'Resume',exact:true}).click();
+  await page.locator('.gym-target').click();const dialog=page.getByRole('dialog');
+  await dialog.locator('input').nth(0).fill('2');await dialog.locator('input').nth(1).fill('50');await dialog.locator('select').selectOption('2');await dialog.getByRole('button',{name:'Done',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelector('.minimal-count')?.firstChild?.textContent==='0',{},{timeout:12000});
+  await page.waitForTimeout(1200);const before=await page.request.get(origin+'/api/training/sessions/'+session.id).then(r=>r.json());
+  if(before.sets.length||!await page.locator('.phase-work').count())throw new Error('Estimated timer auto-logged a Gym set');
+  await page.screenshot({path:'D:/workout_fitness/evidence/gym-review/work-zero.png'});
+  await page.getByRole('button',{name:'Music',exact:true}).click();
+  const volumeDialog=page.getByRole('dialog');await volumeDialog.getByRole('slider').focus();await volumeDialog.getByRole('slider').press('Home');for(let i=0;i<4;i++)await volumeDialog.getByRole('slider').press('ArrowRight');
+  if(await page.evaluate(()=>Number(localStorage.getItem('mingalar-music-volume')))!==0.2)throw new Error('Music volume not persisted');
+  await volumeDialog.getByRole('button',{name:'No music',exact:true}).click();if(await page.evaluate(()=>Number(localStorage.getItem('mingalar-music-volume')))!==0)throw new Error('Music mute failed');
+  await volumeDialog.getByRole('button',{name:'OK',exact:true}).click();
+  await page.locator('.player-next').click();await page.locator('.phase-rest').waitFor();const restInitial=await count();await page.waitForTimeout(1100);const restAfter=await count();if(restAfter>=restInitial)throw new Error('Rest does not count down');
+  await page.locator('.phase-work').waitFor({timeout:15000});
+  if(!(await page.locator('.gym-target').innerText()).includes('50 kg'))throw new Error('Selected weight reset on next set');
+  await page.locator('.gym-target').click();if(await dialog.locator('select').inputValue()!=='')throw new Error('Previous RIR was silently copied');
+  await dialog.locator('input').nth(0).fill('1');await dialog.locator('input').nth(1).fill('45');await dialog.locator('select').selectOption('0');await dialog.getByRole('button',{name:'Done',exact:true}).click();
+  await page.locator('.player-next').click();await page.waitForFunction(()=>!document.querySelector('.minimal-player'),{},{timeout:15000});
+  const saved=await page.request.get(origin+'/api/training/sessions/'+session.id).then(r=>r.json());
+  const sets=[...saved.sets].sort((a,b)=>a.setIndex-b.setIndex);
+  if(saved.status!=='completed'||sets.length!==2||sets[0].weightKg!==50||sets[0].rir!==2||sets[1].weightKg!==45||sets[1].reps!==1||sets[1].rir!==0)throw new Error('Actual Gym data was not saved correctly');
+  return {result:errors.length?'FAIL':'PASS',gymCountdown:{initial,after},pause:true,zeroWaitsForConfirmation:true,restCountdown:{initial:restInitial,after:restAfter},loadCarriedAcrossSets:true,rirResetsPerSet:true,musicVolumeAndMute:true,sets:sets.map(s=>({reps:s.reps,weightKg:s.weightKg,rir:s.rir})),completionPct:saved.completionPct,errors};
+}

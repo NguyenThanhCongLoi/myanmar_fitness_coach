@@ -57,6 +57,8 @@ test('one atomic owner-scoped intake creates a real baseline and different Home/
   const plan=await getPlan(a,'home');expect(plan.days.length).toBe(3);
   expect(plan.days.flatMap(d=>d.items).every(i=>(HOME_VIDEO_IDS as readonly string[]).includes(i.id))).toBe(true);
   const home=await previewQuickWorkout(a,{focus:'all',minutes:15,location:'home'});
+  await expect(previewQuickWorkout(a,{focus:'all',minutes:15,location:'gym'})).rejects.toMatchObject({code:'NO_EXERCISE_MATCH'});
+  await saveIntake(a,{...input,trainingLocation:'gym',equipment:['machine','cable','dumbbell','barbell','bench']});
   const gym=await previewQuickWorkout(a,{focus:'all',minutes:15,location:'gym'});
   expect(home.seconds).toBeLessThanOrEqual(900);expect(gym.seconds).toBeLessThanOrEqual(900);
   expect(home.items.every(i=>(HOME_VIDEO_IDS as readonly string[]).includes(i.id))).toBe(true);
@@ -64,7 +66,7 @@ test('one atomic owner-scoped intake creates a real baseline and different Home/
   expect(equipment.length).toBeGreaterThan(0);expect(equipment.every(e=>availableAt({id:e.id,equipment:e.equipment as string[]},'gym'))).toBe(true);
   await expect(previewQuickWorkout(b,{focus:'all',minutes:15,location:'home'})).rejects.toMatchObject({code:'COMPLETE_PROFILE_FIRST'});
   await expect(saveIntake(a,{...input,userId:b})).rejects.toThrow();
-  await saveIntake(b,{...input,trainingLocation:'gym',age:66,experience:'advanced',activityLevel:'active',goal:'build_strength'});
+  await saveIntake(b,{...input,trainingLocation:'gym',equipment:['machine','cable','dumbbell','barbell','bench'],age:66,experience:'advanced',activityLevel:'active',goal:'build_strength'});
   const gymDefault=await getPlan(b,null);
   expect(gymDefault.location).toBe('gym');
   expect(gymDefault.step).toBe(0);

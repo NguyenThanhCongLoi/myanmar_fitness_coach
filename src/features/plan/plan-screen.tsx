@@ -8,6 +8,7 @@ import { useLanguage } from '@/shared/language';
 import { useTrainingLanguage } from '@/shared/training-language';
 import { trainingErrorText } from '../training/training-hub';
 import type { Exercise } from '@/shared/types';
+import { StartBar } from './workout-music';
 import { getLocation, startPlanDay, type Plan, type PlanDayView } from './plan-view';
 
 // Workout Plan: this week's days with their exercises; the next day is open and has the Start button.
@@ -43,8 +44,9 @@ export function PlanScreen() {
           <ul className="ps-list">{d.items.map(it => { const e = ex(it.id);
             return <li key={it.id}><span className="ex-thumb" style={e?.thumbnailUrl ? { backgroundImage: `url(${e.thumbnailUrl})` } : undefined}/>
               <span><strong>{name(it.id)}</strong><small>{sets(it.sets)} × {it.target}{it.unit === 'reps' ? ` ${u.reps}` : ` ${u.sec}`}</small></span>{d.done && <Check className="ps-done" size={18}/>}</li>; })}</ul>
-          {!d.done && <button type="button" className="button workout-start big-start" disabled={busy !== null} onClick={() => void start(d)}>{busy === d.day ? <><Loader2 className="spin" size={20}/>{u.starting}</> : <><Play size={20}/>{data.activeSession ? u.resume : u.start}</>}</button>}
+          {!d.done && !current && <button type="button" className="button workout-start big-start" disabled={busy !== null} onClick={() => void start(d)}>{busy === d.day ? <><Loader2 className="spin" size={20}/>{u.starting}</> : <><Play size={20}/>{data.activeSession ? u.resume : u.start}</>}</button>}
         </details>; })}
+      {(() => { const d = plan.days.find(x => x.day === plan.current && !x.done); return d ? <StartBar label={busy === d.day ? u.starting : data.activeSession ? u.resume : `${u.start} · ${u.day} ${d.day}`} busy={busy !== null} icon={busy === d.day ? <Loader2 className="spin" size={24}/> : undefined} onStart={() => void start(d)}/> : null; })()}
     </>}
   </section>;
 }

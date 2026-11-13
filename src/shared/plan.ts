@@ -1,6 +1,8 @@
+import {orderedSets} from './workout-sequence';
 // Day-by-day training programmes (Day 1, Day 2, ...): the next day is simply the first one not yet done,
 // so a missed calendar day is never "late". Built only from existing exercises; deterministic.
 import { doseFor, type Level } from './dose';
+import { estimatedSetSeconds, blockRest } from './workout-timing';
 import { availableAt as inPlace, placeOf, hasCollectionVideo } from './exercise-place';
 import { restFor, sessionBudget, type TrainingFactors } from './training-profile';
 export { placeOf, GYM_EQUIPMENT } from './exercise-place';
@@ -16,7 +18,7 @@ export type PlanDay = { day: number; week: number; split: DaySplit; items: PlanI
 export type BmiBand = 'under' | 'normal' | 'over' | 'obese';
 
 // Low-impact cardio moves that need no equipment (jumping ones are skipped for higher BMI / screening).
-export const CARDIO_IDS = ['curated-squat', 'dataset-1373', 'vid-sumo-squat', 'vid-reverse-lunge', 'vid-jumping-jacks', 'vid-high-knees', 'vid-butt-kicks', 'vid-shadow-boxing', 'vid-knee-to-elbow', 'vid-mountain-climbers', 'curated-march', 'curated-step-up', 'dataset-3470', 'dataset-1460', 'curated-seated-march', 'curated-heel-walk', 'core-164'];
+export const CARDIO_IDS = ['curated-squat', 'dataset-1373', 'vid-sumo-squat', 'vid-reverse-lunge', 'vid-jumping-jacks', 'vid-high-knees', 'vid-butt-kicks', 'vid-shadow-boxing', 'vid-knee-to-elbow', 'vid-mountain-climbers', 'curated-march', 'dataset-3470', 'dataset-1460', 'curated-seated-march', 'curated-heel-walk', 'core-164'];
 // Beginner machine circuit: one movement per major muscle group, machines guide the path.
 export const MACHINE_FULL = ['gym-leg-press', 'gym-machine-chest-press', 'gym-lat-pulldown', 'gym-seated-cable-row', 'gym-machine-shoulder-press', 'gym-lying-leg-curl', 'gym-leg-extension'];
 
@@ -38,7 +40,8 @@ export function programSplits(program: ProgramKey, daysPerWeek: number, location
 }
 // Cardio volume follows BMI: start gentler and lower-impact with a higher BMI, build up over weeks.
 export function cardioSettings(band: BmiBand | null) {
-  return band === 'obese' ? { minutes: 20, work: 40, rest: 20 } : band === 'over' ? { minutes: 25, work: 45, rest: 20 } : band === 'under' ? { minutes: 15, work: 40, rest: 20 } : { minutes: 25, work: 45, rest: 15 };
+  void band; // Body size does not establish fitness capability. Profile/feedback sets work and recovery.
+  return { minutes: 25, work: 40, rest: 20 };
 }
 const num = (v: string) => Number(String(v).split('–').pop()) || 10;
 function strengthItems(split: DaySplit, library: ProgramExercise[], location: 'home' | 'gym', level: Level, priorityMuscles: readonly string[] = []): PlanItem[] {
@@ -56,19 +59,13 @@ function strengthItems(split: DaySplit, library: ProgramExercise[], location: 'h
     const withVideo = pickSession(base, homeLib.filter(e => e.videoUrl), location, level, 6, priorityMuscles);
     const more = withVideo.length >= 5 ? [] : pickSession(base, homeLib, location, level, 6, priorityMuscles).filter(x => !withVideo.some(v => v.exercise.id === x.exercise.id));
     let chosen = [...withVideo, ...more].slice(0, 6);
-    // No-equipment homes have few upper-body moves: top up with full-body video moves so a session has 5-6 exercises.
-    if (chosen.length < 5) chosen = [...chosen, ...pickSession(base === 'upper' ? 'core' : 'full', homeLib.filter(e => e.videoUrl), location, level, 6, priorityMuscles).filter(x => !chosen.some(c => c.exercise.id === x.exercise.id))].slice(0, 6);
     return chosen.map(x => toItem(x.exercise, x.dose));
   }
   // Gym: use gym equipment (machines, cables, barbells, dumbbells on a bench); fill with others only if too few.
   const gymLib = library.filter(e => inPlace(e, 'gym'));
   const gymPick = pickSession(base, gymLib, location, level, 5, priorityMuscles);
   if (gymPick.length >= 3) return gymPick.map(x => toItem(x.exercise, x.dose));
-  let picked = pickSession(base, library, location, level, 6, priorityMuscles);
-  if (base === 'core' && !picked.length) return [];
-  // small libraries (owner videos only): top up with full-body moves so every day has 5-6 exercises
-  if (picked.length < 5) picked = [...picked, ...pickSession('full', library, location, level, 6, priorityMuscles).filter(x => !picked.some(p => p.exercise.id === x.exercise.id))].slice(0, 6);
-  return picked.map(x => toItem(x.exercise, x.dose));
+  return gymPick.map(x => toItem(x.exercise, x.dose));
 }
 function toItem(e: ProgramExercise, d: { sets: string; target: string; unit: string; restSeconds: string; perSide: boolean }): PlanItem {
   return { id: e.id, sets: Math.min(4, num(d.sets)), target: num(d.target), unit: d.unit === 'reps' ? 'reps' : 'seconds', rest: Math.max(15, num(d.restSeconds)), perSide: d.perSide };
@@ -103,31 +100,47 @@ export function fillToMinutes(items: PlanItem[], minutes: number, step: number):
   return out;
 }
 export function secondsFor(items: PlanItem[]) {
-  const blocks = items.flatMap(i => Array.from({ length: i.sets * (i.perSide && i.unit === 'seconds' ? 2 : 1) }, () => ({
-    work: i.unit === 'reps' ? i.target * 3 * (i.perSide ? 2 : 1) : i.target, rest: i.rest,
-  })));
-  const last = items.every(i=>i.unit==='seconds') ? items.filter(i=>i.sets===Math.max(...items.map(i=>i.sets))).at(-1) : items.at(-1);
-  return 10 + blocks.reduce((n, b) => n + b.work + b.rest, 0) - (last?.rest ?? 0);
+  if (!items.length) return 0;
+  const timed = items.every(i=>i.unit==='seconds');
+  const rows=items.map(i=>({...i,exerciseId:i.id,sets:i.sets*(i.perSide&&i.unit==='seconds'?2:1)}));
+  const blocks=orderedSets(rows,timed).map(({row,setIndex})=>({i:row,index:setIndex}));
+  return 10 + blocks.reduce((n,b,index)=>{
+    const next=blocks[index+1];
+    const rest=next?blockRest(b.i.rest,b.index,b.i.unit==='seconds',next.i.id!==b.i.id,timed&&Math.floor(next.index/(next.i.perSide?2:1))>Math.floor(b.index/(b.i.perSide?2:1))):0;
+    return n+(b.i.unit==='seconds'?b.i.target:estimatedSetSeconds(b.i.target,b.i.perSide))+rest;
+  },0);
 }
 export function minutesFor(items: PlanItem[]) { return Math.ceil(secondsFor(items) / 60); }
+export function trimToMinutes(items: PlanItem[], minutes: number) {
+  let out=items;
+  while (secondsFor(out)>minutes*60 && out.some(it=>it.sets>1)) out=out.map(it=>({...it,sets:Math.max(1,it.sets-1)}));
+  while (secondsFor(out)>minutes*60 && out.length>1) out=out.slice(0,-1);
+  return secondsFor(out)>minutes*60?[]:out;
+}
 /** Legacy media helper: never fall back to an unrelated catalogue when clips are missing. */
 export const isOwnerVideo = (e: { videoUrl?: string | null }) => !!e.videoUrl && (/\/media\/video\/vid-/.test(e.videoUrl) || /-owner\.mp4$/.test(e.videoUrl));
 export function ownerVideoLibrary<T extends { videoUrl?: string | null }>(library: T[]): T[] { const own = library.filter(isOwnerVideo); return own; }
 export function buildPlan(o: { program: ProgramKey; daysPerWeek: number; library: ProgramExercise[]; location: 'home' | 'gym'; level: Level; bmi: number | null; weeks?: number; lowImpact?: boolean; priorityMuscles?: readonly string[]; goal?: string; weightGoal?: string }): PlanDay[] {
   o = { ...o, library: o.library.filter(e => inPlace(e, o.location)) };
   const splits = o.program==='personal' && o.location==='home' && ['build_strength','build_muscle'].includes(o.goal??'') ? (o.daysPerWeek<=3?Array.from({length:o.daysPerWeek},()=> 'full' as DaySplit):(['upper','lower','cardio','upper','lower','core'] as DaySplit[]).slice(0,o.daysPerWeek)) : programSplits(o.program, o.daysPerWeek, o.location), band = bmiBand(o.bmi);
-  const lowImpact = !!o.lowImpact || band === 'obese';
+  const lowImpact = !!o.lowImpact;
   const lib = lowImpact ? o.library.filter(e => !(e.tags ?? []).includes('jumping')) : o.library;
   const perSplit = new Map<DaySplit, PlanItem[]>();
+  const labels=new Map<DaySplit,DaySplit>();
   for (const s of new Set(splits)) {
     let items = s === 'cardio' ? cardioItems(lib, o.location, band, lowImpact, o.level) : strengthItems(s, lib, o.location, o.level, o.priorityMuscles);
+    let actual=s;
+    if(s!=='full'&&s!=='cardio'&&items.length<2){items=strengthItems('full',lib,o.location,o.level,o.priorityMuscles);actual='full';}
+    labels.set(s,actual);
     if (o.location === 'home' && s !== 'cardio') items = items.map(i => ({ ...i, unit: 'seconds' as const, target: i.unit === 'seconds' ? i.target : HOME_WORK[o.level], sets: Math.min(3, i.sets), rest: 20 }));
     perSplit.set(s, items);
   }
   const weeks = o.weeks ?? 4, days: PlanDay[] = [];
-  for (let w = 0; w < weeks; w++) splits.forEach(split => {
-    const items = perSplit.get(split) ?? [];
-    if (items.length) days.push({ day: days.length + 1, week: w + 1, split, items, minutes: minutesFor(items) });
+  for (let w = 0; w < weeks; w++) splits.forEach((split,index) => {
+    const pool = perSplit.get(split) ?? [];
+    const offset = pool.length ? index % pool.length : 0;
+    const items = [...pool.slice(offset),...pool.slice(0,offset)];
+    if (items.length) days.push({ day: days.length + 1, week: w + 1, split:labels.get(split)??split, items, minutes: minutesFor(items) });
   });
   return days;
 }
@@ -165,7 +178,10 @@ export function nextStep(step: number, results: { pct: number | null; difficulty
 }
 
 // One week of days at a given step; sessionMinutes caps exercises/sets so the session fits the time the user chose.
-export function buildWeek(o: { program: ProgramKey; daysPerWeek: number; library: ProgramExercise[]; location: 'home' | 'gym'; step: number; bmi: number | null; week: number; sessionMinutes: number; lowImpact?: boolean; priorityMuscles?: readonly string[]; factors?: TrainingFactors; splitOverride?: DaySplit }): PlanDay[] {
+export function buildWeek(o: { program: ProgramKey; daysPerWeek: number; library: ProgramExercise[]; location: 'home' | 'gym'; step: number; bmi: number | null; week: number; sessionMinutes: number; lowImpact?: boolean; priorityMuscles?: readonly string[]; factors?: TrainingFactors; splitOverride?: DaySplit; recentExerciseIds?: string[] }): PlanDay[] {
+  const recent=new Map<string,number>();for(const id of o.recentExerciseIds??[])recent.set(id,(recent.get(id)??0)+1);
+  const rank=(id:string)=>[...id].reduce((n,c)=>(n*31+c.charCodeAt(0))%997,o.week*17)%97;
+  o={...o,library:o.library.map(e=>({...e,selectionRank:(recent.get(e.id)??0)*100+rank(e.id)}))};
   const deload = o.week % 4 === 0 && o.step > 0; // every 4th week is a lighter recovery week
   const s = STEPS[Math.max(0, Math.min(MAX_STEP, o.step - (deload ? 1 : 0)))];
   const base = buildPlan({ program: o.program, daysPerWeek: o.daysPerWeek, library: o.library, location: o.location, level: s.maxLevel, bmi: o.bmi, weeks: 1, lowImpact: o.lowImpact, priorityMuscles: o.priorityMuscles, goal:o.factors?.goal,weightGoal:o.factors?.weightGoal });
@@ -176,16 +192,17 @@ export function buildWeek(o: { program: ProgramKey; daysPerWeek: number; library
     const cardioScale = 0.5 + 0.1 * Math.min(5, Math.max(0, o.step - (deload ? 1 : 0)));
     // how many moves: the chosen length decides (45 min -> 6 moves, 25 min -> 5); the step only sets intensity
     const moves = Math.max(s.exercises, o.sessionMinutes >= 40 ? 6 : o.sessionMinutes >= 25 ? 5 : s.exercises);
+    const rotation = d.items.length ? (o.week-1) % d.items.length : 0;
+    d = {...d,items:[...d.items.slice(rotation),...d.items.slice(0,rotation)]};
     let items = d.split === 'cardio' ? d.items.slice(0, Math.max(2, moves)).map(it => ({ ...it, sets: Math.max(1, Math.round(it.sets * cardioScale)), target: Math.min(it.target, s.work + 10) })) : d.items.slice(0, moves).map(it => o.location === 'home' || it.unit === 'seconds'
       ? { ...it, unit: 'seconds' as const, sets: s.sets, target: s.work, rest: s.rest }
       : { ...it, sets: s.sets, rest: Math.max(45, it.rest) });
     const byId = new Map(o.library.map(e => [e.id, e]));
     items = items.map(it => ({ ...it, perSide: o.location === 'home' ? it.id === 'curated-bird-dog' : it.perSide,
       target: it.unit === 'reps' ? (factors.goal === 'build_strength' ? 8 : 10) : it.target,
-      rest: restFor(byId.get(it.id) ?? { equipment: [] }, o.location, factors, o.step) }));
+      rest: restFor({...byId.get(it.id),equipment:byId.get(it.id)?.equipment??[],targetReps:it.unit==='reps'?it.target:undefined}, o.location, factors, o.step) }));
     items = fillToMinutes(items, budget, o.step);
-    while (secondsFor(items) > budget * 60 && items.some(it => it.sets > 1)) items = items.map(it => ({ ...it, sets: Math.max(1, it.sets - 1) }));
-    while (secondsFor(items) > budget * 60 && items.length > 1) items = items.slice(0, -1);
+    items = trimToMinutes(items, budget);
     return { ...d, day: (o.week - 1) * base.length + i + 1, week: o.week, items, minutes: minutesFor(items) };
   });
 }

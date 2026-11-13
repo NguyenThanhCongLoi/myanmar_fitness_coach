@@ -172,7 +172,7 @@ const en = {
     back: 'Back', gymGuide: 'GYM GUIDE', gymTitle: 'New to the gym', gymIntro: 'Simple machines, clear steps and real videos so your first weeks feel easy.', firstVisit: 'Your first visit',
     gymTips: ['Start light. Learn the movement before adding weight.', 'Adjust the seat so the handles or pads line up with your joints.', 'Move slowly: 2 seconds up, 2 seconds down.', 'Breathe out on the hard part. Never hold your breath.', 'Wipe the machine after use and put weights back.'],
     startGymProgram: 'Start the New-to-gym programme', machines: 'Machines and cables', machinesHint: 'Tap one to see the video, steps and settings.',
-    discover: 'Discover', discoverTitle: 'Find a workout', newToGym: 'NEW TO THE GYM?', gymBannerHint: 'How to use each machine, with videos', quick: 'Quick workouts', quickHint: 'Guided, no equipment',
+    discover: 'Discover', discoverTitle: 'Find a workout', newToGym: 'NEW TO THE GYM?', gymBannerHint: 'How to use each machine, with videos', quick: 'Quick workouts', quickHint: 'Guided workout',
     withVideo: 'Exercises with video', library: 'Exercise library', libraryHint: 'All exercises by muscle group', myWorkout: 'My workout', buildOwn: 'Build your own workout', buildOwnHint: 'Choose exercises, sets and rest', savedPlansHint: 'Plans you created or approved',
     setupTitle: 'Set up the machine and your position',
     meSince: '{n} workouts completed', workouts: 'Workouts', weightKg: 'Weight (kg)', progress: 'Progress', progressHint: 'Charts, records, weekly review, photos', coach: 'AI coach', coachHint: 'Ask about training, food and recovery',

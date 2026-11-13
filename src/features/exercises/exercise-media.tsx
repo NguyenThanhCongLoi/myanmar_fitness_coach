@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import {playbackSource,prefersLightVideo} from '@/shared/video-source';
 import { VideoOff } from 'lucide-react';
 import type { Exercise } from '@/shared/types';
 import { useTrainingLanguage } from '@/shared/training-language';
@@ -11,6 +12,7 @@ export function hasApprovedVideo(exercise: Pick<Exercise, 'videoUrl' | 'mediaLic
 }
 export function ExerciseMedia({ exercise, autoPlay = false, compact = false }: { exercise: Exercise; autoPlay?: boolean; compact?: boolean }) {
   const tt = useTrainingLanguage();
+  const [lightVideo]=useState(prefersLightVideo);
   const [failed, setFailed] = useState(false); const video = useRef<HTMLVideoElement>(null);
   // React does not reflect `muted` as an attribute on first render, which blocks autoplay; set it explicitly.
   // Low-data mode: no autoplay or preloading; the user taps play.
@@ -19,7 +21,7 @@ export function ExerciseMedia({ exercise, autoPlay = false, compact = false }: {
   useEffect(() => { const v = video.current; if (!v) return; v.muted = true; if (autoPlay && !lowData) void v.play().catch(() => {}); else v.pause(); }, [autoPlay, exercise.videoUrl, lowData]);
   if (hasApprovedVideo(exercise) && !failed) {
     return <div className={`exercise-media ${compact ? 'compact' : ''}`}>
-      <video ref={video} src={exercise.videoUrl!} poster={exercise.thumbnailUrl ?? undefined} muted loop playsInline autoPlay={autoPlay} controls={!compact} preload={lowData ? 'none' : autoPlay ? 'auto' : 'metadata'} onError={() => setFailed(true)}/>
+      <video ref={video} src={playbackSource(exercise.videoUrl,lightVideo)!} poster={exercise.thumbnailUrl ?? undefined} muted loop playsInline autoPlay={autoPlay} controls={!compact} preload={lowData ? 'none' : autoPlay ? 'auto' : 'metadata'} onError={() => setFailed(true)}/>
       {!compact && exercise.mediaStatus === 'demo_unreviewed' && <span className="demo-badge">{tt.demoUnreviewed}</span>}
     </div>;
   }

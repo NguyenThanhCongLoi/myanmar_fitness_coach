@@ -1,6 +1,7 @@
 // Provisional Myanmar copy; fluent-speaker review is still required.
 import type en from './intake-en';
 const my: typeof en = {
+  estimatedSet: 'ခန့်မှန်းအချိန်', finishSet: 'ပြီးလျှင် အတည်ပြုပါ',
   sessionExpired: 'အစီအစဉ်သိမ်းရန် ပြန်ဝင်ပါ။',
   retryConnection: 'ပြန်ချိတ်ဆက်ပြီး ထပ်သိမ်းပါ။',
   checkAnswers: 'အဖြေများကို ပြန်စစ်ပြီး ထပ်စမ်းပါ။',

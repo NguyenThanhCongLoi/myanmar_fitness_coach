@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "tests": 84,
+  "testFiles": 23,
+  "locales": "PASS",
+  "typescript": "PASS",
+  "productionBuild": "PASS",
+  "deployed": false,
+  "customerDatabaseAccessed": false
+}

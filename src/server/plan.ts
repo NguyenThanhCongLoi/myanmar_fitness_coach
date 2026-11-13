@@ -1,6 +1,8 @@
+import { eligibleExercises } from '@/shared/workout-policy';
 import { z } from 'zod';
 import { availableAt, hasCollectionVideo } from '@/shared/exercise-place';
-import { startingStep } from '@/shared/training-profile';
+import { startingStep, sessionBudget } from '@/shared/training-profile';
+import { minutesFor, trimToMinutes } from '@/shared/plan';
 import { prisma } from '@/shared/lib/prisma';
 import { ApiError } from './validation';
 import { civilDay } from './streak';
@@ -38,7 +40,7 @@ export async function getPlan(userId: string, rawLocation: unknown) {
   const level: Level = screened ? 'beginner' : profile.experience as Level;
   let week = profile.planWeek;
   const age = profile.birthYear ? new Date().getUTCFullYear() - profile.birthYear : null;
-  const factors = { goal: profile.goal, weightGoal: profile.weightGoal, age, activityLevel: profile.activityLevel, screened };
+  const factors = { goal: profile.goal, weightGoal: profile.weightGoal, age, activityLevel: profile.activityLevel, screened, fatigue:false };
   const initialStep = profile.planStep < 0 ? startingStep(level, factors) : profile.planStep;
   const adaptive = await adaptiveWeek(userId, { program, week, step: initialStep, planned: programSplits(program, profile.daysPerWeek, location).length, screened });
   const n = adaptive.base.planned, step = adaptive.decision.step;
@@ -56,13 +58,15 @@ export async function getPlan(userId: string, rawLocation: unknown) {
   const limits = (profile.limitations ?? '').toLowerCase();
   const check = await prisma.readinessCheck.findUnique({ where: { userId_day: { userId, day: civilDay(new Date(), profile.timezone) } } });
   const readiness = check ? readinessScore(check) : null, tired = readiness !== null && readiness <= 2.4;
+  factors.fatigue=tired;
   const bodyPreferences = readBodyPreferences(profile.bodyPreferences);
   const owned = strings(profile.equipment);
   // The home programme must never require equipment the account did not select.
   const protectedTags: Record<string, string[]> = { knees: ['knee-loaded', 'jumping'], back: ['back-loaded'], shoulders: ['overhead'], wrists: ['wrist-loaded'] };
   const avoided = new Set(bodyPreferences.protectedAreas.flatMap(a => protectedTags[a] ?? []));
-  const eligible = lib.filter(e => availableAt(e, location) && hasCollectionVideo(e) && (location === 'gym' || e.equipment.every(q => q === 'body weight' || owned.includes(q))) && !e.tags.some(t => avoided.has(t)));
-  const days = buildWeek({ program, daysPerWeek: n, library: eligible, location, step: adaptive.todayChoice?.lighter ? Math.max(0, step - 1) : step, bmi, week, sessionMinutes: adaptive.todayChoice?.minutes ?? profile.sessionMinutes, lowImpact: screened || (age ?? 0) >= 65 || /knee|ဒူး/.test(limits), priorityMuscles: focusMuscles(bodyPreferences), factors });
+  const eligible = eligibleExercises(lib,profile,location);
+  const recentSets=await prisma.workoutSet.findMany({where:{session:{userId,status:'completed',endedAt:{gte:new Date(Date.now()-7*86400000)}},completed:true},select:{exerciseId:true},orderBy:{loggedAt:'desc'},take:400});
+  const days = buildWeek({ program, daysPerWeek: n, library: eligible, location, step: adaptive.todayChoice?.lighter ? Math.max(0, step - 1) : step, bmi, week, sessionMinutes: adaptive.todayChoice?.minutes ?? profile.sessionMinutes, lowImpact: screened || (age ?? 0) >= 65 || /knee|ဒူး/.test(limits), priorityMuscles: focusMuscles(bodyPreferences), factors, recentExerciseIds:recentSets.map(s=>s.exerciseId) });
   const byId = new Map(eligible.map(e => [e.id, e]));
   // user swaps ("replace X with Y") per programme + place; skipped when the target is missing, wrong place or already in that day
   const swaps = await readSwaps(userId, program, location);
@@ -79,6 +83,12 @@ export async function getPlan(userId: string, rawLocation: unknown) {
         item.loadNote = blocked && suggestion.note === 'ADD_LOAD' ? 'HOLD' : suggestion.note;
       }
     }
+  }
+  // Progression can change reps after generation; keep the time label and selected ceiling truthful.
+  if (location === 'gym') for (const day of days) {
+    const budget=sessionBudget(adaptive.todayChoice?.minutes??profile.sessionMinutes, adaptive.todayChoice?.lighter?Math.max(0,step-1):step, factors);
+    day.items=trimToMinutes(day.items,budget);
+    day.minutes=minutesFor(day.items);
   }
   const current = days.find(d => !byDay.has(d.day))?.day ?? null;
   const balance = { plan: muscleBalance(days.flatMap(d => d.items.map(i => ({ id: i.id, sets: i.sets }))), lib).issues, done: (await doneBalance(userId)).issues };

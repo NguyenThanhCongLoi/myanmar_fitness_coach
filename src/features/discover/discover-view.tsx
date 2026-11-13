@@ -43,9 +43,9 @@ export function DiscoverView() {
     <button type="button" className="feature-banner" onClick={() => setGym(true)}>
       <span><small>{u.newToGym}</small><strong>{u.gymTitle}</strong><em>{u.gymBannerHint}</em></span><ChevronRight size={22}/></button>
     <h2 className="section-title">{u.quick}</h2>
-    <div className="quick-row">{[7, 15, 20].map(m => <button key={m} type="button" className="quick-card" onClick={() => openTrain({ mode: 'follow', focus: 'all', minutes: m })}><Timer size={22}/><strong>{m} {u.min}</strong><small>{u.quickHint}</small></button>)}</div>
+    <div className="quick-row">{[15, 20, 30].map(m => <button key={m} type="button" className="quick-card" onClick={() => openTrain({ mode: 'follow', focus: 'all', minutes: m })}><Timer size={22}/><strong>{m} {u.min}</strong><small>{u.quickHint}</small></button>)}</div>
     <h2 className="section-title">{u.withVideo}</h2>
-    <div className="seg-switch">{(['home', 'gym'] as const).map(p => <button key={p} type="button" className={place === p ? 'selected' : ''} aria-pressed={place === p} onClick={() => { setPlace(p); setGroup('all'); }}>{p === 'home' ? u.placeHome : u.placeGym} · {library.filter(e => availableAt(e,p) && hasCollectionVideo(e)).length}</button>)}</div>
+    <div className="seg-switch">{(['home', 'gym'] as const).map(p => <button key={p} type="button" className={place === p ? 'selected' : ''} aria-pressed={place === p} onClick={() => { setPlace(p); try{localStorage.setItem('mingalar-location',p);}catch{/* optional */} setGroup('all'); }}>{p === 'home' ? u.placeHome : u.placeGym} · {library.filter(e => availableAt(e,p) && hasCollectionVideo(e)).length}</button>)}</div>
     <p className="muted small">{place === 'home' ? u.placeHomeHint : u.placeGymHint}</p>
     <div className="chip-row" role="group">{(['all', ...groups] as const).map(g => <button key={g} type="button" className={`chip-filter ${group === g ? 'on' : ''}`} aria-pressed={group === g} onClick={() => setGroup(g)}>{g === 'all' ? u.groupAll : u.groupNames[g]}</button>)}</div>
     <div className="media-grid">{videos.map(card)}</div>

@@ -1,0 +1,103 @@
+{
+  "result": "PASS",
+  "network": {
+    "latencyMs": 180,
+    "downloadBytesPerSecond": 50000,
+    "cacheDisabled": true
+  },
+  "firstPlayableMs": 2341,
+  "totalElapsedMs": 42094,
+  "nextPreview": "/media/video/mobile/vid-sumo-squat.mp4",
+  "requestedVideos": [
+    "/media/video/mobile/vid-shadow-boxing.mp4",
+    "/media/video/mobile/vid-sumo-squat.mp4"
+  ],
+  "events": [
+    {
+      "type": "waiting",
+      "at": 5615.800000000745,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-shadow-boxing.mp4",
+      "readyState": 0
+    },
+    {
+      "type": "loadeddata",
+      "at": 7208.89999999851,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-shadow-boxing.mp4",
+      "readyState": 3
+    },
+    {
+      "type": "playing",
+      "at": 7209.300000000745,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-shadow-boxing.mp4",
+      "readyState": 3
+    },
+    {
+      "type": "waiting",
+      "at": 16219,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-shadow-boxing.mp4",
+      "readyState": 1
+    },
+    {
+      "type": "playing",
+      "at": 16224.800000000745,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-shadow-boxing.mp4",
+      "readyState": 4
+    },
+    {
+      "type": "waiting",
+      "at": 19725.800000000745,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-sumo-squat.mp4",
+      "readyState": 0
+    },
+    {
+      "type": "loadeddata",
+      "at": 20697.300000000745,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-sumo-squat.mp4",
+      "readyState": 4
+    },
+    {
+      "type": "playing",
+      "at": 20697.599999997765,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-sumo-squat.mp4",
+      "readyState": 4
+    },
+    {
+      "type": "waiting",
+      "at": 26699.699999999255,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-sumo-squat.mp4",
+      "readyState": 1
+    },
+    {
+      "type": "playing",
+      "at": 26704.89999999851,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-sumo-squat.mp4",
+      "readyState": 4
+    },
+    {
+      "type": "waiting",
+      "at": 32705.89999999851,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-sumo-squat.mp4",
+      "readyState": 1
+    },
+    {
+      "type": "playing",
+      "at": 32712.300000000745,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-sumo-squat.mp4",
+      "readyState": 4
+    },
+    {
+      "type": "waiting",
+      "at": 38711.89999999851,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-sumo-squat.mp4",
+      "readyState": 1
+    },
+    {
+      "type": "playing",
+      "at": 38713.39999999851,
+      "src": "https://ta-01m79y3nnhckc5rjb4rw8gpzbs-3000-jpmzps56p9i54pmvz1ng4zsnu.w.modal.host/media/video/mobile/vid-sumo-squat.mp4",
+      "readyState": 4
+    }
+  ],
+  "overflow320": false,
+  "completionPct": 100
+}

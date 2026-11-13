@@ -5,7 +5,7 @@ import { doseFor, type Level } from './dose';
 import { availableAt } from './exercise-place';
 export { availableAt } from './exercise-place';
 
-export type ProgramExercise = { id: string; videoUrl?: string | null; primaryMuscles?: string[]; secondaryMuscles?: string[]; equipment: string[]; difficulty: string; tags?: string[]; tracking?: string; guidance?: { home?: unknown[]; perSide?: boolean } };
+export type ProgramExercise = { selectionRank?: number; id: string; videoUrl?: string | null; primaryMuscles?: string[]; secondaryMuscles?: string[]; equipment: string[]; difficulty: string; tags?: string[]; tracking?: string; guidance?: { home?: unknown[]; perSide?: boolean } };
 export const MUSCLE_GROUPS = {
   chest: ['chest'],
   back: ['upper-back', 'lower-back', 'trapezius'],
@@ -35,11 +35,11 @@ export function pickSession(split: Split, library: ProgramExercise[], location: 
   const targets = SPLIT_MUSCLES[split];
   const pool = exercisesFor(targets, library, location).filter(e => (rank[e.difficulty] ?? 1) <= rank[level])
     .sort((a, b) => (b.primaryMuscles?.length ?? 0) + (b.secondaryMuscles?.length ?? 0) * 0.5 - ((a.primaryMuscles?.length ?? 0) + (a.secondaryMuscles?.length ?? 0) * 0.5)
-      || Number(location === 'gym') * (Number(b.equipment.some(q => q !== 'body weight')) - Number(a.equipment.some(q => q !== 'body weight'))) || a.id.localeCompare(b.id));
+      || Number(location === 'gym') * (Number(b.equipment.some(q => q !== 'body weight')) - Number(a.equipment.some(q => q !== 'body weight'))) || (a.selectionRank??0)-(b.selectionRank??0) || a.id.localeCompare(b.id));
   const chosen: ProgramExercise[] = [], covered = new Set<string>();
   while (chosen.length < max) {
     const next = pool.filter(e => !chosen.includes(e)).sort((a, b) => (b.primaryMuscles ?? []).filter(m => targets.includes(m) && !covered.has(m)).length - (a.primaryMuscles ?? []).filter(m => targets.includes(m) && !covered.has(m)).length
-      || (b.primaryMuscles ?? []).filter(m => priorityMuscles.includes(m)).length - (a.primaryMuscles ?? []).filter(m => priorityMuscles.includes(m)).length)[0];
+      || (b.primaryMuscles ?? []).filter(m => priorityMuscles.includes(m)).length - (a.primaryMuscles ?? []).filter(m => priorityMuscles.includes(m)).length || (a.selectionRank??0)-(b.selectionRank??0))[0];
     if (!next) break;
     chosen.push(next); (next.primaryMuscles ?? []).forEach(m => covered.add(m));
   }
@@ -75,7 +75,7 @@ export const PATTERN: Record<string, string> = {
   'barbell-reverse-lunge': 'lunge', 'cable-face-pull': 'rear-delt', 'bench-hop': 'plyo', 'standing-calf-raise': 'calf', 'dead-bug': 'core-anti-ext',
   'dumbbell-bench-press': 'push-h', 'dumbbell-bent-over-row': 'pull-h', 'dumbbell-biceps-curl': 'biceps', 'forward-lunge': 'lunge', 'glute-bridge': 'hinge',
   'push-up': 'push-h', 'walking-lunge': 'lunge', 'bodyweight-squat': 'squat', 'barbell-back-squat': 'squat', 'forearm-plank': 'core-anti-ext',
-  'side-plank': 'core-anti-lat', 'bird-dog': 'core-anti-rot', 'wall-push-up': 'push-h', 'knee-push-up': 'push-h', 'dumbbell-shoulder-press': 'push-v',
+  'high-plank':'core-anti-ext', 'side-plank': 'core-anti-lat', 'bird-dog': 'core-anti-rot', 'wall-push-up': 'push-h', 'knee-push-up': 'push-h', 'dumbbell-shoulder-press': 'push-v',
   'dumbbell-lateral-raise': 'shoulder-iso', 'band-row': 'pull-h', 'bodyweight-hip-hinge': 'hinge', 'low-step-up': 'lunge', 'seated-knee-lift': 'core-flex',
   'wall-sit': 'squat', 'heel-raise-balance': 'calf', 'lat-pulldown': 'pull-v', 'seated-cable-row': 'pull-h', 'triceps-pushdown': 'triceps',
   'pec-deck': 'chest-iso', 'machine-chest-press': 'push-h', 'leg-press': 'squat', 'leg-extension': 'quad-iso', 'seated-leg-curl': 'ham-iso',

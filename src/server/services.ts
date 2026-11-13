@@ -108,7 +108,11 @@ export async function finishSession(userId: string, id: string, note: string) {
     const planned=rx.reduce((n,p)=>n+p.sets,0);
     const actual=rx.reduce((n,p)=>n+done.filter(x=>x.exerciseId===p.exerciseId&&x.setIndex<p.sets).reduce((m,x)=>m+Math.min(1,(p.timed?x.seconds:x.reps)/Math.max(1,p.reps)),0),0);
     const completionPct=planned?Math.min(100,Math.round(actual/planned*100)):null;
-    const completed=await tx.workoutSession.update({ where: { id }, data: { status: 'completed', endedAt: now, note: note.normalize('NFC'), completionPct } });
+    const checkpoint=await tx.aiMemory.findUnique({where:{userId_key:{userId,key:`playback:${id}`}}});
+    let observed:number|null=null;try{observed=checkpoint?JSON.parse(checkpoint.content).activeSeconds:null;}catch{/* legacy session */}
+    const elapsed=Math.max(0,now.getTime()-session.startedAt.getTime());
+    const pausedMs=typeof observed==='number'&&Number.isFinite(observed)?Math.max(0,elapsed-Math.min(elapsed,observed*1000)):session.totalPausedMs+(session.pausedAt?Math.max(0,now.getTime()-session.pausedAt.getTime()):0);
+    const completed=await tx.workoutSession.update({ where: { id }, data: { status: 'completed', endedAt: now, pausedAt:null,totalPausedMs:pausedMs, note: note.normalize('NFC'), completionPct } });
     const reward=await grantWorkoutCredit(tx,userId,id,now);
     return {...completed,reward};
   });

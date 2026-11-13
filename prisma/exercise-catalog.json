@@ -464,8 +464,8 @@
   },
   {
     "id": "curated-plank",
-    "canonicalId": "forearm-plank",
-    "name": "Forearm plank",
+    "canonicalId": "high-plank",
+    "name": "High plank",
     "primaryMuscles": [
       "abs"
     ],
@@ -478,10 +478,11 @@
     ],
     "difficulty": "beginner",
     "tags": [
-      "floor"
+      "floor",
+      "wrist-loaded"
     ],
     "tracking": "timed",
-    "instructions": "Rest on your forearms and toes. Keep a comfortable straight line from shoulders to hips and breathe normally.",
+    "instructions": "Place your hands under your shoulders and rest on your toes. Keep a comfortable straight line from shoulders to heels and breathe normally.",
     "commonMistakes": [
       "Rushing the movement or holding your breath.",
       "Using a range or load that causes pain."

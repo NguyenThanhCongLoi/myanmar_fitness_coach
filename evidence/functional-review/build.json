@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "tests": 91,
+  "testFiles": 26,
+  "locales": "PASS",
+  "productionBuild": "PASS",
+  "typeScript": "PASS",
+  "testDatabase": "disposable database separate from browser preview",
+  "paidProviderCalls": false
+}

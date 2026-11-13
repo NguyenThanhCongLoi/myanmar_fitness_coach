@@ -1,5 +1,11 @@
 # Release verification — 2026-11-12
 
+## Gym mechanics — local only, 2026-11-13
+
+PASS:84 tests/23 files, locales/build/TypeScript. Existing remote helper with `FITNESS_BUILD_STATE=gym-review-build-sandbox.json`, profile `lointc`, builder `2025.06`, `PYTHONUTF8=1`; standard migrate/seed/test/locales/build commands. Source upload was scoped to code/config/tests/Prisma and the leg-press fixture video/poster; this is not full media-catalog QA.
+
+Existing Playwright CLI: `-s=gymreview open '<disposable-preview-url>' --browser=msedge`, then `-s=gymreview --raw run-code --filename myanmar-fitness-coach/scripts/qa/gym-mechanics-review.js`. PASS: work countdown/pause/hold-at-zero, manual confirmation, rest countdown, load carryover and actual RIR/reps/load persistence with75% completion. No deployment performed. See `docs/GYM_MECHANICS_REVIEW.md`, `evidence/gym-review/`.
+
 ## Intake save / live language switching — 2026-11-13
 
 PASS: 82 tests/22 files, locale contracts and production build/TypeScript in the isolated released-source snapshot (unrelated working player/audio changes excluded). Workspace helper accepts `FITNESS_SOURCE_DIR`; this run used `evidence/intake-save-source`, `FITNESS_BUILD_STATE=intake-save-build-sandbox.json`, `MODAL_PROFILE=lointc`, `MODAL_IMAGE_BUILDER_VERSION=2025.06`, `PYTHONUTF8=1`. Standard remote commands: `npm ci --no-audit --no-fund && npx prisma generate && npm run db:migrate && npm run db:seed && npm test && npm run check:locales && npm run build`, then helper `serve`.
@@ -83,3 +89,18 @@ PASS: complete 21-step signup/intake, review edit and reload; adjust today's min
 Live deployment smoke uses workspace `scripts/product-http-smoke.py <url>`: synthetic signup, Unicode, plan/set persistence, owner isolation, idempotency, unauthorized access and no paid LLM request. `scripts/product-volume-check.py` checks committed SQLite integrity and the synthetic records from a separate read-only container. It never creates another writer. See release notes for actual live outcomes.
 
 NOT TESTED: physical iOS/Android devices, native fullscreen support on each OS, fluent Myanmar translation/voice approval, paid LLM/TTS responses, clinical effectiveness. Device speech availability depends on installed voices. A browser clip decode is not a trainer technique approval.
+
+
+## Functional workout release (2026-11-13)
+
+Use the existing product-remote.py helper with FITNESS_BUILD_STATE=functional-build-sandbox.json and FITNESS_SOURCE_DIR pointing to the frozen release. Keep test and browser databases separate. Verified remote command:
+
+```sh
+export DATABASE_URL=file:/tmp/functional-clock-verification.db && npm run db:migrate && npm run db:seed && npm test && npm run check:locales && npm run build
+```
+
+PASS91 tests/26 files, locales, TypeScript and production build. Generate mobile variants on remote CPU only with `python scripts/prepare-mobile-video.py`; FFmpeg is needed for regeneration, not runtime. `python scripts/audit-workout-media.py` checks registered source assets/provenance/codecs.
+
+Using the installed Playwright CLI and a disposable *.w.modal.host preview, run --raw run-code --filename for scripts/qa/{functional-onboarding,functional-gym-intake,functional-player,functional-entries,gym-mechanics-review,functional-slow-media}.js. These scripts guard against production test accounts. Slow-media uses actual CDP throttling and always restores network conditions. See evidence/functional-review/*.json and FUNCTIONAL_RELEASE.md for results/limits. Existing analytics tests aggregate the test DB, so do not run them against the browser-preview DB.
+
+After stop-before-deploy on existing Modal profile lointc / main, run scripts/verify-functional-volume.py with FITNESS_SOURCE_DIR set to the exact deployed snapshot. It mounts the Volume read-only and checks source-matching seed, backup integrity and user/session/set/profile/measurement ID preservation without printing personal IDs.

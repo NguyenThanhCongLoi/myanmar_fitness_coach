@@ -11,11 +11,11 @@ import { FocusChoices } from './body-goal-fields';
 import { BodyVisual } from './body-visual';
 import { NumberPicker } from './number-picker';
 
-const BASE_STEPS = ['age', 'height', 'weight', 'sex', 'goal', 'level', 'activity', 'place', 'days', 'minutes', 'health', 'focus', 'waistNow', 'waistGoal', 'glutesNow', 'glutesGoal', 'clearance', 'review'] as const;
+const BASE_STEPS = ['age', 'height', 'weight', 'sex', 'goal', 'level', 'activity', 'place', 'equipment', 'preferences', 'days', 'minutes', 'health', 'focus', 'waistNow', 'waistGoal', 'glutesNow', 'glutesGoal', 'clearance', 'review'] as const;
 type Goal = 'lose' | 'muscle' | 'strength' | 'fit';
 const EMPTY_HEALTH = { heart: false, chestPain: false, dizziness: false, joint: false, medication: false, pregnancy: false, other: false };
 export function QuickOnboarding() {
-  const { data, refresh, go } = useApp(); const { locale } = useLanguage(); const tt = useTrainingLanguage(); const q = tt.quiz, u = useIntakeLanguage();
+  const { data, refresh, go } = useApp(); const { locale, t } = useLanguage(); const tt = useTrainingLanguage(); const q = tt.quiz, u = useIntakeLanguage();
   const p = data.profile;
   const [i, setI] = useState(0), [busy, setBusy] = useState(false), [error, setError] = useState('');
   const [age, setAge] = useState(p?.birthYear ? String(new Date().getUTCFullYear() - p.birthYear) : '');
@@ -26,19 +26,21 @@ export function QuickOnboarding() {
   const [level, setLevel] = useState<'beginner'|'intermediate'|'advanced'|null>(p?.experience ?? null);
   const [activity, setActivity] = useState<'sedentary'|'light'|'active'|null>(p?.activityLevel as 'sedentary'|'light'|'active' ?? null);
   const [place, setPlace] = useState<'home'|'gym'|null>(p?.intakeVersion === 1 ? p.trainingLocation ?? null : null);
+  const [equipment,setEquipment]=useState<string[]>(p?.equipment?.filter(e=>e!=='body weight')??[]);
+  const [preferences,setPreferences]=useState<string[]>(p?.limitations?.split(', ').filter(Boolean)??[]);
   const [days, setDays] = useState<number|null>(p?.intakeVersion === 1 ? p.daysPerWeek : null);
   const [minutes, setMinutes] = useState<number|null>(p?.intakeVersion === 1 ? p.sessionMinutes ?? null : null);
   const [screening, setScreening] = useState({ ...EMPTY_HEALTH, ...p?.screening });
   const [healthAnswered, setHealthAnswered] = useState(false), [clearance, setClearance] = useState(false);
   const [bodyPreferences, setBodyPreferences] = useState<BodyPreferences>(() => readBodyPreferences((p as {bodyPreferences?:unknown})?.bodyPreferences ?? DEFAULT_BODY_PREFERENCES));
   const needsReview = screening.heart || screening.chestPain || screening.dizziness || screening.pregnancy;
-  const STEPS = BASE_STEPS.filter(s => s !== 'clearance' || needsReview);
+  const STEPS = BASE_STEPS.filter(s => (s !== 'clearance' || needsReview) && (s !== 'equipment' || place === 'gym'));
   const step = STEPS[i];
   const numeric = step === 'age' || step === 'height' || step === 'weight';
   const displayed = step === 'age' ? Number(age || 30) : step === 'height' ? Number(height || 165) : Number(weight || 65);
-  const valid = numeric ? true : step === 'sex' ? !!sex : step === 'goal' ? !!goal : step === 'level' ? !!level : step === 'activity' ? !!activity : step === 'place' ? !!place : step === 'days' ? !!days : step === 'minutes' ? !!minutes : step === 'health' ? healthAnswered : step === 'clearance' ? clearance : true;
+  const valid = numeric ? true : step === 'sex' ? !!sex : step === 'goal' ? !!goal : step === 'level' ? !!level : step === 'activity' ? !!activity : step === 'place' ? !!place : step === 'equipment' ? equipment.length>0 : step === 'days' ? !!days : step === 'minutes' ? !!minutes : step === 'health' ? healthAnswered : step === 'clearance' ? clearance : true;
   const d = q.details;
-  const titles = { age: u.age, height: u.height, weight: u.weight, sex: u.sex, goal: q.titles.goal, level: q.titles.level, activity: u.activity, place: q.titles.place, days: tt.ux.onb.daysLabel, minutes: u.available, health: u.health, focus: u.focus, waistNow: `${d.waist} · ${d.current}`, waistGoal: `${d.waist} · ${d.desired}`, glutesNow: `${d.glutes} · ${d.current}`, glutesGoal: `${d.glutes} · ${d.desired}`, clearance: u.health, review: u.review };
+  const titles = { age: u.age, height: u.height, weight: u.weight, sex: u.sex, goal: q.titles.goal, level: q.titles.level, activity: u.activity, place: q.titles.place, equipment: t.equipment, preferences: locale==='en'?'Movement preferences':'လေ့ကျင့်မှု ရွေးချယ်စရာ', days: tt.ux.onb.daysLabel, minutes: u.available, health: u.health, focus: u.focus, waistNow: `${d.waist} · ${d.current}`, waistGoal: `${d.waist} · ${d.desired}`, glutesNow: `${d.glutes} · ${d.current}`, glutesGoal: `${d.glutes} · ${d.desired}`, clearance: u.health, review: u.review };
   // Keep a stable code, so an existing error changes language with the rest of this screen.
   const errorMessage = !error ? '' : error === 'GOAL_BMI_TOO_LOW' ? u.lowWeightGoal : error === 'HEALTH_REVIEW_REQUIRED' ? u.reviewRequired : error === 'UNAUTHORIZED' ? u.sessionExpired : error === 'INVALID_ORIGIN' ? u.retryConnection : error === 'INVALID_INPUT' ? u.checkAnswers : u.saveError;
   const indexOf = (name: typeof BASE_STEPS[number]) => STEPS.indexOf(name);
@@ -57,7 +59,7 @@ export function QuickOnboarding() {
       await trainingApi('intake', { locale, heightCm: Number(height), weightKg: Number(weight), age: Number(age), sex,
         goal: goal === 'muscle' ? 'build_muscle' : goal === 'strength' ? 'build_strength' : 'general_fitness',
         weightGoal: goal === 'lose' ? 'lose' : 'maintain', experience: level, activityLevel: activity, trainingLocation: place,
-        equipment: ['body weight'], daysPerWeek: days, sessionMinutes: minutes, limitations: p?.limitations ?? '',
+        equipment: place==='home'?['body weight']:['body weight',...equipment], daysPerWeek: days, sessionMinutes: minutes, limitations: preferences.join(', '),
         weightUnit: p?.weightUnit ?? 'kg', distanceUnit: p?.distanceUnit ?? 'km', timezone: p?.timezone ?? 'Asia/Yangon',
         screening, healthClearance: needsReview && clearance, bodyPreferences });
       try { localStorage.setItem('mingalar-location', place!); } catch { /* optional */ }
@@ -69,6 +71,7 @@ export function QuickOnboarding() {
     [u.age, age, indexOf('age')], [u.height, `${height} cm`, indexOf('height')], [u.weight, `${weight} kg`, indexOf('weight')], [u.sex, sex ? u.sexes[sex] : '', indexOf('sex')],
     [q.titles.goal, goal ? q.goals[goal] : '', indexOf('goal')], [q.titles.level, level ? q.levels[level] : '', indexOf('level')],
     [u.activity, activity ? u.activities[activity] : '', indexOf('activity')], [q.titles.place, place ? q.places[place] : '', indexOf('place')],
+    ...(place==='gym'?[[t.equipment,equipment.map(e=>t.equipmentLabels[e as keyof typeof t.equipmentLabels]).join(' \u00b7 '),indexOf('equipment')] as const]:[]),
     [tt.ux.onb.daysLabel, String(days), indexOf('days')], [u.available, `${minutes} ${tt.ux.min}`, indexOf('minutes')], [u.health, Object.entries(screening).filter(([,v])=>v).map(([k])=>u.conditions[k as keyof typeof u.conditions]).join(' · ') || u.none, indexOf('health')],
     [u.focus, bodyPreferences.focusAreas.map(a=>d.focus[a]).join(' · '), indexOf('focus')],
     [d.waist, `${bodyPreferences.currentWaist === 'unsure' ? d.unsure : d.waistBuilds[bodyPreferences.currentWaist]} → ${d.waistGoals[bodyPreferences.waistGoal]}`, indexOf('waistNow')],
@@ -84,6 +87,8 @@ export function QuickOnboarding() {
       {step === 'level' && choices(['beginner','intermediate','advanced'] as const,level,setLevel,v=>q.levels[v])}
       {step === 'activity' && choices(['sedentary','light','active'] as const,activity,setActivity,v=>u.activities[v])}
       {step === 'place' && choices(['home','gym'] as const,place,setPlace,v=>q.places[v])}
+      {step === 'equipment' && <div className="quiz-grid">{['machine','cable','dumbbell','barbell','bench','band'].map(e=><button type="button" key={e} className={`quiz-option tile ${equipment.includes(e)?'on':''}`} aria-pressed={equipment.includes(e)} onClick={()=>setEquipment(v=>v.includes(e)?v.filter(x=>x!==e):[...v,e])}><strong>{t.equipmentLabels[e as keyof typeof t.equipmentLabels]}</strong>{equipment.includes(e)&&<Check size={20}/>}</button>)}</div>}
+      {step === 'preferences' && <div className="quiz-grid">{['no jumping','no floor'].map((e,index)=><button type="button" key={e} className={`quiz-option tile ${preferences.includes(e)?'on':''}`} aria-pressed={preferences.includes(e)} onClick={()=>setPreferences(v=>v.includes(e)?v.filter(x=>x!==e):[...v,e])}><strong>{locale==='en'?['No jumping','No floor work'][index]:['မခုန်ပါ','ကြမ်းပြင်ပေါ် မလေ့ကျင့်ပါ'][index]}</strong></button>)}<button type="button" className="text-button" onClick={()=>{setPreferences([]);next();}}>{u.none}</button></div>}
       {step === 'days' && choices([2,3,4,5,6],days,setDays,String)}
       {step === 'minutes' && choices([10,20,30,45],minutes,setMinutes,v=>`${v} ${tt.ux.min}`)}
       {step === 'health' && <><div className="intake-checks">{Object.keys(EMPTY_HEALTH).map(key=><label key={key} className="check"><input type="checkbox" checked={!!screening[key as keyof typeof screening]} onChange={e=>{setScreening(v=>({...v,[key]:e.target.checked}));setHealthAnswered(true);setClearance(false);}}/>{u.conditions[key as keyof typeof u.conditions]}</label>)}<label className="check"><input type="checkbox" checked={healthAnswered&&!Object.values(screening).some(Boolean)} onChange={()=>{setScreening(EMPTY_HEALTH);setHealthAnswered(true);setClearance(false);}}/>{u.none}</label></div>

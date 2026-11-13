@@ -1,0 +1,2728 @@
+{
+  "records": 73,
+  "eligibleHome": 19,
+  "eligibleGym": 31,
+  "birdDogFiles": [
+    "curated-bird-dog-owner.mp4"
+  ],
+  "birdDogOppositeSide": "Mirrored existing owner video; separate right-side file absent",
+  "exercises": [
+    {
+      "id": "core-157",
+      "canonicalId": "barbell-reverse-lunge",
+      "name": "Barbell Alternating Reverse Lunges",
+      "equipment": [
+        "barbell"
+      ],
+      "primaryMuscles": [
+        "quadriceps",
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "hamstring",
+        "abs"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "knee-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "core-163",
+      "canonicalId": "cable-face-pull",
+      "name": "Facepulls",
+      "equipment": [
+        "cable"
+      ],
+      "primaryMuscles": [
+        "back-deltoids",
+        "upper-back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "trapezius"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "overhead"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/core-163.mp4",
+      "poster": "/media/poster/core-163.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 327386,
+      "sha256": "b2d285a0c7047e0aba201753aedd375968400445dcbe890b74c40c24305672df",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "8.584000"
+        }
+      }
+    },
+    {
+      "id": "core-164",
+      "canonicalId": "bench-hop",
+      "name": "Bench Hops",
+      "equipment": [
+        "bench"
+      ],
+      "primaryMuscles": [
+        "quadriceps",
+        "calves"
+      ],
+      "secondaryMuscles": [
+        "gluteal",
+        "abs"
+      ],
+      "difficulty": "advanced",
+      "tags": [
+        "jumping",
+        "knee-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "dataset-1373",
+      "canonicalId": "standing-calf-raise",
+      "name": "Bodyweight standing calf raise",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "calves"
+      ],
+      "secondaryMuscles": [
+        "left-soleus",
+        "right-soleus"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "home",
+      "video": "/media/video/dataset-1373-owner.mp4",
+      "poster": "/media/poster/dataset-1373-owner.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 910069,
+      "sha256": "0e7c5a6f795bd925dfc8d5daab95e3faf19a0327b157b90263ef7431d52a1995",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "9.000000"
+        }
+      }
+    },
+    {
+      "id": "dataset-0276",
+      "canonicalId": "dead-bug",
+      "name": "Dead bug",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "abs"
+      ],
+      "secondaryMuscles": [
+        "obliques"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "floor"
+      ],
+      "tracking": "reps",
+      "collection": "home",
+      "video": "/media/video/dataset-0276-owner.mp4",
+      "poster": "/media/poster/dataset-0276-owner.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 775314,
+      "sha256": "03a674ea5ef24496481db56e7d042e4c49500e2653021c4133e40e059fadf040",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "6.709000"
+        }
+      }
+    },
+    {
+      "id": "dataset-0289",
+      "canonicalId": "dumbbell-bench-press",
+      "name": "Dumbbell bench press",
+      "equipment": [
+        "dumbbell",
+        "bench"
+      ],
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "triceps",
+        "front-deltoids"
+      ],
+      "difficulty": "intermediate",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/dataset-0289.mp4",
+      "poster": "/media/poster/dataset-0289.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 436671,
+      "sha256": "5e3622e25004dcd9c2e1b2e61fb13d336de3f893cd070ad743fbd1b3f222665d",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "11.250000"
+        }
+      }
+    },
+    {
+      "id": "dataset-0293",
+      "canonicalId": "dumbbell-bent-over-row",
+      "name": "Dumbbell bent over row",
+      "equipment": [
+        "dumbbell"
+      ],
+      "primaryMuscles": [
+        "upper-back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "back-deltoids"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "back-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "dataset-0294",
+      "canonicalId": "dumbbell-biceps-curl",
+      "name": "Dumbbell biceps curl",
+      "equipment": [
+        "dumbbell"
+      ],
+      "primaryMuscles": [
+        "biceps"
+      ],
+      "secondaryMuscles": [
+        "forearm"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/dataset-0294.mp4",
+      "poster": "/media/poster/dataset-0294.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 220052,
+      "sha256": "c739512f6368b03e224795d9a29323c99c4f54249b2dd092986da5f46a77a899",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "10.959000"
+        }
+      }
+    },
+    {
+      "id": "dataset-3470",
+      "canonicalId": "forward-lunge",
+      "name": "Forward lunge (male)",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "quadriceps",
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "hamstring",
+        "abs"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "knee-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "excluded",
+      "video": "/media/video/dataset-3470.mp4",
+      "poster": "/media/poster/dataset-3470.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied.",
+      "license": "Public domain",
+      "bytes": 21144,
+      "sha256": "df892638153b6e8241cf16b89ae659be15eb4040c7da42534dcb0519a5b483ea",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 200,
+            "height": 292
+          }
+        ],
+        "format": {
+          "duration": "7.000000"
+        }
+      }
+    },
+    {
+      "id": "dataset-3013",
+      "canonicalId": "glute-bridge",
+      "name": "Low glute bridge on floor",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "hamstring",
+        "abs"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "floor"
+      ],
+      "tracking": "reps",
+      "collection": "home",
+      "video": "/media/video/dataset-3013-owner.mp4",
+      "poster": "/media/poster/dataset-3013-owner.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 828919,
+      "sha256": "2a9c8bf46b306a6e7d7ff9856e16d5d7400dd91dc5bc71b5b081b7acbd716b04",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "10.000000"
+        }
+      }
+    },
+    {
+      "id": "dataset-0662",
+      "canonicalId": "push-up",
+      "name": "Push-up",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "triceps",
+        "front-deltoids",
+        "abs"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "floor",
+        "wrist-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "home",
+      "video": "/media/video/dataset-0662-owner.mp4",
+      "poster": "/media/poster/dataset-0662-owner.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 722381,
+      "sha256": "ef0c5456f5de84133d0ed9aad4df9c8e8e559149c31b6e05effb445a14b80888",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "6.000000"
+        }
+      }
+    },
+    {
+      "id": "dataset-1460",
+      "canonicalId": "walking-lunge",
+      "name": "Walking lunge",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "quadriceps",
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "hamstring",
+        "abs"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "knee-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "excluded",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "curated-squat",
+      "canonicalId": "bodyweight-squat",
+      "name": "Bodyweight squat",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "quadriceps",
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "hamstring",
+        "abs"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "knee-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "home",
+      "video": "/media/video/curated-squat-owner.mp4",
+      "poster": "/media/poster/curated-squat-owner.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 1854206,
+      "sha256": "d39f768cc08761fb569bca12f5924fea2a4bdc9299b732ce57c12475e97d3504",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "8.000000"
+        }
+      }
+    },
+    {
+      "id": "curated-barbell-squat",
+      "canonicalId": "barbell-back-squat",
+      "name": "Barbell back squat",
+      "equipment": [
+        "barbell"
+      ],
+      "primaryMuscles": [
+        "quadriceps",
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "hamstring",
+        "lower-back",
+        "abs"
+      ],
+      "difficulty": "advanced",
+      "tags": [
+        "knee-loaded",
+        "back-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/curated-barbell-squat.mp4",
+      "poster": "/media/poster/curated-barbell-squat.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "\"Squat - exercise demonstration video\" by FitnessScape, CC BY 3.0, via Wikimedia Commons. Modified: audio removed, transcoded.",
+      "license": "CC BY 3.0",
+      "bytes": 340673,
+      "sha256": "e3c023c75c18172265c6d3e67f650666dd74f5bd9995050d954f6f63a5932c35",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 720,
+            "height": 406
+          }
+        ],
+        "format": {
+          "duration": "7.100000"
+        }
+      }
+    },
+    {
+      "id": "curated-plank",
+      "canonicalId": "high-plank",
+      "name": "High plank",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "abs"
+      ],
+      "secondaryMuscles": [
+        "obliques",
+        "gluteal"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "floor",
+        "wrist-loaded"
+      ],
+      "tracking": "timed",
+      "collection": "home",
+      "video": "/media/video/curated-plank-owner.mp4",
+      "poster": "/media/poster/curated-plank-owner.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 1000331,
+      "sha256": "ef6151f3cb8fdb98683f14e6c0193fd614d2303ff5ca6b313abf7cf510141cef",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "9.000000"
+        }
+      }
+    },
+    {
+      "id": "curated-side-plank",
+      "canonicalId": "side-plank",
+      "name": "Side plank",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "obliques"
+      ],
+      "secondaryMuscles": [
+        "abs",
+        "gluteal"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "floor"
+      ],
+      "tracking": "timed",
+      "collection": "excluded",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "curated-bird-dog",
+      "canonicalId": "bird-dog",
+      "name": "Bird dog",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "lower-back",
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "abs",
+        "back-deltoids"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "floor",
+        "wrist-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "home",
+      "video": "/media/video/curated-bird-dog-owner.mp4",
+      "poster": "/media/poster/curated-bird-dog-owner.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 1220125,
+      "sha256": "8633527f99bdb9b4aa1dd0d92eb8e69bcf8237450edc9c9d9e09c51cfbd1648f",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 720,
+            "height": 1280
+          }
+        ],
+        "format": {
+          "duration": "7.000000"
+        }
+      }
+    },
+    {
+      "id": "curated-wall-push",
+      "canonicalId": "wall-push-up",
+      "name": "Wall push up",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "triceps",
+        "front-deltoids"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "wrist-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "excluded",
+      "video": "/media/video/curated-wall-push.mp4",
+      "poster": "/media/poster/curated-wall-push.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied.",
+      "license": "Public domain",
+      "bytes": 10950,
+      "sha256": "cc99aba0c8d600d518a75a4b07d7d583d8172e953d972ddd632e2115c38d41a8",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 290,
+            "height": 250
+          }
+        ],
+        "format": {
+          "duration": "3.000000"
+        }
+      }
+    },
+    {
+      "id": "curated-knee-push",
+      "canonicalId": "knee-push-up",
+      "name": "Knee push up",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "triceps",
+        "front-deltoids",
+        "abs"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "floor",
+        "wrist-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "home",
+      "video": "/media/video/curated-knee-push-owner.mp4",
+      "poster": "/media/poster/curated-knee-push-owner.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 1275079,
+      "sha256": "cd93635110fc79ebead384b05b6aa6d50a78be56883616f67a353272cc03a43b",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "8.000000"
+        }
+      }
+    },
+    {
+      "id": "curated-shoulder-press",
+      "canonicalId": "dumbbell-shoulder-press",
+      "name": "Dumbbell shoulder press",
+      "equipment": [
+        "dumbbell"
+      ],
+      "primaryMuscles": [
+        "front-deltoids"
+      ],
+      "secondaryMuscles": [
+        "triceps",
+        "trapezius"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "overhead"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/curated-shoulder-press.mp4",
+      "poster": "/media/poster/curated-shoulder-press.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 533213,
+      "sha256": "433c11edd97a6b381d618422a04be0a9f33386f8864fc831de19db3b4b017509",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "curated-lateral-raise",
+      "canonicalId": "dumbbell-lateral-raise",
+      "name": "Dumbbell lateral raise",
+      "equipment": [
+        "dumbbell"
+      ],
+      "primaryMuscles": [
+        "front-deltoids",
+        "back-deltoids"
+      ],
+      "secondaryMuscles": [
+        "trapezius"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/curated-lateral-raise.mp4",
+      "poster": "/media/poster/curated-lateral-raise.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 684306,
+      "sha256": "d7f5da98af455838977f37cc48450f1863b4facb376ef0121561640fb862ebd2",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "curated-band-row",
+      "canonicalId": "band-row",
+      "name": "Band row",
+      "equipment": [
+        "band"
+      ],
+      "primaryMuscles": [
+        "upper-back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "back-deltoids"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "curated-hip-hinge",
+      "canonicalId": "bodyweight-hip-hinge",
+      "name": "Bodyweight hip hinge",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "gluteal",
+        "hamstring"
+      ],
+      "secondaryMuscles": [
+        "lower-back"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "back-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "excluded",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "curated-step-up",
+      "canonicalId": "low-step-up",
+      "name": "Low step up",
+      "equipment": [
+        "bench"
+      ],
+      "primaryMuscles": [
+        "quadriceps",
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "hamstring",
+        "calves"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "knee-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "excluded",
+      "video": "/media/video/curated-step-up.mp4",
+      "poster": "/media/poster/curated-step-up.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Animation: U.S. Centers for Disease Control and Prevention, 'Growing Stronger: Strength Training for Older Adults' (public domain), via Wikimedia Commons. No endorsement implied.",
+      "license": "Public domain",
+      "bytes": 14989,
+      "sha256": "0c0c30ae15025582698339042c3b6a475b1114f7cee5847a0fd6e9962b61b0ec",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 146,
+            "height": 276
+          }
+        ],
+        "format": {
+          "duration": "5.000000"
+        }
+      }
+    },
+    {
+      "id": "curated-march",
+      "canonicalId": "march-in-place",
+      "name": "March in place",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "warmup"
+      ],
+      "tracking": "timed",
+      "collection": "excluded",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "curated-calf-stretch",
+      "canonicalId": "standing-calf-stretch",
+      "name": "Standing calf stretch",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "calves"
+      ],
+      "secondaryMuscles": [
+        "left-soleus",
+        "right-soleus"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "cooldown"
+      ],
+      "tracking": "timed",
+      "collection": "excluded",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "curated-breathing",
+      "canonicalId": "standing-breathing",
+      "name": "Standing breathing",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "abs"
+      ],
+      "secondaryMuscles": [],
+      "difficulty": "beginner",
+      "tags": [
+        "cooldown"
+      ],
+      "tracking": "timed",
+      "collection": "excluded",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "curated-seated-march",
+      "canonicalId": "seated-knee-lift",
+      "name": "Seated knee lift",
+      "equipment": [
+        "bench"
+      ],
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "abs"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "curated-wall-sit",
+      "canonicalId": "wall-sit",
+      "name": "Wall sit",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "gluteal"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "knee-loaded"
+      ],
+      "tracking": "timed",
+      "collection": "excluded",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "curated-heel-walk",
+      "canonicalId": "heel-raise-balance",
+      "name": "Heel raise balance",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "calves"
+      ],
+      "secondaryMuscles": [
+        "left-soleus",
+        "right-soleus"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "timed",
+      "collection": "excluded",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "gym-lat-pulldown",
+      "canonicalId": "lat-pulldown",
+      "name": "Lat pulldown",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "upper-back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "back-deltoids",
+        "forearm"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "gym-seated-cable-row",
+      "canonicalId": "seated-cable-row",
+      "name": "Seated cable row",
+      "equipment": [
+        "cable"
+      ],
+      "primaryMuscles": [
+        "upper-back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "back-deltoids",
+        "lower-back"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-seated-cable-row.mp4",
+      "poster": "/media/poster/gym-seated-cable-row.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 283553,
+      "sha256": "9a2b54cb8e33b271748c57ad169fe8dc5275b3290ffa251d0f76a0ff6ce420b2",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "10.500000"
+        }
+      }
+    },
+    {
+      "id": "gym-triceps-pushdown",
+      "canonicalId": "triceps-pushdown",
+      "name": "Triceps pushdown",
+      "equipment": [
+        "cable"
+      ],
+      "primaryMuscles": [
+        "triceps"
+      ],
+      "secondaryMuscles": [
+        "forearm"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-triceps-pushdown.mp4",
+      "poster": "/media/poster/gym-triceps-pushdown.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 654511,
+      "sha256": "5d03de7cd22b19c18753033c945db06247769d3ca7aca2dd61601c1b7830491c",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "gym-pec-deck",
+      "canonicalId": "pec-deck",
+      "name": "Pec deck (butterfly machine)",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "front-deltoids"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "gym-machine-chest-press",
+      "canonicalId": "machine-chest-press",
+      "name": "Machine chest press",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "triceps",
+        "front-deltoids"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-machine-chest-press.mp4",
+      "poster": "/media/poster/gym-machine-chest-press.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video: U.S. Centers for Disease Control and Prevention, 'Muscle Strengthening at the Gym' (public domain), via Wikimedia Commons. Trimmed, audio removed. No endorsement implied.",
+      "license": "Public domain",
+      "bytes": 256004,
+      "sha256": "6422ce31f24c017198caca796565644323846adfb97afc712ae7a718098d88ab",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 320,
+            "height": 240
+          }
+        ],
+        "format": {
+          "duration": "9.220000"
+        }
+      }
+    },
+    {
+      "id": "gym-leg-press",
+      "canonicalId": "leg-press",
+      "name": "Leg press",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "quadriceps",
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "hamstring",
+        "calves"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "knee-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-leg-press.mp4",
+      "poster": "/media/poster/gym-leg-press.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 303036,
+      "sha256": "c4fe0c184f3afc589d68424e802046488bece360eb4d2ca0b99ca87b41aa7f50",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "gym-leg-extension",
+      "canonicalId": "leg-extension",
+      "name": "Leg extension",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [],
+      "difficulty": "beginner",
+      "tags": [
+        "knee-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-leg-extension.mp4",
+      "poster": "/media/poster/gym-leg-extension.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video: U.S. Centers for Disease Control and Prevention, 'Muscle Strengthening at the Gym' (public domain), via Wikimedia Commons. Trimmed, audio removed. No endorsement implied.",
+      "license": "Public domain",
+      "bytes": 161040,
+      "sha256": "a476f532de2ada3d356b1b8927ddbbfeec9d27b94ba7c97def65c2f6424ee46f",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 320,
+            "height": 240
+          }
+        ],
+        "format": {
+          "duration": "5.743000"
+        }
+      }
+    },
+    {
+      "id": "gym-lying-leg-curl",
+      "canonicalId": "seated-leg-curl",
+      "name": "Seated leg curl",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "hamstring"
+      ],
+      "secondaryMuscles": [
+        "calves"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-lying-leg-curl.mp4",
+      "poster": "/media/poster/gym-lying-leg-curl.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 417843,
+      "sha256": "1a110cad33e82a1c2da5dcb556e8f7f41a29052fc184b5ddcfa1636702b1709a",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "gym-barbell-bench-press",
+      "canonicalId": "barbell-bench-press",
+      "name": "Barbell bench press",
+      "equipment": [
+        "barbell",
+        "bench"
+      ],
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "triceps",
+        "front-deltoids"
+      ],
+      "difficulty": "intermediate",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-barbell-bench-press.mp4",
+      "poster": "/media/poster/gym-barbell-bench-press.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 554764,
+      "sha256": "4870d6e0fe3fa47b568b6f41bd3d34b1634a6e2f69d12d5a4c27a59772bd550d",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 654,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.042000"
+        }
+      }
+    },
+    {
+      "id": "gym-barbell-deadlift",
+      "canonicalId": "barbell-deadlift",
+      "name": "Barbell deadlift",
+      "equipment": [
+        "barbell"
+      ],
+      "primaryMuscles": [
+        "hamstring",
+        "gluteal",
+        "lower-back"
+      ],
+      "secondaryMuscles": [
+        "quadriceps",
+        "upper-back",
+        "forearm"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "back-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-barbell-deadlift.mp4",
+      "poster": "/media/poster/gym-barbell-deadlift.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "\"Deadlift - exercise demonstration video\" by FitnessScape, CC BY 3.0, via Wikimedia Commons. Modified: audio removed, transcoded.",
+      "license": "CC BY 3.0",
+      "bytes": 285308,
+      "sha256": "e141b24d8b9d6bd81a7b2b9b477ddcce26f1a2b78d610b4221227387b854f380",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 720,
+            "height": 406
+          }
+        ],
+        "format": {
+          "duration": "7.400000"
+        }
+      }
+    },
+    {
+      "id": "gym-romanian-deadlift",
+      "canonicalId": "romanian-deadlift",
+      "name": "Romanian deadlift",
+      "equipment": [
+        "barbell"
+      ],
+      "primaryMuscles": [
+        "hamstring",
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "lower-back",
+        "forearm"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "back-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-romanian-deadlift.mp4",
+      "poster": "/media/poster/gym-romanian-deadlift.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 255051,
+      "sha256": "e721baa153633dfc98f1d62ba8192fd1b3268bc1be1c22a78f6f80bfed7a4987",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "gym-barbell-row",
+      "canonicalId": "barbell-bent-over-row",
+      "name": "Barbell bent-over row",
+      "equipment": [
+        "barbell"
+      ],
+      "primaryMuscles": [
+        "upper-back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "back-deltoids",
+        "lower-back"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "back-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-barbell-row.mp4",
+      "poster": "/media/poster/gym-barbell-row.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "\"Bent-over row - exercise demonstration video\" by FitnessScape, CC BY 3.0, via Wikimedia Commons. Modified: audio removed, transcoded.",
+      "license": "CC BY 3.0",
+      "bytes": 183214,
+      "sha256": "111d9a59b06c71a82cf8a3b689ee31be6b61657dc784e47cab7ec849941ced08",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 720,
+            "height": 406
+          }
+        ],
+        "format": {
+          "duration": "5.134000"
+        }
+      }
+    },
+    {
+      "id": "gym-cable-crossover",
+      "canonicalId": "cable-crossover",
+      "name": "Cable crossover",
+      "equipment": [
+        "cable"
+      ],
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "front-deltoids"
+      ],
+      "difficulty": "intermediate",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "home-crunch",
+      "canonicalId": "crunch",
+      "name": "Crunch",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "abs"
+      ],
+      "secondaryMuscles": [
+        "obliques"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "floor"
+      ],
+      "tracking": "reps",
+      "collection": "excluded",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "home-superman",
+      "canonicalId": "superman",
+      "name": "Superman",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "lower-back"
+      ],
+      "secondaryMuscles": [
+        "gluteal",
+        "upper-back"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "floor"
+      ],
+      "tracking": "reps",
+      "collection": "excluded",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "home-hammer-curl",
+      "canonicalId": "dumbbell-hammer-curl",
+      "name": "Dumbbell hammer curl",
+      "equipment": [
+        "dumbbell"
+      ],
+      "primaryMuscles": [
+        "biceps",
+        "forearm"
+      ],
+      "secondaryMuscles": [],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/home-hammer-curl.mp4",
+      "poster": "/media/poster/home-hammer-curl.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 192356,
+      "sha256": "7a7a2df928c4ecf32800901ed4063d2ccbd500cec4603cc5a052013e62fe59a9",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "10.375000"
+        }
+      }
+    },
+    {
+      "id": "home-bench-dips",
+      "canonicalId": "bench-dip",
+      "name": "Bench dip",
+      "equipment": [
+        "bench"
+      ],
+      "primaryMuscles": [
+        "triceps"
+      ],
+      "secondaryMuscles": [
+        "chest",
+        "front-deltoids"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "wrist-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "gym-hip-adduction",
+      "canonicalId": "hip-adduction-machine",
+      "name": "Hip adduction machine",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "gluteal"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-hip-adduction.mp4",
+      "poster": "/media/poster/gym-hip-adduction.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 332494,
+      "sha256": "4cf874163eedb25c02c2ce55ad33b983e3f89f04a8a0a77976c44cc7be4aa59e",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "gym-machine-shoulder-press",
+      "canonicalId": "machine-shoulder-press",
+      "name": "Machine shoulder press",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "front-deltoids"
+      ],
+      "secondaryMuscles": [
+        "triceps"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "overhead"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-machine-shoulder-press.mp4",
+      "poster": "/media/poster/gym-machine-shoulder-press.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 358406,
+      "sha256": "f643e9797ed6f3993de0fa4c3809274d4e063e9321d9f473b2bf58732c7e11c6",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "gym-assisted-pullup",
+      "canonicalId": "assisted-pull-up-machine",
+      "name": "Assisted pull-up machine",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "upper-back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "back-deltoids"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": null,
+      "poster": null,
+      "videoExists": false,
+      "posterExists": false,
+      "provenance": "",
+      "license": "unavailable"
+    },
+    {
+      "id": "gym-lying-leg-curl-machine",
+      "canonicalId": "lying-leg-curl",
+      "name": "Lying leg curl",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "hamstring"
+      ],
+      "secondaryMuscles": [
+        "calves"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "knee-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-lying-leg-curl-machine.mp4",
+      "poster": "/media/poster/gym-lying-leg-curl-machine.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 422888,
+      "sha256": "35bde5c62d4442f81f5e6dec9c4639751d04f26303c8c5f2070309afcca072d3",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "gym-smith-squat",
+      "canonicalId": "smith-machine-squat",
+      "name": "Smith machine squat",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "quadriceps",
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "hamstring"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "knee-loaded",
+        "back-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-smith-squat.mp4",
+      "poster": "/media/poster/gym-smith-squat.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 346690,
+      "sha256": "9ed3f12c1fae4da34f30b14400ed7a5787b900af1bd5e2bd1ddeb0322d3f7e30",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "11.959000"
+        }
+      }
+    },
+    {
+      "id": "gym-hack-squat",
+      "canonicalId": "hack-squat-machine",
+      "name": "Hack squat machine",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "gluteal"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "knee-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-hack-squat.mp4",
+      "poster": "/media/poster/gym-hack-squat.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 454102,
+      "sha256": "3f5c8e8a94a4fc1bd0477f9ffa8d6f086ca98989abf7ef63537394910adc16d4",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "gym-seated-calf-raise",
+      "canonicalId": "seated-calf-raise-machine",
+      "name": "Seated calf raise machine",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "calves"
+      ],
+      "secondaryMuscles": [],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-seated-calf-raise.mp4",
+      "poster": "/media/poster/gym-seated-calf-raise.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 282209,
+      "sha256": "9625e71d5bd82543a5e88cba8ba4581bcd2461228ecb1563eff7a1ca4328276f",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "gym-cable-biceps-curl",
+      "canonicalId": "cable-biceps-curl",
+      "name": "Cable biceps curl",
+      "equipment": [
+        "cable"
+      ],
+      "primaryMuscles": [
+        "biceps"
+      ],
+      "secondaryMuscles": [
+        "forearm"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-cable-biceps-curl.mp4",
+      "poster": "/media/poster/gym-cable-biceps-curl.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 284504,
+      "sha256": "2a8c5b61ed208882fb194bcfa6a507a2645250de7bafb6f9f4efb051ecccb469",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "10.459000"
+        }
+      }
+    },
+    {
+      "id": "gym-incline-dumbbell-press",
+      "canonicalId": "incline-dumbbell-press",
+      "name": "Incline dumbbell press",
+      "equipment": [
+        "dumbbell",
+        "bench"
+      ],
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "front-deltoids",
+        "triceps"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "wrist-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-incline-dumbbell-press.mp4",
+      "poster": "/media/poster/gym-incline-dumbbell-press.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 624806,
+      "sha256": "258a0586211ad489ec6e35b9f816779dcf4a01421e9207d5983ffc2e45b12e7f",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.042000"
+        }
+      }
+    },
+    {
+      "id": "gym-triceps-kickback",
+      "canonicalId": "dumbbell-triceps-kickback",
+      "name": "Dumbbell triceps kickback",
+      "equipment": [
+        "dumbbell",
+        "bench"
+      ],
+      "primaryMuscles": [
+        "triceps"
+      ],
+      "secondaryMuscles": [],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-triceps-kickback.mp4",
+      "poster": "/media/poster/gym-triceps-kickback.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 349676,
+      "sha256": "220e56d2279dc0763a53c15ff49d3436702a0ee52a5b1759a892a5677e611913",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "10.209000"
+        }
+      }
+    },
+    {
+      "id": "gym-overhead-triceps-extension",
+      "canonicalId": "overhead-dumbbell-triceps-extension",
+      "name": "Overhead dumbbell triceps extension",
+      "equipment": [
+        "dumbbell"
+      ],
+      "primaryMuscles": [
+        "triceps"
+      ],
+      "secondaryMuscles": [],
+      "difficulty": "beginner",
+      "tags": [
+        "overhead"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-overhead-triceps-extension.mp4",
+      "poster": "/media/poster/gym-overhead-triceps-extension.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 409599,
+      "sha256": "a68ed1b3e143fb283c2ec95413bb4981813589325cf9129a3e39224e3a1c0b2e",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "gym-hip-thrust",
+      "canonicalId": "barbell-hip-thrust",
+      "name": "Hip thrust",
+      "equipment": [
+        "barbell",
+        "bench"
+      ],
+      "primaryMuscles": [
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "hamstring",
+        "quadriceps"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "back-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-hip-thrust.mp4",
+      "poster": "/media/poster/gym-hip-thrust.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 361715,
+      "sha256": "b760abcfbb0ce7db3eeeb52c17a39b582bd07cbea0cf3004d01ac303c4739785",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.042000"
+        }
+      }
+    },
+    {
+      "id": "gym-pull-up",
+      "canonicalId": "pull-up",
+      "name": "Pull-up",
+      "equipment": [
+        "machine"
+      ],
+      "primaryMuscles": [
+        "upper-back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "back-deltoids"
+      ],
+      "difficulty": "advanced",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-pull-up.mp4",
+      "poster": "/media/poster/gym-pull-up.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 261754,
+      "sha256": "ef87fb78d1396714e0fcd7c768627c574e85356a9091499b5f9c7b6a653684e0",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "gym-rear-delt-raise",
+      "canonicalId": "bent-over-rear-delt-raise",
+      "name": "Bent-over rear delt raise",
+      "equipment": [
+        "dumbbell"
+      ],
+      "primaryMuscles": [
+        "back-deltoids"
+      ],
+      "secondaryMuscles": [
+        "upper-back",
+        "trapezius"
+      ],
+      "difficulty": "beginner",
+      "tags": [],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-rear-delt-raise.mp4",
+      "poster": "/media/poster/gym-rear-delt-raise.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 225263,
+      "sha256": "453cc7c25815219351ac722a99b3eb44dab421a3678092fd0af8bea4116fd4fb",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "6.375000"
+        }
+      }
+    },
+    {
+      "id": "gym-barbell-curl",
+      "canonicalId": "barbell-biceps-curl",
+      "name": "Barbell biceps curl",
+      "equipment": [
+        "barbell"
+      ],
+      "primaryMuscles": [
+        "biceps"
+      ],
+      "secondaryMuscles": [
+        "forearm"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "wrist-loaded"
+      ],
+      "tracking": "reps",
+      "collection": "gym",
+      "video": "/media/video/gym-barbell-curl.mp4",
+      "poster": "/media/poster/gym-barbell-curl.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Video by Goulart via wger.de (CC-BY-SA 4). Modified: trimmed to 12 s, 360p, no audio.",
+      "license": "CC BY-SA 4.0",
+      "bytes": 429897,
+      "sha256": "789aacad368943cfae76b21c9ce9085954337ead52f1842214128fd76f7ee91b",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360
+          }
+        ],
+        "format": {
+          "duration": "12.000000"
+        }
+      }
+    },
+    {
+      "id": "vid-arm-circles",
+      "canonicalId": "arm-circles",
+      "name": "Arm circles",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "front-deltoids",
+        "back-deltoids"
+      ],
+      "secondaryMuscles": [
+        "trapezius"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "warmup"
+      ],
+      "tracking": "timed",
+      "collection": "home",
+      "video": "/media/video/vid-arm-circles.mp4",
+      "poster": "/media/poster/vid-arm-circles.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 682544,
+      "sha256": "416ae05284a36d90c327f9f8a81c920fd2ffef3318a270d56038711bb9d3f7a9",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "5.375000"
+        }
+      }
+    },
+    {
+      "id": "vid-bicycle-crunch",
+      "canonicalId": "bicycle-crunch",
+      "name": "Bicycle crunch",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "abs",
+        "obliques"
+      ],
+      "secondaryMuscles": [],
+      "difficulty": "beginner",
+      "tags": [
+        "floor"
+      ],
+      "tracking": "timed",
+      "collection": "home",
+      "video": "/media/video/vid-bicycle-crunch.mp4",
+      "poster": "/media/poster/vid-bicycle-crunch.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 1901125,
+      "sha256": "7454da9f9b11f2e918d2e8620298ba26fcc8ead2a89cc968b23a605e6567a6a4",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "9.000000"
+        }
+      }
+    },
+    {
+      "id": "vid-butt-kicks",
+      "canonicalId": "butt-kicks",
+      "name": "Butt kicks",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "hamstring"
+      ],
+      "secondaryMuscles": [
+        "calves"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "jumping",
+        "warmup"
+      ],
+      "tracking": "timed",
+      "collection": "home",
+      "video": "/media/video/vid-butt-kicks.mp4",
+      "poster": "/media/poster/vid-butt-kicks.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 1645406,
+      "sha256": "0994244686ed7fb2dd8d793f31725657f0c046a974843573dcb3f3f216327ac2",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "6.000000"
+        }
+      }
+    },
+    {
+      "id": "vid-high-knees",
+      "canonicalId": "high-knees",
+      "name": "High knees",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "abs"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "jumping"
+      ],
+      "tracking": "timed",
+      "collection": "home",
+      "video": "/media/video/vid-high-knees.mp4",
+      "poster": "/media/poster/vid-high-knees.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 2477737,
+      "sha256": "590829aa3c604ec47c31dcc33a0314c7755892361bc220995fe296dfed5a3cfc",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "8.000000"
+        }
+      }
+    },
+    {
+      "id": "vid-jumping-jacks",
+      "canonicalId": "jumping-jacks",
+      "name": "Jumping jacks",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "calves"
+      ],
+      "secondaryMuscles": [
+        "front-deltoids",
+        "quadriceps"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "jumping",
+        "warmup"
+      ],
+      "tracking": "timed",
+      "collection": "home",
+      "video": "/media/video/vid-jumping-jacks.mp4",
+      "poster": "/media/poster/vid-jumping-jacks.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 1339071,
+      "sha256": "e1c68964a9b0d2e35f5f7f360633c33e6e85789901ef2ad28e8c514d5aae845a",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "4.000000"
+        }
+      }
+    },
+    {
+      "id": "vid-mountain-climbers",
+      "canonicalId": "mountain-climbers",
+      "name": "Mountain climbers",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "abs"
+      ],
+      "secondaryMuscles": [
+        "front-deltoids",
+        "quadriceps"
+      ],
+      "difficulty": "intermediate",
+      "tags": [
+        "wrist-loaded",
+        "jumping"
+      ],
+      "tracking": "timed",
+      "collection": "home",
+      "video": "/media/video/vid-mountain-climbers.mp4",
+      "poster": "/media/poster/vid-mountain-climbers.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 2285325,
+      "sha256": "6e96c6b966b0477c91fde2de56af88f561d422e1b88b82cbff5c15873b9a573a",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "10.000000"
+        }
+      }
+    },
+    {
+      "id": "vid-reverse-lunge",
+      "canonicalId": "reverse-lunge",
+      "name": "Reverse lunge",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "quadriceps",
+        "gluteal"
+      ],
+      "secondaryMuscles": [
+        "hamstring"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "knee-loaded"
+      ],
+      "tracking": "timed",
+      "collection": "home",
+      "video": "/media/video/vid-reverse-lunge.mp4",
+      "poster": "/media/poster/vid-reverse-lunge.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 1902187,
+      "sha256": "65c9781b3a888989fc874d0d811d1ff87cf1b9c3ee0abdc1bdcdba73571a8628",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "8.500000"
+        }
+      }
+    },
+    {
+      "id": "vid-reverse-crunch",
+      "canonicalId": "reverse-crunch",
+      "name": "Reverse crunch",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "abs"
+      ],
+      "secondaryMuscles": [],
+      "difficulty": "beginner",
+      "tags": [
+        "floor"
+      ],
+      "tracking": "timed",
+      "collection": "home",
+      "video": "/media/video/vid-reverse-crunch.mp4",
+      "poster": "/media/poster/vid-reverse-crunch.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 2126159,
+      "sha256": "e1f568fd2bc112f3fb236aebceb703ee5fbb69c812560d462cdd992c73219cd0",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 720,
+            "height": 1280
+          }
+        ],
+        "format": {
+          "duration": "10.000000"
+        }
+      }
+    },
+    {
+      "id": "vid-shadow-boxing",
+      "canonicalId": "shadow-boxing",
+      "name": "Shadow boxing",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "front-deltoids"
+      ],
+      "secondaryMuscles": [
+        "back-deltoids",
+        "abs",
+        "calves"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "warmup"
+      ],
+      "tracking": "timed",
+      "collection": "home",
+      "video": "/media/video/vid-shadow-boxing.mp4",
+      "poster": "/media/poster/vid-shadow-boxing.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 2260112,
+      "sha256": "b0aeee5cf60acf3291e039d37bd3b080121232bade4c6ffb02a7d940f574f7b5",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "9.000000"
+        }
+      }
+    },
+    {
+      "id": "vid-knee-to-elbow",
+      "canonicalId": "knee-to-elbow",
+      "name": "Standing knee to elbow",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "obliques",
+        "abs"
+      ],
+      "secondaryMuscles": [
+        "quadriceps"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "warmup"
+      ],
+      "tracking": "timed",
+      "collection": "home",
+      "video": "/media/video/vid-knee-to-elbow.mp4",
+      "poster": "/media/poster/vid-knee-to-elbow.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 1299772,
+      "sha256": "0ef9e47b82717093c76aa57281b962104b203e7ae93de284294db34eb6bf7ad0",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "5.709000"
+        }
+      }
+    },
+    {
+      "id": "vid-sumo-squat",
+      "canonicalId": "sumo-squat",
+      "name": "Sumo squat",
+      "equipment": [
+        "body weight"
+      ],
+      "primaryMuscles": [
+        "gluteal",
+        "adductor"
+      ],
+      "secondaryMuscles": [
+        "quadriceps"
+      ],
+      "difficulty": "beginner",
+      "tags": [
+        "knee-loaded"
+      ],
+      "tracking": "timed",
+      "collection": "home",
+      "video": "/media/video/vid-sumo-squat.mp4",
+      "poster": "/media/poster/vid-sumo-squat.webp",
+      "videoExists": true,
+      "posterExists": true,
+      "provenance": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+      "license": "Owner-supplied, used with permission",
+      "bytes": 1267007,
+      "sha256": "db403dd7d51eec370453d615cafa5cb63ea5bf9d91f11c9a4584eab98e0b006b",
+      "encoding": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 704,
+            "height": 1248
+          }
+        ],
+        "format": {
+          "duration": "6.000000"
+        }
+      }
+    }
+  ]
+}

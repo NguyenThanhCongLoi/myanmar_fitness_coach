@@ -1,5 +1,6 @@
 'use client';
 import { WorkoutIntro } from '../plan/workout-intro';
+import {eligibleExercises} from '@/shared/workout-policy';
 import { availableAt } from '@/shared/exercise-place';
 import { BeeTip } from '../gamification/bee-tip';
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
@@ -54,7 +55,7 @@ export function TrainingHub() {
   const start = async (path: 'free' | 'follow', body: unknown) => {
     const session = await trainingApi<{ id: string }>(path, body); await refresh(); openWorkout(session.id);
   };
-  if (preset?.mode === 'follow' || mode === 'follow') return <WorkoutIntro focus={preset?.mode==='follow'?preset.focus:'all'} minutes={preset?.mode==='follow'?preset.minutes:data.profile?.sessionMinutes??20} title={preset?.mode==='follow'?`${preset.minutes} ${tt.ux.min}`:tt.ux.home.forYou} image="/images/banners/fullbody.webp" back={()=>go('home')}/>;
+  if (preset?.mode === 'follow' || mode === 'follow') return <WorkoutIntro focus={preset?.mode==='follow'?preset.focus:'all'} minutes={preset?.mode==='follow'?preset.minutes:([15,20,30].includes(data.profile?.sessionMinutes??20)?data.profile?.sessionMinutes??20:20)} title={preset?.mode==='follow'?`${preset.minutes} ${tt.ux.min}`:tt.ux.home.forYou} image="/images/banners/fullbody.webp" back={()=>go('home')}/>;
   return <section>
     <div className="page-heading"><span className="overline"><Dumbbell size={14}/> {tt.train}</span><h1>{tt.trainTitle}</h1><p>{tt.trainBody}</p></div>
     <BeeTip context={mode === 'nutrition' ? 'nutrition' : 'train'}/>
@@ -79,7 +80,7 @@ function FreeBuilder({ library, name, location, start, preset }: { library: Exer
   const [title, setTitle] = useState(preset?.name ?? tt.defaultFreeName);
   const [rows, setRows] = useState<Row[]>(() => (preset?.rows ?? []).map((r, i) => ({ key: i + 1, exerciseId: r.exerciseId, sets: Math.min(8, Math.max(1, r.sets)), reps: Math.min(50, Math.max(1, r.reps)), weight: 0, restSeconds: Math.min(600, Math.max(15, r.restSeconds)) }))); const [busy, setBusy] = useState(false);
   const available = new Set(LOCATION_EQUIPMENT[location]);
-  const choices = library.filter(e => availableAt(e,location) && !(e.tags ?? []).some(x => x === 'warmup' || x === 'cooldown') && (e.equipment.every(q => available.has(q)) || rows.some(r => r.exerciseId === e.id)));
+  const choices = eligibleExercises(library,data.profile??{equipment:['body weight']},location).filter(e => availableAt(e,location) && !(e.tags ?? []).some(x => x === 'warmup' || x === 'cooldown') && (e.equipment.every(q => available.has(q)) || rows.some(r => r.exerciseId === e.id)));
   const update = (key: number, patch: Partial<Row>) => setRows(all => all.map(r => r.key === key ? { ...r, ...patch } : r));
   const add = () => { const next = choices.find(e => !rows.some(r => r.exerciseId === e.id)); if (next) setRows(all => [...all, { key: Date.now(), exerciseId: next.id, sets: 3, reps: 10, weight: 0, restSeconds: 60 }]); };
   async function submit(event: FormEvent) {
@@ -88,7 +89,7 @@ function FreeBuilder({ library, name, location, start, preset }: { library: Exer
     // Consecutive linked rows share a superset letter (A, B, ...), max 4 per group.
     const groups: (string | null)[] = []; let letter = -1, size = 0;
     rows.forEach((r, i) => { const linkedFromPrev = i > 0 && rows[i - 1].linkNext && size < 4; if (linkedFromPrev) { groups[i - 1] ??= String.fromCharCode(65 + letter); groups[i] = String.fromCharCode(65 + letter); size++; } else { groups[i] = null; if (r.linkNext && i < rows.length - 1) { letter++; size = 1; } } });
-    try { await start({ name: title.trim(), exercises: rows.map((r, i) => ({ exerciseId: r.exerciseId, sets: r.sets, reps: r.reps, restSeconds: r.restSeconds, targetKg: Math.round((unit === 'lb' ? r.weight * 0.45359237 : r.weight) * 10) / 10, supersetGroup: groups[i] ?? null })) }); }
+    try { await start({ name: title.trim(), location, exercises: rows.map((r, i) => ({ exerciseId: r.exerciseId, sets: r.sets, reps: r.reps, restSeconds: r.restSeconds, targetKg: Math.round((unit === 'lb' ? r.weight * 0.45359237 : r.weight) * 10) / 10, supersetGroup: groups[i] ?? null })) }); }
     catch (error) { notify(trainingErrorText(error, t, tt), true); } finally { setBusy(false); }
   }
   return <form className="panel form-stack free-builder" onSubmit={submit}>

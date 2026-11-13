@@ -20,7 +20,7 @@ export async function saveIntake(userId: string, raw: unknown) {
   const needsReview = body.screening.heart || body.screening.chestPain || body.screening.dizziness || body.screening.pregnancy;
   if (needsReview && !body.healthClearance) throw new ApiError(400, 'HEALTH_REVIEW_REQUIRED');
   const screened = Object.values(body.screening).some(Boolean);
-  const equipment = body.trainingLocation === 'home' ? ['body weight'] : ['body weight', 'dumbbell', 'barbell', 'bench', 'cable', 'machine'];
+  const equipment = body.trainingLocation === 'home' ? ['body weight'] : [...new Set(['body weight', ...body.equipment])];
   const weekdays = ({1:[0],2:[0,3],3:[0,2,4],4:[0,1,3,5],5:[0,1,2,4,5],6:[0,1,2,3,4,5]} as Record<number,number[]>)[body.daysPerWeek];
   const data = { ...body, equipment, birthYear: new Date().getUTCFullYear() - age, intakeVersion: 1,
     onboarded: true, program: 'personal', planWeek: 1,

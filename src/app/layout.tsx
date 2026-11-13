@@ -22,6 +22,8 @@ import './solaris.css';
 import './gloss.css';
 import './simple.css';
 import './intake-player.css';
+import './start-bar.css';
+import './finish.css';
 export const metadata = { title: 'Mingalar Fit · Myanmar Fitness Coach', description: 'Your workouts, plans and progress in one place.', manifest: '/manifest.webmanifest', appleWebApp: { capable: true, title: 'Mingalar Fit' } };
 export const viewport = { themeColor: '#fc7a1e', viewportFit: 'cover', width: 'device-width', initialScale: 1 };
 // Applies the saved theme before first paint (no light flash in dark mode). Static string, no user input.

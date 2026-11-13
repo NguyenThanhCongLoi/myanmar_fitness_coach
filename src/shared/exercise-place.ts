@@ -10,7 +10,7 @@ const homeIds = new Set<string>(HOME_VIDEO_IDS);
 export type PlaceExercise = { id?: string; equipment: string[]; videoUrl?: string | null };
 export const GYM_EQUIPMENT = ['machine', 'cable', 'barbell', 'dumbbell', 'bench', 'band'];
 export function isHomeExercise(e: PlaceExercise) { return !!e.id && homeIds.has(e.id) && e.equipment.every(x => x === 'body weight'); }
-export function isGymExercise(e: PlaceExercise) { return !isHomeExercise(e) && e.equipment.some(x => GYM_EQUIPMENT.includes(x)); }
+export function isGymExercise(e: PlaceExercise) { return e.id !== 'curated-step-up' && !isHomeExercise(e) && e.equipment.some(x => GYM_EQUIPMENT.includes(x)); }
 export function availableAt(e: PlaceExercise, location: 'home' | 'gym') { return location === 'home' ? isHomeExercise(e) : isGymExercise(e); }
 export function placeOf(e: PlaceExercise): 'home' | 'gym' { return isGymExercise(e) ? 'gym' : 'home'; }
 export function hasCollectionVideo(e: PlaceExercise) {

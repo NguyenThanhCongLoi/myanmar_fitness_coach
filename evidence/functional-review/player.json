@@ -1,0 +1,50 @@
+{
+  "result": "PASS",
+  "session": "cmweq9hf2001gfqawuk3il7zt",
+  "autoLeftRightNext": true,
+  "restCheckpoint": {
+    "before": 10,
+    "restored": 10
+  },
+  "transitionRest": 20,
+  "sets": [
+    {
+      "exerciseId": "curated-bird-dog",
+      "setIndex": 0,
+      "seconds": 3
+    },
+    {
+      "exerciseId": "curated-plank",
+      "setIndex": 0,
+      "seconds": 3
+    },
+    {
+      "exerciseId": "curated-bird-dog",
+      "setIndex": 1,
+      "seconds": 3
+    }
+  ],
+  "completionPct": 100,
+  "activeSeconds": 49,
+  "audio": [
+    {
+      "src": "pump.mp3",
+      "paused": false,
+      "volume": 0.35,
+      "decoded": true,
+      "currentTime": 14.342717,
+      "loop": true
+    },
+    {
+      "src": "voice",
+      "paused": true,
+      "volume": 1,
+      "decoded": true,
+      "currentTime": 0.2,
+      "loop": false
+    }
+  ],
+  "cueRequests": 26,
+  "voiceMock": "synthetic WAV, no paid provider",
+  "errors": []
+}

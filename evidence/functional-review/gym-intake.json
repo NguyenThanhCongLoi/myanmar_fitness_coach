@@ -1,0 +1,46 @@
+{
+  "result": "PASS",
+  "equipmentRequired": true,
+  "steps": [
+    "age",
+    "height",
+    "weight",
+    "sex",
+    "goal",
+    "level",
+    "activity",
+    "place",
+    "equipment",
+    "preferences",
+    "days",
+    "minutes",
+    "health",
+    "focus",
+    "waistNow",
+    "waistGoal",
+    "glutesNow",
+    "glutesGoal",
+    "review"
+  ],
+  "equipment": [
+    "body weight",
+    "machine"
+  ],
+  "days": [
+    {
+      "split": "push",
+      "ids": [
+        "gym-machine-shoulder-press",
+        "gym-machine-chest-press"
+      ]
+    },
+    {
+      "split": "legs",
+      "ids": [
+        "gym-seated-calf-raise",
+        "gym-lying-leg-curl-machine",
+        "gym-leg-extension"
+      ]
+    }
+  ]
+}

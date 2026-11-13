@@ -65,6 +65,13 @@ def web():
                         raise RuntimeError('Intake backup integrity check failed')
                 volume.commit()
         # Capture the existing database before this release's additive migrations.
+        functional_backup = Path('/data/backups/pre-functional-v1.db')
+        if connection.execute("SELECT count(*) FROM sqlite_master WHERE name='WorkoutSession'").fetchone()[0] and not functional_backup.exists():
+            functional_backup.parent.mkdir(exist_ok=True)
+            with sqlite3.connect(functional_backup) as backup:
+                connection.backup(backup)
+                if backup.execute('PRAGMA integrity_check').fetchone()[0] != 'ok':
+                    raise RuntimeError('Functional release backup integrity check failed')
         adaptive_backup = Path('/data/backups/pre-adaptive-v2.db')
         if connection.execute("SELECT count(*) FROM sqlite_master WHERE name='WorkoutSession'").fetchone()[0] and not adaptive_backup.exists():
             adaptive_backup.parent.mkdir(exist_ok=True)

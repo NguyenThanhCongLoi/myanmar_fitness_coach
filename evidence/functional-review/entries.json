@@ -1,0 +1,26 @@
+{
+  "result": "PASS",
+  "previews": [
+    {
+      "requested": 15,
+      "count": 3,
+      "meta": "10 min\n3 exercises\nHome\nGlutes \u00b7 Adductors \u00b7 Abs"
+    },
+    {
+      "requested": 20,
+      "count": 3,
+      "meta": "10 min\n3 exercises\nHome\nGlutes \u00b7 Adductors \u00b7 Abs"
+    },
+    {
+      "requested": 30,
+      "count": 5,
+      "meta": "16 min\n5 exercises\nHome\nGlutes \u00b7 Adductors \u00b7 Abs"
+    }
+  ],
+  "bannerCount": 3,
+  "recommendationCount": 3,
+  "tryThisExercises": 1,
+  "recommendedExercises": 3,
+  "samePlayer": true,
+  "errors": []
+}

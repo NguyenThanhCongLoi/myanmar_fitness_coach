@@ -142,7 +142,7 @@ export function PlanView() {
       {history && <ul>{plan.pastWeeks.map(w => <li key={w.week}><span>{u.week} {w.week}</span><i style={{ background: pctColor(w.avg) }}/><strong>{w.avg}%</strong></li>)}</ul>}</section>}
 
     {quick && <Modal title={u.quickPick} close={() => setQuick(false)}>
-      <div className="quick-row">{[7, 15, 20].map(m => <button key={m} type="button" className="quick-card" onClick={() => { setQuick(false); openTrain({ mode: 'follow', focus: 'all', minutes: m }); }}><Timer size={22}/><strong>{m} {u.min}</strong><small>{u.quickHint}</small></button>)}</div>
+      <div className="quick-row">{[15, 20, 30].map(m => <button key={m} type="button" className="quick-card" onClick={() => { setQuick(false); openTrain({ mode: 'follow', focus: 'all', minutes: m }); }}><Timer size={22}/><strong>{m} {u.min}</strong><small>{u.quickHint}</small></button>)}</div>
     </Modal>}
     {open && <Modal title={`${u.day} ${open.day} · ${dayTitle(open)}`} close={() => { setOpen(null); setSwapFor(null); }}>
       <p className="day-meta"><Clock size={15}/>{open.minutes} {u.min} · <Flame size={15}/>{open.kcal} kcal{open.done ? ` · ${open.pct ?? 100}%` : ''}</p>

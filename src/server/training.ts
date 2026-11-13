@@ -1,3 +1,4 @@
+import {eligibleExercises} from '@/shared/workout-policy';
 import { availableAt, hasCollectionVideo } from '@/shared/exercise-place';
 import { z } from 'zod';
 import { prisma } from '@/shared/lib/prisma';
@@ -8,7 +9,7 @@ import { getSession, sessionInclude } from './services';
 
 // Free Workout: manual exercises/sets/reps/weight/rest. No total-duration limit exists for this mode.
 const prescription = z.object({ exerciseId: z.string().min(1).max(100), sets: z.number().int().min(1).max(8), reps: z.number().int().min(1).max(600), restSeconds: z.number().int().min(10).max(600), targetKg: z.number().min(0).max(400).default(0), supersetGroup: z.string().regex(/^[A-J]$/).nullable().optional(), timed: z.boolean().optional() }).strict();
-export const freeInput = z.object({ name: z.string().trim().min(2).max(100), exercises: z.array(prescription).min(1).max(20), location: z.enum(['home','gym']).optional(), program: z.object({ key: z.enum(['personal', 'four_day', 'gym_beginner']), day: z.number().int().min(1).max(60) }).strict().optional() }).strict()
+export const freeInput = z.object({ requestId:z.string().min(8).max(80).regex(/^[a-zA-Z0-9-]+$/).optional(), name: z.string().trim().min(2).max(100), exercises: z.array(prescription).min(1).max(20), location: z.enum(['home','gym']).optional(), program: z.object({ key: z.enum(['personal', 'four_day', 'gym_beginner']), day: z.number().int().min(1).max(60) }).strict().optional() }).strict()
   .refine(v => Object.values(v.exercises.reduce<Record<string, number>>((m, e) => (e.supersetGroup ? { ...m, [e.supersetGroup]: (m[e.supersetGroup] ?? 0) + 1 } : m), {})).every(n => n >= 2 && n <= 4), 'A superset groups 2-4 exercises');
 const ranks = ['beginner', 'intermediate', 'advanced'] as const;
 // Phase timers tolerate 1 s of client/server clock rounding.
@@ -42,12 +43,17 @@ export async function createTraining(userId: string, mode: 'free' | 'follow', ra
   const rows = input?.exercises ?? Object.values(routine!.phases.filter(p => p.kind === 'exercise').reduce((all, p) => {
     const key = p.exerciseId!; all[key] ??= { exerciseId: key, sets: 0, reps: p.reps || 1, restSeconds: routine!.settings.restSeconds, targetKg: 0 }; all[key].sets++; return all;
   }, {} as Record<string, { exerciseId: string; sets: number; reps: number; restSeconds: number; targetKg: number }>));
-  if (input?.location) {
+  const profile=await prisma.fitnessProfile.findUnique({where:{userId}});
+  const location=input?.location??(profile?.intakeVersion===1?(profile.trainingLocation==='gym'?'gym':'home'):null);
+  if (input && location) {
     const allowedRows=await prisma.exercise.findMany({where:{id:{in:rows.map(r=>r.exerciseId)}}});
-    if(allowedRows.some(e=>!availableAt({id:e.id,equipment:e.equipment as string[]},input.location!)||!hasCollectionVideo({id:e.id,equipment:e.equipment as string[],videoUrl:e.videoUrl})))throw new ApiError(400,'EXERCISE_LOCATION_MISMATCH');
+    if(profile?.intakeVersion===1){const mapped=allowedRows.map(e=>({...e,equipment:e.equipment as string[],primaryMuscles:e.primaryMuscles as string[],tags:e.tags as string[]}));const allowed=new Set(eligibleExercises(mapped,profile,location).map(e=>e.id));if(rows.some(r=>!allowed.has(r.exerciseId)))throw new ApiError(400,'EXERCISE_LOCATION_MISMATCH');}
+    if(rows.some(r=>r.exerciseId==='curated-bird-dog'&&(r as {timed?:boolean}).timed&&r.sets%2!==0))throw new ApiError(400,'INVALID_SET');
+    if(allowedRows.some(e=>!availableAt({id:e.id,equipment:e.equipment as string[]},location)||!hasCollectionVideo({id:e.id,equipment:e.equipment as string[],videoUrl:e.videoUrl})))throw new ApiError(400,'EXERCISE_LOCATION_MISMATCH');
   }
   if (new Set(rows.map(p => p.exerciseId)).size !== rows.length) throw new ApiError(400, 'DUPLICATE_EXERCISE');
   return prisma.$transaction(async tx => {
+    if(input?.requestId){const saved=await tx.aiMemory.findUnique({where:{userId_key:{userId,key:`session-start:${input.requestId}`}}});if(saved){const prior=await tx.workoutSession.findFirst({where:{id:saved.content,userId},include:sessionInclude});if(prior)return prior;}}
     const existing = await tx.workoutSession.findFirst({ where: { userId, status: { in: ['active', 'paused'] } } });
     if (existing) throw new ApiError(409, 'ACTIVE_WORKOUT_EXISTS', { sessionId: existing.id });
     if (await tx.exercise.count({ where: { id: { in: rows.map(p => p.exerciseId) } } }) !== rows.length) throw new ApiError(400, 'UNKNOWN_EXERCISE');
@@ -55,7 +61,9 @@ export async function createTraining(userId: string, mode: 'free' | 'follow', ra
     const name = input?.name.normalize('NFC') ?? 'Follow Along';
     const plan = await tx.workoutPlan.create({ data: { userId, name, goal: mode, status: 'session_template', source: mode, days: { create: { name: mode, week: 1, weekday: 0, order: 0, exercises: { create: rows.map((r, order) => { const { supersetGroup: _g, timed: _t, ...p } = r as typeof r & { supersetGroup?: string | null; timed?: boolean }; void _g; void _t; return { ...p, order }; }) } } } }, include: { days: true } });
     const target = mode === 'follow' ? routine!.exerciseCount : rows.reduce((n, p) => n + p.sets, 0);
-    return tx.workoutSession.create({ data: { userId, planId: plan.id, dayId: plan.days[0].id, mode, programKey: input?.program?.key ?? null, programDay: input?.program?.day ?? null, creditTimezone: state.timezone, playerPlan: routine ?? undefined, phaseStartedAt: routine ? new Date() : null, creditTargetSets: target, prescriptions: { create: rows.map((p, order) => ({ ...p, originalExerciseId: p.exerciseId, order })) } }, include: sessionInclude });
+    const session=await tx.workoutSession.create({ data: { userId, planId: plan.id, dayId: plan.days[0].id, mode, programKey: input?.program?.key ?? null, programDay: input?.program?.day ?? null, creditTimezone: state.timezone, playerPlan: routine ?? undefined, phaseStartedAt: routine ? new Date() : null, creditTargetSets: target, prescriptions: { create: rows.map((p, order) => ({ ...p, originalExerciseId: p.exerciseId, order })) } }, include: sessionInclude });
+    if(input?.requestId)await tx.aiMemory.upsert({where:{userId_key:{userId,key:`session-start:${input.requestId}`}},create:{userId,key:`session-start:${input.requestId}`,content:session.id},update:{content:session.id}});
+    return session;
   });
 }
 

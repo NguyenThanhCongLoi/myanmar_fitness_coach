@@ -1,0 +1,30 @@
+{
+  "result": "PASS",
+  "gymCountdown": {
+    "initial": 6,
+    "after": 5
+  },
+  "pause": true,
+  "zeroWaitsForConfirmation": true,
+  "restCountdown": {
+    "initial": 10,
+    "after": 9
+  },
+  "loadCarriedAcrossSets": true,
+  "rirResetsPerSet": true,
+  "musicVolumeAndMute": true,
+  "sets": [
+    {
+      "reps": 2,
+      "weightKg": 50,
+      "rir": 2
+    },
+    {
+      "reps": 1,
+      "weightKg": 45,
+      "rir": 0
+    }
+  ],
+  "completionPct": 75,
+  "errors": []
+}

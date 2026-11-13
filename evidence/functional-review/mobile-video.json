@@ -1,0 +1,192 @@
+[
+  {
+    "exerciseId": "vid-arm-circles",
+    "original": "/media/video/vid-arm-circles.mp4",
+    "mobile": "/media/video/mobile/vid-arm-circles.mp4",
+    "originalSha256": "416ae05284a36d90c327f9f8a81c920fd2ffef3318a270d56038711bb9d3f7a9",
+    "sha256": "caa97eef0e7bec17c9a93828e1c16ea5705483dd2999f3f4aa2cad7e93de5690",
+    "bytes": 122570,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "vid-bicycle-crunch",
+    "original": "/media/video/vid-bicycle-crunch.mp4",
+    "mobile": "/media/video/mobile/vid-bicycle-crunch.mp4",
+    "originalSha256": "7454da9f9b11f2e918d2e8620298ba26fcc8ead2a89cc968b23a605e6567a6a4",
+    "sha256": "f4e2d08882764a3a3b82aac7b2bf2b6dd82a4b353441b39ba011f2bee8489eb5",
+    "bytes": 228802,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "curated-bird-dog",
+    "original": "/media/video/curated-bird-dog-owner.mp4",
+    "mobile": "/media/video/mobile/curated-bird-dog-owner.mp4",
+    "originalSha256": "8633527f99bdb9b4aa1dd0d92eb8e69bcf8237450edc9c9d9e09c51cfbd1648f",
+    "sha256": "f0d67bcdca9cd4ebda263d3f26259212fe69a850af31109feaf9f9833cc054cc",
+    "bytes": 179296,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "curated-squat",
+    "original": "/media/video/curated-squat-owner.mp4",
+    "mobile": "/media/video/mobile/curated-squat-owner.mp4",
+    "originalSha256": "d39f768cc08761fb569bca12f5924fea2a4bdc9299b732ce57c12475e97d3504",
+    "sha256": "3ec5029e809b63140544717d175f5bccd71e722b20660c86d9f8587c1de2fade",
+    "bytes": 212389,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "vid-butt-kicks",
+    "original": "/media/video/vid-butt-kicks.mp4",
+    "mobile": "/media/video/mobile/vid-butt-kicks.mp4",
+    "originalSha256": "0994244686ed7fb2dd8d793f31725657f0c046a974843573dcb3f3f216327ac2",
+    "sha256": "19e3373a8fd02118ef2f9cfea1caeaa344b1d7d160353aeb7d8dcdaf1e496303",
+    "bytes": 160337,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "dataset-0276",
+    "original": "/media/video/dataset-0276-owner.mp4",
+    "mobile": "/media/video/mobile/dataset-0276-owner.mp4",
+    "originalSha256": "03a674ea5ef24496481db56e7d042e4c49500e2653021c4133e40e059fadf040",
+    "sha256": "d0cd674e6dbd7c0aebe522d03bb55c923a23f581caae5cfdf8d2063dbad26ec7",
+    "bytes": 166962,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "vid-high-knees",
+    "original": "/media/video/vid-high-knees.mp4",
+    "mobile": "/media/video/mobile/vid-high-knees.mp4",
+    "originalSha256": "590829aa3c604ec47c31dcc33a0314c7755892361bc220995fe296dfed5a3cfc",
+    "sha256": "bd0656cbfc77c857fe8a8299f1c8a85eb7038aa63d596dd258d5e75a4f1668d1",
+    "bytes": 210896,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "vid-jumping-jacks",
+    "original": "/media/video/vid-jumping-jacks.mp4",
+    "mobile": "/media/video/mobile/vid-jumping-jacks.mp4",
+    "originalSha256": "e1c68964a9b0d2e35f5f7f360633c33e6e85789901ef2ad28e8c514d5aae845a",
+    "sha256": "a3293d49e7f76b5f4c0004bc0cfeb1940a5aeb15ed1fc7f0ac1b559e34aed90a",
+    "bytes": 99480,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "curated-plank",
+    "original": "/media/video/curated-plank-owner.mp4",
+    "mobile": "/media/video/mobile/curated-plank-owner.mp4",
+    "originalSha256": "ef6151f3cb8fdb98683f14e6c0193fd614d2303ff5ca6b313abf7cf510141cef",
+    "sha256": "7b55e90cc66f1bfa4e5892142c93db7c8decb68039e360f35172d5b09151e209",
+    "bytes": 233768,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "dataset-3013",
+    "original": "/media/video/dataset-3013-owner.mp4",
+    "mobile": "/media/video/mobile/dataset-3013-owner.mp4",
+    "originalSha256": "2a9c8bf46b306a6e7d7ff9856e16d5d7400dd91dc5bc71b5b081b7acbd716b04",
+    "sha256": "eacf2d1ce036988dcdba1eb5dd0ebbd2ca4233f95798219a07a3447b92ac9700",
+    "bytes": 265217,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "curated-knee-push",
+    "original": "/media/video/curated-knee-push-owner.mp4",
+    "mobile": "/media/video/mobile/curated-knee-push-owner.mp4",
+    "originalSha256": "cd93635110fc79ebead384b05b6aa6d50a78be56883616f67a353272cc03a43b",
+    "sha256": "18674f91f41f3d24818a68fbe6ce45809b381a8b8bc212a96d2378213e5e52e3",
+    "bytes": 218258,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "vid-mountain-climbers",
+    "original": "/media/video/vid-mountain-climbers.mp4",
+    "mobile": "/media/video/mobile/vid-mountain-climbers.mp4",
+    "originalSha256": "6e96c6b966b0477c91fde2de56af88f561d422e1b88b82cbff5c15873b9a573a",
+    "sha256": "76bfa42669722e79d89799e97462d0ba76e40312bb3b86356dd761a15387d544",
+    "bytes": 264977,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "dataset-0662",
+    "original": "/media/video/dataset-0662-owner.mp4",
+    "mobile": "/media/video/mobile/dataset-0662-owner.mp4",
+    "originalSha256": "ef0c5456f5de84133d0ed9aad4df9c8e8e559149c31b6e05effb445a14b80888",
+    "sha256": "657abb8a7057eb817c3ff2c9eb8c7f09e6ca9229c8dd9e4fc1c120413390c39d",
+    "bytes": 156210,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "vid-reverse-lunge",
+    "original": "/media/video/vid-reverse-lunge.mp4",
+    "mobile": "/media/video/mobile/vid-reverse-lunge.mp4",
+    "originalSha256": "65c9781b3a888989fc874d0d811d1ff87cf1b9c3ee0abdc1bdcdba73571a8628",
+    "sha256": "5e8c718acc0b95c40dee8da37d2f66941f071575710651c98e3220726d48319f",
+    "bytes": 231772,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "vid-reverse-crunch",
+    "original": "/media/video/vid-reverse-crunch.mp4",
+    "mobile": "/media/video/mobile/vid-reverse-crunch.mp4",
+    "originalSha256": "e1f568fd2bc112f3fb236aebceb703ee5fbb69c812560d462cdd992c73219cd0",
+    "sha256": "72d24df8b04a0ba45d01d74b5b68726d55c3be580904cc69ca1ecd0e0597d333",
+    "bytes": 263945,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "vid-shadow-boxing",
+    "original": "/media/video/vid-shadow-boxing.mp4",
+    "mobile": "/media/video/mobile/vid-shadow-boxing.mp4",
+    "originalSha256": "b0aeee5cf60acf3291e039d37bd3b080121232bade4c6ffb02a7d940f574f7b5",
+    "sha256": "30e607472345f6effb50c82aad3ed82fc96eb6994cfe71c1de49b136c1268e8f",
+    "bytes": 230017,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "dataset-1373",
+    "original": "/media/video/dataset-1373-owner.mp4",
+    "mobile": "/media/video/mobile/dataset-1373-owner.mp4",
+    "originalSha256": "0e7c5a6f795bd925dfc8d5daab95e3faf19a0327b157b90263ef7431d52a1995",
+    "sha256": "773f3b46177776213c4c7eddfad9863e81ce23ac69a8e597bc3c6a130f90192a",
+    "bytes": 240337,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "vid-knee-to-elbow",
+    "original": "/media/video/vid-knee-to-elbow.mp4",
+    "mobile": "/media/video/mobile/vid-knee-to-elbow.mp4",
+    "originalSha256": "0ef9e47b82717093c76aa57281b962104b203e7ae93de284294db34eb6bf7ad0",
+    "sha256": "0d4167619b3c0b7e5920bc8a58b053f2d744b40819b5e2e1d743215c2033e566",
+    "bytes": 148519,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  },
+  {
+    "exerciseId": "vid-sumo-squat",
+    "original": "/media/video/vid-sumo-squat.mp4",
+    "mobile": "/media/video/mobile/vid-sumo-squat.mp4",
+    "originalSha256": "db403dd7d51eec370453d615cafa5cb63ea5bf9d91f11c9a4584eab98e0b006b",
+    "sha256": "ef224f95f2cb2fca309957e8f3fed5d8ceec8423c82b3051b6ac1f2c9d1d5a28",
+    "bytes": 149133,
+    "provenance": "Owner-supplied, used with permission",
+    "encoding": "H.264 baseline, max360px width,24fps,220kbps target,260kbps peak,1s keyframes,faststart,no audio"
+  }
+]

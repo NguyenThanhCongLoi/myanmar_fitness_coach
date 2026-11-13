@@ -2,23 +2,21 @@
 import { availableAt, hasCollectionVideo, isHomeExercise } from '@/shared/exercise-place';
 import { BeeTip } from '../gamification/bee-tip';
 import { useEffect, useState } from 'react';
-import { ArrowLeft, ArrowUpRight, House, MessageCircle, PlayCircle, Search } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, House, Loader2, Play, PlayCircle, Search } from 'lucide-react';
 import { localExercise, trainingApi } from '@/shared/client';
 import { useApp } from '@/shared/app-context';
 import { errorText, useLanguage } from '@/shared/language';
-import { useTrainingLanguage } from '@/shared/training-language';
+import { fill, useTrainingLanguage } from '@/shared/training-language';
 import { Empty } from '@/shared/ui';
 import type { Exercise } from '@/shared/types';
 import { MuscleMap, MAPPED_MUSCLES } from './muscle-map';
 import { ExerciseMedia } from './exercise-media';
-import { ExerciseSteps } from './exercise-steps';
-import { ExerciseGuidance, homeAvailable, useLocationPref } from './exercise-guidance';
-import { HOME_EQUIPMENT, doseFor, type Level } from '@/shared/dose';
+import { homeAvailable, useLocationPref } from './exercise-guidance';
 import { MuscleBrowser } from './muscle-browser';
-import { ExerciseRecommendations } from './exercise-recommendations';
-import { fill } from '@/shared/training-language';
-import { CoachChat } from '../ai-coach/coach-chat';
-import { BeeMessage } from '../gamification/mascot';
+import type { PlanDay as GeneratedDay } from '@/shared/plan';
+import { trainingErrorText } from '../training/training-hub';
+import { music, StartBar } from '../plan/workout-music';
+import { workoutVoice } from '@/locales/workout-voice';
 
 export function ExerciseView() {
   const { notify, exerciseId, openExercise } = useApp(); const { locale, t } = useLanguage(); const tt = useTrainingLanguage();
@@ -46,23 +44,38 @@ export function ExerciseView() {
     {!loading && !results.length && <Empty title={t.noResults}/>}</>}<p className="translation-note">{t.provisional}</p></section>;
 }
 
+// Exercise intro: video + muscles at a glance, "Try this" for the single move, and a same-muscle set with a sticky Start bar.
 function ExerciseDetail({ exercise, library }: { exercise: Exercise; library: Exercise[] }) {
-  const { openExercise, openCoach, data } = useApp(); const { locale, t } = useLanguage(); const tt = useTrainingLanguage();
+  const { openExercise, openWorkout, refresh, notify, data } = useApp(); const { locale, t } = useLanguage(); const tt = useTrainingLanguage();
+  const v = workoutVoice[locale === 'my-MM' ? 'my' : 'en'];
+  const [pref] = useLocationPref();
+  const [busy, setBusy] = useState<'one' | 'set' | null>(null);
   const local = localExercise(exercise, locale);
   const primary = exercise.primaryMuscles ?? [], secondary = exercise.secondaryMuscles ?? [];
   const mapped = primary.some(m => MAPPED_MUSCLES.has(m));
   const name = (m: string) => tt.muscleNames[m as keyof typeof tt.muscleNames] ?? m;
-  const alternatives = (exercise.alternatives ?? []).map(id => library.find(e => e.id === id)).filter((e): e is Exercise => Boolean(e));
-  const g = exercise.guidance ?? {};
-  const mistakes = (g.mistakes?.length ? g.mistakes : (exercise.commonMistakes ?? []).map(en => ({ en, my: null })));
-  const level = (data.profile?.experience ?? 'beginner') as Level;
-  const dose = doseFor({ tracking: exercise.tracking, equipment: exercise.equipment, tags: exercise.tags }, level, !!g.perSide);
-  const doseText = fill(dose.unit === 'reps' ? tt.doseReps : tt.doseSeconds, { sets: dose.sets, target: dose.target }) + (dose.perSide ? ` · ${tt.perSide}` : '');
-  const say = (c: { en: string; my: string | null }) => (locale === 'my-MM' ? c.my ?? c.en : c.en);
-  const lang = (c: { my: string | null }) => (locale === 'my-MM' && c.my ? 'my' : 'en');
-  const sections = [['how', tt.sectionHow], ['place', tt.whereTrain], ['reco', tt.recoTitle], ...(mistakes.length ? [['mistakes', tt.mistakes]] : []), ...(alternatives.length ? [['alternatives', tt.alternatives]] : []), ['coach', t.coach]] as [string, string][];
+  const place: 'home' | 'gym' = availableAt(exercise, pref) ? pref : pref === 'home' ? 'gym' : 'home';
+  const [preview,setPreview]=useState<GeneratedDay|null>(null);
+  const [previewError,setPreviewError]=useState(false);
+  useEffect(()=>{let cancelled=false;setPreview(null);setPreviewError(false);
+    trainingApi<GeneratedDay>('quick-plan',{focus:'all',minutes:20,location:place,exerciseId:exercise.id})
+      .then(d=>{if(!cancelled)setPreview(d);}).catch(()=>{if(!cancelled)setPreviewError(true);});
+    return()=>{cancelled=true;};
+  },[exercise.id,place]);
+  const doseText=(e:Exercise)=>{const i=preview?.items.find(i=>i.id===e.id);return i?`${i.sets} \u00d7 ${i.target} ${i.unit==='seconds'?tt.ux.sec:tt.ux.reps}${i.perSide?` \u00b7 ${tt.perSide}`:''}`:t.loading;};
+  const set = (preview?.items??[]).map(i=>library.find(e=>e.id===i.id)).filter((e):e is Exercise=>!!e);
+  const minutes = preview?.minutes??0;
+  async function start(_list: Exercise[], kind: 'one' | 'set') {
+    if (data.activeSession) { openWorkout(data.activeSession.id); return; }
+    setBusy(kind);
+    const title = (kind === 'one' ? local.name : `${v.setTitle} · ${local.name}`).split('—')[0].trim().slice(0, 100);
+    try { const plan=kind==='one'?await trainingApi<GeneratedDay>('quick-plan',{focus:'all',minutes:15,location:place,exerciseId:exercise.id,single:true}):preview;
+      if(!plan?.items.length)throw new Error('NO_EXERCISE_MATCH');
+      const s = await trainingApi<{ id: string }>('free', { name: title.length >= 2 ? title : v.setTitle, location: place, exercises: plan.items.map(i=>({exerciseId:i.id,sets:i.sets*(i.perSide&&i.unit==='seconds'?2:1),reps:i.target,restSeconds:i.rest,targetKg:i.weightKg??0,timed:i.unit==='seconds'})) }); await refresh(); openWorkout(s.id); }
+    catch (e) { notify(trainingErrorText(e, t, tt)); setBusy(null); }
+  }
   useEffect(() => { window.scrollTo({ top: 0 }); }, [exercise.id]);
-  return <section className="exercise-detail" data-exercise={exercise.canonicalId ?? exercise.id}>
+  return <section className="exercise-detail ex-intro" data-exercise={exercise.canonicalId ?? exercise.id}>
     <button className="text-button back-link" onClick={() => openExercise('')}><ArrowLeft size={18}/>{tt.back}</button>
     <header className="detail-header">
       <span className="overline">{tt.detailTitle}</span>
@@ -81,22 +94,19 @@ function ExerciseDetail({ exercise, library }: { exercise: Exercise; library: Ex
         {mapped && <div className="summary-map"><MuscleMap primary={primary} secondary={secondary} compact label={`${tt.primary}: ${primary.map(name).join(', ')}`}/></div>}
         <div className="chip-group"><span className="chip-label">{tt.primary}</span>{primary.map(m => <span key={m} className="chip primary">{name(m)}</span>)}</div>
         {secondary.length > 0 && <div className="chip-group"><span className="chip-label">{tt.secondary}</span>{secondary.map(m => <span key={m} className="chip secondary">{name(m)}</span>)}</div>}
-        <div className="summary-dose"><span className="chip-label">{tt.yourDose}</span><strong>{doseText}</strong></div>
+        <div className="summary-dose"><span className="chip-label">{tt.yourDose}</span><strong>{doseText(exercise)}</strong></div>
+        {<button type="button" className="button secondary ex-try" disabled={busy !== null || !preview} onClick={() => { music.prime(); void start([exercise], 'one'); }}>{busy === 'one' ? <Loader2 className="spin" size={20}/> : <Play size={20}/>}{v.tryThis}</button>}
       </aside>
     </div>
-    <nav className="section-nav" aria-label={tt.detailTitle}>{sections.map(([id, label]) => <a key={id} href={`#ex-${id}`}>{label}</a>)}</nav>
-    <div id="ex-how"><ExerciseSteps exercise={exercise}/></div>
-    <div id="ex-place"><ExerciseGuidance exercise={exercise} library={library}/></div>
-    <ExerciseRecommendations exercise={exercise} library={library}/>
-    {mistakes.length > 0 && <section id="ex-mistakes" className="panel"><h2>{tt.mistakes}</h2><ul className="cue-list mistakes">{mistakes.map((m, i) => <li key={i} lang={lang(m)}>{say(m)}</li>)}</ul></section>}
-    {alternatives.length > 0 && <section id="ex-alternatives" className="panel"><h2>{tt.alternatives}</h2><div className="alt-grid">{alternatives.map(alt => <button key={alt.id} className="alt-card" onClick={() => openExercise(alt.id)}>
-      <span className="alt-map"><MuscleMap primary={alt.primaryMuscles ?? []} secondary={alt.secondaryMuscles ?? []} compact/></span>
-      <span className="alt-text"><strong>{localExercise(alt, locale).name}</strong><small>{tt.levels[alt.difficulty as keyof typeof tt.levels] ?? alt.difficulty} · {(alt.primaryMuscles ?? []).map(name).join(' · ')}</small></span><ArrowUpRight size={18}/></button>)}</div></section>}
-    <section id="ex-coach" className="panel exercise-coach" aria-label={tt.coachPanelTitle}>
-      <div className="exercise-coach-head"><h2><MessageCircle size={18}/> {tt.coachPanelTitle}</h2><BeeMessage state="pointing" size={56} text={tt.coachPanelBee}/></div>
-      <CoachChat key={exercise.id} exerciseId={exercise.id} compact quickActions={[tt.quick.explain, tt.quick.technique, tt.quick.setsReps, tt.quick.load, tt.quick.history, tt.quick.alternatives, tt.quick.easier, tt.quick.harder, tt.quick.addToPlan]}/>
-      <button className="text-button" onClick={() => openCoach(`${local.name} (ID: ${exercise.id}) — `)}>{tt.askCoach} →</button>
-    </section>
+    {set.length > 1 && <section className="panel ex-set" aria-label={v.setTitle}>
+      <div className="ex-set-head"><h2>{v.setTitle}</h2><small>{fill(v.setHint, { n: set.length, min: minutes })}</small></div>
+      <ol className="ex-set-list">{set.map(e => <li key={e.id}><button type="button" className={e.id === exercise.id ? 'current' : ''} onClick={() => { if (e.id !== exercise.id) openExercise(e.id); }}>
+        <span className="ex-set-thumb" style={e.thumbnailUrl ? { backgroundImage: `url(${e.thumbnailUrl})` } : undefined}>{!e.thumbnailUrl && <MuscleMap primary={e.primaryMuscles ?? []} secondary={[]} compact/>}</span>
+        <span className="ex-set-text"><strong>{localExercise(e, locale).name.split('—')[0].trim()}</strong><small>{(e.primaryMuscles ?? []).map(name).join(' · ')}</small><small>{doseText(e)}</small></span>
+        {e.id !== exercise.id && <ArrowUpRight size={18}/>}</button></li>)}</ol>
+    </section>}
     {locale === 'my-MM' && <p className="translation-note">{tt.stepsProvisional}</p>}
+    {previewError&&<p className="explain-box" role="alert">{tt.errors.NO_EXERCISE_MATCH}</p>}
+    <StartBar disabled={!preview} label={busy === 'set' ? tt.ux.starting : data.activeSession ? tt.ux.resume : set.length > 1 ? v.startSet : tt.ux.start} busy={busy !== null} icon={busy === 'set' ? <Loader2 className="spin" size={24}/> : undefined} onStart={() => void start(set, 'set')}/>
   </section>;
 }
