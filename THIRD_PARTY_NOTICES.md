@@ -16,4 +16,3 @@ wger and openGym application code remain AGPL references only; no AGPL source is
 
 # Workout audio addition (2026-11-12)
 
-`public/audio/carefree.mp3`: “Carefree”, Kevin MacLeod (incompetech.com), CC BY 4.0. Source, license, checksum and playback changes in `public/audio/ATTRIBUTION.md`; player shows attribution. Existing original procedural tracks remain original project code. No subscription music service or unlicensed app soundtrack is bundled.
