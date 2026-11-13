@@ -1,3 +1,4 @@
+import { availableAt, hasCollectionVideo } from '@/shared/exercise-place';
 import { z } from 'zod';
 import { prisma } from '@/shared/lib/prisma';
 import { ApiError } from './validation';
@@ -7,7 +8,7 @@ import { getSession, sessionInclude } from './services';
 
 // Free Workout: manual exercises/sets/reps/weight/rest. No total-duration limit exists for this mode.
 const prescription = z.object({ exerciseId: z.string().min(1).max(100), sets: z.number().int().min(1).max(8), reps: z.number().int().min(1).max(600), restSeconds: z.number().int().min(10).max(600), targetKg: z.number().min(0).max(400).default(0), supersetGroup: z.string().regex(/^[A-J]$/).nullable().optional(), timed: z.boolean().optional() }).strict();
-export const freeInput = z.object({ name: z.string().trim().min(2).max(100), exercises: z.array(prescription).min(1).max(20), program: z.object({ key: z.enum(['personal', 'four_day', 'gym_beginner']), day: z.number().int().min(1).max(60) }).strict().optional() }).strict()
+export const freeInput = z.object({ name: z.string().trim().min(2).max(100), exercises: z.array(prescription).min(1).max(20), location: z.enum(['home','gym']).optional(), program: z.object({ key: z.enum(['personal', 'four_day', 'gym_beginner']), day: z.number().int().min(1).max(60) }).strict().optional() }).strict()
   .refine(v => Object.values(v.exercises.reduce<Record<string, number>>((m, e) => (e.supersetGroup ? { ...m, [e.supersetGroup]: (m[e.supersetGroup] ?? 0) + 1 } : m), {})).every(n => n >= 2 && n <= 4), 'A superset groups 2-4 exercises');
 const ranks = ['beginner', 'intermediate', 'advanced'] as const;
 // Phase timers tolerate 1 s of client/server clock rounding.
@@ -23,7 +24,15 @@ export async function previewRoutine(userId: string, raw: unknown) {
   if (missing.length) throw new ApiError(400, 'EQUIPMENT_UNAVAILABLE', { missing });
   // Never generate above the user's stated experience level.
   const level = ranks[Math.min(ranks.indexOf(input.difficulty), ranks.indexOf(profile.experience as typeof ranks[number]))] ?? 'beginner';
-  try { return sequenceWorkout(await prisma.exercise.findMany(), { ...input, difficulty: level }); }
+  try {
+    const all = await prisma.exercise.findMany();
+    const own = all.filter(e=>availableAt({id:e.id,equipment:e.equipment as string[]}, input.location==='gym'?'gym':'home') && hasCollectionVideo({id:e.id,equipment:e.equipment as string[],videoUrl:e.videoUrl}));
+    // Gentle, real supplied arm-circle clip for the legacy sequencer's preparation.
+    // Banner workouts use the reviewed Quick plan and the unified player instead.
+    const preparation = all.find(e=>e.id==='vid-arm-circles');
+    const prep = preparation ? [{...preparation,tags:['warmup','cooldown']}] : [];
+    return sequenceWorkout([...own.filter(e=>e.id!==preparation?.id),...prep], { ...input, difficulty: level });
+  }
   catch (error) { if (error instanceof SequenceError) throw new ApiError(422, error.code, error.details); throw error; }
 }
 
@@ -33,6 +42,10 @@ export async function createTraining(userId: string, mode: 'free' | 'follow', ra
   const rows = input?.exercises ?? Object.values(routine!.phases.filter(p => p.kind === 'exercise').reduce((all, p) => {
     const key = p.exerciseId!; all[key] ??= { exerciseId: key, sets: 0, reps: p.reps || 1, restSeconds: routine!.settings.restSeconds, targetKg: 0 }; all[key].sets++; return all;
   }, {} as Record<string, { exerciseId: string; sets: number; reps: number; restSeconds: number; targetKg: number }>));
+  if (input?.location) {
+    const allowedRows=await prisma.exercise.findMany({where:{id:{in:rows.map(r=>r.exerciseId)}}});
+    if(allowedRows.some(e=>!availableAt({id:e.id,equipment:e.equipment as string[]},input.location!)||!hasCollectionVideo({id:e.id,equipment:e.equipment as string[],videoUrl:e.videoUrl})))throw new ApiError(400,'EXERCISE_LOCATION_MISMATCH');
+  }
   if (new Set(rows.map(p => p.exerciseId)).size !== rows.length) throw new ApiError(400, 'DUPLICATE_EXERCISE');
   return prisma.$transaction(async tx => {
     const existing = await tx.workoutSession.findFirst({ where: { userId, status: { in: ['active', 'paused'] } } });

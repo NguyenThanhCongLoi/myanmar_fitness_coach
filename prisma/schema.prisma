@@ -101,6 +101,9 @@ model FitnessProfile {
   distanceUnit String @default("km")
   timezone     String @default("Asia/Yangon")
   onboarded    Boolean @default(false)
+  intakeVersion Int @default(0)
+  trainingLocation String @default("home")
+  healthClearance Boolean @default(false)
   heightCm     Float?
   birthYear    Int?
   sex          String?

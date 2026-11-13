@@ -6,6 +6,7 @@ import { trainingApi } from '@/shared/client';
 import { useLanguage } from '@/shared/language';
 import { useTrainingLanguage } from '@/shared/training-language';
 import { BeeAvatar } from '../gamification/mascot';
+import { WorkoutIntro } from '../plan/workout-intro';
 import { getLocation, type Plan } from '../plan/plan-view';
 
 // Home = 4 sections only: AI coach, 3 metrics, My plan, workout banners (images in public/images/banners).
@@ -14,15 +15,14 @@ const BANNERS = [
   { key: 'core', img: '/images/banners/core.webp', focus: 'core', minutes: 15, pos: '62% 50%' },
   { key: 'upper', img: '/images/banners/upper.webp', focus: 'upper', minutes: 15, pos: '50% 30%' },
   { key: 'legs', img: '/images/banners/jump.webp', focus: 'legs', minutes: 15, pos: '82% 40%' },
-  { key: 'cardio', img: '/images/banners/cardio.webp', focus: 'all', minutes: 10, pos: '50% 35%' },
-  { key: 'hiit', img: '/images/banners/hiit.webp', focus: 'all', minutes: 7, pos: '60% 45%' },
-  { key: 'stretch', img: '/images/banners/stretch.webp', focus: 'all', minutes: 10, pos: '40% 45%' },
+  { key: 'cardio', img: '/images/banners/cardio.webp', focus: 'cardio', minutes: 10, pos: '50% 35%' },
 ] as const;
 
 export function HomeView() {
   const { data, go, openTrain } = useApp(); const { t } = useLanguage(); const tt = useTrainingLanguage(); const u = tt.ux, h = u.home;
+  const [selectedWorkout, setSelectedWorkout] = useState<typeof BANNERS[number]|null>(null);
   const [plan, setPlan] = useState<Plan | null>(null);
-  useEffect(() => { trainingApi<Plan>(`plan?location=${getLocation()}`).then(setPlan).catch(() => {}); }, []);
+  useEffect(() => { trainingApi<Plan>(`plan?location=${getLocation(data.profile?.trainingLocation)}`).then(setPlan).catch(() => {}); }, []);
   const who = plan?.nickname || data.user.name.split(' ')[0];
   const next = plan?.days.find(d => d.day === plan.current) ?? null;
   const title = (split: string) => u.splits[split as keyof typeof u.splits] ?? split;
@@ -32,6 +32,7 @@ export function HomeView() {
     { icon: Trophy, value: data.stats.completed, label: h.workouts },
     { icon: CalendarCheck, value: plan ? `${plan.completed}/${plan.total}` : '–', label: h.thisWeek },
   ];
+  if (selectedWorkout) return <WorkoutIntro focus={selectedWorkout.focus} minutes={selectedWorkout.minutes} title={h.banners[selectedWorkout.key]} image={selectedWorkout.img} back={()=>setSelectedWorkout(null)}/>;
   return <section className="home-v2">
     <button type="button" className="hv-coach" onClick={() => go('coach')} aria-label={u.coachAsk}>
       <BeeAvatar mood="happy" size={52}/><span><strong>{u.coachHi.replace('{name}', who)}</strong><small>{line}</small></span><ChevronRight size={20}/>
@@ -51,7 +52,7 @@ export function HomeView() {
     </button> : <div className="hv-plan sk"/>}
 
     <div className="hv-head"><h2>{h.forYou}</h2></div>
-    <div className="hv-banners">{BANNERS.map(b => <button key={b.key} type="button" className="hv-banner" style={{ backgroundImage: `url(${b.img})`, backgroundPosition: b.pos }} onClick={() => openTrain({ mode: 'follow', focus: b.focus, minutes: b.minutes })}>
+    <div className="hv-banners">{BANNERS.filter(b=>getLocation(data.profile?.trainingLocation)==='home'||!['core','cardio'].includes(b.key)).map(b => <button key={b.key} type="button" className="hv-banner" style={{ backgroundImage: `url(${b.img})`, backgroundPosition: b.pos }} onClick={() => setSelectedWorkout(b)}>
       <span><strong>{h.banners[b.key]}</strong><small>{b.minutes} {u.min}</small></span></button>)}</div>
     <span className="sr-only">{t.loading}</span>
   </section>;

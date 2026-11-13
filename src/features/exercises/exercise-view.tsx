@@ -1,4 +1,5 @@
 'use client';
+import { availableAt, hasCollectionVideo, isHomeExercise } from '@/shared/exercise-place';
 import { BeeTip } from '../gamification/bee-tip';
 import { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowUpRight, House, MessageCircle, PlayCircle, Search } from 'lucide-react';
@@ -29,17 +30,17 @@ export function ExerciseView() {
   const [tab, setTab] = useState<'muscles' | 'all'>('muscles');
   const selected = exercises.find(e => e.id === exerciseId);
   if (selected) return <ExerciseDetail exercise={selected} library={exercises}/>;
-  const results = exercises.filter(exercise => (place !== 'home' || homeAvailable(exercise) || exercise.equipment.every(q => HOME_EQUIPMENT.includes(q))) && (filter === 'all' || exercise.equipment.includes(filter)) && `${exercise.name} ${localExercise(exercise, locale).name} ${(exercise.primaryMuscles ?? exercise.muscles).join(' ')}`.toLowerCase().includes(search.toLowerCase()));
+  const results = exercises.filter(exercise => (place === 'all' ? (availableAt(exercise,'home') || availableAt(exercise,'gym')) : availableAt(exercise,place)) && hasCollectionVideo(exercise) && (filter === 'all' || exercise.equipment.includes(filter)) && `${exercise.name} ${localExercise(exercise, locale).name} ${(exercise.primaryMuscles ?? exercise.muscles).join(' ')}`.toLowerCase().includes(search.toLowerCase()));
   return <section><div className="page-heading"><span className="overline">{t.movement}</span><h1>{t.browse}</h1><p>{t.browseHint}</p></div><BeeTip context="library"/>
     <div className="seg-switch library-tabs" role="tablist">{(['muscles', 'all'] as const).map(x => <button key={x} role="tab" aria-selected={tab === x} className={tab === x ? 'selected' : ''} onClick={() => setTab(x)}>{x === 'muscles' ? tt.byMuscle : tt.allExercises}</button>)}</div>
-    {tab === 'muscles' ? (loading ? <p className="loading-inline">{t.loading}</p> : <MuscleBrowser library={exercises}/>) : <>
+    {tab === 'muscles' ? (loading ? <p className="loading-inline">{t.loading}</p> : <MuscleBrowser library={exercises.filter(e=>availableAt(e,location)&&hasCollectionVideo(e))}/>) : <>
     <div className="library-toolbar"><div className="search-box"><Search size={19}/><input aria-label={t.search} placeholder={t.search} value={search} onChange={event => setSearch(event.target.value)}/></div><span className="count-label">{results.length} {t.exercises}</span></div>
     <div className="seg-switch library-place" role="tablist">{(['all', 'home', 'gym'] as const).map(p => <button key={p} role="tab" aria-selected={place === p} className={place === p ? 'selected' : ''} onClick={() => { setPlace(p); if (p !== 'all') setLocation(p); }}>{p === 'all' ? t.all : tt[p]}</button>)}</div>
     <div className="filter-row">{['all', 'body weight', 'dumbbell', 'barbell', 'bench', 'cable', 'band', 'machine'].map(item => <button key={item} className={`filter ${filter === item ? 'selected' : ''}`} onClick={() => setFilter(item)}>{item === 'all' ? t.all : t.equipmentLabels[item as keyof typeof t.equipmentLabels]}</button>)}</div>
     {loading ? <p className="loading-inline">{t.loading}</p> : <div className="exercise-grid">{results.map(exercise => {
       const primary = exercise.primaryMuscles ?? [];
       return <button key={exercise.id} className="exercise-card" onClick={() => openExercise(exercise.id)} data-exercise={exercise.canonicalId ?? exercise.id}>
-        <div className="card-map"><MuscleMap primary={primary} secondary={exercise.secondaryMuscles ?? []} compact/><span className="card-badges">{exercise.videoUrl && <span className="card-badge"><PlayCircle size={13}/>{tt.video}</span>}{homeAvailable(exercise) && <span className="card-badge"><House size={13}/>{tt.home}</span>}</span></div><div className="exercise-card-body"><span className="overline">{primary.map(m => tt.muscleNames[m as keyof typeof tt.muscleNames] ?? m).join(' · ') || exercise.muscles[0]}</span><h3>{localExercise(exercise, locale).name}</h3>
+        <div className="card-map"><MuscleMap primary={primary} secondary={exercise.secondaryMuscles ?? []} compact/><span className="card-badges">{exercise.videoUrl && <span className="card-badge"><PlayCircle size={13}/>{tt.video}</span>}{isHomeExercise(exercise) && <span className="card-badge"><House size={13}/>{tt.home}</span>}</span></div><div className="exercise-card-body"><span className="overline">{primary.map(m => tt.muscleNames[m as keyof typeof tt.muscleNames] ?? m).join(' · ') || exercise.muscles[0]}</span><h3>{localExercise(exercise, locale).name}</h3>
           <div className="card-meta"><span>{exercise.equipment.map(item => t.equipmentLabels[item as keyof typeof t.equipmentLabels] ?? item).join(' · ')}</span><ArrowUpRight size={18}/></div></div></button>;
     })}</div>}
     {!loading && !results.length && <Empty title={t.noResults}/>}</>}<p className="translation-note">{t.provisional}</p></section>;

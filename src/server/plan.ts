@@ -1,4 +1,6 @@
 import { z } from 'zod';
+import { availableAt, hasCollectionVideo } from '@/shared/exercise-place';
+import { startingStep } from '@/shared/training-profile';
 import { prisma } from '@/shared/lib/prisma';
 import { ApiError } from './validation';
 import { civilDay } from './streak';
@@ -22,17 +24,22 @@ async function library() {
 // The user's programme, one week at a time: when every day of the week is done, its completion % and feedback
 // decide next week's step (up / same / down). Location comes from the client (home/gym switch).
 export async function getPlan(userId: string, rawLocation: unknown) {
-  const location = rawLocation === 'gym' ? 'gym' : 'home';
+  const requestedLocation = rawLocation === 'gym' ? 'gym' : rawLocation === 'home' ? 'home' : null;
   const [profile, weight, lib, game] = await Promise.all([
     prisma.fitnessProfile.findUnique({ where: { userId } }),
     prisma.bodyMeasurement.findFirst({ where: { userId }, orderBy: { recordedAt: 'desc' }, select: { weightKg: true } }), library(),
     prisma.gameState.findUnique({ where: { userId }, select: { weekdays: true } })]);
-  if (!profile?.onboarded) throw new ApiError(400, 'COMPLETE_PROFILE_FIRST');
+  if (!profile?.onboarded || profile.intakeVersion !== 1) throw new ApiError(400, 'COMPLETE_PROFILE_FIRST');
+  const location = requestedLocation ?? (profile.trainingLocation === 'gym' ? 'gym' : 'home');
+  const health = profile.screening as Record<string,boolean>;
+  if ((health.heart || health.chestPain || health.dizziness || health.pregnancy) && !profile.healthClearance) throw new ApiError(400,'HEALTH_REVIEW_REQUIRED');
   const program = (PROGRAMS as readonly string[]).includes(profile.program) ? profile.program as ProgramKey : 'personal';
   const screened = Object.values((profile.screening ?? {}) as Record<string, boolean>).some(Boolean);
   const level: Level = screened ? 'beginner' : profile.experience as Level;
   let week = profile.planWeek;
-  const initialStep = profile.planStep < 0 ? Math.min(screened ? 2 : 8, startStep(level)) : profile.planStep;
+  const age = profile.birthYear ? new Date().getUTCFullYear() - profile.birthYear : null;
+  const factors = { goal: profile.goal, weightGoal: profile.weightGoal, age, activityLevel: profile.activityLevel, screened };
+  const initialStep = profile.planStep < 0 ? startingStep(level, factors) : profile.planStep;
   const adaptive = await adaptiveWeek(userId, { program, week, step: initialStep, planned: programSplits(program, profile.daysPerWeek, location).length, screened });
   const n = adaptive.base.planned, step = adaptive.decision.step;
   if (profile.planStep !== step) await prisma.fitnessProfile.update({ where: { userId }, data: { planStep: step } });
@@ -54,13 +61,13 @@ export async function getPlan(userId: string, rawLocation: unknown) {
   // The home programme must never require equipment the account did not select.
   const protectedTags: Record<string, string[]> = { knees: ['knee-loaded', 'jumping'], back: ['back-loaded'], shoulders: ['overhead'], wrists: ['wrist-loaded'] };
   const avoided = new Set(bodyPreferences.protectedAreas.flatMap(a => protectedTags[a] ?? []));
-  const eligible = lib.filter(e => e.equipment.every(q => q === 'body weight' || owned.includes(q)) && !e.tags.some(t => avoided.has(t)));
-  const days = buildWeek({ program, daysPerWeek: n, library: eligible, location, step: adaptive.todayChoice?.lighter ? Math.max(0, step - 1) : step, bmi, week, sessionMinutes: adaptive.todayChoice?.minutes ?? profile.sessionMinutes, lowImpact: screened || /knee|ဒူး/.test(limits), priorityMuscles: focusMuscles(bodyPreferences) });
+  const eligible = lib.filter(e => availableAt(e, location) && hasCollectionVideo(e) && (location === 'gym' || e.equipment.every(q => q === 'body weight' || owned.includes(q))) && !e.tags.some(t => avoided.has(t)));
+  const days = buildWeek({ program, daysPerWeek: n, library: eligible, location, step: adaptive.todayChoice?.lighter ? Math.max(0, step - 1) : step, bmi, week, sessionMinutes: adaptive.todayChoice?.minutes ?? profile.sessionMinutes, lowImpact: screened || (age ?? 0) >= 65 || /knee|ဒူး/.test(limits), priorityMuscles: focusMuscles(bodyPreferences), factors });
   const byId = new Map(eligible.map(e => [e.id, e]));
   // user swaps ("replace X with Y") per programme + place; skipped when the target is missing, wrong place or already in that day
   const swaps = await readSwaps(userId, program, location);
   for (const d of days) d.items = d.items.map(i => { const to = swaps[i.id], e = to ? byId.get(to) : null;
-    return e && (location === 'gym' || placeOf(e) === 'home') && !d.items.some(x => x.id === to) ? { ...i, id: e.id, swappedFrom: i.id } : i; });
+    return e && availableAt(e, location) && !d.items.some(x => x.id === to) ? { ...i, id: e.id, swappedFrom: i.id } : i; });
   if (location === 'gym') {
     const suggestions = await progressionFor(userId, [...new Set(days.flatMap(d => d.items.map(i => i.id)))]);
     for (const day of days) for (const item of day.items) {
@@ -101,9 +108,9 @@ export async function swapExercise(userId: string, raw: unknown) {
   const profile = await prisma.fitnessProfile.findUnique({ where: { userId }, select: { program: true, onboarded: true } });
   if (!profile?.onboarded) throw new ApiError(400, 'COMPLETE_PROFILE_FIRST');
   if (b.to) {
-    const e = await prisma.exercise.findUnique({ where: { id: b.to }, select: { equipment: true } });
+    const e = await prisma.exercise.findUnique({ where: { id: b.to }, select: { id: true, equipment: true, videoUrl: true } });
     if (!e) throw new ApiError(404, 'NOT_FOUND');
-    if (b.location === 'home' && placeOf({ equipment: strings(e.equipment) }) === 'gym') throw new ApiError(400, 'SWAP_NOT_ALLOWED');
+    if (!availableAt({ id: e.id, equipment: strings(e.equipment) }, b.location) || !hasCollectionVideo({id:e.id,equipment:strings(e.equipment),videoUrl:e.videoUrl})) throw new ApiError(400, 'SWAP_NOT_ALLOWED');
   }
   const swaps = await readSwaps(userId, profile.program, b.location);
   if (b.to && b.to !== b.from) swaps[b.from] = b.to; else delete swaps[b.from];

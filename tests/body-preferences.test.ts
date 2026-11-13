@@ -17,16 +17,16 @@ test('visual goal values are bounded and reject identity or arbitrary fields', (
 });
 
 test('a focus changes eligible exercise selection without adding harder work', () => {
-  const lib: ProgramExercise[] = ['quadriceps', 'gluteal'].map((muscle, i) => ({ id: `choice-${i}`, equipment: ['body weight'], difficulty: 'beginner', primaryMuscles: [muscle], guidance: { home: ['cue'] } }));
-  expect(pickSession('lower', lib, 'home', 'beginner', 1)[0].exercise.id).toBe('choice-0');
-  expect(pickSession('lower', lib, 'home', 'beginner', 1, ['gluteal'])[0].exercise.id).toBe('choice-1');
+  const lib: ProgramExercise[] = ['quadriceps', 'gluteal'].map((muscle, i) => ({ id: ['curated-squat','dataset-3013'][i], equipment: ['body weight'], difficulty: 'beginner', primaryMuscles: [muscle], guidance: { home: ['cue'] } }));
+  expect(pickSession('lower', lib, 'home', 'beginner', 1)[0].exercise.id).toBe('curated-squat');
+  expect(pickSession('lower', lib, 'home', 'beginner', 1, ['gluteal'])[0].exercise.id).toBe('dataset-3013');
   expect(pickSession('lower', lib, 'home', 'beginner', 1, ['gluteal'])[0].dose).toEqual(pickSession('lower', lib, 'home', 'beginner', 1)[0].dose);
 });
 
 test('preferences persist only for the authenticated owner; plans respect selected equipment', async () => {
   const a = prefix + '-a', b = prefix + '-b';
   await prisma.user.createMany({ data: [a, b].map(id => ({ id, name: 'Synthetic', email: `${id}@example.test` })) });
-  for (const userId of [a, b]) await prisma.fitnessProfile.create({ data: { userId, equipment: ['body weight'], onboarded: true, daysPerWeek: 3 } });
+  for (const userId of [a, b]) await prisma.fitnessProfile.create({ data: { userId, equipment: ['body weight'], onboarded: true, intakeVersion: 1, daysPerWeek: 3 } });
   const bodyPreferences = { ...DEFAULT_BODY_PREFERENCES, focusAreas: ['glutes'] as const, gluteGoal: 'build', waistCm: 80, hipsCm: 95 };
   await savePrefs(a, { bodyPreferences });
   expect((await getPrefs(a)).bodyPreferences).toMatchObject({ focusAreas: ['glutes'], waistCm: 80, hipsCm: 95 });

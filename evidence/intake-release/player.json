@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "preparationMs": 10118,
+  "restMs": 10208,
+  "sets": [
+    {
+      "exerciseId": "curated-bird-dog",
+      "setIndex": 0,
+      "seconds": 2
+    },
+    {
+      "exerciseId": "curated-plank",
+      "setIndex": 0,
+      "seconds": 2
+    },
+    {
+      "exerciseId": "curated-bird-dog",
+      "setIndex": 1,
+      "seconds": 2
+    }
+  ],
+  "errors": []
+}

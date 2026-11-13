@@ -7,6 +7,7 @@ import { useLanguage } from '@/shared/language';
 import { useTrainingLanguage } from '@/shared/training-language';
 import type { Exercise } from '@/shared/types';
 import { groupOf, placeOf, type BalanceIssue, type PlanDay, type PlanItem, type ProgramKey, type StepStage } from '@/shared/plan';
+import { availableAt } from '@/shared/exercise-place';
 import { Modal } from '@/shared/ui';
 import { Button } from '@/components/ui/button';
 import { UI_IMAGES } from '@/shared/ui-images';
@@ -22,13 +23,13 @@ export type Plan = { adaptive?: { decision: ReturnType<typeof assessTraining> };
   current: number | null; completed: number; total: number; days: PlanDayView[]; balance?: { plan: BalanceIssue[]; done: BalanceIssue[] } };
 type Scores = { today: string; days: { day: string; score: number | null; workout: number | null; water: number | null; food: number | null; rest: boolean }[] };
 const LOC = 'mingalar-location';
-export const getLocation = (): 'home' | 'gym' => { try { return localStorage.getItem(LOC) === 'gym' ? 'gym' : 'home'; } catch { return 'home'; } };
+export const getLocation = (fallback: 'home'|'gym' = 'home'): 'home' | 'gym' => { try { return localStorage.getItem(LOC) === 'gym' ? 'gym' : localStorage.getItem(LOC) === 'home' ? 'home' : fallback; } catch { return fallback; } };
 // % colour scale: light green (good) → yellow → red; grey when there is no data yet.
 export const pctColor = (p: number | null | undefined) => (p === null || p === undefined ? 'var(--line)' : p >= 100 ? 'var(--st-great)' : p >= 80 ? 'var(--st-good)' : p >= 50 ? 'var(--st-warn)' : 'var(--st-low)');
 
 export async function startPlanDay(day: PlanDayView, program: ProgramKey, title: string) {
-  return trainingApi<{ id: string }>('free', { name: title.slice(0, 100), program: { key: program, day: day.day },
-    exercises: day.items.map(i => ({ exerciseId: i.id, sets: i.sets, reps: i.target, restSeconds: Math.max(10, i.rest), targetKg: i.weightKg ?? 0, timed: i.unit === 'seconds' })) });
+  return trainingApi<{ id: string }>('free', { name: title.slice(0, 100), location:day.items.every(i=>i.unit==='seconds')?'home':'gym', program: { key: program, day: day.day },
+    exercises: day.items.map(i => ({ exerciseId: i.id, sets: i.sets * (i.perSide && i.unit === 'seconds' ? 2 : 1), reps: i.target, restSeconds: Math.max(10, i.rest), targetKg: i.weightKg ?? 0, timed: i.unit === 'seconds' })) });
 }
 
 export function PlanView() {
@@ -37,7 +38,7 @@ export function PlanView() {
   const [location, setLocation] = useState<'home' | 'gym'>('home'); const [open, setOpen] = useState<PlanDayView | null>(null); const [programs, setPrograms] = useState(false);
   const [busy, setBusy] = useState(false); const [history, setHistory] = useState(false); const [swapFor, setSwapFor] = useState<PlanItem | null>(null); const [quick, setQuick] = useState(false);
   const load = (loc = location) => trainingApi<Plan>(`plan?location=${loc}`).then(p => { setPlan(p); setError(''); }).catch(e => setError(trainingErrorText(e, t, tt)));
-  useEffect(() => { const loc = getLocation(); setLocation(loc); void load(loc); trainingApi<Exercise[]>('exercises').then(setLibrary).catch(() => {}); trainingApi<Scores>('day-scores').then(setScores).catch(() => {}); }, []);
+  useEffect(() => { const loc = getLocation(data.profile?.trainingLocation); setLocation(loc); void load(loc); trainingApi<Exercise[]>('exercises').then(setLibrary).catch(() => {}); trainingApi<Scores>('day-scores').then(setScores).catch(() => {}); }, []);
   const ex = (id: string) => library.find(e => e.id === id);
   const name = (id: string) => { const e = ex(id); return e ? localExercise(e, locale).name.split('—')[0].trim() : id; };
   const dayTitle = (d: PlanDayView) => u.splits[d.split as keyof typeof u.splits] ?? d.split;
@@ -56,7 +57,7 @@ export function PlanView() {
     catch (e) { notify(trainingErrorText(e, t, tt)); } finally { setBusy(false); }
   }
   const alternatives = (item: PlanItem) => { const cur = ex(item.id), g = cur ? groupOf(cur) : null;
-    return library.filter(e => e.id !== item.id && !open?.items.some(i => i.id === e.id) && g && groupOf(e) === g && (location === 'gym' || placeOf(e) === 'home'))
+    return library.filter(e => e.id !== item.id && !open?.items.some(i => i.id === e.id) && g && groupOf(e) === g && availableAt(e,location))
       .sort((a, b) => Number(!!b.videoUrl) - Number(!!a.videoUrl)).slice(0, 8); };
   const goPlan = (l: 'home' | 'gym') => { if (l !== location) switchLocation(l); requestAnimationFrame(() => document.getElementById('my-plan')?.scrollIntoView({ behavior: 'smooth', block: 'start' })); };
   if (error) return <section className="plan-view"><p className="error-text" role="alert">{error}</p></section>;

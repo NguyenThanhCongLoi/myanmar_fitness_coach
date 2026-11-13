@@ -7,6 +7,8 @@ import { useLanguage } from '@/shared/language';
 import { useTrainingLanguage } from '@/shared/training-language';
 import type { Exercise } from '@/shared/types';
 import { BeeTip } from '../gamification/bee-tip';
+import { availableAt, hasCollectionVideo } from '@/shared/exercise-place';
+import { getLocation } from '../plan/plan-view';
 import { groupOf, placeOf, type MuscleGroup } from '@/shared/plan';
 
 // Gym-beginner machines first (simple, guided path), then cables and basic free weights.
@@ -14,15 +16,15 @@ const GYM_GUIDE = ['gym-leg-press', 'gym-machine-chest-press', 'gym-lat-pulldown
   'gym-lying-leg-curl-machine', 'gym-hip-adduction', 'gym-seated-calf-raise', 'gym-assisted-pullup', 'gym-pec-deck', 'gym-smith-squat', 'gym-hack-squat', 'gym-triceps-pushdown', 'gym-cable-biceps-curl', 'core-163', 'gym-cable-crossover'];
 
 export function DiscoverView() {
-  const { go, openTrain, openExercise } = useApp(); const { locale } = useLanguage(); const tt = useTrainingLanguage(); const u = tt.ux;
-  const [library, setLibrary] = useState<Exercise[]>([]); const [gym, setGym] = useState(false); const [place, setPlace] = useState<'home' | 'gym'>('home'); const [group, setGroup] = useState<MuscleGroup | 'all'>('all');
+  const { data, go, openTrain, openExercise } = useApp(); const { locale } = useLanguage(); const tt = useTrainingLanguage(); const u = tt.ux;
+  const [library, setLibrary] = useState<Exercise[]>([]); const [gym, setGym] = useState(false); const [place, setPlace] = useState<'home' | 'gym'>(()=>getLocation(data.profile?.trainingLocation)); const [group, setGroup] = useState<MuscleGroup | 'all'>('all');
   useEffect(() => { trainingApi<Exercise[]>('exercises').then(setLibrary).catch(() => {}); }, []);
   const name = (e: Exercise) => localExercise(e, locale).name.split('—')[0].trim();
-  const card = (e: Exercise) => <button key={e.id} type="button" className="media-card" onClick={() => openExercise(e.id)}>
+  const card = (e: Exercise) => <button key={e.id} data-exercise={e.id} type="button" className="media-card" onClick={() => openExercise(e.id)}>
     <span className="media-card-img" style={e.thumbnailUrl ? { backgroundImage: `url(${e.thumbnailUrl})` } : undefined}>{e.videoUrl && <PlayCircle size={22}/>}<em className={`place-badge ${placeOf(e)}`}>{placeOf(e) === 'gym' ? u.placeGym : u.placeHome}</em></span>
     <span className="media-card-text"><strong>{name(e)}</strong><small>{(e.primaryMuscles ?? []).map(m => tt.muscleNames[m as keyof typeof tt.muscleNames] ?? m).join(' · ')}</small></span></button>;
   if (gym) {
-    const machines = GYM_GUIDE.map(id => library.find(e => e.id === id)).filter((e): e is Exercise => !!e);
+    const machines = GYM_GUIDE.map(id => library.find(e => e.id === id)).filter((e): e is Exercise => !!e && availableAt(e,'gym') && hasCollectionVideo(e));
     return <section className="discover-view">
       <button type="button" className="text-button back-link" onClick={() => setGym(false)}><ArrowLeft size={16}/>{u.back}</button>
       <div className="page-heading"><span className="overline"><Dumbbell size={14}/> {u.gymGuide}</span><h1>{u.gymTitle}</h1><p>{u.gymIntro}</p></div>
@@ -32,7 +34,7 @@ export function DiscoverView() {
       <div className="media-grid">{machines.map(card)}</div>
     </section>;
   }
-  const inPlace = library.filter(e => e.videoUrl && placeOf(e) === place);
+  const inPlace = library.filter(e => availableAt(e,place) && hasCollectionVideo(e));
   const groups = (['chest', 'back', 'legs', 'arms', 'core', 'shoulders'] as const).filter(g => inPlace.some(e => groupOf(e) === g));
   const videos = group === 'all' ? inPlace : inPlace.filter(e => groupOf(e) === group);
   return <section className="discover-view">
@@ -43,7 +45,7 @@ export function DiscoverView() {
     <h2 className="section-title">{u.quick}</h2>
     <div className="quick-row">{[7, 15, 20].map(m => <button key={m} type="button" className="quick-card" onClick={() => openTrain({ mode: 'follow', focus: 'all', minutes: m })}><Timer size={22}/><strong>{m} {u.min}</strong><small>{u.quickHint}</small></button>)}</div>
     <h2 className="section-title">{u.withVideo}</h2>
-    <div className="seg-switch">{(['home', 'gym'] as const).map(p => <button key={p} type="button" className={place === p ? 'selected' : ''} aria-pressed={place === p} onClick={() => { setPlace(p); setGroup('all'); }}>{p === 'home' ? u.placeHome : u.placeGym} · {library.filter(e => e.videoUrl && placeOf(e) === p).length}</button>)}</div>
+    <div className="seg-switch">{(['home', 'gym'] as const).map(p => <button key={p} type="button" className={place === p ? 'selected' : ''} aria-pressed={place === p} onClick={() => { setPlace(p); setGroup('all'); }}>{p === 'home' ? u.placeHome : u.placeGym} · {library.filter(e => availableAt(e,p) && hasCollectionVideo(e)).length}</button>)}</div>
     <p className="muted small">{place === 'home' ? u.placeHomeHint : u.placeGymHint}</p>
     <div className="chip-row" role="group">{(['all', ...groups] as const).map(g => <button key={g} type="button" className={`chip-filter ${group === g ? 'on' : ''}`} aria-pressed={group === g} onClick={() => setGroup(g)}>{g === 'all' ? u.groupAll : u.groupNames[g]}</button>)}</div>
     <div className="media-grid">{videos.map(card)}</div>

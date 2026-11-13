@@ -1,5 +1,11 @@
 # Release verification — 2026-11-12
 
+## Single-question intake / video collections — 2026-11-13
+
+PASS: 80 tests/21 files, locale contracts and production build/TypeScript in an isolated Modal sandbox. Scope `MODAL_PROFILE=lointc`, `MODAL_IMAGE_BUILDER_VERSION=2025.06`, `PYTHONUTF8=1` and `FITNESS_BUILD_STATE=intake-build-sandbox.json`. Workspace `scripts/product-remote.py`: `start`, then `exec 'npm ci --no-audit --no-fund && npx prisma generate && npm run db:migrate && npm run db:seed && npm test && npm run check:locales && npm run build'`, then `serve`. Do not stop another sandbox state.
+
+Existing Playwright CLI: `node '<installed-playwright-cli.js>' -s=pickerqa open '<disposable-preview-url>' --browser=msedge`. Run `-s=pickerqa --raw run-code --filename` with these product scripts in order: `scripts/qa/intake-review.js`, `scripts/qa/player-preview-review.js`, `scripts/qa/intake-layout-review.js`, `scripts/qa/intake-touch-review.js`. They reject production origins; the first creates a disposable account and the others reuse it. PASS: single-question intake and exact saved measurements; Home19/Gym32; red Start; bilateral video during rest and actual seconds; 36 picker layout cases; native CDP touch pan and bounds. Handover: `evidence/intake-release/`, `docs/TRAINING_INTAKE_RELEASE.md`. Physical phones, fluent Myanmar review and clinical effectiveness NOT TESTED.
+
 ## Independent Docker deployment — 2026-11-13
 
 From the product directory, with the SSH key unlocked in Windows OpenSSH agent:

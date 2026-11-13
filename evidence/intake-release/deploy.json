@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "app": "myanmar-fitness-coach",
+  "profile": "lointc",
+  "workspace": "avibigateway",
+  "environment": "main",
+  "cpuOnly": true,
+  "maxWebWriters": 1,
+  "priorDeploymentStopped": true,
+  "deploymentBuildTests": 80,
+  "deploymentBuildLocales": "PASS",
+  "url": "https://avibigateway--myanmar-fitness-coach.modal.run",
+  "independentDockerChanged": false,
+  "aiChatChanged": false
+}

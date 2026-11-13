@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "before": 70,
+  "after": 72,
+  "touch": "native CDP touch pan",
+  "boundaries": [
+    30,
+    250
+  ]
+}

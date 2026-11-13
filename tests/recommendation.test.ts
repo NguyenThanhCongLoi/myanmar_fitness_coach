@@ -70,7 +70,9 @@ test('home without equipment and switching home -> gym change the eligible exerc
   // At the gym the user may select gym equipment even though the profile is bodyweight-only.
   const gym = await previewRoutine(id, { ...base, equipment: ['body weight', 'dumbbell', 'barbell', 'bench', 'cable'], location: 'gym' });
   const gymRows = await prisma.exercise.findMany({ where: { id: { in: gym.phases.filter(p => p.exerciseId).map(p => p.exerciseId!) } } });
-  expect(gymRows.some(e => (e.equipment as string[]).some(q => q !== 'body weight'))).toBe(true);
+  const main = gymRows.filter(e => !((e.tags as string[]) ?? []).some(t => t === 'warmup' || t === 'cooldown'));
+  expect(main.length).toBeGreaterThan(0);
+  expect(main.every(e => (e.equipment as string[]).some(q=>['dumbbell','barbell','bench','cable','machine','band'].includes(q)))).toBe(true);
   await expect(previewRoutine(id, { ...base, equipment: ['barbell'], location: 'home' })).rejects.toMatchObject({ code: 'EQUIPMENT_UNAVAILABLE' });
 });
 

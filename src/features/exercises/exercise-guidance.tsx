@@ -1,4 +1,5 @@
 'use client';
+import { isHomeExercise } from '@/shared/exercise-place';
 import { useEffect, useState } from 'react';
 import { Building2, House } from 'lucide-react';
 import type { Exercise } from '@/shared/types';
@@ -10,9 +11,10 @@ import { doseFor, type Level } from '@/shared/dose';
 
 type Cue = { en: string; my: string | null };
 export type Guidance = { perSide?: boolean; home?: Cue[]; gym?: Cue[] };
-export function homeAvailable(e: Exercise) { return ((e.guidance as Guidance | undefined)?.home?.length ?? 0) > 0; }
+export function homeAvailable(e: Exercise) { return isHomeExercise(e); }
 export function useLocationPref(): ['home' | 'gym', (v: 'home' | 'gym') => void] {
-  const [location, set] = useState<'home' | 'gym'>('home');
+  const {data} = useApp();
+  const [location, set] = useState<'home' | 'gym'>(data.profile?.trainingLocation ?? 'home');
   useEffect(() => { try { const v = localStorage.getItem('mingalar-location'); if (v === 'home' || v === 'gym') set(v); } catch { /* optional */ } }, []);
   return [location, (v) => { set(v); try { localStorage.setItem('mingalar-location', v); } catch { /* optional */ } }];
 }

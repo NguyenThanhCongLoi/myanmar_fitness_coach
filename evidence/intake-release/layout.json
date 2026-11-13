@@ -1,0 +1,582 @@
+{
+  "result": "PASS",
+  "checks": [
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 320,
+      "step": "age",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 284,
+        "height": 60,
+        "bottom": 691.5
+      },
+      "value": "34"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "step": "age",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 354,
+        "height": 60,
+        "bottom": 697.5
+      },
+      "value": "34"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1280,
+      "step": "age",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 680,
+        "height": 60,
+        "bottom": 743.5
+      },
+      "value": "34"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 320,
+      "step": "height",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 284,
+        "height": 60,
+        "bottom": 691.59375
+      },
+      "value": "170"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "step": "height",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 354,
+        "height": 60,
+        "bottom": 714.390625
+      },
+      "value": "170"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1280,
+      "step": "height",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 680,
+        "height": 60,
+        "bottom": 760.390625
+      },
+      "value": "170"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 320,
+      "step": "weight",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 284,
+        "height": 60,
+        "bottom": 691.59375
+      },
+      "value": "70"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "step": "weight",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 354,
+        "height": 60,
+        "bottom": 714.390625
+      },
+      "value": "70"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1280,
+      "step": "weight",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 680,
+        "height": 60,
+        "bottom": 760.390625
+      },
+      "value": "70"
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 320,
+      "step": "age",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 284,
+        "height": 60,
+        "bottom": 691.5
+      },
+      "value": "34"
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "step": "age",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 354,
+        "height": 60,
+        "bottom": 697.5
+      },
+      "value": "34"
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1280,
+      "step": "age",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 680,
+        "height": 60,
+        "bottom": 743.5
+      },
+      "value": "34"
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 320,
+      "step": "height",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 284,
+        "height": 60,
+        "bottom": 691.59375
+      },
+      "value": "170"
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "step": "height",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 354,
+        "height": 60,
+        "bottom": 714.390625
+      },
+      "value": "170"
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1280,
+      "step": "height",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 680,
+        "height": 60,
+        "bottom": 760.390625
+      },
+      "value": "170"
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 320,
+      "step": "weight",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 284,
+        "height": 60,
+        "bottom": 691.59375
+      },
+      "value": "70"
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "step": "weight",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 354,
+        "height": 60,
+        "bottom": 714.390625
+      },
+      "value": "70"
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1280,
+      "step": "weight",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 680,
+        "height": 60,
+        "bottom": 760.390625
+      },
+      "value": "70"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 320,
+      "step": "age",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 284,
+        "height": 60,
+        "bottom": 692.140625
+      },
+      "value": "34"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 390,
+      "step": "age",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 354,
+        "height": 60,
+        "bottom": 692.140625
+      },
+      "value": "34"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 1280,
+      "step": "age",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 680,
+        "height": 60,
+        "bottom": 738.140625
+      },
+      "value": "34"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 320,
+      "step": "height",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 284,
+        "height": 60,
+        "bottom": 692.484375
+      },
+      "value": "170"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 390,
+      "step": "height",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 354,
+        "height": 60,
+        "bottom": 709.28125
+      },
+      "value": "170"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 1280,
+      "step": "height",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 680,
+        "height": 60,
+        "bottom": 755.28125
+      },
+      "value": "170"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 320,
+      "step": "weight",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 284,
+        "height": 60,
+        "bottom": 692.484375
+      },
+      "value": "70"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 390,
+      "step": "weight",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 354,
+        "height": 60,
+        "bottom": 709.28125
+      },
+      "value": "70"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 1280,
+      "step": "weight",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 680,
+        "height": 60,
+        "bottom": 755.28125
+      },
+      "value": "70"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 320,
+      "step": "age",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 284,
+        "height": 60,
+        "bottom": 692.140625
+      },
+      "value": "34"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 390,
+      "step": "age",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 354,
+        "height": 60,
+        "bottom": 692.140625
+      },
+      "value": "34"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 1280,
+      "step": "age",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 680,
+        "height": 60,
+        "bottom": 738.140625
+      },
+      "value": "34"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 320,
+      "step": "height",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 284,
+        "height": 60,
+        "bottom": 692.484375
+      },
+      "value": "170"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 390,
+      "step": "height",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 354,
+        "height": 60,
+        "bottom": 709.28125
+      },
+      "value": "170"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 1280,
+      "step": "height",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 680,
+        "height": 60,
+        "bottom": 755.28125
+      },
+      "value": "170"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 320,
+      "step": "weight",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 284,
+        "height": 60,
+        "bottom": 692.484375
+      },
+      "value": "70"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 390,
+      "step": "weight",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 354,
+        "height": 60,
+        "bottom": 709.28125
+      },
+      "value": "70"
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 1280,
+      "step": "weight",
+      "overflow": 0,
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif",
+      "numberInputs": 0,
+      "sliderCount": 1,
+      "button": {
+        "width": 680,
+        "height": 60,
+        "bottom": 755.28125
+      },
+      "value": "70"
+    }
+  ],
+  "errors": []
+}

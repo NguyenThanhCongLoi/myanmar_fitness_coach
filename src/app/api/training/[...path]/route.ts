@@ -1,4 +1,6 @@
 import {z} from 'zod';
+import {saveIntake} from '@/server/intake';
+import {previewQuickWorkout} from '@/server/quick-workout';
 import {requiredUser} from '@/server/auth';
 import {prisma} from '@/shared/lib/prisma';
 import {createTraining,previewRoutine,trainingAction} from '@/server/training';
@@ -79,6 +81,8 @@ async function handler(request:Request,context:{params:Promise<{path:string[]}>}
   else if(!write&&path[0]==='sessions'&&path.length===2)result={...await getSession(user.id,path[1]),serverNow:new Date().toISOString()};
   else if(!write&&key==='recommendation')result=await recommendTrainingFocus(user.id,{location:new URL(request.url).searchParams.get('location')??'home'});
   else if(write&&path[0]==='sessions'&&path[2]==='feedback'&&path.length===3)result=await saveFeedback(user.id,path[1],body);
+  else if(write&&key==='intake')result=await saveIntake(user.id,body);
+  else if(write&&key==='quick-plan')result=await previewQuickWorkout(user.id,body);
   else if(write&&key==='free')result=await createTraining(user.id,'free',body);
   else if(write&&key==='preview')result=await previewRoutine(user.id,body);
   else if(write&&key==='follow')result=await createTraining(user.id,'follow',body);

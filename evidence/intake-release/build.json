@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "tests": 80,
+  "testFiles": 21,
+  "localeContracts": "PASS",
+  "productionBuild": "PASS",
+  "typescript": "PASS",
+  "environment": "separate Modal sandbox, disposable SQLite; no customer Volume or gateway credentials",
+  "commands": [
+    "npm ci --no-audit --no-fund",
+    "npx prisma generate",
+    "npm run db:migrate",
+    "npm run db:seed",
+    "npm test",
+    "npm run check:locales",
+    "npm run build"
+  ],
+  "finalStyleBuild": "PASS"
+}

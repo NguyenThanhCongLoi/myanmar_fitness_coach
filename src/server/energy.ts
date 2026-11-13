@@ -22,7 +22,7 @@ export async function saveBody(userId: string, raw: unknown) {
   // a goal weight below a healthy BMI (18.5) is refused, e.g. 35 kg at 170 cm (BMI ~12)
   const height = input.heightCm ?? (await prisma.fitnessProfile.findUnique({ where: { userId }, select: { heightCm: true } }))?.heightCm ?? null;
   if (height && input.goalWeightKg && input.goalWeightKg / (height / 100) ** 2 < 18.5) throw new ApiError(400, 'GOAL_BMI_TOO_LOW');
-  return prisma.fitnessProfile.update({ where: { userId }, data: { ...input, sex: input.sex === 'unspecified' ? null : input.sex } });
+  return prisma.fitnessProfile.update({ where: { userId }, data: { ...input, ...(!input.heightCm || !input.birthYear || !input.sex ? {intakeVersion:0} : {}) } });
 }
 export async function logFood(userId: string, raw: unknown) {
   const input = foodInput.parse(raw); const { today } = await context(userId);

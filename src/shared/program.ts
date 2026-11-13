@@ -1,7 +1,9 @@
 // Shared, deterministic programme logic (client + server): muscle groups, training splits,
 // a weekly plan built only from existing exercises, and general nutrition guidance.
 // Nothing here is medical advice; numbers are common evidence-based ranges for healthy adults.
-import { doseFor, HOME_EQUIPMENT, type Level } from './dose';
+import { doseFor, type Level } from './dose';
+import { availableAt } from './exercise-place';
+export { availableAt } from './exercise-place';
 
 export type ProgramExercise = { id: string; videoUrl?: string | null; primaryMuscles?: string[]; secondaryMuscles?: string[]; equipment: string[]; difficulty: string; tags?: string[]; tracking?: string; guidance?: { home?: unknown[]; perSide?: boolean } };
 export const MUSCLE_GROUPS = {
@@ -24,9 +26,6 @@ export type Split = keyof typeof SPLITS | 'full' | 'upper' | 'lower';
 const SPLIT_MUSCLES: Record<Split, readonly string[]> = { ...SPLITS, full: [...SPLITS.push, ...SPLITS.pull, ...SPLITS.legs, ...SPLITS.core], upper: [...SPLITS.push, ...SPLITS.pull], lower: [...SPLITS.legs, ...SPLITS.core] };
 const rank: Record<string, number> = { beginner: 0, intermediate: 1, advanced: 2 };
 const isPrep = (e: ProgramExercise) => (e.tags ?? []).some(t => t === 'warmup' || t === 'cooldown');
-export function availableAt(e: ProgramExercise, location: 'home' | 'gym') {
-  return location === 'gym' || (((e.guidance?.home?.length ?? 0) > 0) && e.equipment.every(q => HOME_EQUIPMENT.includes(q) || q === 'bench'));
-}
 export function exercisesFor(muscles: readonly string[], library: ProgramExercise[], location?: 'home' | 'gym') {
   return library.filter(e => !isPrep(e) && (e.primaryMuscles ?? []).some(m => muscles.includes(m)) && (!location || availableAt(e, location)))
     .sort((a, b) => (rank[a.difficulty] ?? 1) - (rank[b.difficulty] ?? 1) || (b.secondaryMuscles?.length ?? 0) - (a.secondaryMuscles?.length ?? 0) || a.id.localeCompare(b.id));

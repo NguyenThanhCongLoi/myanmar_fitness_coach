@@ -22,7 +22,7 @@ test('increase needs enough actual completions, explicit form and recovery; one 
 });
 test('plan reads never compound; weekly close advances once, is owner isolated and rejects injected identity', async () => {
   const a = prefix + 'a', b = prefix + 'b';
-  for (const id of [a,b]) await prisma.user.create({ data: { id, email: `${id}@example.test`, name: 'Synthetic', profile: { create: { onboarded: true, equipment: ['body weight'], daysPerWeek: 3, planStep: 3 } } } });
+  for (const id of [a,b]) await prisma.user.create({ data: { id, email: `${id}@example.test`, name: 'Synthetic', profile: { create: { onboarded: true, intakeVersion: 1, equipment: ['body weight'], daysPerWeek: 3, planStep: 3 } } } });
   await getPlan(a, 'home');
   const session = await createTraining(a, 'free', { name: 'Test', program: { key: 'personal', day: 1 }, exercises: [{ exerciseId: 'dataset-0294', sets: 1, reps: 10, restSeconds: 30, targetKg: 0 }] });
   await prisma.workoutSession.update({ where: { id: session.id }, data: { status: 'completed', endedAt: new Date(), completionPct: 30, note: 'quit:too_hard' } });

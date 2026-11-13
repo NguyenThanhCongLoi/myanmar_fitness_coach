@@ -12,7 +12,7 @@ export const FOCUS_GROUPS = {
   pull: ['upper-back', 'back-deltoids', 'biceps', 'trapezius', 'forearm'],
 } as const;
 export type FocusGroup = keyof typeof FOCUS_GROUPS;
-export const LOCATION_EQUIPMENT = { home: ['body weight', 'band', 'dumbbell'], gym: ['body weight', 'dumbbell', 'barbell', 'bench', 'cable', 'band', 'machine'] } as const;
+export const LOCATION_EQUIPMENT = { home: ['body weight'], gym: ['body weight', 'dumbbell', 'barbell', 'bench', 'cable', 'band', 'machine'] } as const;
 export function focusMuscles(focus: string): string[] | null { return focus === 'all' ? null : focus === 'upper' ? [...FOCUS_GROUPS.push, ...FOCUS_GROUPS.pull] : (FOCUS_GROUPS as Record<string, readonly string[]>)[focus]?.slice() ?? [focus]; }
 export const sequenceInput = z.object({
   seconds: z.number().int().min(60).max(3600),
