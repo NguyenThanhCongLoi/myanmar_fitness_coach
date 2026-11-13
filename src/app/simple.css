@@ -104,8 +104,64 @@ body{background:var(--paper)}
 /* review fixes */
 h1,.page-heading h1,.plan-head h1,.quiz-title,:root[data-theme=dark] :is(h1,.page-heading h1){color:var(--ink)}
 .hv-coach .bee-avatar,.hv-coach img{width:52px!important;height:52px!important;flex:0 0 52px;object-fit:contain;border-radius:50%;background:var(--v-soft)}
-.hv-banner,.hv-plan{background-size:cover!important;background-position:center!important}
+.hv-banner,.hv-plan{background-size:cover!important}
 .player-media{background:var(--surface-2);aspect-ratio:4/5;max-height:54dvh}
 .player-media video{object-fit:contain;background:var(--surface-2)}
 .hv-plan::before,.hv-banner::before{background:linear-gradient(180deg,rgb(0 0 0/0) 15%,rgb(0 0 0/.45) 50%,rgb(0 0 0/.82))}
 .hv-plan-body small{opacity:1;color:rgb(255 255 255/.92);text-shadow:0 1px 3px rgb(0 0 0/.4)}
+
+/* ---------- Ratios & banners everywhere (2026-11-13 b) ---------- */
+/* plan card 16:10, banners 4:5 portrait cards like the reference "Featured workout" rail */
+.hv-plan{min-height:0;aspect-ratio:16/10;max-height:340px}
+.hv-banners{grid-auto-columns:min(58%,240px);gap:12px}
+.hv-banner{min-height:0;aspect-ratio:4/5;border-radius:26px}
+.hv-banner strong{font-size:18px;line-height:1.25}
+@media(min-width:1100px){.hv-banners{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:220px}.hv-plan{max-height:380px}}
+.hv-metric{padding:14px 12px;border-radius:20px}
+/* page heroes: Water, Goals and Exercises open with one of the banner photos */
+:is(.water-view,.target-view,.discover-view)>.page-heading{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;min-height:0;aspect-ratio:16/9;max-height:300px;margin:0;padding:18px;border-radius:26px;overflow:hidden;color:#fff;background:#2a2540 center/cover no-repeat;isolation:isolate}
+:is(.water-view,.target-view,.discover-view)>.page-heading::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgb(0 0 0/0) 25%,rgb(0 0 0/.72))}
+.water-view>.page-heading{background-image:url(/images/banners/cardio.webp);background-position:50% 30%}
+.target-view>.page-heading{background-image:url(/images/banners/jump.webp);background-position:80% 40%}
+.discover-view>.page-heading{background-image:url(/images/banners/upper.webp);background-position:50% 28%}
+:is(.water-view,.target-view,.discover-view)>.page-heading :is(h1,p,.overline),:root[data-theme=dark] :is(.water-view,.target-view,.discover-view)>.page-heading h1{color:#fff;margin:0}
+:is(.water-view,.target-view,.discover-view)>.page-heading p{color:rgb(255 255 255/.85);font-size:15px}
+:is(.water-view,.target-view,.discover-view)>.page-heading .overline{opacity:.85}
+.feature-banner{background:linear-gradient(90deg,rgb(20 12 50/.82),rgb(20 12 50/.25)),url(/images/banners/hiit.webp) 70% 40%/cover no-repeat!important;min-height:140px;border:0}
+.feature-banner strong,.feature-banner em{color:#fff}.feature-banner small{color:#cbbcff}
+
+/* ---------- Proportions pass: calmer, more premium rhythm ---------- */
+.home-v2{gap:22px;max-width:880px}
+.hv-head{margin:6px 0 -8px}.hv-head h2{font-size:20px;letter-spacing:-.02em}
+/* coach: slimmer */
+.hv-coach{padding:12px 16px;gap:14px;border-radius:22px}
+.hv-coach .bee-avatar,.hv-coach img{width:44px!important;height:44px!important;flex-basis:44px}
+.hv-coach strong{font-size:17px}.hv-coach small{font-size:14px}
+/* metrics: one quiet strip with hairline dividers instead of three heavy boxes */
+.hv-metrics{grid-template-columns:repeat(3,1fr);gap:0;padding:14px 4px;border-radius:22px;background:var(--surface-2)}
+.hv-metric{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:10px;row-gap:0;align-items:center;padding:0 14px;background:none;border-radius:0}
+.hv-metric+.hv-metric{border-left:1px solid var(--line)}
+.hv-metric svg{grid-row:1/3;width:20px;height:20px}
+.hv-metric strong{font-size:20px;line-height:1.15}.hv-metric small{font-size:12px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+:lang(my) .hv-metric small{font-size:11px}
+/* plan: 16:10 on phones, a cinematic 21:9 strip on large screens */
+.hv-plan{aspect-ratio:16/10;max-height:none;border-radius:28px}
+.hv-plan-body strong{font-size:24px}
+/* banner rail: tall 4:5 cards, peek of the next one */
+.hv-banners{grid-auto-columns:min(56%,230px);margin-right:-16px;padding-right:16px}
+.hv-banner{border-radius:24px;padding:14px}
+@media(min-width:761px){
+  .hv-plan{aspect-ratio:21/9}
+  .hv-banners{grid-auto-columns:200px;margin-right:0;padding-right:0}
+}
+/* desktop chrome */
+.sidebar .brand-mark{background:var(--v2);color:#fff}
+.sidebar-label{display:none}
+.topbar{border-bottom:1px solid var(--line)}
+.hv-metric{padding:0 10px;column-gap:8px}
+.hv-metric small{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.25;word-break:keep-all}
+:lang(my) .hv-metric small{font-size:11px;line-height:1.5}
+:lang(my) :is(.hv-plan-body strong,.hv-banner strong,.hv-coach small,.ps-day strong){word-break:keep-all;overflow-wrap:normal;line-height:1.55}
+:lang(my) .hv-plan-body strong{font-size:21px}
+.sidebar nav{margin-top:28px}
+@media(min-width:761px){.hv-plan{max-height:320px}}

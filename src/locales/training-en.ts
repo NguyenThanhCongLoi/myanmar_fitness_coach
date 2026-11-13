@@ -131,7 +131,7 @@ const en = {
   },
   ux: {
     bodyData: 'Body & calories', bodyDataHint: 'Height, weight, goal weight, water', 
-    home: { streak: 'Day streak', workouts: 'Workouts', thisWeek: 'This week', forYou: 'Workouts for you', coachToday: 'Today: {title}, {min} min. Tap to ask me anything.', coachResume: 'Your workout is waiting. Let\'s finish it.', coachLoading: 'Getting your plan ready…', banners: { all: 'Full body burn', core: 'Core in 15', upper: 'Upper body' } },
+    home: { streak: 'Streak', workouts: 'Workouts', thisWeek: 'This week', forYou: 'Workouts for you', coachToday: 'Today: {title}, {min} min. Tap to ask me anything.', coachResume: 'Your workout is waiting. Let\'s finish it.', coachLoading: 'Getting your plan ready…', banners: { all: 'Full body burn', core: 'Core in 15', upper: 'Upper body', legs: 'Legs & jumps', cardio: 'Quick cardio', hiit: '7-minute blast', stretch: 'Stretch & reset' } },
     onb: { scheduleTitle: 'How often and how long?', daysLabel: 'Days per week', minutesLabel: 'Minutes per session', healthTitle: 'One health question', healthHint: 'Has a doctor told you to limit exercise, or do you have a heart condition?', homeSub: 'No equipment needed', needOne: 'Choose an option to continue', needDays: 'Choose how many days per week', needMinutes: 'Choose how long each session is', needBoth: 'Choose days per week and session length', makingSteps: ['Your profile', 'Your schedule', 'Your first week'] },
     plural: { set1: '1 set', sets: '{n} sets', day1: '1 training day', days: '{n} training days' }, starting: 'Starting…',
     nav: { home: 'Today', discover: 'Exercises', water: 'Water & food', target: 'Goals', me: 'Me' },
