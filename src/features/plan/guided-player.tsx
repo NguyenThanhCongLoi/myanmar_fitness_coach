@@ -109,7 +109,6 @@ export function GuidedPlayer({ sessionId, listView }: { sessionId: string; listV
       <button type="button" className="icon-button" aria-label={u.listView} onClick={listView}><List size={20}/></button>
     </div>
     {audio.controls}
-    {cur && <details className="player-credit"><summary>{tt.creditsTitle}</summary><small>{cur.exercise.mediaSource || tt.noVideo}</small></details>}
     {phase === 'ready' && cur && <div className="player-ready"><div className="player-media">{media(cur.exercise)}</div><p>{u.getReady}</p><strong className="big-count">{count}</strong><h2>{nm(cur.exercise)}</h2>
       <button type="button" className="text-button" onClick={() => setPhase('work')}>{u.startNow}</button></div>}
     {phase === 'work' && cur && <div className="player-work">

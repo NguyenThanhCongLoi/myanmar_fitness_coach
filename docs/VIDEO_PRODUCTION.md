@@ -1,5 +1,7 @@
 # Creator handover
 
+Vietnamese visual handover: open `video-production-kit/index.html`, or extract `VIDEO_PRODUCTION_KIT.zip`. Includes 35 home-capable exercises and 27 gym-equipment exercises; 90 unchanged image files cover 44 exercises. The 18 without a registered image are explicitly marked, with a separate CSV. Home-capable exercises also work at a gym; equipment requirements remain per exercise. Primary reference links are not grants to copy third-party photographs. Regenerate with `python scripts/video-reference-kit.py`.
+
 Run `python scripts/video-production.py` to regenerate `VIDEO_SHOT_LIST.csv`. It lists every current exercise using stable IDs, home/gym equipment, muscles, side handling, setup instructions and common mistakes. P1 means no existing demo; P2 replaces a licensed, unreviewed demo. This is a production backlog, not a claim that all clips already exist.
 
 For each ID deliver:

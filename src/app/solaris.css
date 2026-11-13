@@ -215,7 +215,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--lime);box-shadow:0 0 
 .player-poster{background-color:var(--surface-2);color:var(--ink);box-sizing:border-box;background-size:contain}.player-poster .muscle-map{height:100%;max-height:100%;width:100%}
 .player,.player-ready,.player-work{width:100%;min-width:0;box-sizing:border-box}
 .player-media{width:100%;max-width:100%;aspect-ratio:auto;box-sizing:border-box}
-.player-credit{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
 .today-hero-media{display:grid;place-items:center}.hero-placeholder{color:var(--forest);opacity:.8}
 .player:fullscreen .player-media{height:56dvh}.player .big-count{font-size:88px}.rir-choice{max-width:320px;margin:12px auto}
 .calendar-month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;max-height:270px;overflow:auto;padding:2px}

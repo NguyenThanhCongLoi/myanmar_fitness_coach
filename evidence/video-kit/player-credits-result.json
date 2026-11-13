@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "playerCreditsRemoved": true,
+  "dedicatedCreditsRetained": true,
+  "pageErrors": [],
+  "checks": [
+    {
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "width": 1440,
+      "overflow": 0
+    }
+  ]
+}

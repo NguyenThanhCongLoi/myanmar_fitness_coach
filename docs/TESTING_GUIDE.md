@@ -1,5 +1,11 @@
 # Release verification — 2026-11-12
 
+## Video creator kit / credit placement — 2026-11-13
+
+PASS: 76 tests, locale contract and remote production build after removing inline player credits. Preview-only synthetic account checks: credits absent from the guided player at 320/390/1440px, no overflow/page errors, full author attribution still reachable via Profile → Credits & licences. No synthetic production accounts were created following the requested user-data wipe.
+
+`python scripts/video-reference-kit.py` exports 62 IDs (35 home-capable / 27 gym equipment), 90 byte-identical images for 44 exercises, and an explicit 18-image gap list. PASS: ZIP CRC, unique IDs and all image SHA-256 values. `scripts/qa/video-kit-review.js` on a localhost-only static server decoded all 90 images, checked filters 35/27/18/62 and ID search, and verified 320/390/1440px overflow=0. The CLI blocks `file://`, so runtime verification used localhost; direct file opening in other browsers is NOT TESTED. No external assets are required to render the packaged gallery. Source/reference links are explicit and optional.
+
 Heavy checks ran in an isolated CPU Modal sandbox using profile `lointc`, workspace `avibigateway`, active environment `main`, disposable SQLite, no customer Volume or provider keys. Workspace orchestration is `../scripts/product-remote.py`: `start`, `sync`, `exec '<command>'`, then `serve` only after build completion. Do not rebuild while reviewing a running preview: restart `serve` after the build. Targeted source sync was used during iteration; final public audio was fully synchronized and decoded with ffprobe (205.139625s / 6,566,713 bytes).
 
 In this workspace's PowerShell, set `$env:MODAL_PROFILE='lointc'` and `$env:MODAL_IMAGE_BUILDER_VERSION='2025.06'` before Modal commands. The installed client does not support the workspace's newer default image-builder version; the read-only Volume check passed after selecting the supported builder explicitly.

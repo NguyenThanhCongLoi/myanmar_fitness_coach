@@ -1,0 +1,37 @@
+{
+  "result": "PASS",
+  "images": 90,
+  "groups": [
+    {
+      "group": "home",
+      "count": 35
+    },
+    {
+      "group": "gym",
+      "count": 27
+    },
+    {
+      "group": "missing",
+      "count": 18
+    },
+    {
+      "group": "all",
+      "count": 62
+    }
+  ],
+  "sizes": [
+    {
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "width": 1440,
+      "overflow": 0
+    }
+  ],
+  "pageErrors": []
+}

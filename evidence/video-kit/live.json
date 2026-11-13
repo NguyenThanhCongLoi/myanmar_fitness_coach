@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/api/fitness/bootstrap",
+      "status": 401
+    }
+  ],
+  "seconds": 12.75
+}
