@@ -1,5 +1,5 @@
 'use client';
-import { Apple, Clock3, Droplets, Pill, ShieldAlert, UtensilsCrossed } from 'lucide-react';
+import { Apple, ChevronDown, Clock3, Droplets, Lightbulb, Pill, ShieldAlert, UtensilsCrossed } from 'lucide-react';
 import { useApp } from '@/shared/app-context';
 import { fill, useTrainingLanguage } from '@/shared/training-language';
 import { NUTRITION_EVIDENCE, nutritionGuidance, type Goal } from '@/shared/program';
@@ -11,8 +11,9 @@ export function NutritionView() {
   const food = nutritionGuidance(data.measurements[0]?.weightKg ?? null, (data.profile?.goal ?? 'general_fitness') as Goal);
   const list = (o: Record<string, string>) => <ul className="cue-list">{Object.values(o).map(x => <li key={x}>{x}</li>)}</ul>;
   return <div className="nutrition-view">
-    <p className="muted">{tt.nutritionHint}</p>
     <EnergyPanel/>
+    {/* long evidence-based guidance stays one tap away so the tab is not a wall of text */}
+    <details className="tips-fold"><summary><Lightbulb size={20}/><span>{tt.ux.nutritionTips}</span><ChevronDown className="fold-chev" size={20}/></summary>
     <section className="panel"><h2><Apple size={18}/> {tt.yourNumbers}</h2>
       {food.proteinG ? <ul className="cue-list">
         <li>{fill(tt.proteinLine, { min: food.proteinG[0], max: food.proteinG[1], per: `${food.proteinPerKg[0]}–${food.proteinPerKg[1]}` })}</li>
@@ -27,5 +28,6 @@ export function NutritionView() {
     </div>
     <p className="explain-box"><ShieldAlert size={16}/> {tt.nutritionNote}</p>
     <details className="evidence"><summary>{tt.evidenceNutrition}</summary><ul lang="en">{NUTRITION_EVIDENCE.map(x => <li key={x}>{x}</li>)}</ul></details>
+    </details>
   </div>;
 }

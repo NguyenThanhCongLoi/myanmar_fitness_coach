@@ -127,11 +127,11 @@ const en = {
     activitySubs: { sedentary: 'Desk work, little walking', light: 'Walk or stand part of the day', active: 'Physical work, lots of moving' },
     minuteSubs: { '10': 'Tiny start', '20': 'Easy to keep', '30': 'Balanced', '45': 'Full session' },
     healthNo: 'No', healthYes: 'Yes', healthAdvice: 'Please check with a doctor before hard training. Your plan will stay gentle.',
-    create: 'Create my plan', next: 'Next', making: 'Creating your plan…', makingHint: 'Choosing exercises that fit your goal and level.',
+    create: 'Create my plan', next: 'Next', making: 'Creating your plan…', makingSteps: ['Your profile', 'Body & goal', 'Schedule', 'Your first week'], makingHint: 'Choosing exercises that fit your goal and level.',
   },
   ux: {
     nav: { home: 'My plan', discover: 'Exercises', water: 'Water & food', target: 'Goals', me: 'Me' },
-    seeAll: 'See all', changePlan: 'Change', groupAll: 'All', groupNames: { chest: 'Chest', back: 'Back', legs: 'Legs', arms: 'Arms', core: 'Core', shoulders: 'Shoulders' },
+    nutritionTips: 'Eating tips', seeAll: 'See all', changePlan: 'Change', groupAll: 'All', groupNames: { chest: 'Chest', back: 'Back', legs: 'Legs', arms: 'Arms', core: 'Core', shoulders: 'Shoulders' },
     coachHi: 'Mingalaba, {name}!', coachToday: 'Today: {title}, {min} min. Ready when you are.', coachDoneToday: 'Today’s session is done. Great job! Drink water and rest well.', coachWeekDone: 'You finished this week. New sessions start next week.',
     coachPlanWarn: 'Your planned week:', coachAsk: 'Ask coach', coachClose: 'Close',
     training: 'Training', trainingHint: 'Choose how you want to train', trainCards: { home: { title: 'At home', sub: 'No machines, follow the video' }, gym: { title: 'At the gym', sub: 'Machines, step by step' }, quick: { title: 'Quick workout', sub: '7, 15 or 20 min, guided' }, build: { title: 'Build your own', sub: 'Pick your own exercises' } },

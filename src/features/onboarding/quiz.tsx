@@ -30,26 +30,37 @@ export function OnboardingQuiz() {
   const bmi = bmiOf(a.weight, a.height), band = bmiBand(bmi);
   const canNext = step === 'days' ? a.days.length >= 2 && a.days.length <= 6 : step === 'health' ? a.health === false || (a.health === true && Object.values(a.screening).some(Boolean)) : (step === 'waist' || step === 'glutes' || step === 'review') ? bodyPreferencesSchema.safeParse(a.bodyPreferences).success : true;
   useEffect(() => { if (step === 'target' && a.target === 62) set({ target: a.goal === 'lose' ? Math.round(a.weight * 0.93) : a.goal === 'muscle' ? Math.round(a.weight * 1.03) : a.weight }); }, [step]);
+  // Real progress: 4 save stages; independent saves run in parallel (profile first, programme last).
+  const [stage, setStage] = useState(0);
   async function finish() {
-    setBusy(true); setMaking(5);
-    const tick = setInterval(() => setMaking(m => Math.min(95, m + 7)), 160);
+    setBusy(true); setMaking(4); setStage(0);
+    const done = (n: number) => { setStage(n); setMaking(Math.round(n / 4 * 100)); };
     try {
       const goal = a.goal === 'muscle' ? 'build_muscle' : a.goal === 'strength' ? 'build_strength' : 'general_fitness';
       const equipment = ['body weight', ...a.equipment];
       const screening = { heart: false, chestPain: false, dizziness: false, joint: a.avoid.length > 0, medication: false, pregnancy: false, other: false, ...(a.health ? a.screening : {}) };
       await api('profile', { locale, goal, experience: a.level, equipment, daysPerWeek: a.days.length, limitations: a.avoid.map(x => q.avoidOpts[x as keyof typeof q.avoidOpts]).join(', '), weightUnit: data.profile?.weightUnit ?? 'kg', distanceUnit: data.profile?.distanceUnit ?? 'km', screening, timezone: 'Asia/Yangon' });
-      await api('measurements', { weight: a.weight, unit: 'kg', waistCm: a.bodyPreferences.waistCm ?? null });
-      await trainingApi('energy/body', { heightCm: a.height, birthYear: new Date().getFullYear() - a.age, sex: a.sex, goalWeightKg: a.target, weightGoal: a.goal === 'lose' ? 'lose' : a.goal === 'muscle' ? 'gain' : 'maintain' });
-      await gameApi('schedule', { weekdays: a.days });
-      await trainingApi('prefs', { trainTime: a.trainTime, activityLevel: a.activity, sessionMinutes: a.minutes, nickname: a.nickname.trim(), bodyPreferences: { ...a.bodyPreferences, protectedAreas: a.avoid } });
+      done(1);
+      await Promise.all([
+        api('measurements', { weight: a.weight, unit: 'kg', waistCm: a.bodyPreferences.waistCm ?? null }),
+        trainingApi('energy/body', { heightCm: a.height, birthYear: new Date().getFullYear() - a.age, sex: a.sex, goalWeightKg: a.target, weightGoal: a.goal === 'lose' ? 'lose' : a.goal === 'muscle' ? 'gain' : 'maintain' }),
+      ]);
+      done(2);
+      await Promise.all([
+        gameApi('schedule', { weekdays: a.days }),
+        trainingApi('prefs', { trainTime: a.trainTime, activityLevel: a.activity, sessionMinutes: a.minutes, nickname: a.nickname.trim(), bodyPreferences: { ...a.bodyPreferences, protectedAreas: a.avoid } }),
+      ]);
+      done(3);
       await trainingApi('program', { program: a.place === 'gym' && a.level === 'beginner' ? 'gym_beginner' : 'personal' });
+      done(4);
       try { localStorage.setItem('mingalar-location', a.place); } catch { /* optional */ }
-      setMaking(100); await new Promise(r => setTimeout(r, 400));
+      await new Promise(r => setTimeout(r, 350));
       await refresh(); go('home');
     } catch (error) { notify(errorText(error, t)); setMaking(0); }
-    finally { clearInterval(tick); setBusy(false); }
+    finally { setBusy(false); }
   }
-  if (making) return <section className="quiz quiz-making"><Mascot state="excited" size={140}/><div className="quiz-ring" style={{ ['--p' as string]: `${making}%` }}><strong>{making}%</strong></div><h2>{q.making}</h2><p className="muted">{q.makingHint}</p></section>;
+  if (making) return <section className="quiz quiz-making" aria-live="polite"><div className="making-ring" style={{ ['--p' as string]: `${making}%` }}><Mascot state="excited" size={92}/><strong>{making}%</strong></div><h2>{q.making}</h2>
+    <ol className="making-steps">{q.makingSteps.map((label, k) => <li key={label} className={stage > k ? 'done' : stage === k ? 'now' : ''}><i>{stage > k ? <Check size={16}/> : k + 1}</i>{label}</li>)}</ol></section>;
   // Visual tiles: an icon disc, a short label, an optional one-line hint. Less reading, faster tapping.
   const Option = ({ on, label, sub, onClick, icon }: { on: boolean; label: string; sub?: string; onClick: () => void; icon?: React.ReactNode }) =>
     <button type="button" className={`quiz-option ${icon ? 'tile' : ''} ${on ? 'on' : ''}`} aria-pressed={on} onClick={onClick}>{icon && <i className="qo-icon">{icon}</i>}<span><strong>{label}</strong>{sub && <small>{sub}</small>}</span>{on && <Check className="qo-check" size={18}/>}</button>;

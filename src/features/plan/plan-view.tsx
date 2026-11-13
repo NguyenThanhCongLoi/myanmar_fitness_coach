@@ -9,6 +9,7 @@ import type { Exercise } from '@/shared/types';
 import { groupOf, placeOf, type BalanceIssue, type PlanDay, type PlanItem, type ProgramKey, type StepStage } from '@/shared/plan';
 import { Modal } from '@/shared/ui';
 import { Button } from '@/components/ui/button';
+import { UI_IMAGES } from '@/shared/ui-images';
 import { trainingErrorText } from '../training/training-hub';
 import { AdaptiveControls } from './adaptive-controls';
 import type { assessTraining } from '@/shared/adaptation';
@@ -75,13 +76,24 @@ export function PlanView() {
       <div className="plan-chips"><button type="button" className="chip-stat" onClick={() => go('achievements')} aria-label={u.streak}><Flame size={16}/>{data.stats.streak}</button></div>
     </header>
 
+    <CoachBubble state={warnings.length ? 'concerned' : todayDone ? 'celebrating' : 'waving'} lines={[
+      fill(u.coachHi, { name: who }),
+      todayDone ? u.coachDoneToday : today ? fill(u.coachToday, { title: dayTitle(today), min: today.minutes }) : u.coachWeekDone, ...warnings]}
+      warn={warnings.length > 0} action={!todayDone && today ? { label: data.activeSession ? u.resume : u.start, run: () => void start(today) } : null}
+      ask={{ label: u.coachAsk, run: () => go('coach') }} closeLabel={u.coachClose} busy={busy}/>
+
     <section className="score-card" aria-label={u.todayScore}>
       <div className="score-summaries"><div className="score-main"><div className="solaris-ring" style={{ background: `conic-gradient(var(--forest) ${(todayScore?.score ?? 0) * 3.6}deg, var(--line) 0deg)` }}><strong><CountUp to={todayScore?.score ?? 0}/><em>%</em></strong></div><small>{u.todayScore}</small></div>
       <div className="score-main"><div className="solaris-ring" style={{ background: `conic-gradient(var(--lime) ${(weeklyAverage ?? 0) * 3.6}deg, var(--line) 0deg)` }}><strong>{weeklyAverage ?? '—'}{weeklyAverage !== null && <em>%</em>}</strong></div><small>{tt.quiz.details.weeklyAverage}</small></div></div>
+      <div className="score-tiles">
+        {([['workout', Dumbbell, u.partWorkout, () => goPlan(location)], ['water', Droplets, u.partWater, () => go('water')], ['food', Utensils, u.partFood, () => go('water')]] as const).map(([k, Icon, label, act]) =>
+          <button key={k} type="button" className={`score-tile st-${k}`} onClick={act}><span className="st-head"><Icon size={23}/><small>{label}</small></span><div className="solaris-mini-ring" style={{ background: `conic-gradient(var(--series) ${(todayScore?.[k] ?? 0) * 3.6}deg, var(--series-soft) 0deg)` }}><strong>{todayScore?.[k] ?? 0}<em>%</em></strong></div></button>)}
+      </div>
+      {scores && scores.days.filter(d => d.score !== null).length >= 2 && <ScoreHistory scores={scores} label={u.last7} locale={locale} weekdays={t.weekdaysShort}/>}
     </section>
 
     <section className="home-section" id="my-plan" aria-labelledby="h-plan">
-      <div className="section-head"><div><h2 id="h-plan">{u.planSection}</h2><small>{u.planHint}</small></div><button type="button" className="see-all" onClick={() => setPrograms(true)}>{u.changePlan}</button></div>
+      <div className="section-head"><div><h2 id="h-plan">{u.planSection}</h2></div><button type="button" className="see-all" onClick={() => setPrograms(true)}>{u.changePlan}</button></div>
       {today ? <article className="today-hero" onClick={() => setOpen(today)}>
         <div className="today-hero-media" style={today.thumb ? { backgroundImage: `url(${today.thumb})` } : undefined}>{!today.thumb && <Dumbbell className="hero-placeholder" size={52} aria-hidden="true"/>}<span className="today-badge">{u.today}</span></div>
         <div className="today-hero-body">
@@ -110,29 +122,17 @@ export function PlanView() {
         {plan.program === p && <em>{u.currentPlan}</em>}<strong>{u.programs[p].title}</strong><small>{u.programs[p].desc}</small></button>)}</div>
     </section>
 
-    <CoachBubble state={warnings.length ? 'concerned' : todayDone ? 'celebrating' : 'waving'} lines={[
-      fill(u.coachHi, { name: who }),
-      todayDone ? u.coachDoneToday : today ? fill(u.coachToday, { title: dayTitle(today), min: today.minutes }) : u.coachWeekDone, ...warnings]}
-      warn={warnings.length > 0} action={!todayDone && today ? { label: data.activeSession ? u.resume : u.start, run: () => void start(today) } : null}
-      ask={{ label: u.coachAsk, run: () => go('coach') }} closeLabel={u.coachClose} busy={busy}/>
 
     <section className="home-section" aria-labelledby="h-training">
-      <div className="section-head"><div><h2 id="h-training">{u.training}</h2><small>{u.trainingHint}</small></div><button type="button" className="see-all" onClick={() => go('discover')}>{u.seeAll}</button></div>
+      <div className="section-head"><div><h2 id="h-training">{u.training}</h2></div><button type="button" className="see-all" onClick={() => go('discover')}>{u.seeAll}</button></div>
       <div className="train-grid">
-        <button type="button" className="train-card tc-home" onClick={() => goPlan('home')}><span><small>{u.trainCards.home.sub}</small><strong>{u.trainCards.home.title}</strong></span><Home className="tc-art" size={72} aria-hidden="true"/></button>
-        <button type="button" className="train-card tc-gym" onClick={() => goPlan('gym')}><span><small>{u.trainCards.gym.sub}</small><strong>{u.trainCards.gym.title}</strong></span><Dumbbell className="tc-art" size={72} aria-hidden="true"/></button>
-        <button type="button" className="train-card tc-quick" onClick={() => setQuick(true)}><span><small>{u.trainCards.quick.sub}</small><strong>{u.trainCards.quick.title}</strong></span><Timer className="tc-art" size={72} aria-hidden="true"/></button>
-        <button type="button" className="train-card tc-build" onClick={() => openTrain({ mode: 'free', name: u.myWorkout, rows: [] })}><span><small>{u.trainCards.build.sub}</small><strong>{u.trainCards.build.title}</strong></span><ListPlus className="tc-art" size={72} aria-hidden="true"/></button>
+        <button type="button" className={`train-card tc-home ${UI_IMAGES.train.home ? 'has-img' : ''}`} aria-label={`${u.trainCards.home.title}: ${u.trainCards.home.sub}`} onClick={() => goPlan('home')}>{UI_IMAGES.train.home && <img className="tc-img" src={UI_IMAGES.train.home} alt="" loading="lazy"/>}<span><strong>{u.trainCards.home.title}</strong></span><Home className="tc-art" size={72} aria-hidden="true"/></button>
+        <button type="button" className={`train-card tc-gym ${UI_IMAGES.train.gym ? 'has-img' : ''}`} aria-label={`${u.trainCards.gym.title}: ${u.trainCards.gym.sub}`} onClick={() => goPlan('gym')}>{UI_IMAGES.train.gym && <img className="tc-img" src={UI_IMAGES.train.gym} alt="" loading="lazy"/>}<span><strong>{u.trainCards.gym.title}</strong></span><Dumbbell className="tc-art" size={72} aria-hidden="true"/></button>
+        <button type="button" className={`train-card tc-quick ${UI_IMAGES.train.quick ? 'has-img' : ''}`} aria-label={`${u.trainCards.quick.title}: ${u.trainCards.quick.sub}`} onClick={() => setQuick(true)}>{UI_IMAGES.train.quick && <img className="tc-img" src={UI_IMAGES.train.quick} alt="" loading="lazy"/>}<span><strong>{u.trainCards.quick.title}</strong></span><Timer className="tc-art" size={72} aria-hidden="true"/></button>
+        <button type="button" className={`train-card tc-build ${UI_IMAGES.train.build ? 'has-img' : ''}`} aria-label={`${u.trainCards.build.title}: ${u.trainCards.build.sub}`} onClick={() => openTrain({ mode: 'free', name: u.myWorkout, rows: [] })}>{UI_IMAGES.train.build && <img className="tc-img" src={UI_IMAGES.train.build} alt="" loading="lazy"/>}<span><strong>{u.trainCards.build.title}</strong></span><ListPlus className="tc-art" size={72} aria-hidden="true"/></button>
       </div>
     </section>
 
-    <section className="score-card" aria-label={u.todayScore}>
-      <div className="score-tiles">
-        {([['workout', Dumbbell, u.partWorkout, () => goPlan(location)], ['water', Droplets, u.partWater, () => go('water')], ['food', Utensils, u.partFood, () => go('water')]] as const).map(([k, Icon, label, act]) =>
-          <button key={k} type="button" className={`score-tile st-${k}`} onClick={act}><span className="st-head"><Icon size={23}/><small>{label}</small></span><div className="solaris-mini-ring" style={{ background: `conic-gradient(var(--series) ${(todayScore?.[k] ?? 0) * 3.6}deg, var(--series-soft) 0deg)` }}><strong>{todayScore?.[k] ?? 0}<em>%</em></strong></div></button>)}
-      </div>
-      {scores && <ScoreHistory scores={scores} label={u.last7} locale={locale} weekdays={t.weekdaysShort}/>}
-    </section>
 
     <button type="button" className="meal-cta" onClick={() => { try { sessionStorage.setItem('mingalar-tab', 'food'); } catch { /* optional */ } go('water'); }}><Camera size={22}/><span><strong>{u.mealPhoto}</strong><small>{u.mealPhotoHint}</small></span></button>
     <RatingPrompt/>

@@ -124,3 +124,77 @@
 .ladder-row{grid-template-columns:minmax(0,110px) minmax(0,1fr)}.ladder-steps{min-width:0;gap:5px}.ladder-steps span{min-width:0;flex:1 1 0}
 :root[data-theme=dark] :is(.streak-card,.s-water,.s-meals,.s-photos) .streak-icon{color:#fff;background:var(--gloss),linear-gradient(150deg,var(--s1),var(--s2))}
 :root[data-theme=dark] :is(.streak-card,.s-water,.s-meals,.s-photos) .milestone-bar i{background:var(--gloss),linear-gradient(90deg,var(--s1),var(--s2))}
+
+/* ==========================================================================
+   Audit fixes (2026-11-13): contrast, minimum type/targets, player controls,
+   plan-making screen, Me cards, image slots, folded tips. One place, last.
+   ========================================================================== */
+/* contrast: secondary text 4.0 → ≥5.5:1; orange used as TEXT is the deeper shade (≥4.5:1) */
+:root{--muted:#566379;--link:#b94e05}
+:root[data-theme=dark]{--link:#ffa864}
+:is(.see-all,.text-button,.link-list a,main a:not(.button)){color:var(--link)}
+.place-badge.home{background:#0a7f9c}
+/* type floor 12px; touch targets ≥44 (40 for dense chips) */
+:is(.badge,.language-switch,.expression-choices button,.pill,.shield-line,.momentum-info p,.momentum-info b){font-size:13px}
+.expression-choices button{min-height:40px;padding:8px 14px}
+.text-button,.back-link{min-height:44px;display:inline-flex;align-items:center;gap:6px}
+:is(.filter,.filter-chip,.chip){min-height:40px;padding:8px 14px;font-size:14px}
+.language-switch{min-height:40px;padding:8px 14px;border-radius:999px}
+main input[type=checkbox],main input[type=radio]{width:22px;height:22px;accent-color:var(--o2)}
+.exercise-detail a,.detail-tags a{min-height:40px;display:inline-flex;align-items:center}
+.big-start{height:auto;min-height:52px;white-space:normal;text-align:center}
+
+/* player: icon-only round audio controls, right-aligned; real secondary button for "start now" */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.workout-audio .adaptive-actions{display:flex;justify-content:flex-end;flex-wrap:nowrap;gap:10px}
+.workout-audio .adaptive-actions .audio-btn{flex:0 0 48px;width:48px;height:48px;min-height:48px;padding:0;border-radius:50%;justify-content:center}
+.workout-audio .audio-btn[aria-pressed=true]{background:var(--gloss),linear-gradient(180deg,var(--o1),var(--o3));color:#fff;border-color:transparent;box-shadow:0 8px 16px -8px rgb(252 122 30/.7)}
+.player-media{height:auto;aspect-ratio:16/10;max-height:56dvh}
+.player-ready .text-button{min-height:48px;padding:10px 22px;border-radius:999px;background:var(--card-bg);border:1px solid var(--line);box-shadow:var(--edge),var(--sh-card);font-weight:700}
+.player details summary{font-size:13px;color:var(--muted)}
+
+/* plan-making: real progress ring with smooth fill + step checklist */
+@property --p{syntax:'<percentage>';inherits:false;initial-value:0%}
+.quiz-making{align-items:center;justify-content:center;text-align:center;gap:18px}
+.making-ring{--p:0%;position:relative;width:196px;height:196px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(from -90deg,var(--rose) 0,var(--o2) var(--p),color-mix(in srgb,var(--o2) 14%,var(--surface-2)) var(--p));transition:--p .6s var(--ease);box-shadow:0 18px 36px -18px rgb(252 122 30/.55)}
+.making-ring::before{content:'';position:absolute;inset:12px;border-radius:50%;background:var(--card-bg);box-shadow:inset 0 2px 8px rgb(0 0 0/.06)}
+.making-ring>*{position:relative}.making-ring strong{position:absolute;bottom:26px;font-family:var(--font-head);font-size:22px;color:var(--ink)}
+.making-ring .mascot,.making-ring img{margin-top:-18px}
+.making-steps{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:10px;width:min(320px,100%);text-align:left}
+.making-steps li{display:flex;align-items:center;gap:12px;font-size:16px;color:var(--muted);transition:color .3s var(--ease)}
+.making-steps li i{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;font-style:normal;font-size:14px;font-weight:700;background:var(--surface-2);color:var(--muted);transition:background-color .3s var(--ease),transform .3s var(--spring)}
+.making-steps li.now{color:var(--ink);font-weight:600}.making-steps li.now i{background:color-mix(in srgb,var(--o2) 18%,var(--surface));color:var(--o3);animation:pulse-o 1.2s ease-in-out infinite}
+.making-steps li.done{color:var(--ink)}.making-steps li.done i{background:var(--gloss),linear-gradient(180deg,#2fc173,#078a3c);color:#fff;transform:scale(1.05)}
+@keyframes pulse-o{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--o2) 18%,transparent)}}
+
+/* Me: streak + companion cards in the orange family (were legacy forest green) */
+.momentum-card{background:var(--gloss),linear-gradient(130deg,var(--rose-2) 0%,var(--rose) 40%,var(--o2) 100%);box-shadow:inset 0 1px 0 rgb(255 255 255/.3),var(--sh-pop);min-height:0}
+.momentum-card .pill{background:rgb(255 255 255/.2);border-color:rgb(255 255 255/.35);color:#fff}
+.companion-card{background:linear-gradient(135deg,#fdf4ea,#f3e1cd);border-color:#ecd8c2}
+:root[data-theme=dark] .companion-card{background:linear-gradient(135deg,#2a1a0e,#1e130a);border-color:#3a2716}
+.goal-dots>span{border:1.5px solid color-mix(in srgb,var(--o2) 45%,var(--line));color:var(--ink);background:var(--surface)}
+.goal-dots .filled{background:var(--gloss),linear-gradient(180deg,var(--o1),var(--o3));color:#fff;border-color:transparent}
+.activity-week .activity-day:not(.is-today) .day-state{display:none}   /* icon already says training vs rest; long words broke mid-word */
+.day-circle{color:var(--ink)}
+
+/* training tiles: optional artwork (src/shared/ui-images.ts) under a bottom shade; text stays legible */
+.train-card{min-height:136px}
+.train-card .tc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.train-card.has-img::after{display:block;content:'';position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgb(0 0 0/0) 35%,rgb(0 0 0/.55))}
+.train-card.has-img .tc-art{display:none}
+
+/* nutrition tips folded */
+.tips-fold{border:1px solid var(--line);border-radius:var(--r-xl);background:var(--card-bg);box-shadow:var(--edge),var(--sh-card);overflow:hidden}
+.tips-fold>summary{display:flex;align-items:center;gap:12px;min-height:60px;padding:12px 18px;cursor:pointer;list-style:none;font-family:var(--font-head);font-size:18px;font-weight:700}
+.tips-fold>summary::-webkit-details-marker{display:none}
+.tips-fold>summary>svg:first-child{color:var(--o2)}.tips-fold .fold-chev{margin-left:auto;transition:transform .25s var(--ease)}
+.tips-fold[open] .fold-chev{transform:rotate(180deg)}
+.tips-fold[open]>:not(summary){margin:0 14px 14px}
+@media(prefers-reduced-motion:reduce){.making-steps li.now i{animation:none}.making-ring{transition:none}}
+/* beat the older, more specific tiny rules */
+.topbar .language-switch{font-size:13px;padding:8px 14px;min-height:40px}
+.history-row .badge,.panel .badge{font-size:12px}
+.inbox-list .text-button{font-size:14px}
+.daily-mission p{font-size:15px;color:var(--muted)}.daily-mission h2{font-size:20px}.daily-mission .button{font-size:16px}
+.game-page .muted,.xp-track~.muted,.xp-track .muted{font-size:13px}
+.activity-week .activity-day.is-today .day-state{font-size:12px!important}
