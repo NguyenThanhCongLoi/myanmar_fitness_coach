@@ -1,0 +1,3 @@
+mingalar-fitness-scheduler-1 | Up About a minute | 3000/tcp
+mingalar-fitness-web-1 | Up About a minute (healthy) | 10.1.5.13:8100->3000/tcp
+Notification tick HTTP 200

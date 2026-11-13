@@ -1,5 +1,32 @@
 # Release verification — 2026-11-12
 
+## Independent Docker deployment — 2026-11-13
+
+From the product directory, with the SSH key unlocked in Windows OpenSSH agent:
+
+```powershell
+python scripts/docker-release.py stage
+python scripts/docker-release.py build --debian-mirror http://mirrors.huaweicloud.com
+python scripts/docker-release.py configure
+ssh myanmar-prod "python3 /home/github-runner/fitness-deployment/releases/20261113T041835Z/infrastructure/docker/smoke.py mingalar-fitness:20261113T041835Z"
+python scripts/docker-release.py up
+python scripts/docker-release.py status
+```
+
+The smoke command above is the exact verified release, not a floating latest alias. Replace both identifiers with the newly staged release for subsequent deployments. **PASS:** build/TypeScript, 76 tests/20 files, locales; disposable DB signup/profile/plan, owner isolation, protected routes, duplicate writer rejection, restart/session persistence, integrity and pre-start backup. The original smoke count assertion used a historical 62; corrected harness compares source seed IDs and passes with 73 exercises. Temporary containers/data cleaned up; no production synthetic accounts.
+
+Public verification: root HTTPS 200, auth options Google configured, anonymous bootstrap and notification POST 401. Production read-only DB integrity ok, 0 users / 73 exercises at check; env files 600; scheduler has no volume and its authenticated tick returns 200. AI Chat before/after receipts match commit/status, start times, restart counts and healthy states.
+
+Browser (workspace root, installed Playwright CLI with Edge):
+
+```powershell
+node '<installed-playwright-cli.js>' -s=fitnessdeploy open https://fitness.aibinhdan.vn --browser=msedge
+node '<installed-playwright-cli.js>' -s=fitnessdeploy --raw run-code --filename myanmar-fitness-coach/scripts/qa/docker-deployment-review.js
+node '<installed-playwright-cli.js>' -s=fitnessdeploy --raw run-code --filename myanmar-fitness-coach/scripts/qa/docker-google-entry-review.js
+```
+
+**PASS:** public login MY/EN at 320/390/1440, zero overflow/page errors/failed own-origin responses; screenshots reviewed for Myanmar shaping/wrapping and desktop layout. **FAIL:** Google entry reaches provider `redirect_uri_mismatch`; owner must register `https://fitness.aibinhdan.vn/api/auth/callback/google`. No account login/consent performed. **NOT TESTED:** completed Google login, paid LLM/TTS responses, physical devices, off-host recovery. Full evidence root `evidence/docker-deployment/`; sanitized summary inside product at the same relative path. See `docs/DOCKER_DEPLOYMENT.md` for isolation, persistence and rollback limits.
+
 ## Video creator kit / credit placement — 2026-11-13
 
 PASS: 76 tests, locale contract and remote production build after removing inline player credits. Preview-only synthetic account checks: credits absent from the guided player at 320/390/1440px, no overflow/page errors, full author attribution still reachable via Profile → Credits & licences. No synthetic production accounts were created following the requested user-data wipe.

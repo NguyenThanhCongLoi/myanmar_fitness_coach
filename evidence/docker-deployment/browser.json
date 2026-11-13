@@ -1,0 +1,49 @@
+{
+  "result": "PASS",
+  "pageErrors": [],
+  "failedResponses": [],
+  "checks": [
+    {
+      "locale": "my-MM",
+      "width": 320,
+      "overflow": 0,
+      "heroText": "နေ့တိုင်း အနည်းငယ် ပိုသန်မာလာမယ်။",
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif"
+    },
+    {
+      "locale": "my-MM",
+      "width": 390,
+      "overflow": 0,
+      "heroText": "နေ့တိုင်း အနည်းငယ် ပိုသန်မာလာမယ်။",
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif"
+    },
+    {
+      "locale": "my-MM",
+      "width": 1440,
+      "overflow": 0,
+      "heroText": "နေ့တိုင်း အနည်းငယ် ပိုသန်မာလာမယ်။",
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif"
+    },
+    {
+      "locale": "en",
+      "width": 320,
+      "overflow": 0,
+      "heroText": "A little stronger, every day.",
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "overflow": 0,
+      "heroText": "A little stronger, every day.",
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif"
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "overflow": 0,
+      "heroText": "A little stronger, every day.",
+      "font": "\"Open Sans\", \"Noto Sans Myanmar\", sans-serif"
+    }
+  ]
+}

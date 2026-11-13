@@ -1,0 +1,8 @@
+{
+  "host": "accounts.google.com",
+  "path": "/signin/oauth/error",
+  "redirectMismatch": true,
+  "invalidClient": false,
+  "title": "Sign in - Google Accounts",
+  "completedLogin": "NOT TESTED"
+}

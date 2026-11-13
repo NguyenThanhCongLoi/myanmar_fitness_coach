@@ -1,0 +1,55 @@
+name: mingalar-fitness
+services:
+  web:
+    image: mingalar-fitness:${FITNESS_RELEASE:-local}
+    build:
+      context: ../..
+      target: runtime
+    user: "${FITNESS_UID:-1003}:${FITNESS_GID:-1003}"
+    env_file:
+      - path: ${FITNESS_ENV_FILE:-/home/github-runner/fitness-deployment/runtime.env}
+        format: raw
+    environment:
+      DATABASE_URL: file:/data/fitness.db
+      VOICE_WARMUP: "0"
+      NEXT_TELEMETRY_DISABLED: "1"
+      HOME: /tmp
+    ports:
+      - "${FITNESS_BIND_IP:-10.1.5.13}:${FITNESS_PORT:-8100}:3000"
+    volumes:
+      - ${FITNESS_DATA_DIR:-/home/github-runner/fitness-deployment/data}:/data
+    restart: unless-stopped
+    init: true
+    mem_limit: 3g
+    cpus: 2
+    stop_grace_period: 40s
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      start_period: 120s
+      retries: 3
+    logging:
+      driver: json-file
+      options: {max-size: 10m, max-file: "3"}
+  scheduler:
+    image: mingalar-fitness:${FITNESS_RELEASE:-local}
+    user: "${FITNESS_UID:-1003}:${FITNESS_GID:-1003}"
+    # Deliberately no database mount; all writes go through the protected API.
+    env_file:
+      - path: ${FITNESS_SCHEDULER_ENV_FILE:-/home/github-runner/fitness-deployment/scheduler.env}
+        format: raw
+    command: [python3, infrastructure/docker/scheduler.py]
+    depends_on:
+      web: {condition: service_healthy}
+    restart: unless-stopped
+    init: true
+    mem_limit: 128m
+    cpus: 0.25
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    logging:
+      driver: json-file
+      options: {max-size: 5m, max-file: "2"}

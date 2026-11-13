@@ -1,0 +1,19 @@
+[
+  {
+    "path": "/",
+    "status": 200
+  },
+  {
+    "path": "/api/auth-options",
+    "status": 200,
+    "googleConfigured": true
+  },
+  {
+    "path": "/api/fitness/bootstrap",
+    "status": 401
+  },
+  {
+    "path": "/api/internal/notifications",
+    "status": 401
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "release": "20261113T041835Z",
+  "files": 462,
+  "baseCommit": "bd57c1850c2450397ee684315269e8bfe7be09ea",
+  "archiveSha256": "9dde7c4ed35ae7010de65b3e0a831d394f2b9e14f584cc542f28ad621beab885",
+  "remote": "/home/github-runner/fitness-deployment/releases/20261113T041835Z",
+  "build": "PASS",
+  "tests": 76,
+  "testFiles": 20,
+  "locales": "PASS",
+  "databaseChoice": "fresh; no Modal user data imported",
+  "googleLogin": "FAIL: redirect_uri_mismatch; owner must add callback URI",
+  "paidProviderCalls": "NOT TESTED; no calls made"
+}

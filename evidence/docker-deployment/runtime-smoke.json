@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "image": "mingalar-fitness:20261113T041835Z",
+  "exerciseCount": 73,
+  "checks": [
+    "fresh catalog matches seed source",
+    "signup",
+    "durable profile/plan",
+    "owner isolation",
+    "anonymous 401",
+    "cron unauthorized 401",
+    "duplicate writer rejected",
+    "restart retains account/session/plan",
+    "SQLite integrity",
+    "pre-start backup"
+  ]
+}

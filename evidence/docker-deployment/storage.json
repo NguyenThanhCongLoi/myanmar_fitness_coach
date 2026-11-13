@@ -1,0 +1,8 @@
+{
+  "integrity": "ok",
+  "users": 0,
+  "exercises": 73,
+  "envMode": "0o600",
+  "schedulerEnvMode": "0o600",
+  "schedulerMounts": []
+}
