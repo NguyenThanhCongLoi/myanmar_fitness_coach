@@ -19,6 +19,9 @@ async function context(userId: string) {
 }
 export async function saveBody(userId: string, raw: unknown) {
   const input = bodyInput.parse(raw);
+  // a goal weight below a healthy BMI (18.5) is refused, e.g. 35 kg at 170 cm (BMI ~12)
+  const height = input.heightCm ?? (await prisma.fitnessProfile.findUnique({ where: { userId }, select: { heightCm: true } }))?.heightCm ?? null;
+  if (height && input.goalWeightKg && input.goalWeightKg / (height / 100) ** 2 < 18.5) throw new ApiError(400, 'GOAL_BMI_TOO_LOW');
   return prisma.fitnessProfile.update({ where: { userId }, data: { ...input, sex: input.sex === 'unspecified' ? null : input.sex } });
 }
 export async function logFood(userId: string, raw: unknown) {
@@ -59,7 +62,8 @@ export async function energySummary(userId: string) {
   const todayRow = daily[6];
   return {
     today, body, bmr: bmr(body), baseline: base, weightGoal: goal, goalWeightKg: profile.goalWeightKg,
-    targetIntake: intakeTarget(body, goal, todayRow.activity + todayRow.workout), protein: nutritionGuidance(body.weightKg, profile.goal as Goal).proteinG,
+    // under 18: no calorie targets (growing bodies need individual advice)
+    targetIntake: body.birthYear && new Date().getFullYear() - body.birthYear < 18 ? null : intakeTarget(body, goal, todayRow.activity + todayRow.workout), protein: nutritionGuidance(body.weightKg, profile.goal as Goal).proteinG,
     daily, avgBalance: avg, loggedDays: loggedDays.length, projection: avg === null ? null : projection(avg, body.weightKg, profile.goalWeightKg),
     foodsToday: foods.filter(f => f.day === today), activitiesToday: acts.filter(a => a.day === today),
     missing: [...(!body.weightKg ? ['weight'] : []), ...(!body.heightCm ? ['height'] : []), ...(!body.birthYear ? ['birthYear'] : [])],

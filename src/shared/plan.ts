@@ -53,9 +53,11 @@ function strengthItems(split: DaySplit, library: ProgramExercise[], location: 'h
   if (location === 'home') {
     const homeLib = library.filter(e => placeOf(e) === 'home');
     const withVideo = pickSession(base, homeLib.filter(e => e.videoUrl), location, level, 6, priorityMuscles);
-    if (withVideo.length >= 3) return withVideo.map(x => toItem(x.exercise, x.dose));
-    const more = pickSession(base, homeLib, location, level, 5, priorityMuscles).filter(x => !withVideo.some(v => v.exercise.id === x.exercise.id));
-    return [...withVideo, ...more].slice(0, 6).map(x => toItem(x.exercise, x.dose));
+    const more = withVideo.length >= 5 ? [] : pickSession(base, homeLib, location, level, 6, priorityMuscles).filter(x => !withVideo.some(v => v.exercise.id === x.exercise.id));
+    let chosen = [...withVideo, ...more].slice(0, 6);
+    // No-equipment homes have few upper-body moves: top up with full-body video moves so a session has 5-6 exercises.
+    if (chosen.length < 5) chosen = [...chosen, ...pickSession('full', homeLib.filter(e => e.videoUrl), location, level, 6, priorityMuscles).filter(x => !chosen.some(c => c.exercise.id === x.exercise.id))].slice(0, 6);
+    return chosen.map(x => toItem(x.exercise, x.dose));
   }
   // Gym: use gym equipment (machines, cables, barbells, dumbbells on a bench); fill with others only if too few.
   const gymLib = library.filter(e => placeOf(e) === 'gym' || e.equipment.includes('dumbbell'));

@@ -56,7 +56,7 @@ export function CoachChat({ exerciseId, quickActions = [], compact = false, onAn
     <div className="messages" aria-live="polite">
       {!state ? <p>{t.loading}</p> : state.messages.length ? state.messages.map(item => <div className={`message ${item.role} ${item.failed ? 'failed' : ''}`} key={item.id} data-pending={item.pending ? 'true' : undefined}>
         {item.role === 'assistant' && <BeeAvatar mood="happy" size={32}/>}
-        <div className="bubble"><span className="message-label">{item.role === 'assistant' ? t.coach : t.profile}</span><p>{item.content}</p>{item.role === 'assistant' && <button type="button" className="text-button speak-button" onClick={() => speak(item)} aria-label={speaking === item.id ? tt.stopVoice : tt.listenMessage}>{speaking === item.id ? <Square size={14}/> : <Volume2 size={14}/>}{speaking === item.id ? tt.stopVoice : tt.listenMessage}</button>}{item.failed && <small className="error-text">{tt.sendFailed}</small>}</div>
+        <div className="bubble"><span className="message-label">{item.role === 'assistant' ? t.coach : t.you}</span>{item.role === 'assistant' ? <Markdown text={item.content}/> : <p>{item.content}</p>}{item.role === 'assistant' && <button type="button" className="text-button speak-button" onClick={() => speak(item)} aria-label={speaking === item.id ? tt.stopVoice : tt.listenMessage}>{speaking === item.id ? <Square size={14}/> : <Volume2 size={14}/>}{speaking === item.id ? tt.stopVoice : tt.listenMessage}</button>}{item.failed && <small className="error-text">{tt.sendFailed}</small>}</div>
       </div>) : <div className="chat-empty"><BeeAvatar mood="idle" size={compact ? 56 : 72}/><p>{exerciseId ? tt.coachExerciseHint : t.noMessages}</p></div>}
       {busy && <div className="message assistant thinking-row" role="status"><BeeAvatar mood="idle" size={32} thinking/><div className="bubble"><span className="typing" aria-hidden="true"><i/><i/><i/></span><span className="sr-only">{t.thinking}</span><small>{t.thinking}</small></div></div>}
       <div ref={end}/>
@@ -69,4 +69,25 @@ export function CoachChat({ exerciseId, quickActions = [], compact = false, onAn
       <button className="button primary send-button" disabled={!state?.configured || busy || !message.trim()} aria-label={t.send}><ArrowUp size={20}/></button>
     </form>
   </div>;
+}
+
+// Tiny safe markdown: **bold**, *italic*, `code`, "- " / "1. " lists, paragraphs. Builds React nodes (no HTML injection).
+function inline(text: string) {
+  return text.split(/(\*\*[^*]+\*\*|\*[^*\n]+\*|`[^`]+`)/g).filter(Boolean).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') ? <strong key={i}>{part.slice(2, -2)}</strong>
+      : part.startsWith('`') && part.endsWith('`') ? <code key={i}>{part.slice(1, -1)}</code>
+      : part.length > 2 && part.startsWith('*') && part.endsWith('*') ? <em key={i}>{part.slice(1, -1)}</em> : part);
+}
+export function Markdown({ text }: { text: string }) {
+  const blocks: React.ReactNode[] = []; const lines = text.replace(/\r/g, '').split('\n'); let list: { ordered: boolean; items: string[] } | null = null;
+  const flush = () => { if (list) { const L = list; blocks.push(L.ordered ? <ol key={blocks.length}>{L.items.map((x, i) => <li key={i}>{inline(x)}</li>)}</ol> : <ul key={blocks.length}>{L.items.map((x, i) => <li key={i}>{inline(x)}</li>)}</ul>); list = null; } };
+  for (const raw of lines) {
+    const line = raw.trim(), bullet = line.match(/^[-*•]\s+(.*)/), num = line.match(/^\d+[.)]\s+(.*)/);
+    if (bullet || num) { const ordered = !!num; if (!list || list.ordered !== ordered) { flush(); list = { ordered, items: [] }; } list.items.push((bullet ?? num)![1]); continue; }
+    flush(); if (!line) continue;
+    const heading = line.match(/^#{1,4}\s+(.*)/);
+    blocks.push(heading ? <p key={blocks.length}><strong>{inline(heading[1])}</strong></p> : <p key={blocks.length}>{inline(line)}</p>);
+  }
+  flush();
+  return <div className="md">{blocks}</div>;
 }

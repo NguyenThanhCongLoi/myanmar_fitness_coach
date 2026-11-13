@@ -1,5 +1,5 @@
 'use client';
-import { ChartNoAxesCombined, ChevronRight, Inbox, MessageCircle, Settings, UserRound } from 'lucide-react';
+import { ChartNoAxesCombined, ChevronRight, Inbox, Scale, Settings, Target, UserRound } from 'lucide-react';
 import { useApp } from '@/shared/app-context';
 import { useTrainingLanguage } from '@/shared/training-language';
 import { bmiBand, bmiOf } from '@/shared/plan';
@@ -19,7 +19,8 @@ export function MeView() {
     </div>
     <div className="link-list">
       <button type="button" onClick={() => go('progress')}><ChartNoAxesCombined size={20}/><span><strong>{u.progress}</strong><small>{u.progressHint}</small></span><ChevronRight size={18}/></button>
-      <button type="button" onClick={() => go('coach')}><MessageCircle size={20}/><span><strong>{u.coach}</strong><small>{u.coachHint}</small></span><ChevronRight size={18}/></button>
+      <button type="button" onClick={() => go('target')}><Target size={20}/><span><strong>{u.nav.target}</strong><small>{u.goals.title}</small></span><ChevronRight size={18}/></button>
+      <button type="button" onClick={() => { try { sessionStorage.setItem('mingalar-tab', 'food'); } catch { /* optional */ } go('water'); }}><Scale size={20}/><span><strong>{u.bodyData}</strong><small>{u.bodyDataHint}</small></span><ChevronRight size={18}/></button>
       <button type="button" onClick={() => go('inbox')}><Inbox size={20}/><span><strong>{u.inbox}</strong><small>{u.inboxHint}</small></span><ChevronRight size={18}/></button>
       <button type="button" onClick={() => go('profile')}><Settings size={20}/><span><strong>{u.settings}</strong><small>{u.settingsHint}</small></span><ChevronRight size={18}/></button>
     </div>

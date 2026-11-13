@@ -130,7 +130,11 @@ const en = {
     create: 'Create my plan', next: 'Next', making: 'Creating your plan…', makingSteps: ['Your profile', 'Body & goal', 'Schedule', 'Your first week'], makingHint: 'Choosing exercises that fit your goal and level.',
   },
   ux: {
-    nav: { home: 'My plan', discover: 'Exercises', water: 'Water & food', target: 'Goals', me: 'Me' },
+    bodyData: 'Body & calories', bodyDataHint: 'Height, weight, goal weight, water', 
+    home: { streak: 'Day streak', workouts: 'Workouts', thisWeek: 'This week', forYou: 'Workouts for you', coachToday: 'Today: {title}, {min} min. Tap to ask me anything.', coachResume: 'Your workout is waiting. Let\'s finish it.', coachLoading: 'Getting your plan ready…', banners: { all: 'Full body burn', core: 'Core in 15', upper: 'Upper body' } },
+    onb: { scheduleTitle: 'How often and how long?', daysLabel: 'Days per week', minutesLabel: 'Minutes per session', healthTitle: 'One health question', healthHint: 'Has a doctor told you to limit exercise, or do you have a heart condition?', homeSub: 'No equipment needed', needOne: 'Choose an option to continue', needDays: 'Choose how many days per week', needMinutes: 'Choose how long each session is', needBoth: 'Choose days per week and session length', makingSteps: ['Your profile', 'Your schedule', 'Your first week'] },
+    plural: { set1: '1 set', sets: '{n} sets', day1: '1 training day', days: '{n} training days' }, starting: 'Starting…',
+    nav: { home: 'Today', discover: 'Exercises', water: 'Water & food', target: 'Goals', me: 'Me' },
     allSkippedTitle: 'All exercises skipped', allSkippedHint: 'Nothing was logged this time. Your plan stays the same.', nutritionTips: 'Eating tips', seeAll: 'See all', changePlan: 'Change', groupAll: 'All', groupNames: { chest: 'Chest', back: 'Back', legs: 'Legs', arms: 'Arms', core: 'Core', shoulders: 'Shoulders' },
     coachHi: 'Mingalaba, {name}!', coachToday: 'Today: {title}, {min} min. Ready when you are.', coachDoneToday: 'Today’s session is done. Great job! Drink water and rest well.', coachWeekDone: 'You finished this week. New sessions start next week.',
     coachPlanWarn: 'Your planned week:', coachAsk: 'Ask coach', coachClose: 'Close',
