@@ -1,0 +1,26 @@
+{
+  "result": "PASS",
+  "sourceCommit": "3590471",
+  "checks": [
+    {
+      "origin": "https://avibigateway--myanmar-fitness-coach.modal.run",
+      "home": 200,
+      "unauthenticatedBootstrap": 401
+    },
+    {
+      "origin": "https://avibigateway--myanmar-fitness-coach.us-east.modal.run",
+      "home": 200,
+      "unauthenticatedBootstrap": 401
+    }
+  ],
+  "asset": {
+    "path": "/media/video/mobile/curated-bird-dog-owner.mp4",
+    "bytes": 179296,
+    "sha256": "f0d67bcdca9cd4ebda263d3f26259212fe69a850af31109feaf9f9833cc054cc",
+    "matchesRelease": true,
+    "cacheControl": "public, max-age=3600, must-revalidate"
+  },
+  "productionAccountsCreated": 0,
+  "userDataReset": false,
+  "dockerChanged": false
+}
