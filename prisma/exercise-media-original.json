@@ -1,1 +1,135 @@
-{}
+{
+ "vid-arm-circles": {
+  "videoUrl": "/media/video/vid-arm-circles.mp4",
+  "thumbnailUrl": "/media/poster/vid-arm-circles.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "vid-bicycle-crunch": {
+  "videoUrl": "/media/video/vid-bicycle-crunch.mp4",
+  "thumbnailUrl": "/media/poster/vid-bicycle-crunch.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "curated-bird-dog": {
+  "videoUrl": "/media/video/curated-bird-dog-owner.mp4",
+  "thumbnailUrl": "/media/poster/curated-bird-dog-owner.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "curated-squat": {
+  "videoUrl": "/media/video/curated-squat-owner.mp4",
+  "thumbnailUrl": "/media/poster/curated-squat-owner.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "vid-butt-kicks": {
+  "videoUrl": "/media/video/vid-butt-kicks.mp4",
+  "thumbnailUrl": "/media/poster/vid-butt-kicks.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "dataset-0276": {
+  "videoUrl": "/media/video/dataset-0276-owner.mp4",
+  "thumbnailUrl": "/media/poster/dataset-0276-owner.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "vid-high-knees": {
+  "videoUrl": "/media/video/vid-high-knees.mp4",
+  "thumbnailUrl": "/media/poster/vid-high-knees.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "vid-jumping-jacks": {
+  "videoUrl": "/media/video/vid-jumping-jacks.mp4",
+  "thumbnailUrl": "/media/poster/vid-jumping-jacks.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "curated-plank": {
+  "videoUrl": "/media/video/curated-plank-owner.mp4",
+  "thumbnailUrl": "/media/poster/curated-plank-owner.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "dataset-3013": {
+  "videoUrl": "/media/video/dataset-3013-owner.mp4",
+  "thumbnailUrl": "/media/poster/dataset-3013-owner.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "curated-knee-push": {
+  "videoUrl": "/media/video/curated-knee-push-owner.mp4",
+  "thumbnailUrl": "/media/poster/curated-knee-push-owner.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "vid-mountain-climbers": {
+  "videoUrl": "/media/video/vid-mountain-climbers.mp4",
+  "thumbnailUrl": "/media/poster/vid-mountain-climbers.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "dataset-0662": {
+  "videoUrl": "/media/video/dataset-0662-owner.mp4",
+  "thumbnailUrl": "/media/poster/dataset-0662-owner.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "vid-reverse-lunge": {
+  "videoUrl": "/media/video/vid-reverse-lunge.mp4",
+  "thumbnailUrl": "/media/poster/vid-reverse-lunge.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "vid-reverse-crunch": {
+  "videoUrl": "/media/video/vid-reverse-crunch.mp4",
+  "thumbnailUrl": "/media/poster/vid-reverse-crunch.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "vid-shadow-boxing": {
+  "videoUrl": "/media/video/vid-shadow-boxing.mp4",
+  "thumbnailUrl": "/media/poster/vid-shadow-boxing.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "dataset-1373": {
+  "videoUrl": "/media/video/dataset-1373-owner.mp4",
+  "thumbnailUrl": "/media/poster/dataset-1373-owner.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "vid-knee-to-elbow": {
+  "videoUrl": "/media/video/vid-knee-to-elbow.mp4",
+  "thumbnailUrl": "/media/poster/vid-knee-to-elbow.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ },
+ "vid-sumo-squat": {
+  "videoUrl": "/media/video/vid-sumo-squat.mp4",
+  "thumbnailUrl": "/media/poster/vid-sumo-squat.webp",
+  "mediaSource": "Mingalar Fit original exercise footage supplied by the product owner (2026-11-13).",
+  "license": "Owner-supplied, used with permission",
+  "page": ""
+ }
+}

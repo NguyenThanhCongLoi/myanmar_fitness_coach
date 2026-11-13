@@ -1,5 +1,5 @@
 'use client';
-import { track } from '@/shared/analytics';
+import { track, setAnalyticsSignedIn } from '@/shared/analytics';
 import { warmApp } from '@/shared/warmup';
 import { ThemeToggle } from '@/shared/theme';
 import { BeeTip } from './gamification/bee-tip';
@@ -42,8 +42,14 @@ function Shell() {
   const [exerciseId, setExerciseId] = useState(''), [coachDraft, setCoachDraft] = useState(''), [trainPreset, setTrainPreset] = useState<TrainPreset | null>(null);
   const [sessionId, setSessionId] = useState(''), [plannerOpen, setPlanner] = useState(false), [notice, setNotice] = useState('');
   const notify = useCallback((message: string) => { setNotice(message); setTimeout(() => setNotice(''), 6000); }, []);
-  const refresh = useCallback(async () => { try { const result = await api<Bootstrap>('bootstrap'); setData(result); } catch(error) { if(error instanceof Error&&error.message==='UNAUTHORIZED')setData(null); } finally { setLoading(false); } }, []);
-  useEffect(() => { try { if ('serviceWorker' in navigator) void navigator.serviceWorker.register('/sw.js'); } catch { /* optional */ } warmApp(); }, []);
+  // Ask Better Auth first (200 with null when signed out) so a signed-out visit makes no 401 calls.
+  const refresh = useCallback(async () => { try {
+    const session = await fetch('/api/auth/get-session', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
+    if (!session?.user) { setData(null); setAnalyticsSignedIn(false); return; }
+    const result = await api<Bootstrap>('bootstrap'); setData(result); setAnalyticsSignedIn(true);
+  } catch(error) { if(error instanceof Error&&error.message==='UNAUTHORIZED') { setData(null); setAnalyticsSignedIn(false); } } finally { setLoading(false); } }, []);
+  useEffect(() => { try { if ('serviceWorker' in navigator) void navigator.serviceWorker.register('/sw.js'); } catch { /* optional */ } }, []);
+  useEffect(() => { if (data) warmApp(); }, [!!data]);
   const go = useCallback((next: View) => {
     const order: View[] = ['home', 'discover', 'water', 'target', 'me'];
     const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown };

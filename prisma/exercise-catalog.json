@@ -2019,5 +2019,344 @@
       "dataset-0294",
       "gym-cable-biceps-curl"
     ]
+  },
+  {
+    "id": "vid-arm-circles",
+    "canonicalId": "arm-circles",
+    "name": "Arm circles",
+    "primaryMuscles": [
+      "front-deltoids",
+      "back-deltoids"
+    ],
+    "secondaryMuscles": [
+      "trapezius"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "warmup"
+    ],
+    "tracking": "timed",
+    "instructions": "Stand tall with arms straight out to the sides. Draw small circles, then slowly make them bigger. Keep shoulders down and breathe steadily.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "vid-bicycle-crunch",
+    "canonicalId": "bicycle-crunch",
+    "name": "Bicycle crunch",
+    "primaryMuscles": [
+      "abs",
+      "obliques"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "floor"
+    ],
+    "tracking": "timed",
+    "instructions": "Lie on your back, hands lightly behind your head. Bring one knee in and turn the opposite elbow towards it. Switch sides in a slow pedalling rhythm; do not pull your neck.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "vid-butt-kicks",
+    "canonicalId": "butt-kicks",
+    "name": "Butt kicks",
+    "primaryMuscles": [
+      "hamstring"
+    ],
+    "secondaryMuscles": [
+      "calves"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "jumping",
+      "warmup"
+    ],
+    "tracking": "timed",
+    "instructions": "Jog in place on the balls of your feet. Kick your heels up towards your glutes. Keep your chest up and arms moving.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "vid-high-knees",
+    "canonicalId": "high-knees",
+    "name": "High knees",
+    "primaryMuscles": [
+      "quadriceps"
+    ],
+    "secondaryMuscles": [
+      "calves",
+      "abs"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "jumping"
+    ],
+    "tracking": "timed",
+    "instructions": "Run in place, lifting your knees towards hip height. Land softly on the balls of your feet. Pump your arms; slow down if you lose your breath.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "vid-jumping-jacks",
+    "canonicalId": "jumping-jacks",
+    "name": "Jumping jacks",
+    "primaryMuscles": [
+      "calves"
+    ],
+    "secondaryMuscles": [
+      "front-deltoids",
+      "quadriceps"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "jumping",
+      "warmup"
+    ],
+    "tracking": "timed",
+    "instructions": "Stand with feet together and arms by your sides. Jump your feet out while raising your arms overhead. Jump back in; keep a steady, light rhythm.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "vid-mountain-climbers",
+    "canonicalId": "mountain-climbers",
+    "name": "Mountain climbers",
+    "primaryMuscles": [
+      "abs"
+    ],
+    "secondaryMuscles": [
+      "front-deltoids",
+      "quadriceps"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "wrist-loaded",
+      "jumping"
+    ],
+    "tracking": "timed",
+    "instructions": "Start in a high plank, hands under shoulders. Drive one knee towards your chest, then switch quickly. Keep your hips level; slow down to stay controlled.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "vid-reverse-lunge",
+    "canonicalId": "reverse-lunge",
+    "name": "Reverse lunge",
+    "primaryMuscles": [
+      "quadriceps",
+      "gluteal"
+    ],
+    "secondaryMuscles": [
+      "hamstring"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "knee-loaded"
+    ],
+    "tracking": "timed",
+    "instructions": "Stand tall, then step one foot back. Lower until both knees are bent, front knee over the ankle. Push through the front foot to return; switch legs.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "vid-reverse-crunch",
+    "canonicalId": "reverse-crunch",
+    "name": "Reverse crunch",
+    "primaryMuscles": [
+      "abs"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "floor"
+    ],
+    "tracking": "timed",
+    "instructions": "Lie on your back, knees bent and lifted, arms by your sides. Curl your hips off the floor, bringing knees towards your chest. Lower slowly with control; do not swing.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "vid-shadow-boxing",
+    "canonicalId": "shadow-boxing",
+    "name": "Shadow boxing",
+    "primaryMuscles": [
+      "front-deltoids"
+    ],
+    "secondaryMuscles": [
+      "back-deltoids",
+      "abs",
+      "calves"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "warmup"
+    ],
+    "tracking": "timed",
+    "instructions": "Stand in a light boxing stance, hands up by your face. Throw relaxed straight punches, turning from your hips. Stay light on your feet and keep breathing.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "vid-knee-to-elbow",
+    "canonicalId": "knee-to-elbow",
+    "name": "Standing knee to elbow",
+    "primaryMuscles": [
+      "obliques",
+      "abs"
+    ],
+    "secondaryMuscles": [
+      "quadriceps"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "warmup"
+    ],
+    "tracking": "timed",
+    "instructions": "Stand tall with hands lightly behind your head. Lift one knee and turn the opposite elbow to meet it. Alternate sides at a steady pace; no jumping needed.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
+  },
+  {
+    "id": "vid-sumo-squat",
+    "canonicalId": "sumo-squat",
+    "name": "Sumo squat",
+    "primaryMuscles": [
+      "gluteal",
+      "adductor"
+    ],
+    "secondaryMuscles": [
+      "quadriceps"
+    ],
+    "equipment": [
+      "body weight"
+    ],
+    "difficulty": "beginner",
+    "tags": [
+      "knee-loaded"
+    ],
+    "tracking": "timed",
+    "instructions": "Stand with feet wide and toes turned out. Lower your hips straight down, knees moving over your toes. Squeeze your glutes to stand back up.",
+    "commonMistakes": [
+      "Rushing the movement or holding your breath.",
+      "Using a range or load that causes pain."
+    ],
+    "alternatives": [],
+    "thumbnailUrl": null,
+    "videoUrl": null,
+    "mediaType": "none",
+    "mediaSource": "",
+    "mediaLicenseStatus": "unavailable"
   }
 ]

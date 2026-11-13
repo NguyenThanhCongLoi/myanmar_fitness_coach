@@ -81,7 +81,9 @@ export const PATTERN: Record<string, string> = {
   'wall-sit': 'squat', 'heel-raise-balance': 'calf', 'lat-pulldown': 'pull-v', 'seated-cable-row': 'pull-h', 'triceps-pushdown': 'triceps',
   'pec-deck': 'chest-iso', 'machine-chest-press': 'push-h', 'leg-press': 'squat', 'leg-extension': 'quad-iso', 'seated-leg-curl': 'ham-iso',
   'barbell-bench-press': 'push-h', 'barbell-deadlift': 'hinge', 'romanian-deadlift': 'hinge', 'barbell-bent-over-row': 'pull-h', 'cable-crossover': 'chest-iso',
-  crunch: 'core-flex', superman: 'back-ext', 'dumbbell-hammer-curl': 'biceps', 'bench-dip': 'triceps',
+  crunch: 'core-flex', superman: 'back-ext',
+  // owner video additions (2026-11-13)
+  'bicycle-crunch': 'core-flex', 'reverse-crunch': 'core-flex', 'high-knees': 'plyo', 'mountain-climbers': 'plyo', 'reverse-lunge': 'lunge', 'sumo-squat': 'squat', 'dumbbell-hammer-curl': 'biceps', 'bench-dip': 'triceps',
   // gym-beginner additions
   'hip-adduction-machine': 'quad-iso', 'machine-shoulder-press': 'push-v', 'assisted-pull-up-machine': 'pull-v', 'lying-leg-curl': 'ham-iso',
   'smith-machine-squat': 'squat', 'hack-squat-machine': 'squat', 'seated-calf-raise-machine': 'calf', 'cable-biceps-curl': 'biceps',

@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useState, type FormEvent } from 'react';
+import { useCallback, useEffect, useState, type FormEvent, useRef } from 'react';
 import { Check, CheckCircle2, Clock3, Pause, Play, Plus, Replace, SkipForward, Trash2 } from 'lucide-react';
 import { useApp } from '@/shared/app-context';
 import { actionId, api, localExercise, RequestError, trainingApi, weightValue } from '@/shared/client';
@@ -141,13 +141,15 @@ function SetRow({ sessionId, prescription, index, saved, unit, onSaved, disabled
   const KINDS = ['normal', 'warmup', 'drop', 'failure'] as const;
   const s = progression?.suggestion; const prev = s?.previous[index] ?? s?.previous.at(-1);
   // Prefill from the progression target once it arrives (only for sets not yet logged).
-  useEffect(() => { if (!saved && s) { setReps(s.reps); if (s.weightKg > 0) setWeight(weightValue(s.weightKg, unit)); } }, [s?.reps, s?.weightKg]);
+  // ...but never after the user has edited the row (the suggestion can arrive late and used to overwrite typed reps)
+  const touched = useRef(false);
+  useEffect(() => { if (!saved && s && !touched.current) { setReps(s.reps); if (s.weightKg > 0) setWeight(weightValue(s.weightKg, unit)); } }, [s?.reps, s?.weightKg]);
   async function submit(event: FormEvent) {
     event.preventDefault(); setBusy(true);
     try { const r = await api<{ pr: PrInfo | null }>(`sessions/${sessionId}/sets`, { exerciseId: prescription.exerciseId, setIndex: index, reps, weight: Math.round(weight * 10) / 10, unit, restSeconds: prescription.restSeconds, rir, kind }); await onSaved(); if (r.pr) onPr(r.pr); }
     catch (error) { notify(trainingErrorText(error, t, tt), true); } finally { setBusy(false); }
   }
   return <><div className="set-meta">{prev && <span className="prev-chip">{tt.previous}: {Number(weightValue(prev.weightKg, unit).toFixed(1))}{unit} × {prev.reps}</span>}{s && index === 0 && <span className={`target-chip ${s.note}`}>{tt.progressNotes[s.note as keyof typeof tt.progressNotes] ?? s.note}</span>}
-    {!saved && !disabled && <span className="rir-chips" role="group" aria-label={tt.rirLabel}>{[0, 1, 2, 3].map(v => <button type="button" key={v} className={rir === v ? 'on' : ''} aria-pressed={rir === v} onClick={() => setRir(rir === v ? null : v)} title={tt.rirHint}>{v === 3 ? '3+' : v}</button>)}</span>}</div>
-  <form className={`set-row ${saved ? 'logged' : ''} kind-${kind}`} onSubmit={submit}><button type="button" className={`set-kind kind-${kind}`} disabled={!!saved || disabled} title={tt.setKinds[kind]} aria-label={`${tt.setKindLabel}: ${tt.setKinds[kind]}`} onClick={() => setKind(KINDS[(KINDS.indexOf(kind) + 1) % KINDS.length])}>{kind === 'normal' ? String(index + 1).padStart(2, '0') : tt.setKindShort[kind]}</button><input aria-label={`${prescription.exercise.name} ${t.reps} ${index + 1}`} type="number" min={1} max={100} required value={reps} disabled={!!saved || disabled} onChange={event => setReps(Number(event.target.value))}/><input aria-label={`${prescription.exercise.name} ${t.weight} ${index + 1}`} type="number" min={0} max={unit === 'kg' ? 400 : 880} step="0.1" required value={Number(weight.toFixed(1))} disabled={!!saved || disabled} onChange={event => setWeight(Number(event.target.value))}/><button className={`button ${saved ? 'logged-button' : 'secondary'}`} disabled={busy || !!saved || disabled} aria-label={`${saved ? t.saved : t.logSet} ${index + 1}`}><Check size={17}/><span>{busy ? t.working : saved ? t.saved : t.logSet}</span></button></form></>;
+    {!saved && !disabled && <span className="rir-chips" role="group" aria-label={tt.rirLabel}><small className="rir-caption">{tt.rirShort}</small>{[0, 1, 2, 3].map(v => <button type="button" key={v} className={rir === v ? 'on' : ''} aria-pressed={rir === v} onClick={() => setRir(rir === v ? null : v)} title={tt.rirHint}>{v === 3 ? '3+' : v}</button>)}</span>}</div>
+  <form className={`set-row ${saved ? 'logged' : ''} kind-${kind}`} onSubmit={submit}><button type="button" className={`set-kind kind-${kind}`} disabled={!!saved || disabled} title={tt.setKinds[kind]} aria-label={`${tt.setKindLabel}: ${tt.setKinds[kind]}`} onClick={() => setKind(KINDS[(KINDS.indexOf(kind) + 1) % KINDS.length])}>{kind === 'normal' ? String(index + 1).padStart(2, '0') : tt.setKindShort[kind]}</button><input aria-label={`${prescription.exercise.name} ${t.reps} ${index + 1}`} type="number" min={1} max={100} required value={reps} disabled={!!saved || disabled} onInput={() => { touched.current = true; }} onChange={event => setReps(Number(event.target.value))}/><input aria-label={`${prescription.exercise.name} ${t.weight} ${index + 1}`} type="number" min={0} max={unit === 'kg' ? 400 : 880} step="0.1" required value={Number(weight.toFixed(1))} disabled={!!saved || disabled} onChange={event => setWeight(Number(event.target.value))}/><button className={`button ${saved ? 'logged-button' : 'secondary'}`} disabled={busy || !!saved || disabled} aria-label={`${saved ? t.saved : t.logSet} ${index + 1}`}><Check size={17}/><span>{busy ? t.working : saved ? t.saved : t.logSet}</span></button></form></>;
 }

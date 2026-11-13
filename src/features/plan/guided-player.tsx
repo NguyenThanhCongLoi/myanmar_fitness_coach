@@ -34,15 +34,21 @@ export function GuidedPlayer({ sessionId, listView }: { sessionId: string; listV
   const audio = useWorkoutAudio(visible && !quit && ['ready','work','rest'].includes(phase));
   useEffect(() => { const changed = () => { setVisible(!document.hidden); if (document.hidden) setRunning(false); }; document.addEventListener('visibilitychange', changed); return () => document.removeEventListener('visibilitychange', changed); }, []);
   const unit = data.profile?.weightUnit ?? 'kg';
+  const experienced = data.profile?.experience === 'advanced' || data.profile?.experience === 'intermediate';
   useWakeLock(phase === 'work' || phase === 'rest' || phase === 'ready');
   const load = async () => setS(await trainingApi<Workout>(`sessions/${sessionId}`));
   useEffect(() => { void load(); trainingApi<Exercise[]>('exercises').then(setLibrary).catch(() => {}); }, [sessionId]);
   const steps: Step[] = useMemo(() => {
     if (!s?.prescriptions) return [];
-    return s.prescriptions.filter(p => !p.skipped && !skipped.includes(p.id)).flatMap(p => Array.from({ length: p.sets }, (_, setIndex) => ({
+    const live = s.prescriptions.filter(p => !p.skipped && !skipped.includes(p.id));
+    const one = (p: typeof live[number], setIndex: number) => ({
       pid: p.id, exercise: library.find(e => e.id === p.exerciseId) ?? (p.exercise as Exercise), setIndex, sets: p.sets, target: p.reps, rest: p.restSeconds,
-      timed: !!(p as { timed?: boolean }).timed || (library.find(e => e.id === p.exerciseId)?.tracking ?? '') === 'time', weightKg: p.targetKg })))
-      .filter(st => !s.sets.some(x => x.exerciseId === st.exercise.id && x.setIndex === st.setIndex));
+      timed: !!(p as { timed?: boolean }).timed || ['time', 'timed'].includes(library.find(e => e.id === p.exerciseId)?.tracking ?? ''), weightKg: p.targetKg });
+    // Timed (home) sessions run as circuits: every exercise once, then the next round. Gym keeps straight sets.
+    const circuit = live.length > 1 && live.every(p => (p as { timed?: boolean }).timed);
+    const rounds = Math.max(0, ...live.map(p => p.sets));
+    const order = circuit ? Array.from({ length: rounds }, (_, r) => live.filter(p => r < p.sets).map(p => one(p, r))).flat() : live.flatMap(p => Array.from({ length: p.sets }, (_, i) => one(p, i)));
+    return order.filter(st => !s.sets.some(x => x.exerciseId === st.exercise.id && x.setIndex === st.setIndex));
   }, [s, library, skipped]);
   const cur = steps[0], next = steps[1];
   useEffect(() => { if (!cur) return; if (phase === 'ready') audio.say(count === 10 ? tt.adaptive.countReady : String(count)); else if (phase === 'rest') audio.say(tt.adaptive.rest); else if (phase === 'work') audio.say(tt.adaptive.start); }, [phase, count, quit, visible, !!cur]);
@@ -69,6 +75,10 @@ export function GuidedPlayer({ sessionId, listView }: { sessionId: string; listV
       if (steps.length > 1) { setRestTotal(cur.rest); setRestLeft(cur.rest); setPhase('rest'); }
     } catch (e) { notify(trainingErrorText(e, t, tt)); } finally { setBusy(false); }
   }
+  async function skipExercise() {
+    if (!cur || !s) return; const pid = cur.pid; setSkipped(x => [...x, pid]); setRunning(false);
+    try { await trainingApi(`sessions/${sessionId}/action`, { actionId: actionId(), revision: s.revision ?? 0, kind: 'skip', prescriptionId: pid }); await load(); } catch { /* local skip still applies */ }
+  }
   async function finish(reason = '') {
     setBusy(true);
     try { const r = await api<{ reward: { awarded: boolean; xp: number; streak?: number } }>(`sessions/${sessionId}/finish`, { note: reason ? `quit:${reason}` : '' }); void r; await refresh(); await load(); setPhase('summary'); }
@@ -89,6 +99,8 @@ export function GuidedPlayer({ sessionId, listView }: { sessionId: string; listV
     setBusy(false); go('home');
   }
   if (!s || !library.length) return <section className="player"><div className="sk sk-hero"/></section>;
+  if (!steps.length && !s.sets.length && ['ready', 'work', 'rest'].includes(phase)) return <section className="panel session-result"><h2>{u.allSkippedTitle}</h2><p className="muted">{u.allSkippedHint}</p>
+    <button type="button" className="button primary big-start" disabled={busy} onClick={() => void quitWith('later')}>{u.backToPlan}</button></section>;
   if (phase === 'summary') return <SessionSummary session={s} library={library} onContinue={() => setPhase('feedback')}/>;
   if (phase === 'result' && result) return <section className="panel session-result"><h2>{u.resultTitle}</h2>
     <div className="result-pct" style={{ ['--p' as string]: `${result.pct ?? 100}%`, ['--c' as string]: pctColor(result.pct ?? 100) }}><strong>{result.pct ?? 100}%</strong><small>{u.completed}</small></div>
@@ -117,14 +129,14 @@ export function GuidedPlayer({ sessionId, listView }: { sessionId: string; listV
       {!cur.timed && cur.setIndex === 0 && <SetupCard exercise={cur.exercise} locale={locale} title={u.setupTitle}/>}
       {cur.timed ? <div className="player-timer"><strong>{timer}<small>s</small></strong>
         <button type="button" className="button secondary" onClick={() => setRunning(r => !r)}>{running ? <><Pause size={18}/>{u.pause}</> : <><Play size={18}/>{u.resumeTimer}</>}</button></div>
-        : <div className="player-inputs">
+        : experienced && <div className="player-inputs">
           <div className="stepper-field"><small>{u.reps}</small><div><button type="button" onClick={() => setReps(Math.max(1, reps - 1))} aria-label="−"><Minus size={20}/></button><strong>{reps}</strong><button type="button" onClick={() => setReps(Math.min(100, reps + 1))} aria-label="+"><Plus size={20}/></button></div></div>
           {cur.exercise.equipment.some(q => q !== 'body weight') && <div className="stepper-field"><small>{tt.weight} ({unit})</small><div><button type="button" onClick={() => setKg(Math.max(0, +(kg - 2.5).toFixed(1)))} aria-label="−"><Minus size={20}/></button><strong>{kg}</strong><button type="button" onClick={() => setKg(+(kg + 2.5).toFixed(1))} aria-label="+"><Plus size={20}/></button></div></div>}
         </div>}
-      {!cur.timed && <label className="rir-choice">{tt.adaptive.rir}<select value={rir ?? ''} onChange={e => setRir(e.target.value === '' ? null : Number(e.target.value))}><option value="">{tt.adaptive.unknown}</option>{[0,1,2,3,4,5].map(n => <option value={n} key={n}>{n}</option>)}</select></label>}
+      {!cur.timed && experienced && <label className="rir-choice">{tt.adaptive.rir}<select value={rir ?? ''} onChange={e => setRir(e.target.value === '' ? null : Number(e.target.value))}><option value="">{tt.adaptive.unknown}</option>{[0,1,2,3,4,5].map(n => <option value={n} key={n}>{n}</option>)}</select></label>}
       <div className="player-actions">
         {!cur.timed && <button type="button" className="button primary big-start" disabled={busy} onClick={() => void logSet()}><Check size={22}/>{u.doneSet}</button>}
-        <button type="button" className="text-button" onClick={() => setSkipped(x => [...x, cur.pid])}><SkipForward size={16}/>{u.skipExercise}</button>
+        <button type="button" className="text-button" disabled={busy} onClick={() => void skipExercise()}><SkipForward size={16}/>{u.skipExercise}</button>
       </div>
       {next && <p className="up-next">{u.next}: {nm(next.exercise)}</p>}
     </div>}

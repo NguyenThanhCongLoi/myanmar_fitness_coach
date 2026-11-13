@@ -18,7 +18,7 @@ export const auth = betterAuth({
     prompt: 'select_account',
   } } : {},
   account: { accountLinking: { enabled: true, allowDifferentEmails: false } },
-  session: { expiresIn: 60 * 60 * 24 * 7, updateAge: 60 * 60 * 24, cookieCache: { enabled: false } },
+  session: { expiresIn: 60 * 60 * 24 * 30, updateAge: 60 * 60 * 24, cookieCache: { enabled: false } },
   rateLimit: { enabled: true, window: 60, max: 30 },
 });
 

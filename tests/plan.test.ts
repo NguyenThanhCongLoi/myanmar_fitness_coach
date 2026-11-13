@@ -38,7 +38,14 @@ import { buildWeek, nextStep, STEPS, minutesFor } from '../src/shared/plan';
 test('week 1 starts very light; the step moves with completion % and feedback', () => {
   const w1 = buildWeek({ program: 'personal', daysPerWeek: 3, library: lib, location: 'home', step: 0, bmi: 23, week: 1, sessionMinutes: 20 });
   expect(w1).toHaveLength(3);
-  for (const d of w1) { expect(d.items.length).toBeLessThanOrEqual(STEPS[0].exercises); if (d.split !== 'cardio') expect(d.items.every(i => i.sets === 1 && i.target === 20)).toBe(true); }
+  // week 1 is light in INTENSITY (short work intervals, long rest), not in length: it still fills the chosen minutes
+  const later = buildWeek({ program: 'personal', daysPerWeek: 3, library: lib, location: 'home', step: 7, bmi: 23, week: 1, sessionMinutes: 20 });
+  for (const [i, d] of w1.entries()) {
+    if (d.split === 'cardio') continue;
+    expect(Math.max(...d.items.map(x => x.target))).toBeLessThanOrEqual(Math.max(...later[i].items.map(x => x.target)));
+    expect(Math.min(...d.items.map(x => x.rest))).toBeGreaterThanOrEqual(Math.min(...later[i].items.map(x => x.rest)));
+  }
+  for (const d of w1) expect(minutesFor(d.items)).toBeGreaterThanOrEqual(15);
   expect(w1.map(d => d.day)).toEqual([1, 2, 3]);
   expect(nextStep(0, [{ pct: 100 }, { pct: 95 }, { pct: 100, difficulty: 'too_easy' }]).change).toBe('up');
   expect(nextStep(3, [{ pct: 40 }, { pct: 55 }, { pct: 50 }]).change).toBe('down');
@@ -51,6 +58,11 @@ test('sessions fit the time the user chose', () => {
   for (const d of short) expect(minutesFor(d.items)).toBeLessThanOrEqual(13);
   const w2 = buildWeek({ program: 'personal', daysPerWeek: 3, library: lib, location: 'home', step: 0, bmi: 23, week: 2, sessionMinutes: 20 });
   expect(w2.map(d => d.day)).toEqual([4, 5, 6]);
+  // regression: 45 min chosen used to give a 6-minute Day 1 (3 moves x 1 set)
+  for (const step of [0, 3, 7]) for (const location of ['home', 'gym'] as const) {
+    const w = buildWeek({ program: 'personal', daysPerWeek: 3, library: lib, location, step, bmi: 23, week: 1, sessionMinutes: 45 });
+    for (const d of w) { expect(minutesFor(d.items)).toBeGreaterThanOrEqual(36); expect(minutesFor(d.items)).toBeLessThanOrEqual(48); }
+  }
 });
 import { adaptAfterSession, placeOf, programSplits as splitsAt } from '../src/shared/plan';
 test('after every session: lighter on pain / too hard / low completion, heavier when easy and complete', () => {

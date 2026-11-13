@@ -13,7 +13,7 @@ export type PlanDay = { day: number; week: number; split: DaySplit; items: PlanI
 export type BmiBand = 'under' | 'normal' | 'over' | 'obese';
 
 // Low-impact cardio moves that need no equipment (jumping ones are skipped for higher BMI / screening).
-export const CARDIO_IDS = ['curated-march', 'curated-step-up', 'dataset-3470', 'dataset-1460', 'curated-seated-march', 'curated-heel-walk', 'core-164'];
+export const CARDIO_IDS = ['vid-jumping-jacks', 'vid-high-knees', 'vid-butt-kicks', 'vid-shadow-boxing', 'vid-knee-to-elbow', 'vid-mountain-climbers', 'curated-march', 'curated-step-up', 'dataset-3470', 'dataset-1460', 'curated-seated-march', 'curated-heel-walk', 'core-164'];
 // Beginner machine circuit: one movement per major muscle group, machines guide the path.
 export const MACHINE_FULL = ['gym-leg-press', 'gym-machine-chest-press', 'gym-lat-pulldown', 'gym-seated-cable-row', 'gym-machine-shoulder-press', 'gym-lying-leg-curl', 'curated-plank'];
 
@@ -52,10 +52,10 @@ function strengthItems(split: DaySplit, library: ProgramExercise[], location: 'h
   // At home, follow-along needs a demo: use exercises with video first; fill with others only if too few.
   if (location === 'home') {
     const homeLib = library.filter(e => placeOf(e) === 'home');
-    const withVideo = pickSession(base, homeLib.filter(e => e.videoUrl), location, level, 5, priorityMuscles);
+    const withVideo = pickSession(base, homeLib.filter(e => e.videoUrl), location, level, 6, priorityMuscles);
     if (withVideo.length >= 3) return withVideo.map(x => toItem(x.exercise, x.dose));
     const more = pickSession(base, homeLib, location, level, 5, priorityMuscles).filter(x => !withVideo.some(v => v.exercise.id === x.exercise.id));
-    return [...withVideo, ...more].slice(0, 5).map(x => toItem(x.exercise, x.dose));
+    return [...withVideo, ...more].slice(0, 6).map(x => toItem(x.exercise, x.dose));
   }
   // Gym: use gym equipment (machines, cables, barbells, dumbbells on a bench); fill with others only if too few.
   const gymLib = library.filter(e => placeOf(e) === 'gym' || e.equipment.includes('dumbbell'));
@@ -69,10 +69,28 @@ function toItem(e: ProgramExercise, d: { sets: string; target: string; unit: str
 function cardioItems(library: ProgramExercise[], location: 'home' | 'gym', band: BmiBand | null, lowImpact: boolean): PlanItem[] {
   const c = cardioSettings(band);
   const moves = CARDIO_IDS.map(id => library.find(e => e.id === id)).filter((e): e is ProgramExercise => !!e && availableAt(e, location) && !(lowImpact && (e.tags ?? []).includes('jumping')))
-    .sort((a, b) => Number(!!b.videoUrl) - Number(!!a.videoUrl)).slice(0, 4);
+    .sort((a, b) => Number(!!b.videoUrl) - Number(!!a.videoUrl)).slice(0, 6);
   if (!moves.length) return [];
   const rounds = Math.max(2, Math.round(c.minutes * 60 / (moves.length * (c.work + c.rest))));
   return moves.map(e => ({ id: e.id, sets: rounds, target: c.work, unit: 'seconds', rest: c.rest, perSide: false }));
+}
+/** Grow a session up to the minutes the user chose: more rounds first (max 5 timed / 5 reps), then longer
+ *  work intervals (timed, capped by the step), then more sets. Never shrinks; the caller trims if over. */
+export function fillToMinutes(items: PlanItem[], minutes: number, step: number): PlanItem[] {
+  if (!items.length) return items;
+  const goal = Math.max(5, minutes - 3) * 60, sec = (list: PlanItem[]) => (minutesFor(list) - 3) * 60;
+  const workCap = 45 + Math.max(0, Math.min(MAX_STEP, step)) * 5;
+  let out = items;
+  for (let guard = 0; guard < 40 && sec(out) < goal - 45; guard++) {
+    const rounds = Math.max(...out.map(i => i.sets));
+    if (rounds < 5) { const grown = out.map(i => ({ ...i, sets: i.sets + 1 })); if (sec(grown) > goal + 120) break; out = grown; continue; }
+    const timed = out.filter(i => i.unit === 'seconds');
+    if (timed.length && timed.some(i => i.target < workCap)) { out = out.map(i => i.unit === 'seconds' ? { ...i, target: Math.min(workCap, i.target + 5) } : i); continue; }
+    // short-rest circuits (cardio) may need a 6th/7th round
+    if (rounds < 7 && timed.length === out.length) { const grown = out.map(i => ({ ...i, sets: i.sets + 1 })); if (sec(grown) > goal + 120) break; out = grown; continue; }
+    break;
+  }
+  return out;
 }
 export function minutesFor(items: PlanItem[]) {
   const sec = items.reduce((n, i) => n + i.sets * ((i.unit === 'reps' ? i.target * 3 * (i.perSide ? 2 : 1) : i.target) + i.rest), 0);
@@ -135,9 +153,12 @@ export function buildWeek(o: { program: ProgramKey; daysPerWeek: number; library
   const base = buildPlan({ program: o.program, daysPerWeek: o.daysPerWeek, library: o.library, location: o.location, level: s.maxLevel, bmi: o.bmi, weeks: 1, lowImpact: o.lowImpact, priorityMuscles: o.priorityMuscles });
   return base.map((d, i) => {
     const cardioScale = 0.5 + 0.1 * Math.min(5, Math.max(0, o.step - (deload ? 1 : 0)));
-    let items = d.split === 'cardio' ? d.items.slice(0, Math.max(2, s.exercises)).map(it => ({ ...it, sets: Math.max(1, Math.round(it.sets * cardioScale)), target: Math.min(it.target, s.work + 10) })) : d.items.slice(0, s.exercises).map(it => o.location === 'home' || it.unit === 'seconds'
+    // how many moves: the chosen length decides (45 min -> 6 moves, 25 min -> 5); the step only sets intensity
+    const moves = Math.max(s.exercises, o.sessionMinutes >= 40 ? 6 : o.sessionMinutes >= 25 ? 5 : s.exercises);
+    let items = d.split === 'cardio' ? d.items.slice(0, Math.max(2, moves)).map(it => ({ ...it, sets: Math.max(1, Math.round(it.sets * cardioScale)), target: Math.min(it.target, s.work + 10) })) : d.items.slice(0, moves).map(it => o.location === 'home' || it.unit === 'seconds'
       ? { ...it, unit: 'seconds' as const, sets: s.sets, target: s.work, rest: s.rest }
       : { ...it, sets: s.sets, rest: Math.max(45, it.rest) });
+    items = fillToMinutes(items, o.sessionMinutes, o.step);
     while (minutesFor(items) > o.sessionMinutes + 3 && items.some(it => it.sets > 1)) items = items.map(it => ({ ...it, sets: Math.max(1, it.sets - 1) }));
     while (minutesFor(items) > o.sessionMinutes + 3 && items.length > 2) items = items.slice(0, -1);
     return { ...d, day: (o.week - 1) * base.length + i + 1, week: o.week, items, minutes: minutesFor(items) };

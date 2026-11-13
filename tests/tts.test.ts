@@ -21,7 +21,7 @@ test('every curated exercise has steps; seeded Myanmar steps are Unicode, step i
     expect(g.gym.length).toBeGreaterThan(0); expect(g.gym.every(c => c.my && /[က-႟]/.test(c.my))).toBe(true);
   }
   const pushUp = rows.find(e => e.canonicalId === 'push-up')!;
-  expect(pushUp.videoUrl).toBe('/media/video/dataset-0662.mp4'); expect(pushUp.mediaStatus).toBe('demo_unreviewed');
+  expect(pushUp.videoUrl).toBe('/media/video/dataset-0662-owner.mp4'); expect(pushUp.mediaStatus).toBe('demo_unreviewed');
   expect((pushUp.steps as { image: string | null }[]).filter(s => s.image).length).toBe(2);
 });
 test('voice is server-only and fails honestly when not configured', async () => {

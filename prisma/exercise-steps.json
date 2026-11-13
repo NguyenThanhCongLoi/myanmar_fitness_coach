@@ -370,5 +370,60 @@
     "Keep your elbows close to your sides.",
     "Curl the bar up toward your shoulders without moving your elbows.",
     "Lower slowly until your arms are straight."
+  ],
+  "vid-arm-circles": [
+    "Stand tall with arms straight out to the sides.",
+    "Draw small circles, then slowly make them bigger.",
+    "Keep shoulders down and breathe steadily."
+  ],
+  "vid-bicycle-crunch": [
+    "Lie on your back, hands lightly behind your head.",
+    "Bring one knee in and turn the opposite elbow towards it.",
+    "Switch sides in a slow pedalling rhythm; do not pull your neck."
+  ],
+  "vid-butt-kicks": [
+    "Jog in place on the balls of your feet.",
+    "Kick your heels up towards your glutes.",
+    "Keep your chest up and arms moving."
+  ],
+  "vid-high-knees": [
+    "Run in place, lifting your knees towards hip height.",
+    "Land softly on the balls of your feet.",
+    "Pump your arms; slow down if you lose your breath."
+  ],
+  "vid-jumping-jacks": [
+    "Stand with feet together and arms by your sides.",
+    "Jump your feet out while raising your arms overhead.",
+    "Jump back in; keep a steady, light rhythm."
+  ],
+  "vid-mountain-climbers": [
+    "Start in a high plank, hands under shoulders.",
+    "Drive one knee towards your chest, then switch quickly.",
+    "Keep your hips level; slow down to stay controlled."
+  ],
+  "vid-reverse-lunge": [
+    "Stand tall, then step one foot back.",
+    "Lower until both knees are bent, front knee over the ankle.",
+    "Push through the front foot to return; switch legs."
+  ],
+  "vid-reverse-crunch": [
+    "Lie on your back, knees bent and lifted, arms by your sides.",
+    "Curl your hips off the floor, bringing knees towards your chest.",
+    "Lower slowly with control; do not swing."
+  ],
+  "vid-shadow-boxing": [
+    "Stand in a light boxing stance, hands up by your face.",
+    "Throw relaxed straight punches, turning from your hips.",
+    "Stay light on your feet and keep breathing."
+  ],
+  "vid-knee-to-elbow": [
+    "Stand tall with hands lightly behind your head.",
+    "Lift one knee and turn the opposite elbow to meet it.",
+    "Alternate sides at a steady pace; no jumping needed."
+  ],
+  "vid-sumo-squat": [
+    "Stand with feet wide and toes turned out.",
+    "Lower your hips straight down, knees moving over your toes.",
+    "Squeeze your glutes to stand back up."
   ]
 }

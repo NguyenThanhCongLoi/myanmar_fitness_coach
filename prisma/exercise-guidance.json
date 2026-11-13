@@ -631,5 +631,126 @@
       "An EZ bar is easier on the wrists.",
       "Keep your body still; no swinging."
     ]
+  },
+  "vid-arm-circles": {
+    "perSide": false,
+    "home": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ],
+    "gym": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ]
+  },
+  "vid-bicycle-crunch": {
+    "perSide": false,
+    "home": [
+      "Lay a mat or towel on a non-slip floor.",
+      "Keep water nearby and stop if anything hurts."
+    ],
+    "gym": [
+      "Lay a mat or towel on a non-slip floor.",
+      "Keep water nearby and stop if anything hurts."
+    ]
+  },
+  "vid-butt-kicks": {
+    "perSide": false,
+    "home": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ],
+    "gym": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ]
+  },
+  "vid-high-knees": {
+    "perSide": false,
+    "home": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ],
+    "gym": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ]
+  },
+  "vid-jumping-jacks": {
+    "perSide": false,
+    "home": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ],
+    "gym": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ]
+  },
+  "vid-mountain-climbers": {
+    "perSide": false,
+    "home": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ],
+    "gym": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ]
+  },
+  "vid-reverse-lunge": {
+    "perSide": true,
+    "home": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ],
+    "gym": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ]
+  },
+  "vid-reverse-crunch": {
+    "perSide": false,
+    "home": [
+      "Lay a mat or towel on a non-slip floor.",
+      "Keep water nearby and stop if anything hurts."
+    ],
+    "gym": [
+      "Lay a mat or towel on a non-slip floor.",
+      "Keep water nearby and stop if anything hurts."
+    ]
+  },
+  "vid-shadow-boxing": {
+    "perSide": false,
+    "home": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ],
+    "gym": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ]
+  },
+  "vid-knee-to-elbow": {
+    "perSide": false,
+    "home": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ],
+    "gym": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ]
+  },
+  "vid-sumo-squat": {
+    "perSide": false,
+    "home": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ],
+    "gym": [
+      "Clear about 2 metres of space around you.",
+      "Wear shoes or train on a non-slip floor; stop if anything hurts."
+    ]
   }
 }
