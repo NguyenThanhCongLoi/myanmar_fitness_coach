@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { allowedAppOrigin } from '@/server/origins';
 import { requiredUser } from '@/server/auth';
 import { prisma } from '@/shared/lib/prisma';
 import { gameSummary, updateGameSettings,updateSchedule } from '@/server/gamification';
@@ -9,7 +10,7 @@ export const dynamic='force-dynamic';export const runtime='nodejs';
 async function handler(request:Request,context:{params:Promise<{path:string[]}>}){
   try{
     const write=request.method==='POST';
-    if(write&&request.headers.get('origin')&&request.headers.get('origin')!==process.env.BETTER_AUTH_URL)throw new ApiError(403,'INVALID_ORIGIN');
+    if(write&&!allowedAppOrigin(request.headers.get('origin')))throw new ApiError(403,'INVALID_ORIGIN');
     const user=await requiredUser(request),route=(await context.params).path.join('/');
     let body:unknown={};
     if(write){const raw=await request.text();if(raw.length>16384)throw new ApiError(413,'REQUEST_TOO_LARGE');try{body=JSON.parse(raw);}catch{throw new ApiError(400,'INVALID_INPUT');}}

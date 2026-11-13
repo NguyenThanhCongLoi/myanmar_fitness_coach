@@ -48,6 +48,12 @@ test('one atomic owner-scoped intake creates a real baseline and different Home/
   expect(saved.birthYear).toBe(new Date().getUTCFullYear()-30);
   expect(await prisma.bodyMeasurement.count({where:{userId:a}})).toBe(1);
   expect(await prisma.bodyMeasurement.count({where:{userId:b}})).toBe(0);
+  // The removed protected-area question must not leave a hidden required answer.
+  await saveIntake(a,{...input,screening:{...input.screening,joint:true},bodyPreferences:{...DEFAULT_BODY_PREFERENCES,protectedAreas:[]}});
+  expect((await prisma.fitnessProfile.findUniqueOrThrow({where:{userId:a}})).screening).toMatchObject({joint:true});
+  const jointPlan=await getPlan(a,'home');
+  expect(jointPlan.days.every(d=>d.items.every(i=>i.rest>=30))).toBe(true);
+  await saveIntake(a,input);
   const plan=await getPlan(a,'home');expect(plan.days.length).toBe(3);
   expect(plan.days.flatMap(d=>d.items).every(i=>(HOME_VIDEO_IDS as readonly string[]).includes(i.id))).toBe(true);
   const home=await previewQuickWorkout(a,{focus:'all',minutes:15,location:'home'});

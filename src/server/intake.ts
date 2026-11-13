@@ -15,7 +15,6 @@ export const intakeInput = profileSchema.extend({
 }).strict();
 export async function saveIntake(userId: string, raw: unknown) {
   const { weightKg, age, ...body } = intakeInput.parse(raw);
-  if (body.screening.joint && !body.bodyPreferences.protectedAreas.length) throw new ApiError(400,'INVALID_INPUT');
   const bmi = weightKg / (body.heightCm / 100) ** 2;
   if (body.weightGoal === 'lose' && bmi < 18.5) throw new ApiError(400, 'GOAL_BMI_TOO_LOW');
   const needsReview = body.screening.heart || body.screening.chestPain || body.screening.dizziness || body.screening.pregnancy;

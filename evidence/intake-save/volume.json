@@ -1,0 +1,1 @@
+{"result": "PASS", "integrity": "ok", "intakeColumns": true, "seedStampMatchesSource": true, "exercises": 73, "backupIntegrity": "ok", "existingUsersPreserved": null, "userComparisonContext": "after-explicit-user-reset", "reader": "separate read-only container"}

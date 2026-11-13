@@ -1,0 +1,137 @@
+{
+  "result": "PASS",
+  "saveStatus": 200,
+  "height": 170,
+  "weight": 70,
+  "jointWithoutProtectedArea": true,
+  "removedScreen": true,
+  "removedCaptions": true,
+  "errorChangesLanguage": true,
+  "duplicateToast": false,
+  "reloadPersistence": true,
+  "gymLocale": "my-MM",
+  "gymLocation": "gym",
+  "checks": [
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 320,
+      "overflow": 0,
+      "errorBottom": 800,
+      "buttonTop": 832,
+      "buttonHeight": 60,
+      "numberInputs": 0
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 390,
+      "overflow": 0,
+      "errorBottom": 800,
+      "buttonTop": 832,
+      "buttonHeight": 60,
+      "numberInputs": 0
+    },
+    {
+      "locale": "my-MM",
+      "theme": "light",
+      "width": 1280,
+      "overflow": 0,
+      "errorBottom": 800,
+      "buttonTop": 832,
+      "buttonHeight": 60,
+      "numberInputs": 0
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 320,
+      "overflow": 0,
+      "errorBottom": 800,
+      "buttonTop": 832,
+      "buttonHeight": 60,
+      "numberInputs": 0
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 390,
+      "overflow": 0,
+      "errorBottom": 800,
+      "buttonTop": 832,
+      "buttonHeight": 60,
+      "numberInputs": 0
+    },
+    {
+      "locale": "my-MM",
+      "theme": "dark",
+      "width": 1280,
+      "overflow": 0,
+      "errorBottom": 800,
+      "buttonTop": 832,
+      "buttonHeight": 60,
+      "numberInputs": 0
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 320,
+      "overflow": 0,
+      "errorBottom": 800,
+      "buttonTop": 832,
+      "buttonHeight": 60,
+      "numberInputs": 0
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "overflow": 0,
+      "errorBottom": 800,
+      "buttonTop": 832,
+      "buttonHeight": 60,
+      "numberInputs": 0
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1280,
+      "overflow": 0,
+      "errorBottom": 800,
+      "buttonTop": 832,
+      "buttonHeight": 60,
+      "numberInputs": 0
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 320,
+      "overflow": 0,
+      "errorBottom": 800,
+      "buttonTop": 832,
+      "buttonHeight": 60,
+      "numberInputs": 0
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "overflow": 0,
+      "errorBottom": 800,
+      "buttonTop": 832,
+      "buttonHeight": 60,
+      "numberInputs": 0
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1280,
+      "overflow": 0,
+      "errorBottom": 800,
+      "buttonTop": 832,
+      "buttonHeight": 60,
+      "numberInputs": 0
+    }
+  ],
+  "errors": []
+}

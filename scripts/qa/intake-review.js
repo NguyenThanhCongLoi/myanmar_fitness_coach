@@ -27,7 +27,7 @@ async page => {
   await next();await at('days');await page.locator('.quiz-grid button').nth(1).click();
   await next();await at('minutes');await page.locator('.quiz-grid button').nth(0).click();
   await next();await at('health');await page.getByLabel('None of these',{exact:true}).check();
-  await next();await at('protected');await next();await at('focus');await page.locator('.focus-choice').nth(2).click();
+  await next();await at('focus');await page.locator('.focus-choice').nth(2).click();
   await page.screenshot({path:'D:/workout_fitness/evidence/intake-release/focus-en.png',fullPage:true});
   await next();await at('waistNow');await page.locator('.intake-shape').nth(1).click();
   await next();await at('waistGoal');await page.locator('.intake-shape').nth(1).click();

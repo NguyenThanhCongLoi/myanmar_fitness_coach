@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "app": "myanmar-fitness-coach",
+  "profile": "lointc",
+  "workspace": "avibigateway",
+  "environment": "main",
+  "oldAppStoppedAndTasksZero": true,
+  "maxWebContainers": 1,
+  "cpuOnly": true,
+  "finalBuildTests": 82,
+  "dataWipedAgain": false,
+  "productionTestUsersCreated": false,
+  "dockerOrAiChatChanged": false,
+  "url": "https://avibigateway--myanmar-fitness-coach.modal.run",
+  "deploymentIncident": "Attempted max-containers0 override did not pause; full product stop recovered the deployment. Static max one restored; see release notes."
+}

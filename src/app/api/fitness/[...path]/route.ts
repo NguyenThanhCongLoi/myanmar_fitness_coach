@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { allowedAppOrigin } from '@/server/origins';
 import { prisma } from '@/shared/lib/prisma';
 import { requiredUser } from '@/server/auth';
 import { trackAppOpen, trackRoute } from '@/server/analytics';
@@ -15,7 +16,7 @@ async function handler(request: Request, context: { params: Promise<{ path: stri
   try {
     if (write) {
       const origin = request.headers.get('origin');
-      if (origin && origin !== process.env.BETTER_AUTH_URL) throw new ApiError(403, 'INVALID_ORIGIN');
+      if (!allowedAppOrigin(origin)) throw new ApiError(403, 'INVALID_ORIGIN');
       if (Number(request.headers.get('content-length') ?? 0) > 65536) throw new ApiError(413, 'REQUEST_TOO_LARGE');
     }
     const user = await requiredUser(request);

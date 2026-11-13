@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "checks": {
+    "home": 200,
+    "bootstrap": 401,
+    "regionalHome": 200,
+    "regionalOrigin": 401,
+    "foreignOrigin": 403
+  },
+  "productionTestUsersCreated": false
+}

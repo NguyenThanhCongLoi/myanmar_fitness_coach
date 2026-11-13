@@ -1,4 +1,5 @@
 import {z} from 'zod';
+import {allowedAppOrigin} from '@/server/origins';
 import {saveIntake} from '@/server/intake';
 import {previewQuickWorkout} from '@/server/quick-workout';
 import {requiredUser} from '@/server/auth';
@@ -20,7 +21,7 @@ export const runtime='nodejs';export const dynamic='force-dynamic';
 async function handler(request:Request,context:{params:Promise<{path:string[]}>}){
  try{
   const user=await requiredUser(request),path=(await context.params).path,key=path.join('/'),write=request.method==='POST';
-  if(write&&request.headers.get('origin')&&request.headers.get('origin')!==process.env.BETTER_AUTH_URL)throw new ApiError(403,'INVALID_ORIGIN');
+  if(write&&!allowedAppOrigin(request.headers.get('origin')))throw new ApiError(403,'INVALID_ORIGIN');
   let body:unknown;
   if(write){const raw=await request.text();if(raw.length>(key==='energy/photo'?1_500_000:65536))throw new ApiError(413,'REQUEST_TOO_LARGE');try{body=JSON.parse(raw);}catch{throw new ApiError(400,'INVALID_INPUT');}}
   let result:unknown;

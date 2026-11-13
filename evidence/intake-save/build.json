@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "tests": 82,
+  "testFiles": 22,
+  "locales": "PASS",
+  "typescript": "PASS",
+  "productionBuild": "PASS",
+  "sourceBase": "0fbc37b",
+  "unrelatedWorkingTreeChangesIncluded": false,
+  "testEnvironment": "separate disposable sandbox and SQLite, no customer Volume or gateway credentials"
+}

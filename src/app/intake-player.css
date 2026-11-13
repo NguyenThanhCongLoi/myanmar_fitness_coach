@@ -7,3 +7,5 @@
 @media(max-width:360px){.intake-v2 .quiz-title{font-size:26px}.intake-shape strong{font-size:17px}.picker-value output{font-size:64px}}
 
 .intake-v2 .quiz-next{background:#17181e!important;color:#fff!important;box-shadow:none!important}.intake-v2 .quiz-next:disabled{opacity:.35}.intake-v2 .quiz-progress i{background:var(--picker-accent)}.intake-v2 .quiz-option.on,.intake-v2 .onb-chip.on,.intake-v2 .focus-choice.on{border-color:var(--picker-accent);background:var(--surface);color:var(--ink)}.intake-v2 .quiz-option.on>svg,.intake-v2 .focus-check{color:var(--picker-accent)}.intake-v2 .picker-track:focus-visible{outline:2px solid var(--picker-accent);outline-offset:5px}.intake-v2 .picker-track:focus:not(:focus-visible){outline:none}
+
+.intake-v2 .onb-footer .form-error{font-size:16px;line-height:1.8;margin:0 0 8px;white-space:normal}

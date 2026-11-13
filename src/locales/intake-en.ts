@@ -17,5 +17,9 @@ export default {
   noMatch: 'No suitable video workout matches these settings. Change the focus or review your restrictions.',
   left: 'Left side', right: 'Right side', next: 'Next exercise', total: 'Total',
   saveError: 'Could not save. Your answers are still here.', needsProfile: 'Complete your training profile first.',
+  sessionExpired: 'Sign in again to save your plan.',
+  retryConnection: 'Reconnect, then try saving again.',
+  checkAnswers: 'Review your answers, then try again.',
+  lowWeightGoal: 'Choose another goal for this height and weight.',
   homeOnly: '19 supplied videos · no equipment', gymOnly: 'Machines, cables and weights · separate from Home',
 };

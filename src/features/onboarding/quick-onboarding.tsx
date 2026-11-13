@@ -11,11 +11,11 @@ import { FocusChoices } from './body-goal-fields';
 import { BodyVisual } from './body-visual';
 import { NumberPicker } from './number-picker';
 
-const BASE_STEPS = ['age', 'height', 'weight', 'sex', 'goal', 'level', 'activity', 'place', 'days', 'minutes', 'health', 'protected', 'focus', 'waistNow', 'waistGoal', 'glutesNow', 'glutesGoal', 'clearance', 'review'] as const;
+const BASE_STEPS = ['age', 'height', 'weight', 'sex', 'goal', 'level', 'activity', 'place', 'days', 'minutes', 'health', 'focus', 'waistNow', 'waistGoal', 'glutesNow', 'glutesGoal', 'clearance', 'review'] as const;
 type Goal = 'lose' | 'muscle' | 'strength' | 'fit';
 const EMPTY_HEALTH = { heart: false, chestPain: false, dizziness: false, joint: false, medication: false, pregnancy: false, other: false };
 export function QuickOnboarding() {
-  const { data, refresh, notify, go } = useApp(); const { locale } = useLanguage(); const tt = useTrainingLanguage(); const q = tt.quiz, u = useIntakeLanguage();
+  const { data, refresh, go } = useApp(); const { locale } = useLanguage(); const tt = useTrainingLanguage(); const q = tt.quiz, u = useIntakeLanguage();
   const p = data.profile;
   const [i, setI] = useState(0), [busy, setBusy] = useState(false), [error, setError] = useState('');
   const [age, setAge] = useState(p?.birthYear ? String(new Date().getUTCFullYear() - p.birthYear) : '');
@@ -36,9 +36,11 @@ export function QuickOnboarding() {
   const step = STEPS[i];
   const numeric = step === 'age' || step === 'height' || step === 'weight';
   const displayed = step === 'age' ? Number(age || 30) : step === 'height' ? Number(height || 165) : Number(weight || 65);
-  const valid = numeric ? true : step === 'sex' ? !!sex : step === 'goal' ? !!goal : step === 'level' ? !!level : step === 'activity' ? !!activity : step === 'place' ? !!place : step === 'days' ? !!days : step === 'minutes' ? !!minutes : step === 'health' ? healthAnswered : step === 'protected' ? !screening.joint || bodyPreferences.protectedAreas.length > 0 : step === 'clearance' ? clearance : true;
+  const valid = numeric ? true : step === 'sex' ? !!sex : step === 'goal' ? !!goal : step === 'level' ? !!level : step === 'activity' ? !!activity : step === 'place' ? !!place : step === 'days' ? !!days : step === 'minutes' ? !!minutes : step === 'health' ? healthAnswered : step === 'clearance' ? clearance : true;
   const d = q.details;
-  const titles = { age: u.age, height: u.height, weight: u.weight, sex: u.sex, goal: q.titles.goal, level: q.titles.level, activity: u.activity, place: q.titles.place, days: tt.ux.onb.daysLabel, minutes: u.available, health: u.health, protected: u.protected, focus: u.focus, waistNow: `${d.waist} · ${d.current}`, waistGoal: `${d.waist} · ${d.desired}`, glutesNow: `${d.glutes} · ${d.current}`, glutesGoal: `${d.glutes} · ${d.desired}`, clearance: u.health, review: u.review };
+  const titles = { age: u.age, height: u.height, weight: u.weight, sex: u.sex, goal: q.titles.goal, level: q.titles.level, activity: u.activity, place: q.titles.place, days: tt.ux.onb.daysLabel, minutes: u.available, health: u.health, focus: u.focus, waistNow: `${d.waist} · ${d.current}`, waistGoal: `${d.waist} · ${d.desired}`, glutesNow: `${d.glutes} · ${d.current}`, glutesGoal: `${d.glutes} · ${d.desired}`, clearance: u.health, review: u.review };
+  // Keep a stable code, so an existing error changes language with the rest of this screen.
+  const errorMessage = !error ? '' : error === 'GOAL_BMI_TOO_LOW' ? u.lowWeightGoal : error === 'HEALTH_REVIEW_REQUIRED' ? u.reviewRequired : error === 'UNAUTHORIZED' ? u.sessionExpired : error === 'INVALID_ORIGIN' ? u.retryConnection : error === 'INVALID_INPUT' ? u.checkAnswers : u.saveError;
   const indexOf = (name: typeof BASE_STEPS[number]) => STEPS.indexOf(name);
   function next() {
     // The footer explicitly confirms the visible value; mounting a picker never saves a default.
@@ -60,7 +62,7 @@ export function QuickOnboarding() {
         screening, healthClearance: needsReview && clearance, bodyPreferences });
       try { localStorage.setItem('mingalar-location', place!); } catch { /* optional */ }
       await refresh(); go('home');
-    } catch (e) { const code = e instanceof Error ? e.message : ''; setError(code === 'GOAL_BMI_TOO_LOW' ? q.healthAdvice : code === 'HEALTH_REVIEW_REQUIRED' ? u.reviewRequired : u.saveError); notify(u.saveError); }
+    } catch (e) { setError(e instanceof Error ? e.message : 'REQUEST_FAILED'); }
     finally { setBusy(false); }
   }
   const overview = [
@@ -81,12 +83,11 @@ export function QuickOnboarding() {
       {step === 'goal' && choices(['lose','muscle','strength','fit'] as const,goal,setGoal,v=>q.goals[v])}
       {step === 'level' && choices(['beginner','intermediate','advanced'] as const,level,setLevel,v=>q.levels[v])}
       {step === 'activity' && choices(['sedentary','light','active'] as const,activity,setActivity,v=>u.activities[v])}
-      {step === 'place' && <>{choices(['home','gym'] as const,place,setPlace,v=>q.places[v])}<p className="quiz-hint">{place === 'gym' ? u.gymOnly : u.homeOnly}</p></>}
+      {step === 'place' && choices(['home','gym'] as const,place,setPlace,v=>q.places[v])}
       {step === 'days' && choices([2,3,4,5,6],days,setDays,String)}
       {step === 'minutes' && choices([10,20,30,45],minutes,setMinutes,v=>`${v} ${tt.ux.min}`)}
       {step === 'health' && <><div className="intake-checks">{Object.keys(EMPTY_HEALTH).map(key=><label key={key} className="check"><input type="checkbox" checked={!!screening[key as keyof typeof screening]} onChange={e=>{setScreening(v=>({...v,[key]:e.target.checked}));setHealthAnswered(true);setClearance(false);}}/>{u.conditions[key as keyof typeof u.conditions]}</label>)}<label className="check"><input type="checkbox" checked={healthAnswered&&!Object.values(screening).some(Boolean)} onChange={()=>{setScreening(EMPTY_HEALTH);setHealthAnswered(true);setClearance(false);}}/>{u.none}</label></div>
       </>}
-      {step === 'protected' && <div className="onb-chips">{(['knees','back','shoulders','wrists'] as const).map(a=><button key={a} className={`onb-chip ${bodyPreferences.protectedAreas.includes(a)?'on':''}`} aria-pressed={bodyPreferences.protectedAreas.includes(a)} onClick={()=>setBodyPreferences(v=>({...v,protectedAreas:v.protectedAreas.includes(a)?v.protectedAreas.filter(x=>x!==a):[...v.protectedAreas,a]}))}>{u.areas[a]}</button>)}{!screening.joint && <button className={`onb-chip ${!bodyPreferences.protectedAreas.length?'on':''}`} onClick={()=>setBodyPreferences(v=>({...v,protectedAreas:[]}))}>{u.none}</button>}</div>}
       {step === 'clearance' && <><p className="explain-box">{u.reviewRequired}</p><label className="check"><input type="checkbox" checked={clearance} onChange={e=>setClearance(e.target.checked)}/>{u.clearance}</label></>}
       {step === 'focus' && <FocusChoices value={bodyPreferences} onChange={setBodyPreferences}/>}
       {step === 'waistNow' && <>{shape('waist',['slim','medium','fuller'],bodyPreferences.currentWaist,v=>setBodyPreferences(p=>({...p,currentWaist:v})),v=>d.waistBuilds[v])}<button className="text-button" aria-pressed={bodyPreferences.currentWaist==='unsure'} onClick={()=>setBodyPreferences(p=>({...p,currentWaist:'unsure'}))}>{d.unsure}</button></>}
@@ -94,8 +95,7 @@ export function QuickOnboarding() {
       {step === 'glutesNow' && <>{shape('glutes',['small','medium','fuller'],bodyPreferences.currentGlutes,v=>setBodyPreferences(p=>({...p,currentGlutes:v})),v=>d.gluteBuilds[v])}<button className="text-button" aria-pressed={bodyPreferences.currentGlutes==='unsure'} onClick={()=>setBodyPreferences(p=>({...p,currentGlutes:'unsure'}))}>{d.unsure}</button></>}
       {step === 'glutesGoal' && shape('glutes',['build','strong','maintain','reduce'],bodyPreferences.gluteGoal,v=>setBodyPreferences(p=>({...p,gluteGoal:v})),v=>d.gluteGoals[v])}
       {step === 'review' && <><div className="intake-review">{overview.map(([title,value,index])=><button key={title} disabled={busy} onClick={()=>setI(index)}><span><strong>{title}</strong><small>{value}</small></span><span>{u.edit}</span></button>)}</div><p className="quiz-hint">{u.changeLater}</p></>}
-      {error && <p className="form-error" role="alert">{error}</p>}
     </div>
-    <div className="onb-footer"><button className="button primary quiz-next" disabled={!valid||busy} onClick={()=>i===STEPS.length-1?void finish():next()}>{busy?<><Loader2 className="spin" size={22}/>{q.making}</>:i===STEPS.length-1?q.create:numeric?`${u.confirm} ${displayed}${step === 'height' ? ' cm' : step === 'weight' ? ' kg' : ''}`:q.next}</button></div>
+    <div className="onb-footer">{errorMessage && <p className="form-error" role="alert">{errorMessage}</p>}<button className="button primary quiz-next" disabled={!valid||busy} onClick={()=>i===STEPS.length-1?void finish():next()}>{busy?<><Loader2 className="spin" size={22}/>{q.making}</>:i===STEPS.length-1?q.create:numeric?`${u.confirm} ${displayed}${step === 'height' ? ' cm' : step === 'weight' ? ' kg' : ''}`:q.next}</button></div>
   </section>;
 }

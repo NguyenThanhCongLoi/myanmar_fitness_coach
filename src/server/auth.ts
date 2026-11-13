@@ -6,12 +6,13 @@ import { headers } from 'next/headers';
 import { prisma } from '@/shared/lib/prisma';
 import { ApiError } from './validation';
 import { googleConfigured } from './social-config';
+import { appOrigins } from './origins';
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, { provider: 'sqlite' }),
   baseURL: process.env.BETTER_AUTH_URL,
   secret: process.env.BETTER_AUTH_SECRET,
-  trustedOrigins: process.env.BETTER_AUTH_URL ? [process.env.BETTER_AUTH_URL] : [],
+  trustedOrigins: appOrigins(),
   emailAndPassword: { enabled: true, minPasswordLength: 10, maxPasswordLength: 128 },
   socialProviders: googleConfigured() ? { google: {
     clientId: process.env.GOOGLE_CLIENT_ID!, clientSecret: process.env.GOOGLE_CLIENT_SECRET!,

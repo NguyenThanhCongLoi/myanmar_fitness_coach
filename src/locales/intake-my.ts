@@ -1,6 +1,10 @@
 // Provisional Myanmar copy; fluent-speaker review is still required.
 import type en from './intake-en';
 const my: typeof en = {
+  sessionExpired: 'အစီအစဉ်သိမ်းရန် ပြန်ဝင်ပါ။',
+  retryConnection: 'ပြန်ချိတ်ဆက်ပြီး ထပ်သိမ်းပါ။',
+  checkAnswers: 'အဖြေများကို ပြန်စစ်ပြီး ထပ်စမ်းပါ။',
+  lowWeightGoal: 'ဤအရပ်နှင့် ကိုယ်အလေးချိန်အတွက် အခြားရည်မှန်းချက်ကို ရွေးပါ။',
   confirm: 'အတည်ပြုမည်',
   body: 'သင့်ရဲ့ အစပြုအချက်အလက်', age: 'အသက်', height: 'အရပ် (cm)', weight: 'ကိုယ်အလေးချိန် (kg)', sex: 'လိင်',
   sexes: { male: 'အမျိုးသား', female: 'အမျိုးသမီး', unspecified: 'မဖော်ပြလိုပါ' },

@@ -1,5 +1,11 @@
 # Release verification — 2026-11-12
 
+## Intake save / live language switching — 2026-11-13
+
+PASS: 82 tests/22 files, locale contracts and production build/TypeScript in the isolated released-source snapshot (unrelated working player/audio changes excluded). Workspace helper accepts `FITNESS_SOURCE_DIR`; this run used `evidence/intake-save-source`, `FITNESS_BUILD_STATE=intake-save-build-sandbox.json`, `MODAL_PROFILE=lointc`, `MODAL_IMAGE_BUILDER_VERSION=2025.06`, `PYTHONUTF8=1`. Standard remote commands: `npm ci --no-audit --no-fund && npx prisma generate && npm run db:migrate && npm run db:seed && npm test && npm run check:locales && npm run build`, then helper `serve`.
+
+Browser: existing Playwright CLI `-s=intakesave open '<disposable-preview-url>' --browser=msedge`, then `-s=intakesave --raw run-code --filename myanmar-fitness-coach/scripts/qa/intake-save-review.js`. PASS: real Home/Gym saves and reload; removed captions/step; failed-save language switches and 12 responsive/theme/language cases with no duplicate toast, overflow or page errors. The forced503 is an explicit UI test, not a backend outage. See `docs/INTAKE_SAVE_FIX.md`, `evidence/intake-save/`. No production test account or paid provider call.
+
 ## Single-question intake / video collections — 2026-11-13
 
 PASS: 80 tests/21 files, locale contracts and production build/TypeScript in an isolated Modal sandbox. Scope `MODAL_PROFILE=lointc`, `MODAL_IMAGE_BUILDER_VERSION=2025.06`, `PYTHONUTF8=1` and `FITNESS_BUILD_STATE=intake-build-sandbox.json`. Workspace `scripts/product-remote.py`: `start`, then `exec 'npm ci --no-audit --no-fund && npx prisma generate && npm run db:migrate && npm run db:seed && npm test && npm run check:locales && npm run build'`, then `serve`. Do not stop another sandbox state.
